@@ -304,7 +304,6 @@ this.showSpinner=true
           this.fileName='summaryReport.xlsx'
           this.title = 'Summary Report of Find Name'+this.deviceName;
           let element = document.getElementById('htmlData');
-          // console.log("element===",element)
           this.general.exportToExcel(element,this.fileName, this.title)
 
         }
