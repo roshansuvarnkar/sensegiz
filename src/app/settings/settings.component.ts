@@ -53,7 +53,7 @@ export class SettingsComponent implements OnInit {
     // });
 
     this.inactivityForm = this.fb.group({
-      inactivity: ['',[Validators.required,Validators.max(121), Validators.min(0)]]
+      inactivity: ['',[Validators.required,Validators.max(120), Validators.min(0)]]
     });
 
     this.bufferForm = this.fb.group({

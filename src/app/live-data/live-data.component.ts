@@ -42,7 +42,7 @@ displayedColumns: string[] = ['i','baseName', 'contactName', 'updatedOn','totalT
     this.count=0
     this.refresh()
     // console.log("count",this.count)
-    // setInterval(()=>{this.refresh()},60*1000)
+    setInterval(()=>{this.refresh()},60*500)
   }
   refresh(){
     this.getTotalCount(0)

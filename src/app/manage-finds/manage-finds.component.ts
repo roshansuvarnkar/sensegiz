@@ -65,7 +65,7 @@ refreshFinds(){
   }
 
   this.api.getData(data).then((res:any)=>{
-    // console.log("find device data ======",res);
+    console.log("find device data ======",res);
     if(res.status){
      this.findData=[]
       for (let i = 0; i <res.success.length; i++) {
@@ -80,9 +80,9 @@ refreshFinds(){
               edit:'edit',
               delete:'delete',
               batteryStatus:res.success[i].batteryStatus,
-              emailId:res.success[i].emailId,
-              mobileNum:res.success[i].mobNum,
-              empId:res.success[i].empId
+              emailId:res.success[i].emailId == 'NULL' ? '-' : res.success[i].emailId,
+              mobileNum:res.success[i].mobNum == 'NULL' ? '-' : res.success[i].mobNum,
+              empId:res.success[i].empId == '' ? '-' : res.success[i].empId
           });
       }
       this.dataSource = new MatTableDataSource(this.findData);

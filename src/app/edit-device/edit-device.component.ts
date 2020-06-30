@@ -33,8 +33,8 @@ userform:FormGroup
     this.Findform = this.fb.group({
       deviceName: ['', Validators.required],
       deviceId: [{value: '', disabled: true}, Validators.required],
-      mobileNum:[{value: '', disabled: true}, Validators.required],
-      emailId:[{value: '', disabled: true}, Validators.required],
+      mobileNum:[''],
+      emailId:[''],
 
     });
 

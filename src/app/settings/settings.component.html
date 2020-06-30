@@ -165,16 +165,16 @@
        Define Inactivity
     </mat-card-title>
     <mat-card-subtitle>
-      Enter inactivity
+      Enter inactivity in minutes
     </mat-card-subtitle>
     <mat-slide-toggle color="primary" [checked]="inactivityStatusValue.value" (change)="inactivityChange($event)">{{inactivityStatusValue.status}}</mat-slide-toggle>
     <br><br>
     <mat-card-content>
       <form [formGroup]="inactivityForm" (ngSubmit)="onSubmitInactivityForm(inactivityForm.value)">
         <mat-form-field>
-          <input type='number' min="0" max="121" matInput placeholder="Inactivity" formControlName="inactivity" required>
+          <input type='number' min="0" max="120" matInput placeholder="Inactivity in minutes" formControlName="inactivity" required>
           <mat-error>
-            Please provide a valid inactivity
+            Please provide a valid inactivity in minutes
           </mat-error>
         </mat-form-field>
         <br><br>

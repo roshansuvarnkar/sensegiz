@@ -40,9 +40,9 @@ userStatus:boolean=false
     this.Findform = this.fb.group({
       deviceName: ['', Validators.required],
       deviceId: ['', Validators.required],
-      employeeId: ['', Validators.required],
-      mobileNum: ['', Validators.required],
-      emailId: ['', Validators.required]
+      employeeId: [''],
+      mobileNum: [''],
+      emailId: ['']
     });
 
 
@@ -61,7 +61,7 @@ userStatus:boolean=false
 
 
 
- 
+
   }
 
 onNoClick(): void {
