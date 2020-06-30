@@ -1,79 +1,86 @@
 img {
-    width: 14%;
+  width: 14%;
 }
 .menubar{
-    display: flex;
-    justify-content: space-evenly;
-    cursor: pointer;
+  display: flex;
+  justify-content: space-evenly;
+  cursor: pointer;
 }
-
+.guide{
+/* float: right; */
+position: fixed;
+right: 0;
+top: 50%;
+z-index: 2;
+}
 .mobilemenu{
-  display: none;
+display: none;
 }
 .devices{
-  display: none;
+display: none;
 }
 button.mat-focus-indicator.mat-button.mat-button-base {
-  /* color: black;
-  background-color: transparent; */
-  border: none;
+/* color: black;
+background-color: transparent; */
+border: none;
 }
 button.mat-focus-indicator.mat-button.mat-button-base:focus {
 
-  border: none;
+border: none;
 }
 span.end {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .logouticon{
-  display: none;
+display: none;
 }
 @media only screen and (max-width: 768px) {
 .mat-toolbar-row, .mat-toolbar-single-row {
-    height: 56px;
-    background: orange;
+  height: 56px;
+  background: orange;
 }
 .main-home{
-  display: block;
-  width: 100% !important;
+display: block;
+width: 100% !important;
 }
 
 /* .col-2, .desktop{
-  display: none;
+display: none;
 } */
 .devices{
-  display: block;
-  margin-left: 2rem;
+display: block;
+margin-left: 2rem;
 }
 
 .mobilemenu{
-  display: block;
+display: block;
 }
 
 .logout,.menubar{
-  display: none;
+display: none;
 }
 .logouticon{
-  display: block;
+display: block;
 }
 img {
-  width: 30%;
+width: 30%;
 }
 .menu{
-  margin-left: -2rem;
+margin-left: -2rem;
 }
 span.flex.title{
-    margin-top: 1rem;
-    font-size: large;
+  margin-top: 1rem;
+  font-size: large;
 }
 button.mat-menu-item, .mat-menu-item .mat-icon  {
 
-  color: #f7a30bfa;
+color: #f7a30bfa;
 }
 .flex {
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly !important;
+display: flex;
+width: 100%;
+justify-content: space-evenly !important;
 }
+
 }

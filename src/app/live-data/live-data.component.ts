@@ -27,7 +27,7 @@ count= 0
 currentPageLength:number = 7;
 currentPageSize:number = 10;
 
-displayedColumns: string[] = ['i','baseName', 'contactName', 'updatedOn'];
+displayedColumns: string[] = ['i','baseName', 'contactName', 'updatedOn','totalTime'];
 
 
   constructor(
@@ -98,7 +98,7 @@ getTotalCount(val){
     }
 
     this.api.getLiveData(data).then((res:any)=>{
-      // console.log("live data ======",res);
+      console.log("live data ======",res);
       if(res.status){
         this.liveData=res.success
         this.currentPageLength = res.success.length;
@@ -112,7 +112,24 @@ getTotalCount(val){
     })
 
  }
-
+ convertDate(a){
+  // console.log("a===",a)
+  var timeArr = a.split(':')
+  var date = ''
+  if(timeArr[0]!='00'){
+    date += timeArr[0] + ' hour '
+  }
+  if(timeArr[1]!='00'){
+    date += timeArr[1] + ' minute '
+  }
+  if(timeArr[2]!='00'){
+    date += timeArr[2] + ' second '
+  }
+  if(date==''){
+    date = '-'
+  }
+  return date
+}
 
 
 

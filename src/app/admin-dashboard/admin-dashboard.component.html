@@ -46,6 +46,7 @@
 								<th scope="col">User Name</th>
 								<th scope="col">Added on</th>
 								<th scope="col" >Add Ble</th>
+								<th scope="col" >Settings</th>
 								<th scope="col">isDelete</th>
 							</tr>
 						</thead>
@@ -55,6 +56,7 @@
 							<td>{{a.userName}}</td>
 							<td>{{a.createdDate  | date : 'medium' : 'IST'}}</td>
 							<td><mat-icon matListIcon (click)="openDialog(a)">add</mat-icon></td>
+							<td><mat-icon matListIcon (click)="openSetting(a)">settings</mat-icon></td>
 							<span>
 								<td *ngIf="a.isDeleted=='N'"><mat-icon matListIcon (click)="delete(a)">done</mat-icon></td>
         						<td *ngIf="a.isDeleted=='Y'"><mat-icon matListIcon (click)="delete(a)">clear</mat-icon></td>
