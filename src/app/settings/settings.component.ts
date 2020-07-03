@@ -44,7 +44,7 @@ export class SettingsComponent implements OnInit {
 
     this.distanceForm = this.fb.group({
       distance: ['', Validators.required],
-      rssi: ['', Validators.required],
+      rssi: [{value:'',disabled: true}, Validators.required],
     });
 
 
@@ -54,7 +54,7 @@ export class SettingsComponent implements OnInit {
 
 
     this.txPowerForm = this.fb.group({
-      txPower: ['', Validators.required],
+      txPower: [{value:'',disabled: true}, Validators.required],
     });
 
     this.inactivityForm = this.fb.group({
@@ -107,7 +107,7 @@ export class SettingsComponent implements OnInit {
           minutes:minutes,
           seconds:seconds
         })
-        
+
         if( res.success[0].inactivityStatus == 1){
           this.inactivityStatusValue = {
             value:true,
