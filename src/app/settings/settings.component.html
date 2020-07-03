@@ -39,7 +39,7 @@
 
 
 
-  <!-- <mat-card>
+  <mat-card>
     <mat-card-title>
       Define Minimum Distance
     </mat-card-title>
@@ -47,7 +47,7 @@
       Enter minimum distance for user in meter
     </mat-card-subtitle>
     <mat-card-content>
-      <mat-slide-toggle color="primary" [checked]="statusCustomise" (change)="customise()">Customize</mat-slide-toggle>
+      <!-- <mat-slide-toggle color="primary" [checked]="statusCustomise" (change)="customise()">Customize</mat-slide-toggle> -->
       <br><br>
       <form [formGroup]="distanceForm" (ngSubmit)="onSubmitDistanceForm(distanceForm.value)">
         <mat-form-field>
@@ -64,19 +64,19 @@
             </mat-option>
           </mat-select>
         </mat-form-field><br>
-        <div *ngIf="statusCustomise">
+        <!-- <div *ngIf="statusCustomise"> -->
           <mat-form-field>
             <input matInput placeholder="RSSI" formControlName="rssi"  required>
             <mat-error>
               Please provide a valid RSSI
             </mat-error>
           </mat-form-field>
-        </div>
+        <!-- </div> -->
         <br><br>
         <button mat-raised-button [disabled]="!distanceForm.valid" color="primary">Submit</button>
       </form>
     </mat-card-content>
-  </mat-card> -->
+  </mat-card>
 
 
 
@@ -105,7 +105,7 @@
 
 
 
-  <!-- <mat-card>
+  <mat-card>
     <mat-card-title>
       Define transmission power
     </mat-card-title>
@@ -116,7 +116,7 @@
       <form [formGroup]="txPowerForm" (ngSubmit)="onSubmittxPowerForm(txPowerForm.value)">
         <mat-form-field>
           <mat-label>Tx Power</mat-label>
-          <mat-select formControlName="txPower" required>
+          <mat-select formControlName="txPower" disabled required>
             <mat-option value="120">
               120 ft
             </mat-option>
@@ -157,7 +157,7 @@
     </div>
 
     </mat-card-content>
-  </mat-card> -->
+  </mat-card>
 
 
   <mat-card>
@@ -202,6 +202,41 @@
         </mat-form-field>
         <br><br>
         <button mat-raised-button [disabled]="!bufferForm.valid" color="primary">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>
+      Maximum duration threshold
+    </mat-card-title>
+    <mat-card-subtitle>
+      Enter Duration 
+    </mat-card-subtitle><br>
+    <mat-card-content>
+     
+      <form [formGroup]="timeForm" (ngSubmit)="onSubmitTimeForm(timeForm.value)" >
+        <mat-form-field  >
+            <mat-label>Minutes</mat-label>
+            <mat-select  formControlName="minutes" (selectionChange)="getMin($event)" required>
+              <mat-option *ngFor="let a of min" [value]="a">{{a}}</mat-option>
+            </mat-select>
+            <mat-error>
+              Please select minimum minutes as 0
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field  >
+          <mat-label>Seconds</mat-label>
+        <mat-select  formControlName="seconds" required >
+          <mat-option *ngFor="let b of sec;let i=index" [disabled]="minStatus" [value]="b">{{b}}</mat-option>
+        </mat-select>
+        <mat-error>
+          Please select minimum second as 0
+        </mat-error>
+    </mat-form-field>
+        
+        <br><br>
+        <button mat-raised-button [disabled]="!timeForm.valid"  color="primary">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>

@@ -107,6 +107,9 @@
           <mat-form-field>
             <mat-label>Gateway Id</mat-label>
             <input matInput formControlName="deviceId" placeholder="Ex. 1" required>
+            <mat-error>
+              Enter gateway Id with character 12
+            </mat-error>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>

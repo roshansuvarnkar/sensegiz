@@ -19,7 +19,9 @@ li {
     font-weight: 500;
     line-height: 2rem;
 }
-
+img {
+    width: 80%;
+}
 @media only screen and (max-width: 768px){
     p {
         font-size:large;

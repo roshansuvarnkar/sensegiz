@@ -57,7 +57,8 @@ userform:FormGroup
       this.Findform.patchValue({
         deviceName: this.deviceData.deviceName,
         deviceId: this.deviceData.deviceId,
-        mobileNum:this.deviceData.mobNum,
+        empId:this.deviceData.empId,
+        mobileNum:this.deviceData.mobileNum,
         emailId:this.deviceData.emailId
       });
     }

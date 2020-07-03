@@ -125,7 +125,7 @@ export class HistoryReportComponent implements OnInit {
           offset:offset
         }
         this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
-          // console.log("find data based on date ======",res);
+          console.log("find data based on date ======",res);
           this.liveData=[]
           if(res.status){
             if(type==0){
@@ -155,7 +155,7 @@ export class HistoryReportComponent implements OnInit {
 
         }
         this.api.getDeviceHistoryBasedOnDeviceName(data1).then((res:any)=>{
-          // console.log("find data based on name ======",res);
+          console.log("find data based on name ======",res);
 
           if(res.status){
             if(type==0){
