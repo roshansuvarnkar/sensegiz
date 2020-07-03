@@ -123,14 +123,16 @@ export class HistoryReportComponent implements OnInit {
           offset:offset
         }
         this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
-          // console.log("find data based on date ======",res);
-          this.liveData=[]
+          console.log("find data based on date ======",res);
+          //this.liveData=[]
           if(res.status){
             if(type==0){
               this.liveData=res.success
             }
             else{
+              console.log("came===",res.success);
               this.excelData=res.success
+              this.openExcel()
             }
             this.dataSource = new MatTableDataSource(this.liveData);
             setTimeout(() => {
@@ -161,6 +163,7 @@ export class HistoryReportComponent implements OnInit {
             }
             else{
               this.excelData=res.success
+              this.openExcel()
             }
 
             this.dataSource = new MatTableDataSource(this.liveData);
@@ -182,7 +185,7 @@ export class HistoryReportComponent implements OnInit {
         this.api.getSummaryReport(data2).then((res:any)=>{
           // console.log("summary report ======",res);
 
-          this.liveData=[]
+          //this.liveData=[]
           if(res.status){
 
             var groupDate = this.dataDateReduce(res.success)
@@ -235,25 +238,15 @@ getUpdate(event) {
 getPages() {
 
   var tempLen=this.currentPageLength
-  // console.log("paginator event length",this.currentPageLength);
+   console.log("paginator event length",tempLen);
   this.loadData(tempLen,0,1)
   var msg = 'Downloading'
   this.general.openSnackBar(msg,'')
-//  setTimeout(()=>{
-//     this.downloadPDF()
-//   },5000);
-this.showSpinner=true
+  //  setTimeout(()=>{
+  //     this.downloadPDF()
+  //   },5000);
+  this.showSpinner=true
 
-  setTimeout(()=>{
-    this.showSpinner=false
-    this.openExcel()
-
-  },5000);
-
-  setTimeout(()=>{
-    this.loadData(10,0,0)
-  },6000)
- clearTimeout(60*1000)
 }
 
 
@@ -308,7 +301,7 @@ this.showSpinner=true
 
         }
         else{
-
+          console.log("this.excelData====",this.excelData)
           if(this.type=='basedOnDate'){
             this.fileName='ReportBasedOnDate.xlsx'
             this.title = 'Based on date'+this.from+" "+this.to;

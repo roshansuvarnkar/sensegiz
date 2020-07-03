@@ -21,6 +21,9 @@ export class ApiService {
     return new Promise((resolve,reject)=>{
       this.http.post(url,data,httpOptions).subscribe(res=>{
         resolve(res);
+      },err=>{
+        console.log("err==",err)
+        reject(err)
       })
     });
   }
@@ -589,7 +592,7 @@ updateInactivityStatus(data){
       resolve(res);
     })
   });
-} 
+}
 
 
 }

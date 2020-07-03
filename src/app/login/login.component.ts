@@ -52,6 +52,8 @@ export class LoginComponent implements OnInit {
           else{
             this.loginInvalid = true;
           }
+        }).catch(err=>{
+          console.log("err======",err)
         })
       } catch (err) {
         this.loginInvalid = true;

@@ -41,14 +41,14 @@ export class SideBarComponent implements OnInit {
 
 
   refreshFinds(){
-  
+
     var data={
       userId:this.loginData.userId,
 
     }
 
     this.api.getAssignedDevices(data).then((res:any)=>{
-      // console.log("find data side bar ======",res);
+      console.log("find data side bar ======",res);
       if(res.status){
         this.findData=[]
 
