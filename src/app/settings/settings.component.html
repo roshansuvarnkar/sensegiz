@@ -208,7 +208,7 @@
 
   <mat-card>
     <mat-card-title>
-      Maximum duration threshold
+      Minimum duration threshold
     </mat-card-title>
     <mat-card-subtitle>
       Enter Duration 
@@ -228,7 +228,7 @@
         <mat-form-field  >
           <mat-label>Seconds</mat-label>
         <mat-select  formControlName="seconds" required >
-          <mat-option *ngFor="let b of sec;let i=index" [disabled]="minStatus" [value]="b">{{b}}</mat-option>
+          <mat-option *ngFor="let b of sec" [disabled]="minStatus" [value]="b">{{b}}</mat-option>
         </mat-select>
         <mat-error>
           Please select minimum second as 0
