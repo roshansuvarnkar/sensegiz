@@ -116,6 +116,7 @@ refreshShift(){
 
 
 edit(data){
+  console.log("data==",data)
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;

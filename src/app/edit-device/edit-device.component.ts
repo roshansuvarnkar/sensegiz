@@ -24,15 +24,17 @@ userform:FormGroup
     private login:LoginCheckService,
     private general:GeneralMaterialsService
   ) {
-    // console.log("data===",data)
+    console.log("data===",data)
     this.type=data.type
     this.deviceData=data.data
+    console.log("deviceData===",this.deviceData)
   }
 
   ngOnInit(): void {
     this.Findform = this.fb.group({
       deviceName: ['', Validators.required],
       deviceId: [{value: '', disabled: true}, Validators.required],
+      empId:[''],
       mobileNum:[''],
       emailId:[''],
 
