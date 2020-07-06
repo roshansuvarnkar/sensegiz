@@ -1,42 +1,64 @@
 <div class='setting'>
-    <mat-card>
-        <mat-card-title>
-          Define Minimum Distance
-        </mat-card-title>
-        <mat-card-subtitle>
-          Enter minimum distance for user in meter
-        </mat-card-subtitle>
-        <mat-card-content>
-          <mat-slide-toggle color="primary" [checked]="statusCustomise" (change)="customise()">Customize</mat-slide-toggle>
-          <br><br>
-          <form [formGroup]="distanceForm" (ngSubmit)="onSubmitDistanceForm(distanceForm.value)">
-            <mat-form-field>
-              <mat-label>Select distance</mat-label>
-              <mat-select formControlName="distance" (selectionChange)="changeDistance($event)" required>
-                <mat-option value="1">
-                  1 meter
-                </mat-option>
-                <mat-option value="2">
-                  2 meter
-                </mat-option>
-                <mat-option value="3">
-                  3 meter
-                </mat-option>
-              </mat-select>
-            </mat-form-field><br>
-            <div *ngIf="statusCustomise">
-              <mat-form-field>
-                <input matInput placeholder="RSSI" formControlName="rssi"  required>
-                <mat-error>
-                  Please provide a valid RSSI
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <br><br>
-            <button mat-raised-button [disabled]="!distanceForm.valid" color="primary">Submit</button>
-          </form>
-        </mat-card-content>
-      </mat-card>
+  <mat-card>
+       <mat-card-title>
+         Define Minimum Distance
+       </mat-card-title>
+       <mat-card-subtitle>
+         Enter minimum distance for user in meter
+       </mat-card-subtitle>
+       <mat-card-content>
+         <mat-slide-toggle color="primary" [checked]="statusCustomise" (change)="customise()">Customize</mat-slide-toggle>
+         <br><br>
+         <!-- <mat-radio-group  color="primary">
+           <mat-radio-button [value]="1" name="small" [checked]="this.selectStatus1" (change)="onclick($event)" >Pendant</mat-radio-button>
+           <mat-radio-button [value]="2" name="small" [checked]="this.selectStatus2" (change)="onclick($event)"  >Band</mat-radio-button>
+         </mat-radio-group><br> -->
+         <form [formGroup]="distanceForm" (ngSubmit)="onSubmitDistanceForm(distanceForm.value)">
+           <mat-form-field>
+             <mat-label>Select distance</mat-label>
+
+              <!-- <div *ngIf="selectedValue==false"> -->
+               <mat-select formControlName="distance" (selectionChange)="changeDistance($event)" required>
+                 <mat-option value="1">
+                   1 meter
+                 </mat-option>
+                 <mat-option value="2">
+                   2 meter
+                 </mat-option>
+                 <mat-option value="3">
+                   3 meter
+                 </mat-option>
+               </mat-select>
+              <!-- </div>
+              <div *ngIf="selectedValue==true">
+               <mat-select formControlName="distance" (selectionChange)="changeDistance($event)" required>
+                 <mat-option value="1">
+                   1 meter
+                 </mat-option>
+                 <mat-option value="2">
+                   2 meter
+                 </mat-option>
+                 <mat-option value="3">
+                   3 meter
+                 </mat-option>
+               </mat-select>
+              </div> -->
+           </mat-form-field><br>
+           <div *ngIf="statusCustomise">
+             <mat-form-field>
+               <input matInput placeholder="RSSI" formControlName="rssi"  required>
+               <mat-error>
+                 Please provide a valid RSSI
+               </mat-error>
+             </mat-form-field>
+           </div>
+           <br><br>
+           <button mat-raised-button [disabled]="!distanceForm.valid" color="primary">Submit</button>
+         </form>
+       </mat-card-content>
+     </mat-card>
+
+
       <mat-card>
         <mat-card-title>
           Define transmission power
@@ -87,7 +109,7 @@
         <div>
           <span class="flex warning">&nbsp;&nbsp;<mat-icon class="warn">warning</mat-icon>Critical Warning: Before changing this setting please contact SenseGiz team.</span>
         </div>
-    
+
         </mat-card-content>
       </mat-card>
 </div>
