@@ -19,13 +19,19 @@ export class SettingsComponent implements OnInit {
   inactivityForm:FormGroup
   timeForm:FormGroup
   bufferForm:FormGroup
+  wearableForm:FormGroup
   loginData:any
   setting:any
+  duration:any
+  wearableType:any
   statusCustomise:boolean=false
+  minStatus:boolean=false
   inactivityStatusValue:any=[]
   min:any=[0,1,2,3,4,5,6,7,8,9,10]
   sec:any=[0,5,10,15,20,25,30,35,40,45,50,55]
-  minStatus:boolean=false
+
+
+
   constructor(public dialog: MatDialog,private fb:FormBuilder,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
 
   ngOnInit(): void {
@@ -43,7 +49,7 @@ export class SettingsComponent implements OnInit {
 
     this.distanceForm = this.fb.group({
       distance: ['', Validators.required],
-      rssi: ['', Validators.required],
+      rssi: [{value:'',disabled: true}, Validators.required],
     });
 
 
@@ -53,7 +59,7 @@ export class SettingsComponent implements OnInit {
 
 
     this.txPowerForm = this.fb.group({
-      txPower: ['', Validators.required],
+      txPower: [{value:'',disabled: true}, Validators.required],
     });
 
     this.inactivityForm = this.fb.group({
@@ -66,21 +72,32 @@ export class SettingsComponent implements OnInit {
     this.timeForm=this.fb.group({
       minutes:['',Validators.required],
       seconds:[{value:'',disabled: false},Validators.required]
-
     })
+    this.wearableForm=this.fb.group({
+     wearable:['',Validators.required]
+   })
+  
 
   }
 
 
+  
   refreshSetting(){
     var data={
       userId:this.loginData.userId,
       tblName:'deviceSetting'
     }
     this.api.getData(data).then((res:any)=>{
-      //console.log("setting data page ======",res);
+      console.log("setting data page ======",res);
       if(res.status){
         this.setting = res.success[0]
+     
+        this.duration=res.success[0].durationThreshold
+        var minutes = Math.round(this.duration/60);
+        var seconds = this.duration%60;
+
+        console.log("min",minutes, seconds)
+
         this.distanceForm.patchValue({
           distance: res.success[0].distance.toString(),
           rssi: res.success[0].rssi
@@ -97,6 +114,19 @@ export class SettingsComponent implements OnInit {
         this.bufferForm.patchValue({
           buffer: res.success[0].buffer,
         })
+        this.timeForm.patchValue({
+          minutes:minutes,
+          seconds:seconds
+        })
+        if(res.success[0].type==0){
+          this.wearableForm.patchValue({
+            wearable:"0"
+          })
+        }else{
+          this.wearableForm.patchValue({
+            wearable:"1"
+          })
+        }
 
         if( res.success[0].inactivityStatus == 1){
           this.inactivityStatusValue = {
@@ -113,6 +143,7 @@ export class SettingsComponent implements OnInit {
       }
     })
   }
+
 
   onSubmitWorkForm(data) {
      if (this.workingForm.valid) {
@@ -132,14 +163,38 @@ export class SettingsComponent implements OnInit {
    }
 
 
-
-  onSubmitDistanceForm(data) {
+   onSubmitDistanceForm(data) {
+    console.log("data=",data)
+  
      if (this.distanceForm.valid) {
        try {
-        //  console.log("distance ===",data)
+        if(this.setting.type==0){
+          if(data.distance == "1" ){
+            data.rssi='B9'
+          }
+          else if(data.distance  == "2" ){
+           data.rssi='B5'
+          
+          }
+          else if(data.distance  == "3"){
+            data.rssi='AE'
+          }
+        }
+        if(this.setting.type==1){
+          if(data.distance  == "1" ){
+            data.rssi='A1'
+          }
+          else if(data.distance  == "2"){
+            data.rssi='A2'
+          }
+          else if(data.distance  == "3"){
+            data.rssi='A3'
+          }
+        }
          data.userId = this.loginData.userId
+         console.log("distance ===",data)
          this.api.addDistance(data).then((res:any)=>{
-          //  console.log("distance insrted or updated",res)
+           console.log("distance insrted or updated",res)
            if(res.status){
              this.refreshSetting()
              var msg = 'Minimum distance updated Successfully'
@@ -246,17 +301,17 @@ export class SettingsComponent implements OnInit {
 
    onSubmitTimeForm(value){
     console.log(" time data===",value);
- 
+
     var minute=value.minutes <=9 && value.minutes >= 0 ?"0"+value.minutes:value.minutes
     var second=value.seconds <=9 && value.seconds >= 0 ?"0"+value.seconds:value.seconds
 
     var data={
       userId:this.loginData.userId,
       minute:minute.toString(),
-      second:second.toString() 
+      second:second.toString()
      }
     console.log("data==",data)
-    
+
     this.api.getDurationThreshold(data).then((res:any)=>{
       console.log("duration==",res)
      if(res.status){
@@ -267,27 +322,76 @@ export class SettingsComponent implements OnInit {
      }
    })
 
-  } 
+  }
   getMin(event){
     // console.log("event==",event)
       if(event.value==10){
         this.minStatus=true
         this.timeForm.patchValue({
           seconds:0
-        }) 
+        })
       }else{
         this.minStatus=false
       }
       // this.minStatus=event.value==10?true:false
       // this.timeForm.patchValue({
       //   seconds:0
-      // }) 
-  
+      // })
+
   }
   //  customise(){
   //    this.statusCustomise = this.statusCustomise == true ? false : true
   //  }
+  onSubmitwearableForm(data){
 
+    this.wearableType=data.wearable
+    console.log("data===",data.wearable)
+    if (this.wearableForm.valid) {
+     try {
+       if(this.wearableType==0){
+         if(this.setting.distance == 1){
+           data.rssi='B9'
+         }
+         else if(this.setting.distance  == 2){
+          data.rssi='B5'
+         
+         }
+         else if(this.setting.distance  ==3){
+           data.rssi='AE'
+         }
+       }
+       if(this.wearableType==1){
+         if(this.setting.distance  == 1){
+           data.rssi='A1'
+         }
+         else if(this.setting.distance  == 2){
+           data.rssi='A2'
+         }
+         else if(this.setting.distance  == 3){
+           data.rssi='A3'
+         }
+       }
+      
+     
+         data.userId=this.loginData.userId,
+       
+       console.log("data=====",data)
+       this.api.updateWearableType(data).then((res:any)=>{
+         console.log("wearable type===",res)
+         if(res.status){
+           this.refreshSetting()
+           var msg='Wearable type updated Successfully'
+           this.general.openSnackBar(msg,'')
+           this.refreshSetting()
+         }
+       }).catch(err=>{
+         console.log("err===",err);
+       })
+     } catch (err) {
+     }
+   }
+
+  }
    changeDistance(event){
     //  console.log("event===",event.value)
      if(event.value == 1){

@@ -33,7 +33,7 @@ userform:FormGroup
     this.Findform = this.fb.group({
       deviceName: ['', Validators.required],
       deviceId: [{value: '', disabled: true}, Validators.required],
-      employeeId: [''],
+      empId: [''],
       mobileNum:[''],
       emailId:[''],
     });
@@ -58,7 +58,8 @@ userform:FormGroup
         deviceName: this.deviceData.deviceName,
         deviceId: this.deviceData.deviceId,
         mobileNum:this.deviceData.mobNum,
-        emailId:this.deviceData.emailId
+        emailId:this.deviceData.emailId,
+        empId:this.deviceData.empId
       });
     }
 
