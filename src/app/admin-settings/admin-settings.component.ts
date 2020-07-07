@@ -15,6 +15,7 @@ export class AdminSettingsComponent implements OnInit {
   setting:any=[]
   dataGet:any
   statusCustomise:boolean=false
+  selectedValue:boolean=false
   selectStatus1:boolean=false
   selectStatus2:boolean=false
   constructor(private fb:FormBuilder,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private route: ActivatedRoute) { }
@@ -41,29 +42,62 @@ export class AdminSettingsComponent implements OnInit {
       userId:this.dataGet.userId,
       tblName:'deviceSetting'
     }
+    console.log("data get==",data)
     this.api.getData(data).then((res:any)=>{
-      // console.log("setting data page ======",res);
+      console.log("setting data page ======",res);
       if(res.status){
         this.setting = res.success[0]
-        if(this.setting.type==0){
-            this.selectStatus1=true
-            this.distanceForm.patchValue({
-              distance: res.success[0].distance.toString(),
-              rssi: res.success[0].rssi
-            })
-          }
-          else{
-            this.selectStatus2=true
-            this.distanceForm.patchValue({
-              distance: res.success[0].distance.toString(),
-              rssi: res.success[0].rssi
-            })
-          }
 
+        this.distanceForm.patchValue({
+          distance: res.success[0].distance.toString(),
+          rssi: res.success[0].rssi
+        })
+        if(this.setting.type==0){
+          this.selectStatus1=true
+          if(this.setting.distance == 1){
+            this.distanceForm.patchValue({
+              distance: res.success[0].distance.toString(),
+              rssi: 'B9'
+            })
+          }
+          else  if(this.setting.distance == 2){
+            this.distanceForm.patchValue({
+              distance: res.success[0].distance.toString(),
+              rssi: 'B5'
+            })
+          }
+          else if(this.setting.distance == 3){
+            this.distanceForm.patchValue({
+              distance: res.success[0].distance.toString(),
+              rssi: 'AE'
+            })
+          }
+        }
+        if(this.setting.type==1){
+          this.selectStatus2=true
+          if(this.setting.distance == 1){
+            this.distanceForm.patchValue({
+              distance: res.success[0].distance.toString(),
+              rssi: 'A1'
+            })
+          }
+          else  if(this.setting.distance == 2){
+            this.distanceForm.patchValue({
+              distance: res.success[0].distance.toString(),
+              rssi: 'A2'
+            })
+          }
+          else if(this.setting.distance == 3){
+            this.distanceForm.patchValue({
+              distance: res.success[0].distance.toString(),
+              rssi: 'A3'
+            })
+          }
+        }
+       
         this.txPowerForm.patchValue({
           txPower: res.success[0].txPower,
         })
-
       }
     })
   }
@@ -87,7 +121,7 @@ export class AdminSettingsComponent implements OnInit {
     }
   }
 
-
+  
   onSubmittxPowerForm(data) {
     if (this.txPowerForm.valid) {
       try {
@@ -110,46 +144,47 @@ export class AdminSettingsComponent implements OnInit {
   customise(){
     this.statusCustomise = this.statusCustomise == true ? false : true
   }
-  // onclick(event){
-  //    this.selectedValue=event.value==1?false:true
-  //    this.distanceForm.reset()
-  //  }
+  onclick(event){
+    this.distanceForm.reset()
+    this.selectedValue=event.value==1?false:true
+     
+  }
 
-    changeDistance(event){
-
-     // if(this.selectedValue == false){
-       if(event.value == 1 ){
-         this.distanceForm.patchValue({
-           rssi:'B9'
-         })
-       }
-       else if(event.value == 2){
-         this.distanceForm.patchValue({
-           rssi:'B5'
-         })
-       }
-       else if(event.value == 3){
-         this.distanceForm.patchValue({
-           rssi:'AE'
-         })
-       }
-   //   }
-   //   else if(this.selectedValue == true){
-   //     if(event.value == 1 ){
-   //       this.distanceForm.patchValue({
-   //         rssi:'A1'
-   //       })
-   //     }
-   //     else if(event.value == 2){
-   //       this.distanceForm.patchValue({
-   //         rssi:'A2'
-   //       })
-   //     }
-   //     else if(event.value == 3){
-   //       this.distanceForm.patchValue({
-   //         rssi:'A3'
-   //       })
-   //     }
-   //   }
-   }
+  changeDistance(event){
+    
+    if(this.setting.type==0){
+      if(event.value == 1 ){
+        this.distanceForm.patchValue({
+          rssi:'B9'
+        })
+      }
+      else if(event.value == 2){
+        this.distanceForm.patchValue({
+          rssi:'B5'
+        })
+      }
+      else if(event.value == 3){
+        this.distanceForm.patchValue({
+          rssi:'AE'
+        })
+      }
+    }
+    else if(this.setting.type==1){
+      if(event.value == 1 ){
+        this.distanceForm.patchValue({
+          rssi:'A1'
+        })
+      }
+      else if(event.value == 2){
+        this.distanceForm.patchValue({
+          rssi:'A2'
+        })
+      }
+      else if(event.value == 3){
+        this.distanceForm.patchValue({
+          rssi:'A3'
+        })
+      }
+    }
+  }
 }

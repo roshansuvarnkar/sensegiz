@@ -39,6 +39,7 @@
 
 
 
+  
   <mat-card>
     <mat-card-title>
       Define Minimum Distance
@@ -52,21 +53,24 @@
       <form [formGroup]="distanceForm" (ngSubmit)="onSubmitDistanceForm(distanceForm.value)">
         <mat-form-field>
           <mat-label>Select distance</mat-label>
-          <mat-select formControlName="distance" (selectionChange)="changeDistance($event)" required>
-            <mat-option value="1">
-              1 meter
-            </mat-option>
-            <mat-option value="2">
-              2 meter
-            </mat-option>
-            <mat-option value="3">
-              3 meter
-            </mat-option>
-          </mat-select>
+    
+            <mat-select formControlName="distance" required>
+              <mat-option value="1">
+                1 meter
+              </mat-option>
+              <mat-option value="2">
+                2 meter
+              </mat-option>
+              <mat-option value="3">
+                3 meter
+              </mat-option>
+            </mat-select>
+              
+      
         </mat-form-field><br>
         <!-- <div *ngIf="statusCustomise">
           <mat-form-field>
-            <input matInput placeholder="RSSI" formControlName="rssi" disabled required>
+            <input matInput placeholder="RSSI" formControlName="rssi"  disabled required>
             <mat-error>
               Please provide a valid RSSI
             </mat-error>
@@ -77,6 +81,7 @@
       </form>
     </mat-card-content>
   </mat-card>
+
 
 
 
@@ -244,7 +249,7 @@
 </div>
 
 
-<!--
+
 <mat-card>
 <mat-card-title>
  Wearable
@@ -272,4 +277,4 @@
     <button mat-raised-button [disabled]="!wearableForm.valid"  color="primary">Submit</button>
   </form>
 </mat-card-content>
-</mat-card> -->
+</mat-card>

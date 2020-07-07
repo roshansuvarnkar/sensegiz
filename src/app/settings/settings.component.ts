@@ -23,6 +23,7 @@ export class SettingsComponent implements OnInit {
   loginData:any
   setting:any
   duration:any
+  wearableType:any
   statusCustomise:boolean=false
   minStatus:boolean=false
   inactivityStatusValue:any=[]
@@ -75,26 +76,27 @@ export class SettingsComponent implements OnInit {
     this.wearableForm=this.fb.group({
      wearable:['',Validators.required]
    })
-   this.wearableForm.patchValue({
-     wearable:"0"
-   })
+  
 
   }
 
 
+  
   refreshSetting(){
     var data={
       userId:this.loginData.userId,
       tblName:'deviceSetting'
     }
     this.api.getData(data).then((res:any)=>{
-      //console.log("setting data page ======",res);
+      console.log("setting data page ======",res);
       if(res.status){
         this.setting = res.success[0]
-
+     
         this.duration=res.success[0].durationThreshold
         var minutes = Math.round(this.duration/60);
         var seconds = this.duration%60;
+
+        console.log("min",minutes, seconds)
 
         this.distanceForm.patchValue({
           distance: res.success[0].distance.toString(),
@@ -116,6 +118,15 @@ export class SettingsComponent implements OnInit {
           minutes:minutes,
           seconds:seconds
         })
+        if(res.success[0].type==0){
+          this.wearableForm.patchValue({
+            wearable:"0"
+          })
+        }else{
+          this.wearableForm.patchValue({
+            wearable:"1"
+          })
+        }
 
         if( res.success[0].inactivityStatus == 1){
           this.inactivityStatusValue = {
@@ -132,6 +143,7 @@ export class SettingsComponent implements OnInit {
       }
     })
   }
+
 
   onSubmitWorkForm(data) {
      if (this.workingForm.valid) {
@@ -151,14 +163,38 @@ export class SettingsComponent implements OnInit {
    }
 
 
-
-  onSubmitDistanceForm(data) {
+   onSubmitDistanceForm(data) {
+    console.log("data=",data)
+  
      if (this.distanceForm.valid) {
        try {
-        //  console.log("distance ===",data)
+        if(this.setting.type==0){
+          if(data.distance == "1" ){
+            data.rssi='B9'
+          }
+          else if(data.distance  == "2" ){
+           data.rssi='B5'
+          
+          }
+          else if(data.distance  == "3"){
+            data.rssi='AE'
+          }
+        }
+        if(this.setting.type==1){
+          if(data.distance  == "1" ){
+            data.rssi='A1'
+          }
+          else if(data.distance  == "2"){
+            data.rssi='A2'
+          }
+          else if(data.distance  == "3"){
+            data.rssi='A3'
+          }
+        }
          data.userId = this.loginData.userId
+         console.log("distance ===",data)
          this.api.addDistance(data).then((res:any)=>{
-          //  console.log("distance insrted or updated",res)
+           console.log("distance insrted or updated",res)
            if(res.status){
              this.refreshSetting()
              var msg = 'Minimum distance updated Successfully'
@@ -306,31 +342,56 @@ export class SettingsComponent implements OnInit {
   //  customise(){
   //    this.statusCustomise = this.statusCustomise == true ? false : true
   //  }
-  // onSubmitwearableForm(data){
-  //      console.log("data===",data)
-  //      if (this.wearableForm.valid) {
-  //       try {
-  //
-  //         var value={
-  //           userId:this.loginData.userId,
-  //           wearable:data.wearable,
-  //         }
-  //
-  //         this.api.maxLimit(data).then((res:any)=>{
-  //           console.log("limit response===",res)
-  //           if(res.status){
-  //             this.refreshSetting()
-  //             var msg='Wearable type updated Successfully'
-  //             this.general.openSnackBar(msg,'')
-  //           }
-  //         }).catch(err=>{
-  //           console.log("err===",err);
-  //         })
-  //       } catch (err) {
-  //       }
-  //     }
-  //
-  //    }
+  onSubmitwearableForm(data){
+
+    this.wearableType=data.wearable
+    console.log("data===",data.wearable)
+    if (this.wearableForm.valid) {
+     try {
+       if(this.wearableType==0){
+         if(this.setting.distance == 1){
+           data.rssi='B9'
+         }
+         else if(this.setting.distance  == 2){
+          data.rssi='B5'
+         
+         }
+         else if(this.setting.distance  ==3){
+           data.rssi='AE'
+         }
+       }
+       if(this.wearableType==1){
+         if(this.setting.distance  == 1){
+           data.rssi='A1'
+         }
+         else if(this.setting.distance  == 2){
+           data.rssi='A2'
+         }
+         else if(this.setting.distance  == 3){
+           data.rssi='A3'
+         }
+       }
+      
+     
+         data.userId=this.loginData.userId,
+       
+       console.log("data=====",data)
+       this.api.updateWearableType(data).then((res:any)=>{
+         console.log("wearable type===",res)
+         if(res.status){
+           this.refreshSetting()
+           var msg='Wearable type updated Successfully'
+           this.general.openSnackBar(msg,'')
+           this.refreshSetting()
+         }
+       }).catch(err=>{
+         console.log("err===",err);
+       })
+     } catch (err) {
+     }
+   }
+
+  }
    changeDistance(event){
     //  console.log("event===",event.value)
      if(event.value == 1){
