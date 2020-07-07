@@ -82,7 +82,8 @@ refreshFinds(){
               batteryStatus:res.success[i].batteryStatus,
               emailId:res.success[i].emailId == 'NULL' ? '-' : res.success[i].emailId,
               mobileNum:res.success[i].mobNum == 'NULL' ? '-' : res.success[i].mobNum,
-              empId:res.success[i].empId == '' ? '-' : res.success[i].empId
+              empId:res.success[i].empId == '' ? '-' : res.success[i].empId,
+              userId:res.success[i].userId
           });
       }
       this.dataSource = new MatTableDataSource(this.findData);
@@ -116,6 +117,8 @@ refreshShift(){
 
 
 edit(data){
+  console.log("find data==",data)
+
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;

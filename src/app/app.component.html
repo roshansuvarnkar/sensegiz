@@ -1,84 +1,89 @@
 
 
 <mat-toolbar>
- <div class="mobilemenu" >
-  <div *ngIf="loginData">
-    <button mat-button [matMenuTriggerFor]="belowMenu" class="menu"><mat-icon>menu</mat-icon></button>
-  <mat-menu #belowMenu="matMenu" yPosition="below">
-    <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>Home</button>
-    <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>Manage People</button>
-    <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>Social Distancing</button>
-    <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>History</button>
-    <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>Settings</button>
-
-  </mat-menu>
-
+  <div class="mobilemenu" >
+   <div *ngIf="loginData">
+     <button mat-button [matMenuTriggerFor]="belowMenu" class="menu"><mat-icon>menu</mat-icon></button>
+   <mat-menu #belowMenu="matMenu" yPosition="below">
+     <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>Home</button>
+     <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>Manage People</button>
+     <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>Social Distancing</button>
+     <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>History</button>
+     <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>Settings</button>
+     <button mat-menu-item routerLink="/User Guide"> <mat-icon>menu_book</mat-icon>User Guide</button>
+   </mat-menu>
+ 
+   </div>
   </div>
+   <span class="flex">
+     <img src="./assets/logo.png" alt="Sensegiz">
+     <span class="end">
+       <span class="flex title" *ngIf="loginStatus">
+         <span>
+           <mat-icon >person</mat-icon>
+         </span>
+         <p >{{loginDataInfo.userName}}</p>&emsp;&nbsp;&emsp;
+         <span  (click)="logout()">
+           <mat-icon >exit_to_app</mat-icon>
+         </span>
+       </span>
+     </span>
+   </span><br>
+   </mat-toolbar>
+ 
+ 
+ 
+ 
+ <div *ngIf="loginData">
+   <mat-toolbar color="primary" class="menubar">
+     <span routerLink="/home">Home</span>
+     <span routerLink="/dashboard">Manage People</span>
+     <span routerLink="/live-data">Social Distancing</span>
+     <span routerLink="/history">History</span>
+     <span routerLink="/settings">Settings</span>
+     <span routerLink="/user-guide">User Guide</span>
+     
+   </mat-toolbar>
+ 
+ <div *ngIf="isDesktopDevice">
+ 
+   <div class="container-fluid">
+ 
+ 
+     <div class="row">
+       <div class="col-2">
+         <app-side-bar></app-side-bar>
+       </div>
+ 
+ 
+       <div class="col-10">
+         <!-- <button mat-raised-button color="primary" class="guide"><span routerLink="/user-guide">User Guide</span></button> -->
+         <router-outlet></router-outlet>
+       </div>
+     </div>
+ 
+     </div>
  </div>
-  <span class="flex">
-    <img src="./assets/logo.png" alt="Sensegiz">
-    <span class="end">
-      <span class="flex title" *ngIf="loginStatus">
-        <span>
-          <mat-icon >person</mat-icon>
-        </span>
-        <p >{{loginDataInfo.userName}}</p>&emsp;&nbsp;&emsp;
-        <span  (click)="logout()">
-          <mat-icon >exit_to_app</mat-icon>
-        </span>
-      </span>
-    </span>
-  </span>
-  </mat-toolbar>
-
-
-
-
-<div *ngIf="loginData">
-  <mat-toolbar color="primary" class="menubar">
-    <span routerLink="/home">Home</span>
-    <span routerLink="/dashboard">Manage People</span>
-    <span routerLink="/live-data">Social Distancing</span>
-    <span routerLink="/history">History</span>
-    <span routerLink="/settings">Settings</span>
-  </mat-toolbar>
-
-<div *ngIf="isDesktopDevice">
-
-  <div class="container-fluid">
-
-
-    <div class="row">
-      <div class="col-2">
-        <app-side-bar></app-side-bar>
-      </div>
-
-
-      <div class="col-10">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-
-    </div>
-</div>
-
-<div *ngIf="isMobile || isTablet" >
-  <mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav mode="over"  >
-   <app-side-bar></app-side-bar>
-
-  </mat-sidenav>
-
-  <mat-sidenav-content >
- <p class="content" (click)="sidenav.toggle()">&nbsp;&nbsp;  Devices list <mat-icon color="primary">keyboard_arrow_right</mat-icon></p>
-     <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
-
-</div >
-</div>
-
-<div *ngIf="!loginData">
-  <router-outlet></router-outlet>
-
-</div>
+ 
+ <div *ngIf="isMobile || isTablet" >
+   <mat-sidenav-container class="example-container">
+   <mat-sidenav #sidenav mode="over"  >
+    <app-side-bar></app-side-bar>
+ 
+   </mat-sidenav>
+ 
+   <mat-sidenav-content >
+     <button mat-raised-button color="primary" class="guide"><span routerLink="/user-guide">User Guide</span></button>
+  <p class="content" (click)="sidenav.toggle()">&nbsp;&nbsp;  Devices list <mat-icon color="primary">keyboard_arrow_right</mat-icon></p>
+      <router-outlet></router-outlet>
+   </mat-sidenav-content>
+ </mat-sidenav-container>
+ 
+ </div >
+ </div>
+ 
+ <div *ngIf="!loginData">
+   <router-outlet></router-outlet>
+ 
+ </div>
+ 

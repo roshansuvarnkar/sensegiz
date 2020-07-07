@@ -30,6 +30,18 @@
             <button mat-button matStepperNext>Next</button>
           </div>
       </mat-step>
+      
+      <mat-step >
+        <ng-template matStepLabel>Fill out your Employee Id</ng-template>
+        <mat-form-field>
+          <mat-label>Employee Id</mat-label>
+          <input type="text" matInput formControlName="empId" placeholder="Employee Id" >
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
 
       <mat-step >
         <ng-template matStepLabel>Fill out your Mobile Number</ng-template>
@@ -164,3 +176,4 @@
   </mat-horizontal-stepper>
 
 </div>
+

@@ -17,11 +17,15 @@ export class SettingsComponent implements OnInit {
   maxContactForm:FormGroup
   txPowerForm:FormGroup
   inactivityForm:FormGroup
+  timeForm:FormGroup
   bufferForm:FormGroup
   loginData:any
   setting:any
   statusCustomise:boolean=false
   inactivityStatusValue:any=[]
+  min:any=[0,1,2,3,4,5,6,7,8,9,10]
+  sec:any=[0,5,10,15,20,25,30,35,40,45,50,55]
+  minStatus:boolean=false
   constructor(public dialog: MatDialog,private fb:FormBuilder,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
 
   ngOnInit(): void {
@@ -58,6 +62,11 @@ export class SettingsComponent implements OnInit {
 
     this.bufferForm = this.fb.group({
       buffer: ['',[Validators.required, Validators.min(0)]]
+    })
+    this.timeForm=this.fb.group({
+      minutes:['',Validators.required],
+      seconds:[{value:'',disabled: false},Validators.required]
+
     })
 
   }
@@ -235,10 +244,49 @@ export class SettingsComponent implements OnInit {
     }
    }
 
+   onSubmitTimeForm(value){
+    console.log(" time data===",value);
+ 
+    var minute=value.minutes <=9 && value.minutes >= 0 ?"0"+value.minutes:value.minutes
+    var second=value.seconds <=9 && value.seconds >= 0 ?"0"+value.seconds:value.seconds
 
-   customise(){
-     this.statusCustomise = this.statusCustomise == true ? false : true
-   }
+    var data={
+      userId:this.loginData.userId,
+      minute:minute.toString(),
+      second:second.toString() 
+     }
+    console.log("data==",data)
+    
+    this.api.getDurationThreshold(data).then((res:any)=>{
+      console.log("duration==",res)
+     if(res.status){
+
+       this.refreshSetting()
+       var msg = 'Maximum duration threshold updated Successfully'
+       this.general.openSnackBar(msg,'')
+     }
+   })
+
+  } 
+  getMin(event){
+    // console.log("event==",event)
+      if(event.value==10){
+        this.minStatus=true
+        this.timeForm.patchValue({
+          seconds:0
+        }) 
+      }else{
+        this.minStatus=false
+      }
+      // this.minStatus=event.value==10?true:false
+      // this.timeForm.patchValue({
+      //   seconds:0
+      // }) 
+  
+  }
+  //  customise(){
+  //    this.statusCustomise = this.statusCustomise == true ? false : true
+  //  }
 
    changeDistance(event){
     //  console.log("event===",event.value)

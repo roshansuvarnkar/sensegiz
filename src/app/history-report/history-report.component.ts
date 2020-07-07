@@ -37,8 +37,10 @@ export class HistoryReportComponent implements OnInit {
   deviceName:any
   currentPageLength:any=10
   currentPageSize:any=10
-  displayedColumns: string[] = ['i','baseName', 'contactName', 'updatedOn', 'totaltime'];
-  displayedColumns1: string[] = ['contactDeviceName','updatedOn'];
+  displayedColumns: string[] = ['i','baseName','contactName', 'updatedOn', 'totaltime'];
+  displayedColumns1: string[] = ['i','contactName', 'updatedOn', 'totaltime'];
+  displayedColumns2: string[] = ['contactDeviceName','updatedOn'];
+  displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
   fileName:any
   showSpinner:boolean=false
   title:any
@@ -124,7 +126,7 @@ export class HistoryReportComponent implements OnInit {
         }
         this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
           console.log("find data based on date ======",res);
-          //this.liveData=[]
+          this.liveData=[]
           if(res.status){
             if(type==0){
               this.liveData=res.success
@@ -155,7 +157,7 @@ export class HistoryReportComponent implements OnInit {
 
         }
         this.api.getDeviceHistoryBasedOnDeviceName(data1).then((res:any)=>{
-          // console.log("find data based on name ======",res);
+          console.log("find data based on name ======",res);
 
           if(res.status){
             if(type==0){

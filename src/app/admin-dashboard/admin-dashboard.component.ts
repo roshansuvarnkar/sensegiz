@@ -91,6 +91,9 @@ refreshAdminData(){
 	  });
  }
 
+ openSetting(data){
+  this.router.navigate(['/admin-settings'], { queryParams: { record: JSON.stringify(data) } });
+ }
 
 
  delete(a){

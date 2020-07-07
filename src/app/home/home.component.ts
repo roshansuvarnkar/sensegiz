@@ -295,7 +295,7 @@ numOfcontactPerDay(){
           var date=new Date(dateObj[0])
           this.month[i]=months[date.getMonth()]
           this.day[i]=date.getDate()
-          this.dates[i]=this.month[i] + " "+this.day[i]
+          this.dates[i]=this.month[i] + " " + this.day[i]
           this.dataPoints.push(
              {
               y:this.countPerday[i].dailyCount,
@@ -305,9 +305,9 @@ numOfcontactPerDay(){
 
       }
 
+     
 
-
-      let chart = new CanvasJS.Chart("chartContainer", {
+      var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
                     exportEnabled: true,
                     title: {
@@ -327,10 +327,32 @@ numOfcontactPerDay(){
                     }]
                   });
 
-  chart.render();
+      chart.render();
+      chart.destroy()
+      chart=null;
+      chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        exportEnabled: true,
+        title: {
+          text: "No. of contacts",
+          fontColor: "#ef6c00",
+        },
+        axisY:{
+
+          gridThickness: 0
+        },
+        dataPointWidth: 30,
+
+        data: [{
+          type: "column",
+
+          dataPoints:this.dataPoints
+        }]
+      });
+      chart.render();
     }
+
   })
-
+ 
 }
-
 }
