@@ -24,7 +24,7 @@ userform:FormGroup
     private login:LoginCheckService,
     private general:GeneralMaterialsService
   ) {
-    // console.log("data===",data)
+     console.log("data===",data)
     this.type=data.type
     this.deviceData=data.data
   }
@@ -57,9 +57,9 @@ userform:FormGroup
       this.Findform.patchValue({
         deviceName: this.deviceData.deviceName,
         deviceId: this.deviceData.deviceId,
-        mobileNum:this.deviceData.mobNum,
-        emailId:this.deviceData.emailId,
-        empId:this.deviceData.empId
+        mobileNum:this.deviceData.mobNum=='' ? '-' : this.deviceData.mobNum==undefined ? '-' : this.deviceData.mobNum,
+        emailId:this.deviceData.emailId=='' ? '-' : this.deviceData.emailId==undefined ? '-' : this.deviceData.emailId,
+        empId:this.deviceData.empId=='' ? '-' : this.deviceData.empId==undefined ? '-' : this.deviceData.empId
       });
     }
 
@@ -72,7 +72,7 @@ userform:FormGroup
 
     else if(this.type=='users'){
       this.userform.patchValue({
-        mobileNum: this.deviceData.mobileNum,
+        mobileNum: this.deviceData.mobileNum=='' ? '-' : this.deviceData.mobNum==undefined ? '-' : this.deviceData.mobNum,
         emailId: this.deviceData.emailId
       });
     }
@@ -83,7 +83,7 @@ userform:FormGroup
   Findsubmit(data){
     if (this.Findform.valid) {
       try {
-        // console.log("find edit===",data)
+         console.log("find edit===",data)
         data.tblName='deviceRegistration'
         data.id=this.deviceData.id
         data.userId=this.deviceData.userId
