@@ -27,7 +27,7 @@ userform:FormGroup
      console.log("data===",data)
     this.type=data.type
     this.deviceData=data.data
-  }
+  } 
 
   ngOnInit(): void {
     this.Findform = this.fb.group({
