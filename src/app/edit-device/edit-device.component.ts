@@ -27,7 +27,7 @@ userform:FormGroup
      console.log("data===",data)
     this.type=data.type
     this.deviceData=data.data
-  } 
+  }
 
   ngOnInit(): void {
     this.Findform = this.fb.group({
@@ -57,9 +57,9 @@ userform:FormGroup
       this.Findform.patchValue({
         deviceName: this.deviceData.deviceName,
         deviceId: this.deviceData.deviceId,
-        mobileNum:this.deviceData.mobNum=='' ? '-' : this.deviceData.mobNum==undefined ? '-' : this.deviceData.mobNum,
-        emailId:this.deviceData.emailId=='' ? '-' : this.deviceData.emailId==undefined ? '-' : this.deviceData.emailId,
-        empId:this.deviceData.empId=='' ? '-' : this.deviceData.empId==undefined ? '-' : this.deviceData.empId
+        mobileNum:this.deviceData.mobileNum=='-' ? '' : this.deviceData.mobileNum==undefined ? '-' : this.deviceData.mobileNum,
+        emailId:this.deviceData.emailId=='-' ? '' : this.deviceData.emailId==undefined ? '-' : this.deviceData.emailId,
+        empId:this.deviceData.empId=='-' ? '' : this.deviceData.empId==undefined ? '-' : this.deviceData.empId
       });
     }
 
@@ -72,7 +72,7 @@ userform:FormGroup
 
     else if(this.type=='users'){
       this.userform.patchValue({
-        mobileNum: this.deviceData.mobileNum=='' ? '-' : this.deviceData.mobNum==undefined ? '-' : this.deviceData.mobNum,
+        mobileNum: this.deviceData.mobileNum=='' ? '-' : this.deviceData.mobileNum==undefined ? '-' : this.deviceData.mobileNum,
         emailId: this.deviceData.emailId
       });
     }
@@ -84,6 +84,9 @@ userform:FormGroup
     if (this.Findform.valid) {
       try {
          console.log("find edit===",data)
+         var mobNum=data.mobileNum.replace(/\s/g,'')
+          // console.log("mon num==",mobNum)
+        data.mobileNum=mobNum==''?'-':mobNum=='+91'?mobNum.substring(3):mobNum
         data.tblName='deviceRegistration'
         data.id=this.deviceData.id
         data.userId=this.deviceData.userId

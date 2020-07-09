@@ -36,6 +36,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { UserGuideComponent } from './user-guide/user-guide.component';
 
+import { InternationalPhoneNumber2Module  } from 'ngx-international-phone-number2';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { UserGuideComponent } from './user-guide/user-guide.component';
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    InternationalPhoneNumber2Module,
     NgCircleProgressModule.forRoot({}),
     MDBBootstrapModule.forRoot(),
     DeviceDetectorModule.forRoot(),

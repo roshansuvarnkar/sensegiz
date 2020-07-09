@@ -20,19 +20,26 @@ export class SettingsComponent implements OnInit {
   timeForm:FormGroup
   bufferForm:FormGroup
   wearableForm:FormGroup
+  buzzerTimeForm:FormGroup
+  buzzerConfigForm:FormGroup
   loginData:any
   setting:any
   duration:any
-  wearableType:any
   statusCustomise:boolean=false
   minStatus:boolean=false
+  buzzerConfigStatus:boolean=false
   inactivityStatusValue:any=[]
   min:any=[0,1,2,3,4,5,6,7,8,9,10]
   sec:any=[0,5,10,15,20,25,30,35,40,45,50,55]
+  // buzzerValue:any=[1,2,3,4,5]
 
 
-
-  constructor(public dialog: MatDialog,private fb:FormBuilder,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
+  constructor(public dialog: MatDialog,
+              private fb:FormBuilder,
+              private api:ApiService,
+              private login:LoginCheckService,
+              private general:GeneralMaterialsService
+  ) { }
 
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
@@ -76,12 +83,18 @@ export class SettingsComponent implements OnInit {
     this.wearableForm=this.fb.group({
      wearable:['',Validators.required]
    })
-  
+   this.buzzerTimeForm=this.fb.group({
+    buzzerTime:['',[Validators.required,Validators.max(255), Validators.min(1)]]
+  })
+  this.buzzerConfigForm=this.fb.group({
+      buzzerConfig:['',Validators.required],
+      durationSec:['',[Validators.max(255), Validators.min(10),Validators.pattern(/^\d*[05]$/)]]
+    })
 
   }
 
 
-  
+
   refreshSetting(){
     var data={
       userId:this.loginData.userId,
@@ -91,7 +104,7 @@ export class SettingsComponent implements OnInit {
       console.log("setting data page ======",res);
       if(res.status){
         this.setting = res.success[0]
-     
+
         this.duration=res.success[0].durationThreshold
         var minutes = Math.round(this.duration/60);
         var seconds = this.duration%60;
@@ -118,16 +131,27 @@ export class SettingsComponent implements OnInit {
           minutes:minutes,
           seconds:seconds
         })
-        if(res.success[0].type==0){
-          this.wearableForm.patchValue({
-            wearable:"0"
-          })
-        }else{
-          this.wearableForm.patchValue({
-            wearable:"1"
-          })
-        }
+        this.wearableForm.patchValue({
+          wearable:res.success[0].type.toString()
+        })
+        this.buzzerTimeForm.patchValue({
+          buzzerTime:res.success[0].buzzerTime
+        })
 
+        if(res.success[0].buzzerConfig==5){
+            this.buzzerConfigStatus=true
+            this.buzzerConfigForm.patchValue({
+              buzzerConfig:res.success[0].buzzerConfig.toString(),
+              durationSec:res.success[0].buzzerConfigSec
+            })
+          }
+          else{
+            this.buzzerConfigStatus=false
+            this.buzzerConfigForm.patchValue({
+              buzzerConfig:res.success[0].buzzerConfig,
+
+            })
+          }
         if( res.success[0].inactivityStatus == 1){
           this.inactivityStatusValue = {
             value:true,
@@ -165,7 +189,7 @@ export class SettingsComponent implements OnInit {
 
    onSubmitDistanceForm(data) {
     console.log("data=",data)
-  
+
      if (this.distanceForm.valid) {
        try {
         if(this.setting.type==0){
@@ -174,7 +198,7 @@ export class SettingsComponent implements OnInit {
           }
           else if(data.distance  == "2" ){
            data.rssi='B5'
-          
+
           }
           else if(data.distance  == "3"){
             data.rssi='AE'
@@ -333,10 +357,6 @@ export class SettingsComponent implements OnInit {
       }else{
         this.minStatus=false
       }
-      // this.minStatus=event.value==10?true:false
-      // this.timeForm.patchValue({
-      //   seconds:0
-      // })
 
   }
   //  customise(){
@@ -344,23 +364,23 @@ export class SettingsComponent implements OnInit {
   //  }
   onSubmitwearableForm(data){
 
-    this.wearableType=data.wearable
+     data.userId=this.loginData.userId,
     console.log("data===",data.wearable)
     if (this.wearableForm.valid) {
      try {
-       if(this.wearableType==0){
+       if(data.wearable==0){
          if(this.setting.distance == 1){
            data.rssi='B9'
          }
          else if(this.setting.distance  == 2){
           data.rssi='B5'
-         
+
          }
          else if(this.setting.distance  ==3){
            data.rssi='AE'
          }
        }
-       if(this.wearableType==1){
+       if(data.wearable==1){
          if(this.setting.distance  == 1){
            data.rssi='A1'
          }
@@ -371,10 +391,7 @@ export class SettingsComponent implements OnInit {
            data.rssi='A3'
          }
        }
-      
-     
-         data.userId=this.loginData.userId,
-       
+
        console.log("data=====",data)
        this.api.updateWearableType(data).then((res:any)=>{
          console.log("wearable type===",res)
@@ -392,24 +409,56 @@ export class SettingsComponent implements OnInit {
    }
 
   }
-   changeDistance(event){
-    //  console.log("event===",event.value)
-     if(event.value == 1){
-       this.distanceForm.patchValue({
-         rssi:'B9'
-       })
-     }
-     else if(event.value == 2){
-       this.distanceForm.patchValue({
-         rssi:'B5'
-       })
-     }
-     else if(event.value == 3){
-       this.distanceForm.patchValue({
-         rssi:'AE'
-       })
-     }
-   }
+
+
+
+onSubmitbuzzerConfigForm(data){
+  console.log("data==",data)
+  data.durationSec=data.buzzerConfig>0 && data.buzzerConfig<=4?0:data.durationSec
+  console.log("data==",data)
+
+  if (this.buzzerConfigForm.valid) {
+    try {
+      data.userId=this.loginData.userId
+      this.api.updateBuzzerConfig(data).then((res:any)=>{
+        console.log("buzzer congig===",res)
+        if(res.status){
+          this.refreshSetting()
+          var msg='Buzzer configured Successfully'
+          this.general.openSnackBar(msg,'')
+        }
+      }).catch(err=>{
+        console.log("err===",err);
+      })
+    } catch (err) {
+    }
+  }
+}
+
+getBuzzerValue(event){
+  console.log("event==",event)
+  this.buzzerConfigStatus=event.value==5?true:false
+
+}
+
+   // changeDistance(event){
+   //  //  console.log("event===",event.value)
+   //   if(event.value == 1){
+   //     this.distanceForm.patchValue({
+   //       rssi:'B9'
+   //     })
+   //   }
+   //   else if(event.value == 2){
+   //     this.distanceForm.patchValue({
+   //       rssi:'B5'
+   //     })
+   //   }
+   //   else if(event.value == 3){
+   //     this.distanceForm.patchValue({
+   //       rssi:'AE'
+   //     })
+   //   }
+   // }
 
    inactivityChange(event){
      var checked = event.checked == true ? 1 : 2

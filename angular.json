@@ -22,7 +22,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              {
+              "glob": "**/*",
+              "input": "node_modules/ngx-international-phone-number2/assets/images",
+              "output": "./assets/images"
+            }
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
