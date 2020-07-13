@@ -70,11 +70,10 @@ export class SideBarComponent implements OnInit {
 
 
   search(a){
-  if(a.length>0){
-    this.findData = this.findDataTemp.filter(obj=>{
-      return ((obj.deviceName.toString().toLowerCase().indexOf(a)>-1) || (obj.deviceId.toString().toLowerCase().indexOf(a)>-1)
-      || (obj.emailId.toString().toLowerCase().indexOf(a)>-1) || (obj.empId.toString().toLowerCase().indexOf(a)>-1))
-    })
+    if(a.length>0){
+      this.findData = this.findDataTemp.filter(obj=>{
+        return (obj.deviceName.toString().toLowerCase().indexOf(a)>-1)
+      })
     this.dataSource = new MatTableDataSource(this.findData);
     setTimeout(() => {
       this.dataSource.paginator = this.paginator;

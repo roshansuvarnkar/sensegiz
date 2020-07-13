@@ -208,17 +208,19 @@ updateWearableType(data){
   });
 }
 
-// updateBuzzerControl(data){
-//   const httpOptions = {
-//     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-//   };
-//   let url = this.host+'/setBuzzerControl';
-//   return new Promise((resolve,reject)=>{
-//     this.http.post(url,data,httpOptions).subscribe(res=>{
-//       resolve(res);
-//     })
-//   });
-// }
+updateScanningInterval(data){
+
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/setScanningInterval';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+}
 updateBuzzerConfig(data){
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

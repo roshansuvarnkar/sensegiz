@@ -1,4 +1,5 @@
 <div class="setting">
+
   <mat-card>
     <mat-card-title>
       Define Working Shifts
@@ -39,7 +40,6 @@
 
 
 
-
   <mat-card>
     <mat-card-title>
       Define Minimum Distance
@@ -54,7 +54,7 @@
         <mat-form-field>
           <mat-label>Select distance</mat-label>
 
-            <mat-select formControlName="distance" required>
+            <mat-select formControlName="distance"  required>
               <mat-option value="1">
                 1 meter
               </mat-option>
@@ -86,7 +86,6 @@
 
 
 
-
   <mat-card>
     <mat-card-title>
       Define max contact threshold
@@ -109,8 +108,8 @@
   </mat-card>
 
 
-
-  <!-- <mat-card>
+<!--
+  <mat-card>
     <mat-card-title>
       Define transmission power
     </mat-card-title>
@@ -162,8 +161,8 @@
     </div>
 
     </mat-card-content>
-  </mat-card> -->
-
+  </mat-card>
+ -->
 
   <mat-card>
     <mat-card-title>
@@ -211,74 +210,77 @@
     </mat-card-content>
   </mat-card>
 
+  
+
+
   <mat-card>
     <mat-card-title>
       Minimum duration threshold
     </mat-card-title>
     <mat-card-subtitle>
-      Enter Duration
+      Enter Duration in minutes or seconds
     </mat-card-subtitle><br>
     <mat-card-content>
 
       <form [formGroup]="timeForm" (ngSubmit)="onSubmitTimeForm(timeForm.value)" >
+        <!-- <div *ngIf="!minStatus"> -->
         <mat-form-field  >
+          
             <mat-label>Minutes</mat-label>
-            <mat-select  formControlName="minutes" (selectionChange)="getMin($event)" required>
-              <mat-option *ngFor="let a of min" [value]="a">{{a}}</mat-option>
+            <mat-select  formControlName="minutes" [disabled]="minStatus" (selectionChange)="getMin($event)" [required]="requiredStatus1">
+              <mat-option *ngFor="let a of min"  [value]="a">{{a}}</mat-option>
             </mat-select>
-            <mat-error>
-              Please select minimum minutes as 0
-            </mat-error>
+          
+           <mat-error *ngIf="!minStatus">
+            Please select minimum minutes as 1
+          </mat-error>
         </mat-form-field>
+      <!-- </div> -->
+      <!-- <div *ngIf="!secStatus"> -->
         <mat-form-field  >
+  
           <mat-label>Seconds</mat-label>
-        <mat-select  formControlName="seconds" required >
-          <mat-option *ngFor="let b of sec" [disabled]="minStatus" [value]="b">{{b}}</mat-option>
-        </mat-select>
-        <mat-error>
-          Please select minimum second as 0
+          <mat-select  formControlName="seconds"  [disabled]="secStatus" (selectionChange)="getSec($event)" [required]="requiredStatus2" >
+            <mat-option *ngFor="let b of sec" [value]="b">{{b}}</mat-option>
+          </mat-select>
+        
+         <mat-error *ngIf="!secStatus">
+          Please select minimum second as 1
         </mat-error>
     </mat-form-field>
-
+  <!-- </div> -->
         <br><br>
-        <button mat-raised-button [disabled]="!timeForm.valid"  color="primary">Submit</button>
+        <button mat-raised-button [disabled]="timeFormStatus"  color="primary">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>
 
 
-
-
-
 <mat-card>
-<mat-card-title>
- Wearable
-</mat-card-title>
-<mat-card-subtitle>
-  Enter wearable
-</mat-card-subtitle><br>
-<mat-card-content>
+  <mat-card-title>
+   Wearable
+  </mat-card-title>
+  <mat-card-subtitle>
+    Enter wearable
+  </mat-card-subtitle><br>
+  <mat-card-content>
 
-  <form [formGroup]="wearableForm" (ngSubmit)="onSubmitwearableForm(wearableForm.value)" >
-    <mat-form-field  >
-        <mat-label>Wearbale is as </mat-label>
-        <mat-select formControlName="wearable" >
-          <mat-option  value="0">Pendant</mat-option>
-          <mat-option value="1">Band</mat-option>
-        </mat-select>
-
-        <mat-error>
-          Please select wearable
-        </mat-error>
-    </mat-form-field>
-
-
-    <br><br>
-    <button mat-raised-button [disabled]="!wearableForm.valid"  color="primary">Submit</button>
-  </form>
-</mat-card-content>
+    <form [formGroup]="wearableForm" (ngSubmit)="onSubmitwearableForm(wearableForm.value)" >
+      <mat-form-field  >
+          <!-- <mat-label>Wearbale is as </mat-label> -->
+          <mat-select formControlName="wearable" >
+            <mat-option  value="0" >Pendant</mat-option>
+            <mat-option value="1">Band</mat-option>
+          </mat-select>
+          <mat-error>
+            Please select wearable
+          </mat-error>
+      </mat-form-field>
+      <br><br>
+      <button mat-raised-button [disabled]="!wearableForm.valid"  color="primary">Submit</button>
+    </form>
+  </mat-card-content>
 </mat-card>
-
 
 
 <mat-card>
@@ -286,37 +288,62 @@
    Buzzer Configuration
   </mat-card-title>
   <mat-card-subtitle>
-    Choose configuration
+    Enter duration
+  </mat-card-subtitle><br>
+  <mat-card-content>
+    <form [formGroup]="buzzerConfigForm" (ngSubmit)="onSubmitbuzzerConfigForm(buzzerConfigForm.value)" >
+      <mat-form-field  >
+        <mat-label>Configuration Type</mat-label>
+        <mat-select formControlName="buzzerConfig"  (selectionChange)="getBuzzerValue($event)" required >
+          <!-- <mat-option *ngFor="let a of buzzerValue"  [value]="a">{{a}}</mat-option> -->
+          <mat-option value="1">Choose 1</mat-option>
+          <mat-option value="2">Choose 2</mat-option>
+          <mat-option value="3">Choose 3</mat-option>
+          <mat-option value="4">Choose 4</mat-option>
+          <mat-option value="5">Choose 5</mat-option>
+        </mat-select>
+        <mat-error  >
+          Please enter value
+        </mat-error>
+    </mat-form-field>
+      <div *ngIf="buzzerConfigStatus" >
+        <mat-form-field >
+          <mat-label>Enter seconds in multiple of 5</mat-label>
+            <input type='number' matInput formControlName="durationSec" required >
+            <mat-error  >
+              Please enter minimum seconds is 10
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <br><br>
+      <button mat-raised-button [disabled]="!buzzerConfigForm.valid"   color="primary">Submit</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>
+  Scanning Interval
+  </mat-card-title>
+  <mat-card-subtitle>
+   Enter interval
   </mat-card-subtitle><br>
   <mat-card-content>
 
-    <form [formGroup]="buzzerConfigForm" (ngSubmit)="onSubmitbuzzerConfigForm(buzzerConfigForm.value)" >
+    <form [formGroup]="scanningForm" (ngSubmit)="onSubmitScanningForm(scanningForm.value)" >
       <mat-form-field  >
-          <mat-label>Configuration Type</mat-label>
-          <mat-select formControlName="buzzerConfig" (selectionChange)="getBuzzerValue($event)">
-            <!-- <mat-option *ngFor="let a of buzzerValue"  [value]="a">{{a}}</mat-option> -->
-            <mat-option value="1">Choose 1</mat-option>
-            <mat-option value="2">Choose 2</mat-option>
-            <mat-option value="3">Choose 3</mat-option>
-            <mat-option value="4">Choose 4</mat-option>
-            <mat-option value="5">Choose 5</mat-option>
-          </mat-select>
+          <mat-label>Interval in seconds</mat-label>
+          <input type='number' min="1" max="60" matInput formControlName="seconds" required>
           <mat-error  >
             Please enter value
           </mat-error>
       </mat-form-field>
-      <div *ngIf="buzzerConfigStatus">
-        <mat-form-field  >
-          <mat-label>Enter seconds in multiple of 5</mat-label>
-            <input type='number' matInput formControlName="durationSec" required>
-            <mat-error  >
-              Please enter minimum seconds as 10
-            </mat-error>
-          </mat-form-field>
-      </div>
       <br><br>
-      <button mat-raised-button [disabled]="!buzzerConfigForm.valid"  color="primary">Submit</button>
+      <button mat-raised-button [disabled]="!scanningForm.valid"  color="primary">Submit</button>
     </form>
   </mat-card-content>
 </mat-card>
+
+
+
 </div>

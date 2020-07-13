@@ -24,7 +24,7 @@ dataSource:any
 loginData:any
 currentLength:any
 count= 0
-currentPageLength:number = 7;
+currentPageLength:number = 10;
 currentPageSize:number = 10;
 
 displayedColumns: string[] = ['i','baseName', 'contactName', 'updatedOn','totalTime'];

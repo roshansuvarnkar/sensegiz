@@ -37,16 +37,14 @@
             <td mat-cell *matCellDef="let i=index" > {{i+1}} </td>
           </ng-container>
 
-
-          <ng-container matColumnDef="gatewayId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Id</th>
-            <td mat-cell *matCellDef="let live"> {{live.gatewayId}} </td>
+          <ng-container matColumnDef="gatewayName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Name </th>
+            <td mat-cell *matCellDef="let live "> {{live.gatewayName}} </td>
           </ng-container>
 
-
-          <ng-container matColumnDef="gatewayName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Name </th>
-            <td mat-cell *matCellDef="let live "> {{live.gatewayName}} </td>
+          <ng-container matColumnDef="gatewayId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> GateWay Id</th>
+            <td mat-cell *matCellDef="let live"> {{live.gatewayId}} </td>
           </ng-container>
 
 
