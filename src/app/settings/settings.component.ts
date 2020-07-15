@@ -40,7 +40,7 @@ export class SettingsComponent implements OnInit {
   coinData:any=[]
   coin:any=[]
   min:any=[]
-  sec:any=[]
+  sec:any=[]  
   // buzzerValue:any=[1,2,3,4,5]
 
   someValue:any=[]
@@ -140,7 +140,7 @@ export class SettingsComponent implements OnInit {
           this.minStatus=true
           this.timeForm.patchValue({
             minutes:'none',
-            seconds:res.success[0].durationThreshold
+            seconds:(res.success[0].durationThreshold).toString()
           })
         }else if(res.success[0].durationThreshold>55){
           this.secStatus=true
@@ -199,7 +199,19 @@ export class SettingsComponent implements OnInit {
       this.min.push(minutes)
      }
     for(let i =0;i<=55;i++){
-     var seconds=i==0?'none':i
+     if(i==0){
+       var seconds='none'
+     }
+     else if(i==1){
+       seconds='0'
+     }
+     else if(i==2 || i==3){
+       continue;
+     }
+    else{
+      seconds=(i*5).toString()
+
+     }
      this.sec.push(seconds)
     }
   }

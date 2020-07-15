@@ -42,7 +42,7 @@ userStatus:boolean=false
       deviceId: ['', Validators.required],
       employeeId: [''],
       mobileNum: [''],
-      emailId: ['']
+      emailId: ['',[Validators.email]]
     });
 
 
@@ -56,7 +56,7 @@ userStatus:boolean=false
 
     this.userform = this.fb.group({
       mobileNum: ['', Validators.required],
-      emailId: ['', Validators.required]
+      emailId: ['',[Validators.email]]
     });
 
 

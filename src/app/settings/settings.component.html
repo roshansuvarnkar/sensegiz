@@ -296,11 +296,11 @@
         <mat-label>Configuration Type</mat-label>
         <mat-select formControlName="buzzerConfig"  (selectionChange)="getBuzzerValue($event)" required >
           <!-- <mat-option *ngFor="let a of buzzerValue"  [value]="a">{{a}}</mat-option> -->
-          <mat-option value="1">Choose 1</mat-option>
-          <mat-option value="2">Choose 2</mat-option>
-          <mat-option value="3">Choose 3</mat-option>
-          <mat-option value="4">Choose 4</mat-option>
-          <mat-option value="5">Choose 5</mat-option>
+          <mat-option value="1">Normal Buzz and Blink</mat-option>
+          <mat-option value="2">Only LED</mat-option>
+          <mat-option value="3">Only Buzz</mat-option>
+          <mat-option value="4">Consecutive Buzz</mat-option>
+          <mat-option value="5">Threshold</mat-option>
         </mat-select>
         <mat-error  >
           Please enter value

@@ -35,7 +35,7 @@ userform:FormGroup
       deviceId: [{value: '', disabled: true}, Validators.required],
       empId: [''],
       mobileNum:[''],
-      emailId:[''],
+      emailId: ['',[Validators.email]]
     });
 
 
@@ -49,7 +49,7 @@ userform:FormGroup
 
     this.userform = this.fb.group({
       mobileNum: ['', Validators.required],
-      emailId: ['', Validators.required]
+      emailId: ['',[Validators.email]]
     });
 
 

@@ -45,12 +45,12 @@
 
       <mat-step >
         <ng-template matStepLabel>Fill out your Mobile Number</ng-template>
-        <mat-form-field>
+        <!-- <mat-form-field>
           <mat-label>Mobile Number</mat-label>
           <input type="tel" matInput formControlName="mobileNum" placeholder="Mobile Number" >
-        </mat-form-field>
-        <!-- <international-phone-number2   placeholder="Enter Mobile number" [defaultCountry]="'in'" formControlName="mobileNum">
-         </international-phone-number2> -->
+        </mat-form-field> -->
+        <international-phone-number2   placeholder="Enter Mobile number" [defaultCountry]="'in'" formControlName="mobileNum">
+         </international-phone-number2>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
@@ -62,7 +62,10 @@
         <mat-form-field>
           <mat-label>Email Id</mat-label>
           <input type="email" matInput formControlName="emailId" placeholder="Ex. xyz@gmail.com" >
-        </mat-form-field>
+          <mat-error>
+            Please provide valid email id. Ex.xyz@gmail.com 
+          </mat-error>
+        </mat-form-field> <br><br>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
@@ -148,10 +151,12 @@
     <form [formGroup]="userform" >
       <mat-step >
           <ng-template matStepLabel>Fill out user mobile number</ng-template>
-          <mat-form-field>
+          <!-- <mat-form-field>
             <mat-label>User Mobile number</mat-label>
             <input matInput  placeholder="Mobile number" formControlName="mobileNum" required>
-          </mat-form-field>
+          </mat-form-field> -->
+          <international-phone-number2   placeholder="Enter Mobile number" [defaultCountry]="'in'" formControlName="mobileNum">
+          </international-phone-number2>
           <div>
             <button mat-button matStepperNext>Next</button>
           </div>
@@ -161,7 +166,10 @@
         <mat-form-field>
           <mat-label>User email Id</mat-label>
           <input matInput type='email' placeholder="Email" formControlName="emailId" required>
-        </mat-form-field>
+          <mat-error>
+            Please provide valid email id. Ex.xyz@gmail.com 
+          </mat-error>
+        </mat-form-field> <br><br>
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
