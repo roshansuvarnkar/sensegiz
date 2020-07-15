@@ -41,7 +41,7 @@ userStatus:boolean=false
       deviceName: ['', Validators.required],
       deviceId: ['', Validators.required],
       employeeId: [''],
-      mobileNum: [''],
+      mobileNum: ['',[Validators.minLength(10),Validators.maxLength(14)]],
       emailId: ['',[Validators.email]]
     });
 
@@ -55,7 +55,7 @@ userStatus:boolean=false
 
 
     this.userform = this.fb.group({
-      mobileNum: ['', Validators.required],
+      mobileNum: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(14)]],
       emailId: ['',[Validators.email]]
     });
 

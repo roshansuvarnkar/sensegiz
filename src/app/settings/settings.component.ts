@@ -40,7 +40,7 @@ export class SettingsComponent implements OnInit {
   coinData:any=[]
   coin:any=[]
   min:any=[]
-  sec:any=[]  
+  sec:any=[]
   // buzzerValue:any=[1,2,3,4,5]
 
   someValue:any=[]
@@ -101,7 +101,7 @@ export class SettingsComponent implements OnInit {
     })
     this.scanningForm=this.fb.group({
       seconds:['',[Validators.required,Validators.max(60), Validators.min(1)]],
-     
+
     })
 
   }
@@ -151,21 +151,21 @@ export class SettingsComponent implements OnInit {
             minutes:res.success[0].durationThreshold/60,
           })
         }
-       
+
         this.scanningForm.patchValue({
           seconds:res.success[0].scanningInterval.toString()
         })
         // this.buzzerTimeForm.patchValue({
         //   buzzerTime:res.success[0].buzzerTime
         // })
-       
+
           this.wearableForm.patchValue({
             wearable:res.success[0].type.toString()
           })
-        
+
           if(res.success[0].buzzerConfig==5){
             this.buzzerConfigStatus=true
-           
+
             this.buzzerConfigForm.patchValue({
               buzzerConfig:res.success[0].buzzerConfig.toString(),
               durationSec:res.success[0].buzzerTime
@@ -175,7 +175,7 @@ export class SettingsComponent implements OnInit {
             this.buzzerConfigStatus=false
             this.buzzerConfigForm.patchValue({
               buzzerConfig:res.success[0].buzzerConfig.toString(),
-  
+
             })
           }
 
@@ -200,11 +200,11 @@ export class SettingsComponent implements OnInit {
       var minutes=i==0?'none':i
       this.min.push(minutes)
      }
-    for(let i =0;i<=55;i++){
+    for(let i =0;i<=11;i++){
      if(i==0){
        var seconds='none'
      }
-     
+
      else{
       seconds=(i*5).toString()
      }
@@ -369,9 +369,9 @@ export class SettingsComponent implements OnInit {
 
    onSubmitTimeForm(data){
      console.log(" time data===",data);
-     
+
        data.seconds=data.minutes!=="none"?data.minutes*60:data.seconds
-    
+
 
      var second=data.seconds <=9 && data.seconds >= 0 ?"0"+data.seconds:data.seconds
      var data1={
@@ -485,7 +485,7 @@ export class SettingsComponent implements OnInit {
       } catch (err) {
       }
     }
-  
+
   }
 
   getBuzzerValue(event){
@@ -495,11 +495,11 @@ export class SettingsComponent implements OnInit {
      this.buzzerConfigForm.patchValue({
       durationSec:10
     })
-   
+
    }else if(event.value !== 5){
     this.buzzerConfigStatus=false
    }
-    
+
 
   }
      customise(){
@@ -515,7 +515,7 @@ export class SettingsComponent implements OnInit {
       this.requiredStatus2=true
       this.timeFormStatus=true
 
-     
+
     }
     else{
       this.minStatus=false
@@ -523,10 +523,10 @@ export class SettingsComponent implements OnInit {
       this.requiredStatus1=true
       this.requiredStatus2=false
       this.timeFormStatus=false
-     
-     
+
+
     }
-   
+
   }
 
   getSec(event){
@@ -544,10 +544,10 @@ export class SettingsComponent implements OnInit {
       this.requiredStatus1=false
       this.requiredStatus2=true
       this.timeFormStatus=false
-     
+
 
     }
-   
+
   }
 
 
@@ -594,8 +594,8 @@ export class SettingsComponent implements OnInit {
           })
         }
       }
-   
-   
+
+
    }
 
    inactivityChange(event){
