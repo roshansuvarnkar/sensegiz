@@ -253,13 +253,13 @@ export class SettingsComponent implements OnInit {
         }
         if(this.setting.type==1){
           if(data.distance  == "1" ){
-            data.rssi='A1'
+            data.rssi='AC'
           }
           else if(data.distance  == "2"){
-            data.rssi='A2'
+            data.rssi='A9'
           }
           else if(data.distance  == "3"){
-            data.rssi='A3'
+            data.rssi='A5'
           }
         }
          data.userId = this.loginData.userId
@@ -417,13 +417,13 @@ export class SettingsComponent implements OnInit {
         }
         if(this.wearableType=="1"){
           if(this.setting.distance  == 1){
-            data.rssi='A1'
+            data.rssi='AC'
           }
           else if(this.setting.distance  == 2){
-            data.rssi='A2'
+            data.rssi='A9'
           }
           else if(this.setting.distance  == 3){
-            data.rssi='A3'
+            data.rssi='A5'
           }
         }
 
