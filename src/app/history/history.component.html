@@ -109,7 +109,12 @@
       <form [formGroup]="findNameForm" (ngSubmit)="onSubmitFindName(findNameForm.value)">
 
         <mat-form-field class="full-width-input">
-          <input type='text' matInput placeholder="User Name" formControlName="deviceName" required>
+          <input type='text' matInput placeholder="User Name" formControlName="deviceName"  [matAutocomplete]="auto"  (keyup)="userSuggestion($event)" required>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let user of username" [value]="user">
+              {{user}}
+            </mat-option>
+          </mat-autocomplete>
           <mat-error>
             Please provide a valid user name
           </mat-error>
@@ -159,7 +164,12 @@
       <form [formGroup]="summaryReportForm" (ngSubmit)="onSubmitSummaryReport(summaryReportForm.value)">
 
         <mat-form-field class="full-width-input">
-          <input type='text' matInput placeholder="User Name" formControlName="deviceName" required>
+          <input type='text' matInput placeholder="User Name" formControlName="deviceName" [matAutocomplete]="auto" (keyup)="infectedSuggestion($event)" required>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let user of username" [value]="user">
+              {{user}}
+            </mat-option>
+          </mat-autocomplete>
           <mat-error>
             Please provide a valid user name
           </mat-error>
@@ -175,7 +185,7 @@
 
         <mat-form-field>
           <mat-label>From date</mat-label>
-          <input matInput [matDatepicker]="myDatepicker7" formControlName="fromDate" required>
+          <input matInput [matDatepicker]="myDatepicker7" formControlName="fromDate"  required>
           <mat-datepicker-toggle matSuffix [for]="myDatepicker7"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker7></mat-datepicker>
           <mat-error>

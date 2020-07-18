@@ -200,7 +200,7 @@ export class SettingsComponent implements OnInit {
       var minutes=i==0?'none':i
       this.min.push(minutes)
      }
-    for(let i =0;i<=55;i++){
+    for(let i =0;i<=11;i++){
      if(i==0){
        var seconds='none'
      }
