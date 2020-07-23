@@ -37,8 +37,8 @@ export class HistoryReportComponent implements OnInit {
   deviceName:any
   currentPageLength:any=10
   currentPageSize:any=10
-  displayedColumns: string[] = ['i','baseName','contactName', 'updatedOn', 'totaltime'];
-  displayedColumns1: string[] = ['i','contactName', 'updatedOn', 'totaltime'];
+  displayedColumns: string[] = ['i','baseName','contactName','location', 'updatedOn', 'totaltime'];
+  displayedColumns1: string[] = ['i','contactName','location', 'updatedOn', 'totaltime'];
   displayedColumns2: string[] = ['contactDeviceName','updatedOn'];
   displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
   fileName:any
@@ -125,14 +125,14 @@ export class HistoryReportComponent implements OnInit {
           offset:offset
         }
         this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
-          console.log("find data based on date ======",res);
+          // console.log("find data based on date ======",res);
           this.liveData=[]
           if(res.status){
             if(type==0){
               this.liveData=res.success
             }
             else{
-              console.log("came===",res.success);
+              // console.log("came===",res.success);
               this.excelData=res.success
               this.openExcel()
             }
@@ -157,7 +157,7 @@ export class HistoryReportComponent implements OnInit {
 
         }
         this.api.getDeviceHistoryBasedOnDeviceName(data1).then((res:any)=>{
-          console.log("find data based on name ======",res);
+          // console.log("find data based on name ======",res);
 
           if(res.status){
             if(type==0){
@@ -240,7 +240,7 @@ getUpdate(event) {
 getPages() {
 
   var tempLen=this.currentPageLength
-   console.log("paginator event length",tempLen);
+  //  console.log("paginator event length",tempLen);
   this.loadData(tempLen,0,1)
   var msg = 'Downloading'
   this.general.openSnackBar(msg,'')

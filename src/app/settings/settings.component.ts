@@ -212,6 +212,27 @@ export class SettingsComponent implements OnInit {
     }
   }
   onSubmitWorkForm(data) {
+    var dateobj=new Date()
+    var year = dateobj.getFullYear();
+    var month = dateobj.getMonth() + 1
+    var day = dateobj.getDate()
+    var date = month + '/' + day + '/'  + year
+
+    var time1=date+" "+data.fromTime
+    var time2=date+" "+data.toTime
+    time1=new Date(time1).toUTCString()
+    time2=new Date(time2).toUTCString()
+    var h=new Date(time1).getUTCHours()
+    var m=new Date(time1).getUTCMinutes()
+    var h1=new Date(time2).getUTCHours()
+    var m1=new Date(time2).getUTCMinutes()
+     var hh = h <= 9 && h >= 0 ? "0"+h : h;
+     var mm = m <= 9 && m >= 0 ? "0"+m : m;
+     var hh1 = h1 <= 9 && h1 >= 0 ? "0"+h1 : h1;
+     var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
+
+     data.fromTime = hh + ':' + mm
+     data.toTime = hh1 + ':' + mm1 
      if (this.workingForm.valid) {
        try {
         //  console.log("time data===",data)
@@ -231,7 +252,7 @@ export class SettingsComponent implements OnInit {
 
 
   onSubmitDistanceForm(data) {
-    console.log("data=",data)
+    // console.log("data=",data)
 
      if (this.distanceForm.valid) {
        try {
@@ -259,9 +280,9 @@ export class SettingsComponent implements OnInit {
           }
         }
          data.userId = this.loginData.userId
-         console.log("distance ===",data)
+        //  console.log("distance ===",data)
          this.api.addDistance(data).then((res:any)=>{
-           console.log("distance insrted or updated",res)
+          //  console.log("distance insrted or updated",res)
            if(res.status){
              this.refreshSetting()
              var msg = 'Minimum distance updated Successfully'
@@ -297,10 +318,10 @@ export class SettingsComponent implements OnInit {
   onSubmittxPowerForm(data) {
      if (this.txPowerForm.valid) {
        try {
-         console.log("threshold ===",data)
+        //  console.log("threshold ===",data)
          data.userId = this.loginData.userId
          this.api.addTxPower(data).then((res:any)=>{
-           console.log("tx power updated",res)
+          //  console.log("tx power updated",res)
            if(res.status){
              this.refreshSetting()
              var msg = 'Transmission power updated Successfully'
@@ -378,10 +399,10 @@ export class SettingsComponent implements OnInit {
        userId:this.loginData.userId,
        seconds:second
      }
-     console.log("data1==",data1)
+    //  console.log("data1==",data1)
 
      this.api.getDurationThreshold(data1).then((res:any)=>{
-       console.log("duration==",res)
+      //  console.log("duration==",res)
       if(res.status){
 
         this.refreshSetting()
@@ -396,7 +417,7 @@ export class SettingsComponent implements OnInit {
    onSubmitwearableForm(data){
 
      this.wearableType=data.wearable
-     console.log("data===",data)
+    //  console.log("data===",data)
      if (this.wearableForm.valid) {
       try {
         if(this.wearableType=="0"){
@@ -426,9 +447,9 @@ export class SettingsComponent implements OnInit {
 
           data.userId=this.loginData.userId,
 
-        console.log("data=====",data)
+        // console.log("data=====",data)
         this.api.updateWearableType(data).then((res:any)=>{
-          console.log("wearable type===",res)
+          // console.log("wearable type===",res)
           if(res.status){
             this.refreshSetting()
             var msg='Wearable type updated Successfully'
@@ -445,15 +466,15 @@ export class SettingsComponent implements OnInit {
    }
 
   onSubmitbuzzerConfigForm(data){
-    console.log("data==",data)
+    // console.log("data==",data)
     data.durationSec=data.buzzerConfig>0 && data.buzzerConfig<=4?0:data.durationSec
-    console.log("data==",data)
+    // console.log("data==",data)
 
     if (this.buzzerConfigForm.valid) {
       try {
         data.userId=this.loginData.userId
         this.api.updateBuzzerConfig(data).then((res:any)=>{
-          console.log("buzzer congig===",res)
+          // console.log("buzzer congig===",res)
           if(res.status){
             this.refreshSetting()
             var msg='Buzzer configured Successfully'
@@ -468,12 +489,12 @@ export class SettingsComponent implements OnInit {
   }
 
   onSubmitScanningForm(data){
-    console.log("data==",data)
+    // console.log("data==",data)
     if (this.scanningForm.valid) {
       try {
         data.userId=this.loginData.userId
         this.api.updateScanningInterval(data).then((res:any)=>{
-          console.log("Scanning Interval===",res)
+          // console.log("Scanning Interval===",res)
           if(res.status){
             this.refreshSetting()
             var msg='Interval second Successfully'
@@ -489,7 +510,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getBuzzerValue(event){
-    console.log("event==",event)
+    // console.log("event==",event)
    if(event.value == 5){
      this.buzzerConfigStatus=true
      this.buzzerConfigForm.patchValue({
@@ -507,7 +528,7 @@ export class SettingsComponent implements OnInit {
    }
 
   getMin(event){
-    console.log("event==",event)
+    // console.log("event==",event)
     if(event.value=="none"){
       this.minStatus=true
       this.secStatus=false

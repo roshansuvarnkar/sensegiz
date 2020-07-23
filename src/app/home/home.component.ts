@@ -31,7 +31,7 @@ dates:any=[]
 month:any=[]
 day:any=[]
 totmin:any
-index:any
+timeout:any
 pageIndex:any
 pageSize:any
 dataPoints:any=[]
@@ -54,12 +54,12 @@ dataPoints:any=[]
     this.repeatedContacts()
     this.numOfcontactPerDay()
 
-    setInterval(()=>{this.refresh()},60*1000)
+    this.timeout=setInterval(()=>{this.refresh()},60*1000)
 
 }
-// ngAfterViewInit() {
-
-// }
+ngOnDestroy() {
+  clearInterval(this.timeout)
+}
 
 sendWarning(id,value){
   // console.log("value==",id,value)

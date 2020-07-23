@@ -49,7 +49,32 @@ export class EditSettingShiftComponent implements OnInit {
 	    // console.log("shift  data ======",res);
 	    if(res.status){
 	      this.shifts=res.success
-
+		  for(let i=0;i<res.success.length;i++){
+			var dateobj=new Date()
+			var year = dateobj.getFullYear();
+			var month = dateobj.getMonth() + 1
+			var day = dateobj.getDate()
+			var date = month + '/' + day + '/'  + year
+		  
+			var time1=date+" "+this.shifts[i].fromTime+':00 UTC'
+			var time2=date+" "+this.shifts[i].toTime+':00 UTC'
+			time1=new Date(time1).toString()
+			time2=new Date(time2).toString()
+			
+		
+			var h=new Date(time1).getHours()
+			var m=new Date(time1).getMinutes()
+			var h1=new Date(time2).getHours()
+			var m1=new Date(time2).getMinutes()
+			var hh = h <= 9 && h >= 0 ? "0"+h : h;
+			var mm = m <= 9 && m >= 0 ? "0"+m : m;
+			var hh1 = h1 <= 9 && h1 >= 0 ? "0"+h1 : h1;
+			var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
+			
+	  
+			this.shifts[i].fromTime=hh+':'+mm
+			this.shifts[i].toTime=hh1+':'+mm1
+	  }
   		    const control = <FormArray>this.shiftForm.controls.items;
 			control.controls = [];
 			for(var i=0;i<this.shifts.length;i++){
@@ -72,6 +97,28 @@ export class EditSettingShiftComponent implements OnInit {
 
 	submit(a){
 		// console.log("a===",a)
+		var dateobj=new Date()
+		var year = dateobj.getFullYear();
+		var month = dateobj.getMonth() + 1
+		var day = dateobj.getDate()
+		var date = month + '/' + day + '/'  + year
+	
+		var time1=date+" "+a.fromTime
+		var time2=date+" "+a.toTime
+		time1=new Date(time1).toUTCString()
+		time2=new Date(time2).toUTCString()
+		var h=new Date(time1).getUTCHours()
+		var m=new Date(time1).getUTCMinutes()
+		var h1=new Date(time2).getUTCHours()
+		var m1=new Date(time2).getUTCMinutes()
+		var hh = h <= 9 && h >= 0 ? "0"+h : h;
+		var mm = m <= 9 && m >= 0 ? "0"+m : m;
+		var hh1 = h1 <= 9 && h1 >= 0 ? "0"+h1 : h1;
+		var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
+   
+		a.fromTime = hh + ':' + mm
+		a.toTime = hh1 + ':' + mm1 
+		console.log("a===",a)
 		this.api.editSettingShift(a).then((res:any)=>{
         // console.log("shift edit==",res)
         if(res.status){

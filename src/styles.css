@@ -32,7 +32,9 @@ h1 {
 .mat-icon {
    vertical-align: middle;
 }
-
+.mat-select-panel{
+  max-width:fit-content !important
+}
 .icon-text {
     display: flex;
     align-items: center;
@@ -63,6 +65,9 @@ tr {
 }
 
 
+/* .select-panel {
+  max-width: fit-content !important;
+} */
 .statusFreeze{
   position:absolute;
   z-index:10000;

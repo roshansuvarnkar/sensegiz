@@ -40,7 +40,11 @@ mat-radio-group.mat-radio-group {
     display: flex;
     justify-content: space-between;
 }
-
+button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary {
+    position: absolute;
+    bottom: 1rem;
+    right: 7.5rem;
+  }
 @media only screen and (max-width: 768px) {
     /* .history{
         margin-left: 2rem;

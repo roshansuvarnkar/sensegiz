@@ -18,7 +18,7 @@ import { ThrowStmt } from '@angular/compiler';
 export class LiveDataComponent implements OnInit {
 @ViewChild(MatSort) sort: MatSort;
 @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-index:any
+timeout:any
 liveData:any=[]
 dataSource:any
 loginData:any
@@ -42,7 +42,10 @@ displayedColumns: string[] = ['i','baseName', 'contactName', 'updatedOn','totalT
     this.count=0
     this.refresh()
     // console.log("count",this.count)
-    setInterval(()=>{this.refresh()},60*500)
+    this.timeout=setInterval(()=>{this.refresh()},60*500)
+  }
+  ngOnDestroy() {
+    clearInterval(this.timeout)
   }
   refresh(){
     this.getTotalCount(0)

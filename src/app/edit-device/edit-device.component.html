@@ -48,6 +48,9 @@
         <mat-form-field>
           <mat-label>Mobile Number</mat-label>
           <input type="tel" matInput formControlName="mobileNum" placeholder="Mobile Number" >
+          <mat-error>
+            Please provide valid mobile number
+          </mat-error>
         </mat-form-field>
         <!-- <international-phone-number2   placeholder="Enter Mobile number" [defaultCountry]="'in'" formControlName="mobileNum">
          </international-phone-number2> -->
@@ -154,6 +157,9 @@
           <mat-form-field>
             <mat-label>User Mobile number</mat-label>
             <input matInput  placeholder="Mobile number" formControlName="mobileNum" required>
+            <mat-error>
+              Please provide valid mobile number
+            </mat-error>
           </mat-form-field>
           <!-- <international-phone-number2   placeholder="Enter Mobile number" [defaultCountry]="'in'" formControlName="mobileNum">
           </international-phone-number2> -->
