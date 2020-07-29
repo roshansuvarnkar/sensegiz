@@ -214,8 +214,8 @@ export class SettingsComponent implements OnInit {
       var minutes=i==0?'none':i
       this.min.push(minutes)
      }
-    for(let i =0;i<=11;i++){
-     if(i==0){
+    for(let i =-1;i<=11;i++){
+     if(i==-1){
        var seconds='none'
      }
 
@@ -246,7 +246,7 @@ export class SettingsComponent implements OnInit {
      var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
 
      data.fromTime = hh + ':' + mm
-     data.toTime = hh1 + ':' + mm1 
+     data.toTime = hh1 + ':' + mm1
      if (this.workingForm.valid) {
        try {
         //  console.log("time data===",data)
@@ -682,7 +682,7 @@ export class SettingsComponent implements OnInit {
         console.log("\nReader result",reader.result);
 
         this.uploadForm.get('fileData').setValue({
-          filename: file.name,
+          filename: file.name ,
           filetype: file.type,
           value: this.tempImagePath.split(',')[1],
         });
@@ -697,18 +697,25 @@ export class SettingsComponent implements OnInit {
    this.uploadForm.get('fileData').setValue(null);
     this.tempImagePath = '';
     this.fileInput.nativeElement.value = '';
-    
+
   }
 
 
-
+  randomNumber(min=1, max=20) {
+      return Math.random() * (max - min) + min;
+  }
 
   formSubmit(data){
-    console.log("file===",data)
     data.userId =  this.loginData.userId
+    data.fileData.filename = this.loginData.userId.toString() + data.fileData.filename + parseInt(this.randomNumber().toString())
+    console.log("file===",data)
     this.api.uploadLogo(data).then((res:any)=>{
       console.log("res img===",res)
+      this.general.updateItem('sensegizlogin','logo',data.fileData.filename)
       this.clearFile()
+      setTimeout(()=>{
+        window.location.reload()
+      },1000)
     })
     // this.general.onUpload(data.target.files).then((res:any)=>{
     //   console.log("upload ===",res)

@@ -62,4 +62,23 @@ exportAsExcelFile(json: any[], excelFileName: string,header: string){
     })
   }
 
+
+setObject(key, obj) {
+    localStorage.setItem(key, JSON.stringify(obj));
+    console.log("get==",this.getObject('sensegizlogin'))
+}
+
+getObject(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+updateItem(key, property, value)
+{
+    var obj = this.getObject(key);
+    obj[property] = value;
+    console.log("obj===",obj)
+
+    this.setObject(key, obj);
+}
+
 }

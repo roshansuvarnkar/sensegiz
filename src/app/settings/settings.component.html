@@ -47,9 +47,8 @@
     </mat-card-subtitle><br>
     <mat-card-content>
       <form action="" [formGroup]="uploadForm" (ngSubmit)="formSubmit(uploadForm.value)">
-
         <input type="file" #fileInput  (change)="fileChange($event.target.files);"/>
-        <button  mat-button><mat-icon>insert_photo</mat-icon>Submit</button>
+        <button class="btn-set" mat-raised-button color="primary">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>
