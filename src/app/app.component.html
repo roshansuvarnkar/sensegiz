@@ -16,7 +16,8 @@
    </div>
   </div>
    <span class="flex">
-     <img src="./assets/logo.png" alt="Sensegiz">
+     <img *ngIf="!loginData" src="./assets/logo.png" alt="Sensegiz">
+     <img *ngIf="loginData" src="{{host}}/photo/{{loginDataInfo.logo}}" alt="Sensegiz">
      <span class="end">
        <span class="flex title" *ngIf="loginStatus">
          <span>

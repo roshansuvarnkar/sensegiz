@@ -1,5 +1,5 @@
 img {
-  width: 14%;
+  max-height: 5rem;
 }
 .menubar{
   display: flex;
@@ -64,7 +64,7 @@ display: none;
 display: block;
 }
 img {
-width: 30%;
+max-height: 5rem;
 }
 .menu{
 margin-left: -2rem;

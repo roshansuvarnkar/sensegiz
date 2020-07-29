@@ -659,4 +659,26 @@ getUsernameSuggestion(data){
   });
 
 }
+
+
+
+uploadLogo(data){
+
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/upload-image';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+
+}
+
+
+
+
+
 }

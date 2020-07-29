@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild,ElementRef} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { LoginCheckService } from '../login-check.service';
 import { GeneralMaterialsService } from '../general-materials.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { EditSettingShiftComponent } from '../edit-setting-shift/edit-setting-shift.component';
+import { saveAs  } from 'file-saver';
 
 @Component({
   selector: 'app-settings',
@@ -41,9 +42,14 @@ export class SettingsComponent implements OnInit {
   coin:any=[]
   min:any=[]
   sec:any=[]
+  tempImagePath:any
   // buzzerValue:any=[1,2,3,4,5]
 
   someValue:any=[]
+  uploadForm: FormGroup;
+    @ViewChild('fileInput') fileInput : ElementRef;
+
+
   constructor(public dialog: MatDialog,private fb:FormBuilder,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
 
   ngOnInit(): void {
@@ -99,10 +105,18 @@ export class SettingsComponent implements OnInit {
       buzzerConfig:['',Validators.required],
       durationSec:['',[Validators.max(255), Validators.min(10),Validators.pattern(/^\d*[05]$/)]]
     })
+
+
     this.scanningForm=this.fb.group({
       seconds:['',[Validators.required,Validators.max(60), Validators.min(1)]],
 
     })
+
+
+    this.uploadForm = this.fb.group({
+      fileData:null,
+      type:'logo',
+    });
 
   }
 
@@ -631,5 +645,58 @@ export class SettingsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
+
+  fileChange(files){
+
+     // console.log("File Change event",files);
+    let reader = new FileReader();
+    if(files && files.length>0){
+
+      let file = files[0];
+      reader.readAsDataURL(file);
+      console.log("file===",file)
+      reader.onload = ()=>{
+        this.tempImagePath = reader.result;
+        console.log("\nReader result",reader.result);
+
+        this.uploadForm.get('fileData').setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: this.tempImagePath.split(',')[1],
+        });
+
+
+      }
+    }
+
+  }
+
+  clearFile(){
+   this.uploadForm.get('fileData').setValue(null);
+    this.tempImagePath = '';
+    this.fileInput.nativeElement.value = '';
+    
+  }
+
+
+
+
+  formSubmit(data){
+    console.log("file===",data)
+    data.userId =  this.loginData.userId
+    this.api.uploadLogo(data).then((res:any)=>{
+      console.log("res img===",res)
+      this.clearFile()
+    })
+    // this.general.onUpload(data.target.files).then((res:any)=>{
+    //   console.log("upload ===",res)
+    // })
+    // saveAs.add('../../assets/logos',data.target.value).then((res:any)=>{
+    //   console.log("res===",res)
+    // })
+  }
+
+
 
 }
