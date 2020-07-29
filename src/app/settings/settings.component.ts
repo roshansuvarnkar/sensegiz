@@ -42,7 +42,7 @@ export class SettingsComponent implements OnInit {
   min:any=[]
   sec:any=[]
   // buzzerValue:any=[1,2,3,4,5]
-
+  
   someValue:any=[]
   constructor(public dialog: MatDialog,private fb:FormBuilder,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
 
@@ -652,5 +652,7 @@ export class SettingsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
+ 
 
 }

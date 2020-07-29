@@ -198,12 +198,17 @@ export class HistoryReportComponent implements OnInit {
                 data : groupDate[data]
               }
             })
-            // console.log("this live data===",this.liveData)
-            // this.dataSource = new MatTableDataSource(this.liveData);
-            // setTimeout(() => {
-            //   this.dataSource.sort = this.sort;
+              
+          for(let i=0;i<this.liveData.length;i++){
 
-            // })
+            for(let j=0;j<this.liveData[i].data.length-1;j++){
+              this.liveData[i].data[j].contactDeviceName = this.liveData[i].data[j].contactDeviceName+','
+            }
+         
+            this.liveData[i].data[this.liveData[i].data.length-1].contactDeviceName=this.liveData[i].data[this.liveData[i].data.length-1].contactDeviceName+'.'
+
+           }
+          
           }
         })
 
