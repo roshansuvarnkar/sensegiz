@@ -38,7 +38,20 @@
   </mat-card>
 
 
-
+  <mat-card>
+    <mat-card-title>
+      Upload Logo
+    </mat-card-title>
+    <mat-card-subtitle>
+      Select logo
+    </mat-card-subtitle><br>
+    <mat-card-content>
+      <form action="" [formGroup]="uploadForm" (ngSubmit)="formSubmit(uploadForm.value)">
+        <input type="file" #fileInput  (change)="fileChange($event.target.files);"/>
+        <button class="btn-set" mat-raised-button color="primary">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
 
 
@@ -212,7 +225,7 @@
     </mat-card-content>
   </mat-card>
 
-  
+
 
 
   <mat-card>
@@ -227,12 +240,12 @@
       <form [formGroup]="timeForm" (ngSubmit)="onSubmitTimeForm(timeForm.value)" >
         <!-- <div *ngIf="!minStatus"> -->
         <mat-form-field  >
-          
+
             <mat-label>Minutes</mat-label>
             <mat-select  formControlName="minutes" [disabled]="minStatus" (selectionChange)="getMin($event)" [required]="requiredStatus1">
               <mat-option *ngFor="let a of min"  [value]="a">{{a}}</mat-option>
             </mat-select>
-          
+
            <mat-error *ngIf="!minStatus">
             Please select minimum minutes as 1
           </mat-error>
@@ -240,12 +253,12 @@
       <!-- </div> -->
       <!-- <div *ngIf="!secStatus"> -->
         <mat-form-field  >
-  
+
           <mat-label>Seconds</mat-label>
           <mat-select  formControlName="seconds"  [disabled]="secStatus" (selectionChange)="getSec($event)" [required]="requiredStatus2" >
             <mat-option *ngFor="let b of sec" [value]="b">{{b}}</mat-option>
           </mat-select>
-        
+
          <mat-error *ngIf="!secStatus">
           Please select minimum second as 1
         </mat-error>

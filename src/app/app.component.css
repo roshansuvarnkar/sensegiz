@@ -1,5 +1,9 @@
 img {
-  width: 14%;
+  height: 100%
+}
+span.flex.logo {
+    position: relative;
+    height: 4rem;
 }
 .menubar{
   display: flex;
@@ -31,6 +35,7 @@ border: none;
 span.end {
   display: flex;
   align-items: center;
+  position:relative;
 }
 .logouticon{
 display: none;
@@ -64,7 +69,7 @@ display: none;
 display: block;
 }
 img {
-width: 30%;
+  height: 100%
 }
 .menu{
 margin-left: -2rem;

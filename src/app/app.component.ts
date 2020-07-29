@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { LoginCheckService } from './login-check.service';
 import { Router , ActivatedRoute } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { environment } from '../environments/environment'
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ export class AppComponent {
   isDesktopDevice:boolean
   deviceStatus:boolean
   deviceInfo = null;
+  host:any = environment.apiHost
   constructor(
     private login:LoginCheckService,
     private router:Router,
@@ -37,7 +39,7 @@ export class AppComponent {
       this.loginDataInfo = this.login.loginData()
     })
     this.loginDataInfo = this.login.loginData()
-  //  console.log("loginDataInfo===",this.loginDataInfo);
+    console.log("loginDataInfo===",this.loginDataInfo);
 
     this.login.loginCheckStatus.subscribe(res=>{
       // console.log("login data===",res)
