@@ -21,6 +21,11 @@ mat-card-title.mat-card-title {
 mat-icon{
   color: #ef6c00d1;
 }
+.version {
+  margin-top: 30%;
+  text-align: center;
+  color: #afaaaa;
+}
 
 @media only screen and (max-width: 768px) {
    .login{

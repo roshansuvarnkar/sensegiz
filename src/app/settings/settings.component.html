@@ -29,8 +29,10 @@
             Please provide a valid to time
           </mat-error>
         </mat-form-field><br>
-        <button mat-raised-button [disabled]="!workingForm.valid" color="primary">Submit</button> &nbsp;&nbsp;&nbsp;
-        <button type="button" mat-raised-button (click)="openDialog()" color="primary">Info</button>
+        <div class="btn-set">
+          <button  mat-raised-button [disabled]="!workingForm.valid" color="primary">Submit</button> &nbsp;&nbsp;&nbsp;
+          <button type="button" mat-raised-button (click)="openDialog()" color="primary">Info</button>
+         </div>
       </form>
     </mat-card-content>
   </mat-card>
@@ -91,7 +93,7 @@
           </mat-form-field>
         </div> -->
         <br><br>
-        <button mat-raised-button [disabled]="!distanceForm.valid" color="primary">Submit</button>
+        <button class="btn-set" mat-raised-button [disabled]="!distanceForm.valid" color="primary">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>
@@ -116,7 +118,7 @@
           </mat-error>
         </mat-form-field>
         <br><br>
-        <button mat-raised-button [disabled]="!maxContactForm.valid" color="primary">Submit</button>
+        <button class="btn-set" mat-raised-button [disabled]="!maxContactForm.valid" color="primary">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>
@@ -196,7 +198,7 @@
           </mat-error>
         </mat-form-field>
         <br><br>
-        <button mat-raised-button [disabled]="!inactivityForm.valid" color="primary">Submit</button>
+        <button class="btn-set" mat-raised-button [disabled]="!inactivityForm.valid" color="primary">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>
@@ -219,7 +221,7 @@
           </mat-error>
         </mat-form-field>
         <br><br>
-        <button mat-raised-button [disabled]="!bufferForm.valid" color="primary">Submit</button>
+        <button class="btn-set" mat-raised-button [disabled]="!bufferForm.valid" color="primary">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>
@@ -264,7 +266,7 @@
     </mat-form-field>
   <!-- </div> -->
         <br><br>
-        <button mat-raised-button [disabled]="timeFormStatus"  color="primary">Submit</button>
+        <button class="btn-set" mat-raised-button [disabled]="timeFormStatus"  color="primary">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>
@@ -291,7 +293,7 @@
           </mat-error>
       </mat-form-field>
       <br><br>
-      <button mat-raised-button [disabled]="!wearableForm.valid"  color="primary">Submit</button>
+      <button class="btn-set" mat-raised-button [disabled]="!wearableForm.valid"  color="primary">Submit</button>
     </form>
   </mat-card-content>
 </mat-card>
@@ -308,7 +310,7 @@
     <form [formGroup]="buzzerConfigForm" (ngSubmit)="onSubmitbuzzerConfigForm(buzzerConfigForm.value)" >
       <mat-form-field  >
         <mat-label>Configuration Type</mat-label>
-        <mat-select formControlName="buzzerConfig"  (selectionChange)="getBuzzerValue($event)" required >
+        <mat-select class="select-panel" formControlName="buzzerConfig"  (selectionChange)="getBuzzerValue($event)" required >
           <!-- <mat-option *ngFor="let a of buzzerValue"  [value]="a">{{a}}</mat-option> -->
           <mat-option value="1">Buzzer followed by LED blinking for every new person</mat-option>
           <mat-option value="2">Only LED</mat-option>
@@ -330,7 +332,7 @@
         </mat-form-field>
       </div>
       <br><br>
-      <button mat-raised-button [disabled]="!buzzerConfigForm.valid"   color="primary">Submit</button>
+      <button class="btn-set" mat-raised-button [disabled]="!buzzerConfigForm.valid"   color="primary">Submit</button>
     </form>
   </mat-card-content>
 </mat-card>
@@ -352,8 +354,8 @@
             Please enter value
           </mat-error>
       </mat-form-field>
-      <br><br>
-      <button mat-raised-button [disabled]="!scanningForm.valid"  color="primary">Submit</button>
+      <br><br><br>
+      <button class="btn-set" mat-raised-button [disabled]="!scanningForm.valid"  color="primary">Submit</button>
     </form>
   </mat-card-content>
 </mat-card>
