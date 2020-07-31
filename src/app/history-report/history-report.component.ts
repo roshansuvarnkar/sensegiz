@@ -37,8 +37,8 @@ export class HistoryReportComponent implements OnInit {
   deviceName:any
   currentPageLength:any=10
   currentPageSize:any=10
-  displayedColumns: string[] = ['i','baseName','contactName','location', 'updatedOn', 'totaltime'];
-  displayedColumns1: string[] = ['i','contactName','location', 'updatedOn', 'totaltime'];
+  displayedColumns: string[] = ['i','baseName','contactName', 'updatedOn', 'totaltime'];
+  displayedColumns1: string[] = ['i','contactName','updatedOn', 'totaltime'];
   displayedColumns2: string[] = ['contactDeviceName','updatedOn'];
   displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
   fileName:any
