@@ -25,6 +25,9 @@ button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary
   bottom: 1rem;
   right: 7.5rem;
 }
+input.input-file {
+  margin-left: 3.5rem;
+}
 @media only screen and (max-width: 768px){
   /* .setting {
     margin-left: 2rem;
