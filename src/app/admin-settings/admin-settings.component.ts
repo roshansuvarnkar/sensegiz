@@ -12,6 +12,7 @@ import { GeneralMaterialsService } from '../general-materials.service';
 export class AdminSettingsComponent implements OnInit {
   txPowerForm:FormGroup
   distanceForm:FormGroup
+  scanningForm:FormGroup
   setting:any=[]
   dataGet:any
   statusCustomise:boolean=false
@@ -29,7 +30,10 @@ export class AdminSettingsComponent implements OnInit {
       distance: ['', Validators.required],
       rssi: ['', Validators.required],
     });
+    this.scanningForm=this.fb.group({
+      seconds:['',[Validators.required,Validators.max(60), Validators.min(1)]],
 
+    })
     this.route.queryParams.subscribe(params => {
       this.dataGet = JSON.parse(params.record) ;
       // console.log("data==",this.dataGet.userId)
@@ -97,6 +101,9 @@ export class AdminSettingsComponent implements OnInit {
        
         this.txPowerForm.patchValue({
           txPower: res.success[0].txPower,
+        })
+        this.scanningForm.patchValue({
+          seconds:res.success[0].scanningInterval.toString()
         })
       }
     })
@@ -184,6 +191,26 @@ export class AdminSettingsComponent implements OnInit {
         this.distanceForm.patchValue({
           rssi:'A3'
         })
+      }
+    }
+  }
+
+  onSubmitScanningForm(data){
+    // console.log("data==",data)
+    if (this.scanningForm.valid) {
+      try {
+        data.userId=this.dataGet.userId
+        this.api.updateScanningInterval(data).then((res:any)=>{
+          // console.log("Scanning Interval===",res)
+          if(res.status){
+            this.refreshSetting()
+            var msg='Interval second Successfully'
+            this.general.openSnackBar(msg,'')
+          }
+        }).catch(err=>{
+          console.log("err===",err);
+        })
+      } catch (err) {
       }
     }
   }

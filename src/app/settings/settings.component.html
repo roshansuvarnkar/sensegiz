@@ -47,7 +47,10 @@
     </mat-card-subtitle><br>
     <mat-card-content>
       <form action="" [formGroup]="uploadForm" (ngSubmit)="formSubmit(uploadForm.value)">
-        <input class="input-file" type="file" #fileInput  (change)="fileChange($event.target.files);"/><br><br> <br><br>         <button class="btn-set" mat-raised-button color="primary">Submit</button>
+        <input class="input-file" type="file" #fileInput  (change)="fileChange($event.target.files);"/><br><br>
+        <span *ngIf="loading" style="color:red">Please choose jpg/jpeg/png*</span>
+        <br><br>     
+            <button class="btn-set" mat-raised-button color="primary">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>
@@ -65,6 +68,10 @@
       <!-- <mat-slide-toggle color="primary" [checked]="statusCustomise" (change)="customise()">Customize</mat-slide-toggle> -->
       <br><br>
       <form [formGroup]="distanceForm" (ngSubmit)="onSubmitDistanceForm(distanceForm.value)">
+        <mat-radio-group  color="primary" formControlName="wearable"  class="wearable">
+          <mat-radio-button value="0" name="small" >Pendant</mat-radio-button>
+          <mat-radio-button value="1" name="small" >Band</mat-radio-button>
+        </mat-radio-group><br>
         <mat-form-field>
           <mat-label>Select distance</mat-label>
 
@@ -270,7 +277,7 @@
   </mat-card>
 
 
-<mat-card>
+<!-- <mat-card>
   <mat-card-title>
    Wearable
   </mat-card-title>
@@ -281,7 +288,7 @@
 
     <form [formGroup]="wearableForm" (ngSubmit)="onSubmitwearableForm(wearableForm.value)" >
       <mat-form-field  >
-          <!-- <mat-label>Wearbale is as </mat-label> -->
+          <mat-label>Wearbale is as </mat-label>
           <mat-select formControlName="wearable" >
             <mat-option  value="0" >Pendant</mat-option>
             <mat-option value="1">Band</mat-option>
@@ -294,7 +301,7 @@
       <button class="btn-set" mat-raised-button [disabled]="!wearableForm.valid"  color="primary">Submit</button>
     </form>
   </mat-card-content>
-</mat-card>
+</mat-card> -->
 
 
 <mat-card>
@@ -335,7 +342,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card>
+<!-- <mat-card>
   <mat-card-title>
   Scanning Interval
   </mat-card-title>
@@ -356,7 +363,7 @@
       <button class="btn-set" mat-raised-button [disabled]="!scanningForm.valid"  color="primary">Submit</button>
     </form>
   </mat-card-content>
-</mat-card>
+</mat-card> -->
 
 
 

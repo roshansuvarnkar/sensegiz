@@ -3,12 +3,26 @@
   <p>manage-finds works!</p>
 </fieldset> -->
 <br>
-<div class="">
-  <button class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
-  <mat-form-field class="full-width-input search">
-    <input matInput placeholder="Search device" autocomplete="off" matInput (input)="search($event.target.value)">
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
+<div class="flex">
+  
+  <!-- <div class="upload">
+   <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)">
+     <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
+     <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br>
+
+   <span *ngIf="loading" style="color:red">Please choose xslx or xls file*</span>
+ 
+   </form>
+  </div>  -->
+   <button class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
+
+ <mat-form-field class="full-width-input search">
+   <input matInput placeholder="Search device" autocomplete="off" matInput (input)="search($event.target.value)" >
+   <mat-icon matSuffix>search</mat-icon>
+ </mat-form-field>
+
+
+
 </div>
 
 

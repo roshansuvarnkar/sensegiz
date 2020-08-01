@@ -1,86 +1,95 @@
 button.mat-focus-indicator.button.mat-flat-button.mat-button-base.mat-primary {
-    display: flex;
-    margin: 1rem auto;
+  /* display: flex; */
+  margin: 1rem auto;
+}
+button.mat-focus-indicator.upload-btn.mat-flat-button.mat-button-base.mat-primary {
+position: absolute;
+left: 14rem;
+height: 2rem;
 }
 table.table thead th {
-    font-weight: 600;
-    cursor: pointer;
+  font-weight: 600;
+  cursor: pointer;
 }
 table.mat-table {
 
-    width: 100%;
-    margin-top: 1rem;
-    /* text-align: center; */
+  width: 100%;
+  margin-top: 1rem;
+  /* text-align: center; */
 }
 
 ::ng-deep .mat-sort-header-container {
-  display:flex;
-  justify-content:center;
-  font-weight: 500;
-  font-size: 0.9rem;
-  color: #ef6c00;
+display:flex;
+justify-content:center;
+font-weight: 500;
+font-size: 0.9rem;
+color: #ef6c00;
 }
 .center {
-  text-align: center;
-  font-size: 1.6rem;
-  margin: 1.2rem 0 2rem 0;
-  font-weight: 500;
+text-align: center;
+font-size: 1.6rem;
+margin: 1.2rem 0 2rem 0;
+font-weight: 500;
 }
 .search{
-	position: absolute;
-    top: 2rem;
-    right: 1rem;
+position: absolute;
+  top: 2rem;
+  right: 1rem;
+}
+.upload {
+ position: absolute;
+ top: 2.3rem;
 }
 
 
 
 .batteryContainer {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+display: -webkit-box;
+display: -moz-box;
+display: -ms-flexbox;
+display: -webkit-flex;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
 }
 
 .batteryOuter {
-  border-radius: 3px;
-  border: 1px solid #444;
-  padding: 0px;
-  width: 34px;
-  height: 20px;
+border-radius: 3px;
+border: 1px solid #444;
+padding: 0px;
+width: 34px;
+height: 20px;
 }
 
 .batteryBump {
-  border-radius: 2px;
-  background-color: #444;
-  width: 2px;
-  height: 8px;
+border-radius: 2px;
+background-color: #444;
+width: 2px;
+height: 8px;
 }
 
 #batteryLevel {
-  border-radius: 2px;
-  height: 18px;
+border-radius: 2px;
+height: 18px;
 }
 
 
 
 @media only screen and (max-width: 768px) {
-    table.table thead th {
-        font-weight: 600;
-        cursor: pointer;
-        font-size: smaller;
-    }
+  table.table thead th {
+      font-weight: 600;
+      cursor: pointer;
+      font-size: smaller;
+  }
 
-    .search{
-        width: 120px;
+  .search{
+      width: 120px;
 
-    }
-    button.mat-focus-indicator.button.mat-flat-button.mat-button-base.mat-primary {
-        margin-left: 1.2rem;
+  }
+  button.mat-focus-indicator.button.mat-flat-button.mat-button-base.mat-primary {
+      margin-left: 1.2rem;
 
-    }
+  }
 
 }

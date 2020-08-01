@@ -28,6 +28,16 @@ button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary
 input.input-file {
   margin-left: 3.5rem;
 }
+mat-radio-group.mat-radio-group.wearable.ng-untouched.ng-pristine.ng-valid {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: -1rem;
+}
+.wearable {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: -1rem;
+}
 @media only screen and (max-width: 768px){
   /* .setting {
     margin-left: 2rem;

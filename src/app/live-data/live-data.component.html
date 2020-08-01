@@ -28,9 +28,13 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
           <td mat-cell *matCellDef="let live "> {{live.contactName}} </td>
         </ng-container>
+        <ng-container matColumnDef="startTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Time </th>
+          <td mat-cell *matCellDef="let live"> {{startTime(live.totalTime,live.updatedOn)| date : 'medium' }} </td>
+        </ng-container>
 
         <ng-container matColumnDef="updatedOn">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Time </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> End Time </th>
           <td mat-cell *matCellDef="let live"> {{live.updatedOn | date : 'medium' }} </td>
         </ng-container>
 

@@ -37,6 +37,7 @@ export class SettingsComponent implements OnInit {
   timeFormStatus:boolean=true
   selectedValue:boolean=false
   buzzerConfigStatus:boolean=false
+  loading:boolean=false
   inactivityStatusValue:any=[]
   coinData:any=[]
   coin:any=[]
@@ -68,6 +69,7 @@ export class SettingsComponent implements OnInit {
     this.distanceForm = this.fb.group({
       distance: ['', Validators.required],
       rssi: [{value:'',disabled: true}, Validators.required],
+      wearable:['',Validators.required]
     });
 
 
@@ -136,7 +138,8 @@ export class SettingsComponent implements OnInit {
 
         this.distanceForm.patchValue({
           distance: res.success[0].distance.toString(),
-          rssi: res.success[0].rssi
+          rssi: res.success[0].rssi,
+          wearable:res.success[0].type.toString()
         })
         this.maxContactForm.patchValue({
           threshold: res.success[0].threshold,
@@ -265,12 +268,12 @@ export class SettingsComponent implements OnInit {
 
 
 
-  onSubmitDistanceForm(data) {
+   onSubmitDistanceForm(data) {
     // console.log("data=",data)
 
      if (this.distanceForm.valid) {
        try {
-        if(this.setting.type==0){
+        if(data.wearable=="0"){
           if(data.distance == "1" ){
             data.rssi='B9'
           }
@@ -282,7 +285,7 @@ export class SettingsComponent implements OnInit {
             data.rssi='AE'
           }
         }
-        if(this.setting.type==1){
+        if(data.wearable=="1"){
           if(data.distance  == "1" ){
             data.rssi='AC'
           }
@@ -294,19 +297,22 @@ export class SettingsComponent implements OnInit {
           }
         }
          data.userId = this.loginData.userId
-        //  console.log("distance ===",data)
+         console.log("distance ===",data)
          this.api.addDistance(data).then((res:any)=>{
           //  console.log("distance insrted or updated",res)
            if(res.status){
              this.refreshSetting()
-             var msg = 'Minimum distance updated Successfully'
+             this.api.updateWearableType(data).then((res:any)=>{
+             var msg = 'Minimum distance and wearable type updated Successfully'
              this.general.openSnackBar(msg,'')
-           }
          })
+        }
+        })
        } catch (err) {
        }
      }
    }
+
 
 
   onSubmitmaxContactForm(data) {
@@ -707,8 +713,9 @@ export class SettingsComponent implements OnInit {
 
   formSubmit(data){
     data.userId =  this.loginData.userId
-    data.fileData.filename = this.loginData.userId.toString() + data.fileData.filename + parseInt(this.randomNumber().toString())
-    console.log("file===",data)
+    data.fileData.filename = this.loginData.userId.toString() + parseInt(this.randomNumber().toString()) + data.fileData.filename
+        console.log("file===",data)
+   if(data.fileData.filetype=='image/jpg'||data.fileData.filetype=='image/jpeg'||data.fileData.filetype=='image/png'){
     this.api.uploadLogo(data).then((res:any)=>{
       console.log("res img===",res)
       this.general.updateItem('sensegizlogin','logo',data.fileData.filename)
@@ -717,12 +724,11 @@ export class SettingsComponent implements OnInit {
         window.location.reload()
       },1000)
     })
-    // this.general.onUpload(data.target.files).then((res:any)=>{
-    //   console.log("upload ===",res)
-    // })
-    // saveAs.add('../../assets/logos',data.target.value).then((res:any)=>{
-    //   console.log("res===",res)
-    // })
+   }else{
+     this.loading=true
+
+   }
+
   }
 
 
