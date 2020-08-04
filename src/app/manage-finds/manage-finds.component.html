@@ -5,15 +5,17 @@
 <br>
 <div class="flex">
   
-  <!-- <div class="upload">
+  <div class="upload">
    <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)">
      <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
      <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br>
 
    <span *ngIf="loading" style="color:red">Please choose xslx or xls file*</span>
+   <span *ngIf="format" style="color:red"> Please check format: Name*, employeeId[optional], deviceId*, emailId[optional], mobileNumber[optional]</span>
+
  
    </form>
-  </div>  -->
+  </div> 
    <button class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
 
  <mat-form-field class="full-width-input search">

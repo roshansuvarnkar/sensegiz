@@ -4,7 +4,7 @@ button.mat-focus-indicator.button.mat-flat-button.mat-button-base.mat-primary {
 }
 button.mat-focus-indicator.upload-btn.mat-flat-button.mat-button-base.mat-primary {
 position: absolute;
-left: 14rem;
+/* left: 14rem; */
 height: 2rem;
 }
 table.table thead th {
