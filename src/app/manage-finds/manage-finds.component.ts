@@ -332,7 +332,7 @@ fileSubmit(data){
 
  if(data.fileData.filetype=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || data.fileData.filetype=="application/vnd.ms-excel" ){
   this.loading=false
-  if((data.header[0].toLowerCase()=='name' && data.header[2].toLowerCase()=='deviceid')|| data.header[1].toLowerCase()=="employeeid" || 
+  if(data.header[0].toLowerCase()=='name' && data.header[2].toLowerCase()=='deviceid'|| data.header[1].toLowerCase()=="employeeid" || 
    data.header[3]=="mobilenumber".toLowerCase() || data.header[4]=="emailid".toLowerCase()){
     this.format=false
     var msg = 'Please wait..!it takes few minutes to upload'
