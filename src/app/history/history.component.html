@@ -4,43 +4,48 @@
   <mat-card >
     <span class="card-head">
       <mat-card-title color="primary">
-        Report based on Date
+        Generic Report
       </mat-card-title>
       <mat-card-subtitle>
-        Enter From to To date
+        Enter date range
       </mat-card-subtitle>
     </span>
     <mat-card-content>
+     <div class="radio radio1">
       <mat-radio-group  color="primary">
         <mat-radio-button [value]="1" name="small" (click)="onclickDate(7)">Last week</mat-radio-button>
-        <mat-radio-button [value]="2" name="small" (click)="onclickDate(14)">Last two week</mat-radio-button>
-      </mat-radio-group><br>
-      <form [formGroup]="dateForm" (ngSubmit)="onSubmitDateForm(dateForm.value)">
+        <mat-radio-button [value]="2" name="small" (click)="onclickDate(14)">Last two weeks</mat-radio-button>
+      </mat-radio-group><br><br>
+     </div>
+<div class="date">
+  <form [formGroup]="dateForm" (ngSubmit)="onSubmitDateForm(dateForm.value)">
 
-        <mat-form-field>
-          <mat-label>From date</mat-label>
-          <input matInput [matDatepicker]="myDatepicker1" formControlName="fromDate" required>
-          <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
-          <mat-datepicker #myDatepicker1></mat-datepicker>
-          <mat-error>
-            Please provide a valid from date
-          </mat-error>
-        </mat-form-field>
+    <mat-form-field>
+      <mat-label>From date</mat-label>
+      <input matInput [matDatepicker]="myDatepicker1" formControlName="fromDate" required>
+      <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker1></mat-datepicker>
+      <mat-error>
+        Please provide a valid from date
+      </mat-error>
+    </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>To date</mat-label>
-          <input matInput [matDatepicker]="myDatepicker2" formControlName="toDate" required>
-          <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
-          <mat-datepicker #myDatepicker2></mat-datepicker>
-          <mat-error>
-            Please provide a valid to date
-          </mat-error>
-        </mat-form-field>
-  <br>
-  <br>
-        <button class="btn-set" mat-raised-button [disabled]="!dateForm.valid" color="primary" >Submit</button>
-      </form>
-    </mat-card-content>
+    <mat-form-field>
+      <mat-label>To date</mat-label>
+      <input matInput [matDatepicker]="myDatepicker2" formControlName="toDate" required>
+      <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker2></mat-datepicker>
+      <mat-error>
+        Please provide a valid to date
+      </mat-error>
+    </mat-form-field>
+<br>
+<br>
+    <button class="btn-set" mat-raised-button [disabled]="!dateForm.valid" color="primary" >Submit</button>
+  </form>
+
+</div> 
+   </mat-card-content>
   </mat-card>
 
 
@@ -95,17 +100,19 @@
   <mat-card >
     <span class="card-head">
       <mat-card-title color="primary">
-        Social Distancing violator's Report based on username
+        Social Distancing Violator's Report Based On Username
       </mat-card-title>
       <mat-card-subtitle>
-        Enter User Name and From to To date
+        Enter username and date range
       </mat-card-subtitle>
     </span>
     <mat-card-content>
+      <div class="radio ">
       <mat-radio-group  color="primary">
         <mat-radio-button [value]="1" name="small" (change)="onclickFindName(7)">Last week</mat-radio-button>
-        <mat-radio-button [value]="2" name="small" (change)="onclickFindName(14)">Last two week</mat-radio-button>
-      </mat-radio-group><br>
+        <mat-radio-button [value]="2" name="small" (change)="onclickFindName(14)">Last two weeks</mat-radio-button>
+      </mat-radio-group>
+    </div><br>
       <form [formGroup]="findNameForm" (ngSubmit)="onSubmitFindName(findNameForm.value)">
 
         <mat-form-field class="full-width-input">
@@ -153,14 +160,16 @@
         Summary Report of Infected User
       </mat-card-title>
       <mat-card-subtitle>
-        Enter User Name and From to To date
+        Enter infected person name and date range
       </mat-card-subtitle>
     </span>
     <mat-card-content>
+      <div class="radio">
       <mat-radio-group  color="primary">
         <mat-radio-button [value]="1" name="small" (change)="onclickSummaryReport(7)">Last week</mat-radio-button>
-        <mat-radio-button [value]="2" name="small" (change)="onclickSummaryReport(14)">Last two week</mat-radio-button>
-      </mat-radio-group><br>
+        <mat-radio-button [value]="2" name="small" (change)="onclickSummaryReport(14)">Last two weeks</mat-radio-button>
+      </mat-radio-group>
+    </div><br>
       <form [formGroup]="summaryReportForm" (ngSubmit)="onSubmitSummaryReport(summaryReportForm.value)">
 
         <mat-form-field class="full-width-input">

@@ -134,7 +134,7 @@ export class HistoryReportComponent implements OnInit {
             else{
               // console.log("came===",res.success);
               this.excelData=res.success
-              this.openExcel()
+              // this.openExcel()
             }
             this.dataSource = new MatTableDataSource(this.liveData);
             setTimeout(() => {
@@ -147,6 +147,7 @@ export class HistoryReportComponent implements OnInit {
 
       }
       if(this.type=='basedOnFindName'){
+
         var data1={
           userId:this.loginData.userId,
           deviceName:this.deviceName,
@@ -165,7 +166,7 @@ export class HistoryReportComponent implements OnInit {
             }
             else{
               this.excelData=res.success
-              this.openExcel()
+              // this.openExcel()
             }
 
             this.dataSource = new MatTableDataSource(this.liveData);
@@ -246,13 +247,23 @@ getPages() {
 
   var tempLen=this.currentPageLength
   //  console.log("paginator event length",tempLen);
-  this.loadData(tempLen,0,1)
+  this.loadData(tempLen,0,0)
   var msg = 'Downloading'
   this.general.openSnackBar(msg,'')
   //  setTimeout(()=>{
   //     this.downloadPDF()
   //   },5000);
-  this.showSpinner=true
+  setTimeout(()=>{
+
+    this.openExcel()
+
+  },5000);
+
+  setTimeout(()=>{
+    this.loadData(10,0,0)
+  },6000)
+ clearTimeout(60*1000)
+  // this.showSpinner=true
 
 }
 
@@ -304,7 +315,8 @@ getPages() {
           this.fileName='summaryReport.xlsx'
           this.title = 'Summary Report of Find Name'+this.deviceName;
           let element = document.getElementById('htmlData');
-          this.general.exportToExcel(element,this.fileName, this.title)
+          console.log("element==",element)
+          // this.general.exportToExcel(element.toString(),this.fileName, this.title)
 
         }
         else{
@@ -312,13 +324,18 @@ getPages() {
           if(this.type=='basedOnDate'){
             this.fileName='ReportBasedOnDate.xlsx'
             this.title = 'Based on date'+this.from+" "+this.to;
-            this.general.exportAsExcelFile(this.excelData,this.fileName, this.title)
+            let element = document.getElementById('htmlData');
+            console.log("element==",element)
+
+            this.general.exportToExcel(element,this.fileName, this.title)
 
           }
           if(this.type=='basedOnFindName'){
             this.fileName='ReportBasedOnFindName.xlsx'
             this.title = 'Based on Find Name'+this.deviceName;
-            this.general.exportAsExcelFile(this.excelData,this.fileName, this.title)
+            let element = document.getElementById('htmlData');
+
+            this.general.exportToExcel(element,this.fileName, this.title)
 
           }
         // console.log("excel data===",this.excelData)

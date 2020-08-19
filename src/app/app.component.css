@@ -17,6 +17,9 @@ right: 0;
 top: 50%;
 z-index: 2;
 }
+span.logout {
+  cursor: pointer;
+}
 .mobilemenu{
 display: none;
 }

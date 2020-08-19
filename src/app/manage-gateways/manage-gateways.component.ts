@@ -60,7 +60,7 @@ refreshGateway(){
     }
 
   this.api.getData(data).then((res:any)=>{
-    // console.log("gateway data ======",res);
+    console.log("gateway data ======",res);
     if(res.status){
       this.gatewayData=[]
 
@@ -70,6 +70,7 @@ refreshGateway(){
               id: res.success[i].id,
               gatewayId: res.success[i].gatewayId,
               gatewayName: res.success[i].gatewayName,
+              
               edit:'edit',
               delete:'delete'
           });

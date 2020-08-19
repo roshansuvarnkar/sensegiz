@@ -176,9 +176,9 @@ export class SettingsComponent implements OnInit {
         //   buzzerTime:res.success[0].buzzerTime
         // })
 
-          this.wearableForm.patchValue({
-            wearable:res.success[0].type.toString()
-          })
+          // this.wearableForm.patchValue({
+          //   wearable:res.success[0].type.toString()
+          // })
 
           if(res.success[0].buzzerConfig==5){
             this.buzzerConfigStatus=true
@@ -275,14 +275,14 @@ export class SettingsComponent implements OnInit {
        try {
         if(data.wearable=="0"){
           if(data.distance == "1" ){
-            data.rssi='B9'
+            data.rssi='BE'
           }
           else if(data.distance  == "2" ){
-           data.rssi='B5'
+            data.rssi='BC'
 
           }
           else if(data.distance  == "3"){
-            data.rssi='AE'
+            data.rssi='B6'
           }
         }
         if(data.wearable=="1"){
@@ -442,14 +442,14 @@ export class SettingsComponent implements OnInit {
       try {
         if(this.wearableType=="0"){
           if(this.setting.distance == 1){
-            data.rssi='B9'
+            data.rssi='BE'
           }
           else if(this.setting.distance  == 2){
-           data.rssi='B5'
+           data.rssi='BC'
 
           }
           else if(this.setting.distance  ==3){
-            data.rssi='AE'
+            data.rssi='B6'
           }
         }
         if(this.wearableType=="1"){
@@ -487,8 +487,8 @@ export class SettingsComponent implements OnInit {
 
   onSubmitbuzzerConfigForm(data){
     // console.log("data==",data)
-    data.durationSec=data.buzzerConfig>0 && data.buzzerConfig<=4?0:data.durationSec
-    // console.log("data==",data)
+    data.durationSec=data.buzzerConfig>0 && data.buzzerConfig<=4?30:data.durationSec
+    console.log("data==",data)
 
     if (this.buzzerConfigForm.valid) {
       try {
@@ -600,38 +600,38 @@ export class SettingsComponent implements OnInit {
    changeDistance(event){
     //  console.log("event===",event.value)
       // this.refreshSetting()
-      console.log("hii")
+      // console.log("hii")
       if(this.setting.type==0){
         if(event.value == 1){
           this.distanceForm.patchValue({
-            rssi:'B9'
+            rssi:'BE'
           })
         }
         else if(event.value == 2){
           this.distanceForm.patchValue({
-            rssi:'B5'
+            rssi:'BC'
           })
         }
         else if(event.value == 3){
           this.distanceForm.patchValue({
-            rssi:'AE'
+            rssi:'B6'
           })
         }
       }
       if(this.setting.type==1){
         if(event.value == 1){
           this.distanceForm.patchValue({
-            rssi:'A1'
+            rssi:'AC'
           })
         }
         else if(event.value == 2){
           this.distanceForm.patchValue({
-            rssi:'A2'
+            rssi:'A9'
           })
         }
         else if(event.value == 3){
           this.distanceForm.patchValue({
-            rssi:'A3'
+            rssi:'A5'
           })
         }
       }

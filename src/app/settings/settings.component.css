@@ -16,6 +16,9 @@ mat-card-title{
   font-family: serif;
   line-height: 2rem;
 }
+.secStatus {
+  margin-top: 0.5rem;
+}
 .warning {
   border: 1px solid red;
   color: red;
@@ -24,9 +27,11 @@ button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary
   position: absolute;
   bottom: 1rem;
   right: 7.5rem;
+  cursor:pointer;
 }
 input.input-file {
   margin-left: 3.5rem;
+  margin-top: 1.1rem;
 }
 mat-radio-group.mat-radio-group.wearable.ng-untouched.ng-pristine.ng-valid {
   display: flex;

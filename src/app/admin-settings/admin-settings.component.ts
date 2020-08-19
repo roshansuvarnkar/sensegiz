@@ -56,48 +56,48 @@ export class AdminSettingsComponent implements OnInit {
           distance: res.success[0].distance.toString(),
           rssi: res.success[0].rssi
         })
-        if(this.setting.type==0){
-          this.selectStatus1=true
-          if(this.setting.distance == 1){
-            this.distanceForm.patchValue({
-              distance: res.success[0].distance.toString(),
-              rssi: 'B9'
-            })
-          }
-          else  if(this.setting.distance == 2){
-            this.distanceForm.patchValue({
-              distance: res.success[0].distance.toString(),
-              rssi: 'B5'
-            })
-          }
-          else if(this.setting.distance == 3){
-            this.distanceForm.patchValue({
-              distance: res.success[0].distance.toString(),
-              rssi: 'AE'
-            })
-          }
-        }
-        if(this.setting.type==1){
-          this.selectStatus2=true
-          if(this.setting.distance == 1){
-            this.distanceForm.patchValue({
-              distance: res.success[0].distance.toString(),
-              rssi: 'A1'
-            })
-          }
-          else  if(this.setting.distance == 2){
-            this.distanceForm.patchValue({
-              distance: res.success[0].distance.toString(),
-              rssi: 'A2'
-            })
-          }
-          else if(this.setting.distance == 3){
-            this.distanceForm.patchValue({
-              distance: res.success[0].distance.toString(),
-              rssi: 'A3'
-            })
-          }
-        }
+        // if(this.setting.type==0){
+        //   this.selectStatus1=true
+        //   if(this.setting.distance == 1){
+        //     this.distanceForm.patchValue({
+        //       distance: res.success[0].distance.toString(),
+        //       rssi: 'BE'
+        //     })
+        //   }
+        //   else  if(this.setting.distance == 2){
+        //     this.distanceForm.patchValue({
+        //       distance: res.success[0].distance.toString(),
+        //       rssi: 'BC'
+        //     })
+        //   }
+        //   else if(this.setting.distance == 3){
+        //     this.distanceForm.patchValue({
+        //       distance: res.success[0].distance.toString(),
+        //       rssi: 'B6'
+        //     })
+        //   }
+        // }
+        // if(this.setting.type==1){
+        //   this.selectStatus2=true
+        //   if(this.setting.distance == 1){
+        //     this.distanceForm.patchValue({
+        //       distance: res.success[0].distance.toString(),
+        //       rssi: 'AC'
+        //     })
+        //   }
+        //   else  if(this.setting.distance == 2){
+        //     this.distanceForm.patchValue({
+        //       distance: res.success[0].distance.toString(),
+        //       rssi: 'A9'
+        //     })
+        //   }
+        //   else if(this.setting.distance == 3){
+        //     this.distanceForm.patchValue({
+        //       distance: res.success[0].distance.toString(),
+        //       rssi: 'A5'
+        //     })
+        //   }
+        // }
        
         this.txPowerForm.patchValue({
           txPower: res.success[0].txPower,
@@ -113,7 +113,7 @@ export class AdminSettingsComponent implements OnInit {
   onSubmitDistanceForm(data) {
     if (this.distanceForm.valid) {
       try {
-        // console.log("distance ===",data)
+        console.log("distance ===",data)
         data.userId = this.dataGet.userId
         this.api.addDistance(data).then((res:any)=>{
           console.log("distance inserted or updated",res)
@@ -162,34 +162,34 @@ export class AdminSettingsComponent implements OnInit {
     if(this.setting.type==0){
       if(event.value == 1 ){
         this.distanceForm.patchValue({
-          rssi:'B9'
+          rssi:'BE'
         })
       }
       else if(event.value == 2){
         this.distanceForm.patchValue({
-          rssi:'B5'
+          rssi:'BC'
         })
       }
       else if(event.value == 3){
         this.distanceForm.patchValue({
-          rssi:'AE'
+          rssi:'B6'
         })
       }
     }
     else if(this.setting.type==1){
       if(event.value == 1 ){
         this.distanceForm.patchValue({
-          rssi:'A1'
+          rssi:'AC'
         })
       }
       else if(event.value == 2){
         this.distanceForm.patchValue({
-          rssi:'A2'
+          rssi:'A9'
         })
       }
       else if(event.value == 3){
         this.distanceForm.patchValue({
-          rssi:'A3'
+          rssi:'A5'
         })
       }
     }

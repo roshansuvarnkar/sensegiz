@@ -20,3 +20,16 @@ mat-card {
     border: 1px solid red;
     color: red;
   }
+  button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary {
+    position: absolute;
+    bottom: 1rem;
+    right: 7.5rem;
+  }
+  @media only screen and (max-width: 768px){
+    .setting {
+      display: block;
+      /* flex-wrap: wrap; */
+      /* justify-content: space-evenly; */
+  }
+
+  }

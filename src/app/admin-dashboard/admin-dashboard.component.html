@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
 	<mat-card class="main">
 		<mat-card-title class="main">Add Users</mat-card-title>
 		<hr class="main">
@@ -68,4 +68,89 @@
 
 		</mat-card-content>
 	</mat-card>
+</div> -->
+
+
+<div>
+
+	<h1 class="head">Add users</h1> 
+	<hr class="main">
+	
+
+	<div class="flex1">
+		<mat-card class="sub">
+			<mat-card-title>Add Users Details</mat-card-title>
+			<mat-card-content>
+				 <form [formGroup]="adminAddUserform" (ngSubmit)="onSubmit(adminAddUserform.value)">
+					<mat-form-field class="full-width-input">
+					  <input matInput placeholder="Email" formControlName="userName" required>
+					  <mat-error>
+						Please provide a valid email address
+					  </mat-error>
+					</mat-form-field>
+					<mat-form-field class="full-width-input">
+					  <input matInput  placeholder="Portal Password" formControlName="portalPassword" matInput required >
+					  <mat-error>
+						<p 	matTooltip="Password must contain at least one lowercase letter, one uppercase letter, one number and,
+						should be minimum of 8 characters and maximum 20 characters are allowed"
+                        [matTooltipPosition]="'after'">Password Policy</p>
+					
+					  </mat-error>
+				
+					</mat-form-field>
+					<mat-form-field class="full-width-input">
+					  <input matInput  placeholder="Mobile Password" formControlName="mobilePassword" matInput required >
+					  <mat-error>
+						<p 	matTooltip="Password must contain at least one lowercase letter, one uppercase letter, one number and,
+						should be minimum of 8 characters and maximum 20 characters are allowed"
+                        [matTooltipPosition]="'after'">Password Policy</p>
+					
+					  </mat-error>
+					</mat-form-field>
+					<mat-form-field class="full-width-input">
+					  <input matInput  placeholder="User Password" formControlName="userPassword" matInput required >
+					  <mat-error>
+						<p 	matTooltip="Password must contain at least one lowercase letter, one uppercase letter, one number and,
+						should be minimum of 8 characters and maximum 20 characters are allowed"
+                        [matTooltipPosition]="'after'">Password Policy</p>
+					
+					  </mat-error>
+					</mat-form-field><br>
+					<button mat-raised-button [disabled]="!adminAddUserform.valid" color="primary">Add user</button>
+				  </form>
+			</mat-card-content>
+		</mat-card>
+
+		<mat-card class="tab">
+			<mat-card-content>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Sl no.</th>
+							<th scope="col">User Name</th>
+							<th scope="col">Added on</th>
+							<th scope="col" >Add Ble</th>
+							<th scope="col" >Settings</th>
+							<th scope="col">isDelete</th>
+						</tr>
+					</thead>
+			
+					<tr *ngFor="let a of adminData;let i = index">
+						<td>{{i+1}}</td>
+						<td>{{a.userName}}</td>
+						<td>{{a.createdDate  | date : 'medium' : 'IST'}}</td>
+						<td><mat-icon matListIcon (click)="openDialog(a)">add</mat-icon></td>
+						<td><mat-icon matListIcon (click)="openSetting(a)">settings</mat-icon></td>
+						<span>
+							<td *ngIf="a.isDeleted=='N'"><mat-icon matListIcon (click)="delete(a)">done</mat-icon></td>
+							<td *ngIf="a.isDeleted=='Y'"><mat-icon matListIcon (click)="delete(a)">clear</mat-icon></td>
+						</span>
+					</tr>
+				</table>
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+
+
 </div>

@@ -8,8 +8,9 @@
      <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>Home</button>
      <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>Manage People</button>
      <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>Social Distancing</button>
-     <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>History</button>
      <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>Settings</button>
+     <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>Reports</button>
+
      <!-- <button mat-menu-item routerLink="/User Guide"> <mat-icon>menu_book</mat-icon>User Guide</button> -->
    </mat-menu>
 
@@ -24,7 +25,7 @@
            <mat-icon >person</mat-icon>
          </span>
          <p >{{loginDataInfo.userName}}</p>&emsp;&nbsp;&emsp;
-         <span  (click)="logout()">
+         <span  (click)="logout()" class="logout">
            <mat-icon >exit_to_app</mat-icon>
          </span>
        </span>
@@ -40,8 +41,9 @@
      <span routerLink="/home">Home</span>
      <span routerLink="/dashboard">Manage People</span>
      <span routerLink="/live-data">Social Distancing</span>
-     <span routerLink="/history">History</span>
      <span routerLink="/settings">Settings</span>
+     <span routerLink="/history">Reports</span>
+
      <span routerLink="/user-guide">User Guide</span>
 
    </mat-toolbar>

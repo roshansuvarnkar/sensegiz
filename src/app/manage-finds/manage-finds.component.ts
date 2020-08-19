@@ -265,7 +265,7 @@ getBatteryStatus(value){
 
 
 fileChange(files){
-  alert("Format should be: Name*, employeeId, deviceid*, mobileNumber, emailId ")
+  alert("Format should be: Name*, employeeId, deviceId*, mobileNumber, emailId ")
   this.loading=false
   this.format=false
 
@@ -328,9 +328,10 @@ randomNumber(min=1, max=20) {
 
 fileSubmit(data){
   console.log(data)
-  
-
- if(data.fileData.filetype=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || data.fileData.filetype=="application/vnd.ms-excel" ){
+  var type=data.fileData.filename.split('.')
+  console.log("type==",type[type.length-1].toString())
+if(type[type.length-1]=='xlsx'.toString() || type[type.length-1]=='xls'){
+ 
   this.loading=false
   if(data.header[0].toLowerCase()=='name' && data.header[2].toLowerCase()=='deviceid'|| data.header[1].toLowerCase()=="employeeid" || 
    data.header[3]=="mobilenumber".toLowerCase() || data.header[4]=="emailid".toLowerCase()){
@@ -346,20 +347,21 @@ fileSubmit(data){
         this.clearFile()
         var msg = 'uploaded'
         this.general.openSnackBar(msg,'')
-       
-      }
-      
-    })
-   }else{
-     this.format=true
-   }
+       }
+     })
 
- }else{
-
-  this.loading=true
+}
+else{
+  this.format=true
+  }
+}
+else{
+   this.loading=true
  }
+ 
  }
 
 
 
 }
+
