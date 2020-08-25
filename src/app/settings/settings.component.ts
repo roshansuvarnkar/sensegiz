@@ -153,21 +153,21 @@ export class SettingsComponent implements OnInit {
         this.bufferForm.patchValue({
           buffer: res.success[0].buffer,
         })
-        if(res.success[0].durationThreshold<=55){
-          this.minStatus=true
-          this.timeFormStatus=false
-          this.timeForm.patchValue({
-            minutes:'none',
-            seconds:(res.success[0].durationThreshold).toString()
-          })
-        }else if(res.success[0].durationThreshold>55){
-          this.secStatus=true
-          this.timeFormStatus=false
-          this.timeForm.patchValue({
-            seconds:'none',
-            minutes:res.success[0].durationThreshold/60,
-          })
-        }
+        // if(res.success[0].durationThreshold<=55){
+        //   this.minStatus=true
+        //   this.timeFormStatus=false
+        //   this.timeForm.patchValue({
+        //     minutes:'none',
+        //     seconds:(res.success[0].durationThreshold).toString()
+        //   })
+        // }else if(res.success[0].durationThreshold>55){
+        //   this.secStatus=true
+        //   this.timeFormStatus=false
+        //   this.timeForm.patchValue({
+        //     seconds:'none',
+        //     minutes:res.success[0].durationThreshold/60,
+        //   })
+        // }
 
         this.scanningForm.patchValue({
           seconds:res.success[0].scanningInterval.toString()
@@ -214,7 +214,7 @@ export class SettingsComponent implements OnInit {
 
   maxThresholdMinsec(){
     var seconds=''
-    for(let i =0;i<=10;i++){
+    for(let i =0;i<=5;i++){
       var minutes=i==0?'none':i
       this.min.push(minutes)
      }
@@ -232,7 +232,7 @@ export class SettingsComponent implements OnInit {
       }
     }
   }
-  
+
   onSubmitWorkForm(data) {
     var dateobj=new Date()
     var year = dateobj.getFullYear();
@@ -413,30 +413,24 @@ export class SettingsComponent implements OnInit {
    }
 
 
-   onSubmitTimeForm(data){
-     console.log(" time data===",data);
-
-       data.seconds=data.minutes!=="none"?data.minutes*60:data.seconds
-
-
-     var second=data.seconds <=9 && data.seconds >= 0 ?"0"+data.seconds:data.seconds
-     var data1={
-       userId:this.loginData.userId,
-       seconds:second
-     }
-    //  console.log("data1==",data1)
-
-     this.api.getDurationThreshold(data1).then((res:any)=>{
-      //  console.log("duration==",res)
-      if(res.status){
-
-        this.refreshSetting()
-        var msg = 'Minimum duration threshold updated Successfully'
-        this.general.openSnackBar(msg,'')
-      }
-    })
-
-   }
+  //  onSubmitTimeForm(data){
+  //   //  console.log(" time data===",data);
+  //     data.seconds=data.minutes!=="none"?data.minutes*60:data.seconds
+  //     var second=data.seconds <=9 && data.seconds >= 0 ?"0"+data.seconds:data.seconds
+  //     var data1={
+  //      userId:this.loginData.userId,
+  //      seconds:second
+  //     }
+  //   //  console.log("data1==",data1)
+  //    this.api.getDurationThreshold(data1).then((res:any)=>{
+  //     //  console.log("duration==",res)
+  //     if(res.status){
+  //       this.refreshSetting()
+  //       var msg = 'Minimum duration threshold updated Successfully'
+  //       this.general.openSnackBar(msg,'')
+  //     }
+  //   })
+  // }
 
 
    onSubmitwearableForm(data){
@@ -552,55 +546,47 @@ export class SettingsComponent implements OnInit {
      this.statusCustomise = this.statusCustomise == true ? false : true
    }
 
-  getMin(event){
-    // console.log("event==",event)
-    if(event.value=="none"){
-      this.minStatus=true
-      this.secStatus=false
-      this.requiredStatus1=false
-      this.requiredStatus2=true
-      this.timeFormStatus=true
+  // getMin(event){
+  //   // console.log("event==",event)
+  //   if(event.value=="none"){
+  //     this.minStatus=true
+  //     this.secStatus=false
+  //     this.requiredStatus1=false
+  //     this.requiredStatus2=true
+  //     this.timeFormStatus=true
 
 
-    }
-    else{
-      this.minStatus=false
-      this.secStatus=true
-      this.requiredStatus1=true
-      this.requiredStatus2=false
-      this.timeFormStatus=false
+  //   }
+  //   else{
+  //     this.minStatus=false
+  //     this.secStatus=true
+  //     this.requiredStatus1=true
+  //     this.requiredStatus2=false
+  //     this.timeFormStatus=false
 
 
-    }
+  //   }
 
-  }
+  // }
 
-  getSec(event){
-    if(event.value=="none"){
-      this.minStatus=false
-      this.secStatus=true
-      this.requiredStatus1=true
-      this.requiredStatus2=false
-      this.timeFormStatus=true
+  // getSec(event){
+  //   if(event.value=="none"){
+  //     this.minStatus=false
+  //     this.secStatus=true
+  //     this.requiredStatus1=true
+  //     this.requiredStatus2=false
+  //     this.timeFormStatus=true
 
-    }
-    else{
-      this.minStatus=true
-      this.secStatus=false
-      this.requiredStatus1=false
-      this.requiredStatus2=true
-      this.timeFormStatus=false
+  //   }
+  //   else{
+  //     this.minStatus=true
+  //     this.secStatus=false
+  //     this.requiredStatus1=false
+  //     this.requiredStatus2=true
+  //     this.timeFormStatus=false
+  //   }
 
-
-    }
-
-  }
-
-
-
-
-
-
+  // }
 
    changeDistance(event){
     //  console.log("event===",event.value)
@@ -735,7 +721,5 @@ export class SettingsComponent implements OnInit {
    }
 
   }
-
-
 
 }

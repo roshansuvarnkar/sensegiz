@@ -125,16 +125,26 @@ export class HistoryReportComponent implements OnInit {
           offset:offset
         }
         this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
-          // console.log("find data based on date ======",res);
+          console.log("find data based on date ======",res);
           this.liveData=[]
           if(res.status){
             if(type==0){
               this.liveData=res.success
             }
             else{
-              // console.log("came===",res.success);
-              this.excelData=res.success
-              // this.openExcel()
+              this.excelData=[]
+             for(var i=0;i<res.success.length;i++){
+            
+               this.excelData.push({
+               Sl_No:i+1,
+               Base_Person:res.success[i].baseName,
+               Contact_Person:res.success[i].contactName,
+               Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
+               Total_Time:this.general.convertTime(res.success[i].totalTime)
+
+             })
+             }
+  
             }
             this.dataSource = new MatTableDataSource(this.liveData);
             setTimeout(() => {
@@ -158,15 +168,24 @@ export class HistoryReportComponent implements OnInit {
 
         }
         this.api.getDeviceHistoryBasedOnDeviceName(data1).then((res:any)=>{
-          // console.log("find data based on name ======",res);
+          console.log("find data based on name======",res);
 
           if(res.status){
             if(type==0){
               this.liveData=res.success
             }
             else{
-              this.excelData=res.success
-              // this.openExcel()
+              this.excelData=[]
+              for(var i=0;i<res.success.length;i++){
+             
+                this.excelData.push({
+                Sl_No:i+1,
+                Contact_Person:res.success[i].contactName,
+                Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
+                Total_Time:this.general.convertTime(res.success[i].totalTime)
+ 
+              })
+              }
             }
 
             this.dataSource = new MatTableDataSource(this.liveData);
@@ -186,7 +205,7 @@ export class HistoryReportComponent implements OnInit {
 
         }
         this.api.getSummaryReport(data2).then((res:any)=>{
-          // console.log("summary report ======",res);
+          console.log("summary report ======",res);
 
           //this.liveData=[]
           if(res.status){
@@ -243,11 +262,13 @@ getUpdate(event) {
 
 
 
+
+
 getPages() {
 
   var tempLen=this.currentPageLength
   //  console.log("paginator event length",tempLen);
-  this.loadData(tempLen,0,0)
+  this.loadData(tempLen,0,1)
   var msg = 'Downloading'
   this.general.openSnackBar(msg,'')
   //  setTimeout(()=>{
@@ -262,11 +283,10 @@ getPages() {
   setTimeout(()=>{
     this.loadData(10,0,0)
   },6000)
- clearTimeout(60*1000)
+ clearTimeout(6*1000)
   // this.showSpinner=true
 
 }
-
 
 
   orderContactOpen(a){
@@ -290,7 +310,11 @@ getPages() {
 
   convertDate(a){
     // console.log("a===",a)
-    var timeArr = a.split(':')
+    var timeArr = []
+    if(a!==''){
+      timeArr=a.split(':')
+    }
+    
     var date = ''
     if(timeArr[0]!='00'){
       date += timeArr[0] + ' hour '
@@ -312,33 +336,30 @@ getPages() {
   openExcel(){
 
       if(this.type=='summaryReport'){
-          this.fileName='summaryReport.xlsx'
+          this.fileName='summaryReport-of-infectedUser-'+this.deviceName+'.xlsx'
           this.title = 'Summary Report of Find Name'+this.deviceName;
           let element = document.getElementById('htmlData');
-          console.log("element==",element)
-          // this.general.exportToExcel(element.toString(),this.fileName, this.title)
+          this.general.exportToExcel(element,this.fileName, this.title)
+
 
         }
         else{
           console.log("this.excelData====",this.excelData)
           if(this.type=='basedOnDate'){
-            this.fileName='ReportBasedOnDate.xlsx'
+            this.fileName='GenricReport.xlsx'
             this.title = 'Based on date'+this.from+" "+this.to;
-            let element = document.getElementById('htmlData');
-            console.log("element==",element)
 
-            this.general.exportToExcel(element,this.fileName, this.title)
+            this.general.exportAsExcelFile(this.excelData,this.fileName, this.title)
 
           }
           if(this.type=='basedOnFindName'){
-            this.fileName='ReportBasedOnFindName.xlsx'
+            this.fileName='Report-Of-Find-'+this.liveData[0].baseName+'.xlsx'
             this.title = 'Based on Find Name'+this.deviceName;
             let element = document.getElementById('htmlData');
 
-            this.general.exportToExcel(element,this.fileName, this.title)
+            this.general.exportAsExcelFile(this.excelData,this.fileName, this.title)
 
           }
-        // console.log("excel data===",this.excelData)
 
       }
 

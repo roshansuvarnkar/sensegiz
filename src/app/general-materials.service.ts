@@ -84,4 +84,45 @@ updateItem(key, property, value)
     this.setObject(key, obj);
 }
 
+updatedOnDate(date){
+  
+  var months=['Jan','Feb', 'Mar','Apr','May','Jun','Jul','Aug','sep','Oct','Nov','Dec']
+
+  var dateObj=new Date(date)
+  var year = dateObj.getFullYear();
+  var month = months[dateObj.getMonth()];
+  var day = ("0" + dateObj.getDate()).slice(-2);
+  var from = month  + ',' + day + ','  +year 
+
+  var h=dateObj.getHours()
+  var m=dateObj.getMinutes()
+  var s=dateObj.getSeconds()
+  var hh = h <= 9 && h >= 0 ? "0"+h : h;
+  var mm = m <= 9 && m >= 0 ? "0"+m : m;
+  var ss=  s <= 9 && s >= 0 ? "0"+s : s;
+  var datetime=from +', '+hh+':'+mm+':'+ss
+  return datetime
+
+
+}
+convertTime(a){
+  // console.log(a)
+
+  var timeArr = a.split(':')
+  
+  var date = ''
+  if(timeArr[0]!='00'){
+    date += timeArr[0] + ' hour '
+  }
+  if(timeArr[1]!='00'){
+    date += timeArr[1] + ' minute '
+  }
+  if(timeArr[2]!='00'){
+    date += timeArr[2] + ' second '
+  }
+  if(date==''){
+    date = '-'
+  }
+  return date
+}
 }

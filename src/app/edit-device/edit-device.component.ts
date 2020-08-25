@@ -100,18 +100,7 @@ userform:FormGroup
             var msg = 'Device Name Already exists, try different Name'
             this.general.openSnackBar(msg,'')
           }
-          else if(!res.status && res.alreadyExisted){
-            var msg = 'Device Name or Device Id Already exists, try different device'
-            this.general.openSnackBar(msg,'')
-          }
-          else if(!res.status && res.alreadyExisted){
-            var msg = 'Mobile number Already exists, try with different Mobile number'
-            this.general.openSnackBar(msg,'')
-          }
-          else if(!res.status && res.alreadyExisted){
-            var msg = 'Email Id Already exists, try with different emailId'
-            this.general.openSnackBar(msg,'')
-          }
+        
         })
       } catch (err) {
       }
@@ -133,7 +122,7 @@ userform:FormGroup
             this.general.openSnackBar(msg,'')
           }
           else if(!res.status && res.alreadyExisted){
-            var msg = 'Gateway Already exists, try different gateway'
+            var msg = 'Gateway Name  Already exists, try different gateway'
             this.general.openSnackBar(msg,'')
           }
         })
@@ -155,7 +144,7 @@ userform:FormGroup
             this.general.openSnackBar(msg,'')
           }
           else if(!res.status && res.alreadyExisted){
-            var msg = 'Device Already exists, try different device'
+            var msg = 'Email Id or Mobile Number Already exists, try different device'
             this.general.openSnackBar(msg,'')
           }
         })

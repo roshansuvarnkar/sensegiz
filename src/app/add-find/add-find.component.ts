@@ -103,7 +103,7 @@ Gatewaysubmit(data){
           this.general.openSnackBar(msg,'')
         }
         else if(!res.status && res.alreadyExisted){
-          var msg = 'Gateway Already exists, try different gateway'
+          var msg = 'Gateway Name or Gateway Id Already exists, try different gateway'
           this.general.openSnackBar(msg,'')
         }
       })
@@ -125,7 +125,7 @@ Usersubmit(data){
           this.general.openSnackBar(msg,'')
         }
         else if(!res.status && res.alreadyExisted){
-          var msg = 'Device Already exists, try different device'
+          var msg = 'EmailId or Mobile Number Already exists, try different device'
           this.general.openSnackBar(msg,'')
         }
       })
@@ -134,25 +134,6 @@ Usersubmit(data){
   }
 }
 
-employeeIdsubmit(data){
-  if (this.userform.valid) {
-    try {
-      data.userId=this.loginData.userId
-      this.api.UserRegister(data).then((res:any)=>{
-        // console.log("user submit==",res)
-        if(res.status){
-          var msg = 'Email Id Registered Successfully'
-          this.general.openSnackBar(msg,'')
-        }
-        else if(!res.status && res.alreadyExisted){
-          var msg = 'EmailId Already exists, try with different email Id'
-          this.general.openSnackBar(msg,'')
-        }
-      })
-    } catch (err) {
-    }
-  }
 
-}
 
 }
