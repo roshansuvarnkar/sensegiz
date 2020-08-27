@@ -50,18 +50,6 @@ exportAsExcelFile(json: any[], excelFileName: string,header: string){
 }
 
 
-  onUpload(files) {
-    return new Promise((resolve,reject)=>{
-      const formData = new FormData();
-      for (const file of files) {
-        formData.append(name, file, file.name);
-      }
-      this.http.post('./assets/', formData).subscribe((res:any)=>{
-        resolve(res)
-      });
-    })
-  }
-
 
 setObject(key, obj) {
     localStorage.setItem(key, JSON.stringify(obj));
