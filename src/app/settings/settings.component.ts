@@ -37,6 +37,7 @@ export class SettingsComponent implements OnInit {
   timeFormStatus:boolean=true
   selectedValue:boolean=false
   buzzerConfigStatus:boolean=false
+  bufferValue:boolean=false
   loading:boolean=false
   inactivityStatusValue:any=[]
   coinData:any=[]
@@ -51,7 +52,8 @@ export class SettingsComponent implements OnInit {
     @ViewChild('fileInput') fileInput : ElementRef;
 
 
-  constructor(public dialog: MatDialog,private fb:FormBuilder,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
+  constructor(public dialog: MatDialog,private fb:FormBuilder,private api:ApiService,private login:LoginCheckService,
+    private general:GeneralMaterialsService) { }
 
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
@@ -418,8 +420,11 @@ export class SettingsComponent implements OnInit {
       }
     }
    }
-   bufferval($event){
-     console.log(event)
+   bufferval(event){
+     console.log(event.target.value)
+    
+      this.bufferValue=event.target.value>5?true:false
+    
    }
 
 

@@ -65,12 +65,12 @@ margin-left: 2rem;
 display: block;
 }
 
-.logout,.menubar{
+.menubar{
 display: none;
 }
-.logouticon{
-display: block;
-}
+/* .logout{
+margin-left: -7rem !important;
+} */
 img {
   height: 100%
 }
