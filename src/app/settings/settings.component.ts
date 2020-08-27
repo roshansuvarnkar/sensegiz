@@ -386,6 +386,7 @@ export class SettingsComponent implements OnInit {
    }
 
 
+ 
    onSubmitBufferForm(value){
 
     if (this.bufferForm.valid) {
@@ -397,6 +398,7 @@ export class SettingsComponent implements OnInit {
 
         }
 
+      if(value.buffer!=6){
         this.api.getBufferDeviceSetting(data).then((res:any)=>{
           // console.log("Buffer response===",res)
           if(res.status){
@@ -407,9 +409,17 @@ export class SettingsComponent implements OnInit {
         }).catch(err=>{
           // console.log("err===",err);
         })
+      }else{
+        var msg = 'Maximum value for buffer can be set to 5'
+            this.general.openSnackBar(msg,'')
+
+      }
       } catch (err) {
       }
     }
+   }
+   bufferval($event){
+     console.log(event)
    }
 
 

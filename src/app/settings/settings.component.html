@@ -1,3 +1,7 @@
+<br>
+<div class="marquee">
+  <p >Please contact SenseGiz Team before making any changes in Settings</p>
+</div>
 <div class="setting">
   <mat-card>
     <mat-card-title>
@@ -5,16 +9,16 @@
     </mat-card-title>
     <mat-card-subtitle>
       Enter buffer value for the wearable
-    </mat-card-subtitle><br> <br>
+    </mat-card-subtitle><br> 
     <mat-card-content>
       <form [formGroup]="bufferForm" (ngSubmit)="onSubmitBufferForm(bufferForm.value)">
         <mat-form-field>
-          <input type='number' min="0"  matInput placeholder="Buffer" formControlName="buffer"  required>
+          <input type='number' min="0" max="5" matInput placeholder="Buffer" formControlName="buffer" (click)="bufferval($event)"  required>
           <mat-error>
-            Please provide a valid buffer
+            Please provide a valid buffer and maximum value you can set is 5
           </mat-error>
         </mat-form-field>
-        <br><br>
+        <br><br><br>
         <button class="btn-set" mat-raised-button [disabled]="!bufferForm.valid" color="primary">Submit</button>
       </form>
     </mat-card-content>
@@ -26,7 +30,7 @@
     </mat-card-title>
     <mat-card-subtitle>
       Enter violation limit/day
-    </mat-card-subtitle><br> <br>
+    </mat-card-subtitle><br> 
     <mat-card-content>
       <form [formGroup]="maxContactForm" (ngSubmit)="onSubmitmaxContactForm(maxContactForm.value)">
         <mat-form-field>
@@ -35,7 +39,7 @@
             Please provide a valid threshold
           </mat-error>
         </mat-form-field>
-        <br><br>
+        <br><br><br>
         <button class="btn-set" mat-raised-button [disabled]="!maxContactForm.valid" color="primary">Submit</button>
       </form>
     </mat-card-content>
@@ -44,7 +48,7 @@
  
   
 
-  <mat-card>
+  <!-- <mat-card>
     <mat-card-title>
        Define Inactivity
     </mat-card-title>
@@ -65,7 +69,7 @@
         <button class="btn-set" mat-raised-button [disabled]="!inactivityForm.valid" color="primary">Submit</button>
       </form>
     </mat-card-content>
-  </mat-card>
+  </mat-card> -->
 
 <!-- 
   <mat-card>
@@ -141,7 +145,7 @@
               </mat-error>
           </mat-form-field>
         </div>
-        <br><br>
+        <br><br><br>
         <button class="btn-set" mat-raised-button [disabled]="!buzzerConfigForm.valid"   color="primary">Submit</button>
       </form>
     </mat-card-content>

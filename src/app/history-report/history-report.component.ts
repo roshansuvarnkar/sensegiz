@@ -282,8 +282,8 @@ getPages() {
 
   setTimeout(()=>{
     this.loadData(10,0,0)
-  },6000)
- clearTimeout(6*1000)
+  },8000)
+ clearTimeout(8*1000)
   // this.showSpinner=true
 
 }
@@ -325,8 +325,8 @@ getPages() {
     if(timeArr[2]!='00'){
       date += timeArr[2] + ' second '
     }
-    if(date==''){
-      date = '-'
+    if(date=='' ||date=='-'){
+      date = '05 second'
     }
     return date
   }

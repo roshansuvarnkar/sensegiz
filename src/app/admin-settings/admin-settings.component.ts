@@ -51,6 +51,7 @@ export class AdminSettingsComponent implements OnInit {
       // console.log("data==",this.dataGet.userId)
   })
   this. refreshSetting()
+  this.minThresholdMinsec()
   }
 
   refreshSetting(){
@@ -115,7 +116,7 @@ export class AdminSettingsComponent implements OnInit {
           this.timeFormStatus=false
           this.timeForm.patchValue({
             minutes:'none',
-            seconds:(res.success[0].durationThreshold).toString()
+            seconds:res.success[0].durationThreshold
           })
         }else if(res.success[0].durationThreshold>55){
           this.secStatus=true
@@ -139,18 +140,21 @@ export class AdminSettingsComponent implements OnInit {
     for(let i =0;i<=5;i++){
       var minutes=i==0?'none':i
       this.min.push(minutes)
+      console.log("min==",this.min)
      }
     for(let i =-1;i<=11;i++){
-      if(i==1|| i==2 || i==3){
+      if(i==1 || i==2 || i==3){
       }
       else{
         if(i==-1){
-          seconds='none'
+           seconds='none'
         }
         else{
          seconds=(i*5).toString()
         }
         this.sec.push(seconds)
+        console.log("sec==",this.sec)
+
       }
     }
   }

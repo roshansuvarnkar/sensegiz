@@ -120,8 +120,8 @@ convertTime(a){
   if(timeArr[2]!='00'){
     date += timeArr[2] + ' second '
   }
-  if(date==''){
-    date = '-'
+  if(date == '' ||   date == '-'){
+    date = '05 second'
   }
   return date
 }

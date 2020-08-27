@@ -29,22 +29,23 @@ export class AdminDashboardComponent implements OnInit {
       private general: GeneralMaterialsService
     ) {
     }
-
+    // ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\W_]+$
 
   ngOnInit(): void {
     this.adminAddUserform = this.fb.group({
       userName: ['', Validators.email],
       portalPassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\W_]+$/) 	
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
       ]],
       mobilePassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\W_]+$/) 	
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
       ]],
       userPassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\W_]+$/) 	
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
       ]]
     });
     this.refreshAdminData()
+    
   }
 
  onSubmit(data) {
