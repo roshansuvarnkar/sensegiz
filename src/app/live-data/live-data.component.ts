@@ -102,8 +102,19 @@ getTotalCount(val){
 
     this.api.getLiveData(data).then((res:any)=>{
       console.log("live data ======",res);
+      this.liveData=[]
       if(res.status){
-        this.liveData=res.success
+        for(var i=0;i<res.success.length;i++){
+          this.liveData.push({
+            i:i+1,
+            baseName:res.success[i].baseName,
+            contactName:res.success[i].contactName,
+            updatedOn:res.success[i].updatedOn,
+            totalTime:res.success[i].totalTime,
+            startTime:this.startTime(res.success[i].totalTime,res.success[i].updatedOn),
+
+          })
+        }
         this.currentPageLength = res.success.length;
         this.dataSource = new MatTableDataSource(this.liveData);
         setTimeout(() => {
@@ -143,12 +154,12 @@ startTime(data1,data2){
     date.setHours(date.getHours() -a[0]);
     date.setMinutes(date.getMinutes() - a[1]); 
     date.setSeconds(date.getSeconds() - a[2]); 
-    console.log("new date==",date)
+    // console.log("new date==",date)
   }
   if(data1=="00:00:00" || data1=='-'){
     date.setSeconds(date.getSeconds() - 5); 
   }
-
+ 
 
   return date
 }

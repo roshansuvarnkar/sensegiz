@@ -29,16 +29,23 @@ export class AdminDashboardComponent implements OnInit {
       private general: GeneralMaterialsService
     ) {
     }
-
+    // ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\W_]+$
 
   ngOnInit(): void {
     this.adminAddUserform = this.fb.group({
       userName: ['', Validators.email],
-      portalPassword: ['', Validators.required],
-      mobilePassword: ['', Validators.required],
-      userPassword: ['', Validators.required]
+      portalPassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
+      ]],
+      mobilePassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
+      ]],
+      userPassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
+      ]]
     });
     this.refreshAdminData()
+    
   }
 
  onSubmit(data) {
@@ -51,7 +58,8 @@ export class AdminDashboardComponent implements OnInit {
 				this.general.openSnackBar(msg,'')
 				this.adminAddUserform.reset()
 				this.refreshAdminData()
-			}
+      }
+    
         })      	
       } catch (err) {
       }

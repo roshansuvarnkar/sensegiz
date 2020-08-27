@@ -21,3 +21,32 @@ hr.main {
     width: 19rem;
     border: 1px solid #f082602b;
 }
+.flex1 {
+    display: flex;
+    justify-content: space-around;
+}
+.head{
+    color: #df7217;
+}
+mat-icon {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px){
+    .flex1 {
+      display: block;
+      /* flex-wrap: wrap; */
+      /* justify-content: space-evenly; */
+  }
+  mat-card.mat-card.mat-focus-indicator.tab {
+    /* max-width: fit-content !important; */
+    width: 140%;
+}
+mat-card.mat-card.mat-focus-indicator.sub {
+    max-width: 20rem;
+    text-align: center;
+    color: #ef6c00eb;
+    margin-left: auto !important;
+}
+
+  }

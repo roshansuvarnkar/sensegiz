@@ -16,6 +16,9 @@ mat-card-title{
   font-family: serif;
   line-height: 2rem;
 }
+.secStatus {
+  margin-top: 0.5rem;
+}
 .warning {
   border: 1px solid red;
   color: red;
@@ -24,9 +27,11 @@ button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary
   position: absolute;
   bottom: 1rem;
   right: 7.5rem;
+  cursor:pointer;
 }
 input.input-file {
   margin-left: 3.5rem;
+  margin-top: 1.1rem;
 }
 mat-radio-group.mat-radio-group.wearable.ng-untouched.ng-pristine.ng-valid {
   display: flex;
@@ -37,6 +42,32 @@ mat-radio-group.mat-radio-group.wearable.ng-untouched.ng-pristine.ng-valid {
   display: flex;
   justify-content: space-evenly;
   margin-top: -1rem;
+}
+.marquee {
+  margin: 0 auto;
+  width: 600px;
+  height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  width: 300%;
+  display: flex;
+  line-height: 30px;
+  font-weight: 500 !important;
+  font-size: x-large !important;
+  font-family: sans-serif !important;
+  animation: marquee 20s linear infinite forwards;
+  color:red;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(35%);
+  }
 }
 @media only screen and (max-width: 768px){
   /* .setting {
