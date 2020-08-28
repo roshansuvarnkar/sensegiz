@@ -5,12 +5,20 @@
    <div *ngIf="loginData">
      <button mat-button [matMenuTriggerFor]="belowMenu" class="menu"><mat-icon>menu</mat-icon></button>
    <mat-menu #belowMenu="matMenu" yPosition="below">
+    <div class=" title" *ngIf="loginStatus">
+      <span>
+        <mat-icon >person</mat-icon>
+      </span> <br>  
+      <p >{{loginDataInfo.userName}}</p> 
+     
+    </div><hr>
+   
      <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>Home</button>
      <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>Manage People</button>
      <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>Social Distancing</button>
      <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>Settings</button>
      <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>Reports</button>
-
+     <button mat-menu-item  (click)="logout()" class="logout"><mat-icon >exit_to_app</mat-icon>Logout</button>
      <!-- <button mat-menu-item routerLink="/User Guide"> <mat-icon>menu_book</mat-icon>User Guide</button> -->
    </mat-menu>
 
@@ -20,7 +28,7 @@
      <img *ngIf="!loginData" src="./assets/logo.png" alt="Sensegiz">
      <img *ngIf="loginData" src="{{host}}/photo/{{loginDataInfo.logo}}" alt="Sensegiz">
      <span class="end">
-       <span class="flex title" *ngIf="loginStatus">
+       <span class="flex title" *ngIf="loginStatus && isDesktopDevice">
          <span>
            <mat-icon >person</mat-icon>
          </span>

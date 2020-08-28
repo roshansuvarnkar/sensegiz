@@ -68,34 +68,17 @@ mat-radio-group.mat-radio-group.wearable.ng-untouched.ng-pristine.ng-valid {
   /* animation: marquee 15s linear infinite forwards; */
   color:red;
 }
-/* @-moz-keyframes marquee {
+
+/* @keyframes marquee {
   0% {
-    transform: translateX(0, 0);
-  }
-  100% {
-    transform: translateX(0, 100%);
-  }
-}
-@-webkit-keyframes marquee {
-  0% {
-    transform: translateX(0, 0);
-  }
-  100% {
-    transform: translateX(0, 100%);
-  }
-} */
-@keyframes marquee {
-  0% {
-    /* -moz-transform: translateX(0, 0);
-    -webkit-transform: translate(X0, 0); */
+    
     transform: translateX(0);
   }
   100% {
-    /* -moz-transform: translate(0, 100%);
-    -webkit-transform: translate(0, 100%); */
+    
     transform: translateX(10%);
   }
-}
+} */
 /* @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -108,4 +91,24 @@ mat-radio-group.mat-radio-group.wearable.ng-untouched.ng-pristine.ng-valid {
   /* .setting {
     margin-left: 2rem;
   } */
+  .marquee {
+  margin:1rem 0 0 0;
+/*  
+  height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  width:fit-content;
+  display: flex;*/
+  line-height: 30px; 
+  font-weight: 500 !important;
+  font-size: small !important;
+  font-family: sans-serif !important;
+  /* -moz-animation: marquee 5s linear infinite;
+  -webkit-animation: marquee 5s linear infinite;
+  animation: marquee 5s linear infinite; */
+  /* animation: marquee 15s linear infinite forwards; */
+  color:red;
+}
 }

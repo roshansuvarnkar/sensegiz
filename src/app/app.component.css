@@ -52,7 +52,11 @@ display: none;
 display: block;
 width: 100% !important;
 }
-
+.title {
+  text-align: center;
+  line-height: 1.687rem;
+  font-size: 1.2rem;
+}
 /* .col-2, .desktop{
 display: none;
 } */
