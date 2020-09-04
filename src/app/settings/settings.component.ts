@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angula
 import { EditSettingShiftComponent } from '../edit-setting-shift/edit-setting-shift.component';
 import { saveAs  } from 'file-saver';
 
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -24,6 +25,7 @@ export class SettingsComponent implements OnInit {
   scanningForm:FormGroup
   buzzerTimeForm:FormGroup
   buzzerConfigForm:FormGroup
+  twoStepAuthForm:FormGroup
   loginData:any
   setting:any
   duration:any
@@ -39,7 +41,9 @@ export class SettingsComponent implements OnInit {
   buzzerConfigStatus:boolean=false
   bufferValue:boolean=false
   loading:boolean=false
+  multipleshift:boolean=false
   inactivityStatusValue:any=[]
+  twoStepAuthStatus:any=[]
   coinData:any=[]
   coin:any=[]
   min:any=[]
@@ -84,22 +88,22 @@ export class SettingsComponent implements OnInit {
       txPower: [{value:'',disabled: true}, Validators.required],
     });
 
-    this.inactivityForm = this.fb.group({
-      inactivity: ['',[Validators.required,Validators.max(120), Validators.min(0)]]
-    });
+    // this.inactivityForm = this.fb.group({
+    //   inactivity: ['',[Validators.required,Validators.max(120), Validators.min(0)]]
+    // });
 
     this.bufferForm = this.fb.group({
       buffer: ['',[Validators.required, Validators.min(0)]]
     })
 
-    this.timeForm=this.fb.group({
-      minutes:[{value:'',disabled: false},Validators.required],
-      seconds:[{value:'',disabled: false},Validators.required]
-    })
+    // this.timeForm=this.fb.group({
+    //   minutes:[{value:'',disabled: false},Validators.required],
+    //   seconds:[{value:'',disabled: false},Validators.required]
+    // })
 
-    this.wearableForm=this.fb.group({
-      wearable:['',Validators.required]
-    })
+    // this.wearableForm=this.fb.group({
+    //   wearable:['',Validators.required]
+    // })
 
     // this.buzzerTimeForm=this.fb.group({
     //   buzzerTime:['',[Validators.required,Validators.max(255), Validators.min(1)]]
@@ -121,6 +125,8 @@ export class SettingsComponent implements OnInit {
       fileData:null,
       type:'logo',
     });
+
+     
 
   }
 
@@ -149,9 +155,9 @@ export class SettingsComponent implements OnInit {
         this.txPowerForm.patchValue({
           txPower: res.success[0].txPower,
         })
-        this.inactivityForm.patchValue({
-          inactivity: res.success[0].inactivity,
-        })
+        // this.inactivityForm.patchValue({
+        //   inactivity: res.success[0].inactivity,
+        // })
         this.bufferForm.patchValue({
           buffer: res.success[0].buffer,
         })
@@ -210,9 +216,22 @@ export class SettingsComponent implements OnInit {
             status:'Enable'
           }
         }
+      
+      if(res.success[0].twoStepAuth== "N"){
+        this.twoStepAuthStatus={
+          value:'Enable',
+          status:false
+        }
       }
-    })
-  }
+      else{
+        this.twoStepAuthStatus={
+          value:'Disable',
+          status:true
+        }
+      }
+    }
+  })
+}
 
   maxThresholdMinsec(){
     var seconds=''
@@ -262,10 +281,15 @@ export class SettingsComponent implements OnInit {
         //  console.log("time data===",data)
          data.userId = this.loginData.userId
          this.api.setTime(data).then((res:any)=>{
-          //  console.log("time insrted or updated",res)
+           console.log("time insrted or updated",res)
            if(res.status){
-             var msg = 'Shift time updated Successfully'
-             this.general.openSnackBar(msg,'')
+            this.multipleshift=false
+         
+            var msg = 'Shift time update Successfully'
+            this.general.openSnackBar(msg,'')
+           
+           }else{
+            this.multipleshift=true
            }
          })
        } catch (err) {
@@ -273,8 +297,43 @@ export class SettingsComponent implements OnInit {
      }
    }
 
+   onSubmitTwoAuth(data){
+      console.log(" data===",data)
+        var value={
+          userId:this.loginData.userId,
+          twoStepAuth:data==true?'Y':'N'
+        }
+        console.log("value===",value)
+        this.api.twoStepAuth(value).then((res:any)=>{
+        
+          if(res.status){
+            this.refreshSetting()
+            if(data==true){
+              var msg = 'Two step authentication enabled'
+              this.general.openSnackBar(msg,'')
+            }else{
+              var msg = 'Two step authentication diabled'
+              this.general.openSnackBar(msg,'')
+            }
+          }
+        })
 
-
+   }
+   twoStepAuthchange(event){
+     console.log(event)
+     if(event.checked==true){
+       this.twoStepAuthStatus={
+         value:'Disable',
+         status:true
+       }
+     }  
+     else{
+      this.twoStepAuthStatus={
+        value:'Enable',
+        status:false
+      }
+     }
+   }
    onSubmitDistanceForm(data) {
     // console.log("data=",data)
 

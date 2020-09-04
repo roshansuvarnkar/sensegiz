@@ -6,7 +6,7 @@ mat-card {
 .setting {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
 }
 mat-card.mat-card.mat-focus-indicator {
     box-shadow: 0 2px 8px 0 #ef6c00;

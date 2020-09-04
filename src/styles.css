@@ -99,7 +99,7 @@ a.canvasjs-chart-credit {
 }
 .mat-menu-panel{
   margin-top: -3.3rem !important;
- width: 230px !important;
+  width: fit-content !important;
 }
 
 .table {

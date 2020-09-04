@@ -7,7 +7,7 @@ mat-card {
   left: 0;
   top: 0;
   bottom: 0;
-  max-height: 240px;
+  max-height: 254px;
   border: 1px solid #ef6c00;
   box-shadow: 0 2px 8px 0 #ef6c00 !important;
 }
@@ -26,7 +26,21 @@ mat-icon{
   text-align: center;
   color: #afaaaa;
 }
-
+/* .login {
+  text-align: start;
+} */
+.set-pwd {
+  position: absolute;
+  right: 0.2rem;
+  color: darkorange;
+  cursor: pointer;
+}
+.line {
+  text-decoration-line: underline;
+}
+.pwd-error{
+  color:red
+}
 @media only screen and (max-width: 768px) {
    .login{
      width: 90%;

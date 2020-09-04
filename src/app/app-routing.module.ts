@@ -14,10 +14,14 @@ import { UserGuideComponent } from './user-guide/user-guide.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
+import { TwoStepAuthComponent } from './two-step-auth/two-step-auth.component';
+import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 
 const routes: Routes = [
   { path: '', component:HomeComponent, canActivate: [AuthGuard], data:{role:['user']}},
   {path:'login' , component:LoginComponent},
+  {path:'two-step-auth' , component:TwoStepAuthComponent},
+  {path:'set-new-password' , component:SetNewPasswordComponent},
   {path:'dashboard' , component:DashboardComponent , canActivate: [AuthGuard], data:{role:['user']}},
   {path:'history' , component:HistoryComponent , canActivate: [AuthGuard], data:{role:['user']}},
   {path:'settings' , component:SettingsComponent , canActivate: [AuthGuard], data:{role:['user']}},
@@ -27,6 +31,7 @@ const routes: Routes = [
   {path:'history-report' , component:HistoryReportComponent, canActivate: [AuthGuard], data:{role:['user']}},
   {path:'home-count-view' , component:HomeCountViewComponent, canActivate: [AuthGuard], data:{role:['user']}},
   {path:'user-guide' , component:UserGuideComponent, canActivate: [AuthGuard], data:{role:['user']}},
+
 
 
   {path:'admin-login' , component:AdminLoginComponent},

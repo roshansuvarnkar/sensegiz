@@ -23,11 +23,21 @@
             Please provide a valid password
           </mat-error>
         </mat-form-field>
-        <button mat-raised-button [disabled]="!Loginform.valid" color="primary">Login</button>
+      
+        <button mat-raised-button  [disabled]="!Loginform.valid" color="primary" >Login</button> <br>
+      
       </form>
+      
+      <div class="set-pwd">
+        <span (click)="forgetPassword()"class="line" >Forget password</span> <br>
+        <span *ngIf="newPassword" class="set-new">
+          <span class="pwd-error">your password expired </span><br>
+           Set new password <span  (click)="forgetPassword()" class="line">here</span>
+        </span>
+     </div>
     </mat-card-content>
   </mat-card>
 </div>
   <div class="version"> 
-    <p>version 2.6.0</p>
+    <p>version 2.7.0</p>
   </div>

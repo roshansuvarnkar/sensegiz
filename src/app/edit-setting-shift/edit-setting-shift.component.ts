@@ -46,7 +46,7 @@ export class EditSettingShiftComponent implements OnInit {
 	  }
 
 	  this.api.getData(data).then((res:any)=>{
-	    // console.log("shift  data ======",res);
+	    console.log("shift  data ======",res);
 	    if(res.status){
 	      this.shifts=res.success
 		  for(let i=0;i<res.success.length;i++){

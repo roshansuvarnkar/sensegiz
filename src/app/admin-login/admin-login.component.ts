@@ -27,7 +27,7 @@ export class AdminLoginComponent implements OnInit {
     ) {
     }
 
-
+ 
   ngOnInit(): void {
     this.login.loginStatusMenu()
     this.adminLoginform = this.fb.group({
@@ -37,16 +37,19 @@ export class AdminLoginComponent implements OnInit {
   }
 
  onSubmit(data) {
+
     this.loginInvalid = false;
-    if (this.adminLoginform.valid) {
+    if (this.adminLoginform.valid){
       try {
         this.api.adminLogin(data).then((res:any)=>{
         	// console.log("admin res===",res)
           if(res.status){
+   
           	res.success.role='admin'
             if(this.login.login(JSON.stringify(res.success))){
-                this.router.navigate(['/admin-dashboard'])
-              }
+              this.login.authCheck.next(true)
+              this.router.navigate(['/admin-dashboard'])
+            }
           }
         })
       } catch (err) {

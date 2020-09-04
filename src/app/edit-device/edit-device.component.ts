@@ -118,7 +118,7 @@ userform:FormGroup
         this.api.editDeviceRegister(data).then((res:any)=>{
           // console.log("gateway submit==",res)
           if(res.status){
-            var msg = 'Gateway Registered Successfully'
+            var msg = 'Gateway Updated Successfully'
             this.general.openSnackBar(msg,'')
           }
           else if(!res.status && res.alreadyExisted){
@@ -140,7 +140,7 @@ userform:FormGroup
         this.api.EditUserRegister(data).then((res:any)=>{
           // console.log("user submit==",res)
           if(res.status){
-            var msg = 'User Registered Successfully'
+            var msg = 'User Updated Successfully'
             this.general.openSnackBar(msg,'')
           }
           else if(!res.status && res.alreadyExisted){

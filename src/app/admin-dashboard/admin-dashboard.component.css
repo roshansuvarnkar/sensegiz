@@ -31,7 +31,32 @@ hr.main {
 mat-icon {
     cursor: pointer;
 }
+::ng-deep input#primaryPhoneInput{
+    border: none;
+    
+}
+::ng-deep button.dropbtn.btn {
+    margin-left: 2.5rem;
+}
 
+::ng-deep .btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 !important;
+}
+hr {
+    border: 1px solid #cac6c3 !important;
+    margin-top: 0rem !important;
+    width: 12rem !important;
+}
+::ng-deep label#dial-code {
+    color: #6d6b6b;
+    padding-top: 9px !important;
+    margin-left: 0;
+    margin-right: 0;
+}
+::ng-deep input:-internal-autofill-selected {
+    background-color: white !important;
+}
 @media only screen and (max-width: 768px){
     .flex1 {
       display: block;

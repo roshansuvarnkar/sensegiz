@@ -37,6 +37,9 @@ import { AdminSettingsComponent } from './admin-settings/admin-settings.componen
 import { UserGuideComponent } from './user-guide/user-guide.component';
 
 import { InternationalPhoneNumber2Module  } from 'ngx-international-phone-number2';
+import { TwoStepAuthComponent } from './two-step-auth/two-step-auth.component';
+import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -64,6 +67,9 @@ import { InternationalPhoneNumber2Module  } from 'ngx-international-phone-number
     OrderContactComponent,
     AdminSettingsComponent,
     UserGuideComponent,
+    TwoStepAuthComponent,
+    SetNewPasswordComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@
 <!-- <div >
   <p class=" marquee">Please contact SenseGiz Team before making any changes in Settings</p>
 </div>  -->
-<marquee class=" marquee" behavior="" direction="right">Please contact SenseGiz Team before making any changes in settings</marquee>
+<marquee class=" marquee" behavior="" direction="left">Please contact SenseGiz Team before making any changes in settings</marquee>
 <div class="setting">
  
   <mat-card>
@@ -52,7 +52,22 @@
     </mat-card-content>
   </mat-card>
 
- 
+  <mat-card>
+    <mat-card-title>
+     Two Step Authentication
+    </mat-card-title>
+    <mat-card-subtitle>
+      Enable or Disable two step authentication
+    </mat-card-subtitle><br> 
+    <mat-card-content>
+    
+          <mat-slide-toggle class="toggle" color="primary" [checked]= "twoStepAuthStatus.status" (change)="twoStepAuthchange($event)" >{{twoStepAuthStatus.value}}</mat-slide-toggle>
+
+        <br><br> <br>
+        <button class="btn-set" mat-raised-button (click)="onSubmitTwoAuth(twoStepAuthStatus.status)" color="primary">Submit</button>
+   
+    </mat-card-content>
+  </mat-card>
   
 
   <!-- <mat-card>
@@ -214,7 +229,11 @@
       Enter time for each shift
     </mat-card-subtitle>
     <mat-card-content>
+      <mat-error *ngIf="multipleshift">
+        You cannot have multiple shift, to update shift click info
+      </mat-error>
       <form [formGroup]="workingForm" (ngSubmit)="onSubmitWorkForm(workingForm.value)">
+      
         <mat-form-field>
           <input matInput placeholder="Shift name" formControlName="shift"  required>
           <mat-error>
@@ -235,6 +254,7 @@
             Please provide a valid to time
           </mat-error>
         </mat-form-field><br>
+        
         <div class="btn-set">
           <button  mat-raised-button [disabled]="!workingForm.valid" color="primary">Submit</button> &nbsp;&nbsp;&nbsp;
           <button type="button" mat-raised-button (click)="openDialog()" color="primary">Info</button>
