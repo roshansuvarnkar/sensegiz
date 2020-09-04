@@ -312,7 +312,7 @@ export class SettingsComponent implements OnInit {
               var msg = 'Two step authentication enabled'
               this.general.openSnackBar(msg,'')
             }else{
-              var msg = 'Two step authentication diabled'
+              var msg = 'Two step authentication disabled'
               this.general.openSnackBar(msg,'')
             }
           }
