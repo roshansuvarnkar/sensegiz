@@ -12,11 +12,9 @@ mat-card.mat-card.mat-focus-indicator.auth-card {
     width: 50%;
     height: 20rem;
     margin-top: 10%;
+    margin-left: 40%;
     box-shadow: 0 2px 8px 0 #ef6c00;
 
-}
-.verify {
-    margin-left: 40%;
 }
 
 .inputField{
@@ -48,10 +46,10 @@ span.dail {
 }
 
 @media only screen and (max-width: 768px){
-    mat-card.mat-card.mat-focus-indicator.auth-card[_ngcontent-qxl-c293] {
-        width: 90%;
+    mat-card.mat-card.mat-focus-indicator.auth-card {
+        width: 90% !important;
         height: 20rem;
-        margin: 1rem;
+        margin: 1rem !important;
         /* margin-top: 10%; */
         box-shadow: 0 2px 8px 0 #ef6c00;
     }
