@@ -96,6 +96,10 @@ export class LoginCheckService {
       }
 
     }
+    else{
+      var a = {status:false,role:''}
+      return a
+    }
     
   }
   loginStatusMenu(){

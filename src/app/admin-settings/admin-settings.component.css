@@ -5,7 +5,7 @@ mat-card {
   }
   .setting {
       display: flex;
-      /* flex-wrap: wrap; */
+      flex-wrap: wrap;
       /* justify-content: space-evenly; */
   }
   mat-card.mat-card.mat-focus-indicator {

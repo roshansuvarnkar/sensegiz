@@ -16,6 +16,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { TwoStepAuthComponent } from './two-step-auth/two-step-auth.component';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
+import { ProfileComponent } from './profile/profile.component';
+
 
 const routes: Routes = [
   { path: '', component:HomeComponent, canActivate: [AuthGuard], data:{role:['user']}},
@@ -31,6 +33,7 @@ const routes: Routes = [
   {path:'history-report' , component:HistoryReportComponent, canActivate: [AuthGuard], data:{role:['user']}},
   {path:'home-count-view' , component:HomeCountViewComponent, canActivate: [AuthGuard], data:{role:['user']}},
   {path:'user-guide' , component:UserGuideComponent, canActivate: [AuthGuard], data:{role:['user']}},
+  {path:'profile' , component:ProfileComponent, canActivate: [AuthGuard], data:{role:['user']}},
 
 
 

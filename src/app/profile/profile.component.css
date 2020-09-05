@@ -1,0 +1,77 @@
+mat-card.mat-card.mat-focus-indicator.sub {
+    max-width: 20rem;
+    text-align: center;
+    color: #ef6c00eb;
+}
+mat-card-content.mat-card-content.main {
+    display: flex;
+    justify-content: space-around;
+    margin: 3rem auto;
+}
+mat-card.mat-card.mat-focus-indicator.main {
+    text-align: center;
+    margin: 1rem;
+    padding: 2rem;
+    color: #df7217;
+}
+mat-card-title.mat-card-title.main  {
+    font-size: 2rem;
+}
+hr.main {
+    width: 19rem;
+    border: 1px solid #f082602b;
+}
+.flex1 {
+    display: flex;
+    justify-content: space-around;
+}
+.head{
+    color: #df7217;
+}
+mat-icon {
+    cursor: pointer;
+}
+::ng-deep input#primaryPhoneInput{
+    border: none;
+    
+}
+::ng-deep button.dropbtn.btn {
+    margin-left: 2.5rem;
+}
+
+::ng-deep .btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 !important;
+}
+hr {
+    border: 1px solid #cac6c3 !important;
+    margin-top: 0rem !important;
+    width: 11rem !important;
+}
+::ng-deep label#dial-code {
+    color: #6d6b6b;
+    padding-top: 9px !important;
+    margin-left: 0;
+    margin-right: 0;
+}
+::ng-deep input:-internal-autofill-selected {
+    background-color: white !important;
+}
+@media only screen and (max-width: 768px){
+    .flex1 {
+      display: block;
+      /* flex-wrap: wrap; */
+      /* justify-content: space-evenly; */
+  }
+  mat-card.mat-card.mat-focus-indicator.tab {
+    /* max-width: fit-content !important; */
+    width: 140%;
+}
+mat-card.mat-card.mat-focus-indicator.sub {
+    max-width: 20rem;
+    text-align: center;
+    color: #ef6c00eb;
+    margin-left: auto !important;
+}
+
+  }

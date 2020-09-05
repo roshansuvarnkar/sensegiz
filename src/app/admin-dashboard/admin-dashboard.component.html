@@ -82,7 +82,7 @@
 			<mat-card-title>Add Users Details</mat-card-title>
 			<mat-card-content>
 				<mat-error *ngIf="registered">
-					Email id / mobile number already existed
+					User already exist
 				</mat-error>
 
 				 <form [formGroup]="adminAddUserform" (ngSubmit)="onSubmit(adminAddUserform.value)">
@@ -93,7 +93,7 @@
 					  </mat-error>
 					</mat-form-field>
 					<div class="phone">
-						<international-phone-number2  class="phoneNum" placeholder="Enter Mobile number" [defaultCountry]="'in'" formControlName="mobileNum" 
+						<international-phone-number2  class="phoneNum" placeholder="Mobile number" [defaultCountry]="'in'" formControlName="mobileNum" 
 						autocomplete="false" aria-autocomplete="false" [required]="true">
 						</international-phone-number2> <hr class="num">
 					</div>
@@ -138,7 +138,7 @@
 							<th scope="col">Sl no.</th>
 							<th scope="col">User Name</th>
 							<th scope="col">Added on</th>
-							<!-- <th scope="col">Api key</th> -->
+							<th scope="col">Api key</th>
 							<th scope="col" >Add Ble</th>
 							<th scope="col" >Settings</th>
 							<th scope="col">isDelete</th>
@@ -149,8 +149,8 @@
 						<td>{{i+1}}</td>
 						<td>{{a.userName}}</td>
 						<td>{{a.createdDate  | date : 'medium' : 'IST'}}</td>
-						<!-- <td *ngIf="a.apiKey!==null">{{a.apiKey}}</td>
-						<td *ngIf="a.apiKey==null">Not available</td> -->
+						<td *ngIf="a.apiKey!==null">{{a.apiKey}}</td>
+						<td *ngIf="a.apiKey==null">Not available</td>
 						<td><mat-icon matListIcon (click)="openDialog(a)">add</mat-icon></td>
 						<td><mat-icon matListIcon (click)="openSetting(a)">settings</mat-icon></td>
 						<span>

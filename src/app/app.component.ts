@@ -89,7 +89,7 @@ export class AppComponent {
     localStorage.clear()
     this.login.loginCheckStatus.next(false)
     this.login.loginCred.next(false)
-    this.twoStepAuth=false
+    this.login.authCheck.next(false)
     this.router.navigate(['/login'])
   }
 }

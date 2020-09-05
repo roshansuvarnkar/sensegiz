@@ -46,7 +46,7 @@ mat-icon {
 hr {
     border: 1px solid #cac6c3 !important;
     margin-top: 0rem !important;
-    width: 12rem !important;
+    width: 11rem !important;
 }
 ::ng-deep label#dial-code {
     color: #6d6b6b;

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators ,FormArray} from '@angular/forms';
 import { ApiService } from '../api.service';
 import { LoginCheckService } from '../login-check.service';
 import { GeneralMaterialsService } from '../general-materials.service';
+import { Router ,ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class EditSettingShiftComponent implements OnInit {
 	type:any
 	shifts:any
 	loginData:any
-
+	dataGet:any
 
     constructor(
 	    private fb: FormBuilder,
@@ -25,7 +26,8 @@ export class EditSettingShiftComponent implements OnInit {
 	    @Inject(MAT_DIALOG_DATA)  data,
 	    private api: ApiService,
 	    private login:LoginCheckService,
-	    private general:GeneralMaterialsService
+		private general:GeneralMaterialsService,
+		private route: ActivatedRoute
   	){
 		this.type=data.type
 		this.shiftForm = this.fb.group({
@@ -36,15 +38,20 @@ export class EditSettingShiftComponent implements OnInit {
 	ngOnInit(): void {
 	  this.loginData = this.login.Getlogin()
 	  this.loginData = JSON.parse(this.loginData)
+
+	  this.route.queryParams.subscribe(params => {
+		this.dataGet = JSON.parse(params.record) ;
+		// console.log("data==",this.dataGet.userId)
+	})
 	  this.refreshShift()
 	}
 
 	refreshShift(){
 	  var data={
-	    userId:this.loginData.userId,
+	    userId:this.dataGet.userId,
 	    tblName:'deviceShift'
 	  }
-
+	  console.log("data==",data)
 	  this.api.getData(data).then((res:any)=>{
 	    console.log("shift  data ======",res);
 	    if(res.status){

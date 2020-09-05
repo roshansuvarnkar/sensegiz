@@ -1,4 +1,53 @@
 <div class='setting'>
+  <mat-card>
+    <mat-card-title>
+       Define Buffer
+    </mat-card-title>
+    <mat-card-subtitle>
+      Enter buffer value for the wearable
+    </mat-card-subtitle><br> 
+    <mat-card-content>
+      <form [formGroup]="bufferForm" (ngSubmit)="onSubmitBufferForm(bufferForm.value)">
+        <mat-form-field>
+          <input type='number' min="0" max="5" matInput placeholder="Buffer" formControlName="buffer" (input)="bufferval($event)"  required>
+          <mat-error >
+            Please provide a valid buffer 
+          </mat-error>
+         
+        </mat-form-field>
+        <mat-error class="bufferError" *ngIf="bufferValue">
+         Maximum value you can set is 5
+        </mat-error>
+     
+        <br><br><br>
+        <button class="btn-set" mat-raised-button [disabled]="bufferValue" color="primary">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>
+    Scanning Interval
+    </mat-card-title>
+    <mat-card-subtitle>
+     Enter interval
+    </mat-card-subtitle><br>
+    <mat-card-content>
+  
+      <form [formGroup]="scanningForm" (ngSubmit)="onSubmitScanningForm(scanningForm.value)" >
+        <mat-form-field  >
+            <mat-label>Interval in seconds</mat-label>
+            <input type='number' min="1" max="60" matInput formControlName="seconds" required>
+            <mat-error  >
+              Please enter value between 1-60
+            </mat-error>
+        </mat-form-field>
+        <br><br><br>
+        <button class="btn-set" mat-raised-button [disabled]="!scanningForm.valid"  color="primary">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  
     <mat-card>
         <mat-card-title>
           Define Minimum Distance
@@ -55,7 +104,7 @@
               </mat-form-field>
             </div>
             <br><br>
-            <button  class="btn-set" mat-raised-button [disabled]="!distanceForm.valid" color="primary">Submit</button>
+            <button class="btn-set"  mat-raised-button [disabled]="!distanceForm.valid" color="primary">Submit</button>
           </form>
         </mat-card-content>
       </mat-card>
@@ -107,77 +156,95 @@
             <br><br>
             <div>
               <span class="flex warning">&nbsp;&nbsp;<mat-icon class="warn">warning</mat-icon>Critical Warning: Before changing this setting please contact SenseGiz team.</span>
-            </div> <br>
-            <button  class="btn-set" mat-raised-button [disabled]="!txPowerForm.valid" color="primary">Submit</button>
-          </form><br>
-        
+            </div><br><br>
+            <button class="btn-set" mat-raised-button [disabled]="!txPowerForm.valid" color="primary">Submit</button>
+          </form>
     
+    
+        </mat-card-content>
+      </mat-card>
+   
+      
+      <mat-card>
+        <mat-card-title>
+          Define Response Time 
+        </mat-card-title>
+        <mat-card-subtitle>
+          Enter response time for the wearable
+        </mat-card-subtitle> <br> 
+          <mat-card-content>
+      
+          <form [formGroup]="timeForm" (ngSubmit)="onSubmitTimeForm(timeForm.value)" >
+            <!-- <div *ngIf="!minStatus"> -->
+            <mat-form-field  >
+      
+                <mat-label>Minutes</mat-label>
+                <mat-select  formControlName="minutes" [disabled]="minStatus" (selectionChange)="getMin($event)" [required]="requiredStatus1">
+                  <mat-option *ngFor="let a of min"  [value]="a">{{a}}</mat-option>
+                </mat-select>
+      
+               <mat-error *ngIf="!minStatus">
+                Please select minimum minutes as 1
+              </mat-error>
+            </mat-form-field>
+          <!-- </div> -->
+          <!-- <div *ngIf="!secStatus"> -->
+            <mat-form-field  >
+      
+              <mat-label>Seconds</mat-label>
+              <mat-select  formControlName="seconds"  [disabled]="secStatus" (selectionChange)="getSec($event)" [required]="requiredStatus2" >
+                <mat-option *ngFor="let b of sec" [value]="b">{{b}}</mat-option>
+              </mat-select>
+      
+             <mat-error *ngIf="!secStatus">
+              Please select minimum second as 1
+            </mat-error>
+        </mat-form-field>
+      <!-- </div> -->
+            <br><br>
+            <button class="btn-set" mat-raised-button [disabled]="timeFormStatus"  color="primary">Submit</button>
+          </form>
         </mat-card-content>
       </mat-card>
 
       <mat-card>
         <mat-card-title>
-        Scanning Interval
+          Define Shift Time
         </mat-card-title>
         <mat-card-subtitle>
-         Enter interval
-        </mat-card-subtitle><br>
-        <mat-card-content>
-      
-          <form [formGroup]="scanningForm" (ngSubmit)="onSubmitScanningForm(scanningForm.value)" >
-            <mat-form-field  >
-                <mat-label>Interval in seconds</mat-label>
-                <input type='number' min="1" max="60" matInput formControlName="seconds" required>
-                <mat-error  >
-                  Please enter value
-                </mat-error>
+          Enter time for each shift
+        </mat-card-subtitle>
+        <mat-card-content class="shift">
+          <mat-error *ngIf="multipleShift">
+            You cannot have multiple shift, to update shift click info
+          </mat-error>
+          <form [formGroup]="workingForm" (ngSubmit)="onSubmitWorkForm(workingForm.value)">
+            <mat-form-field>
+              <input matInput placeholder="Shift name" formControlName="shift"  required>
+              <mat-error>
+                Please provide a valid shift name
+              </mat-error> 
             </mat-form-field>
-            <br><br><br>
-            <button class="btn-set" mat-raised-button [disabled]="!scanningForm.valid"  color="primary">Submit</button>
+            <mat-form-field class="full-width-input">
+              <input type='time' matInput placeholder="From time" formControlName="fromTime" required>
+              <mat-icon matPrefix >schedule</mat-icon>
+              <mat-error>
+                Please provide a valid from time
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+              <input  type='time' matInput  placeholder="To time" formControlName="toTime" required >
+              <mat-icon matPrefix >schedule</mat-icon>
+              <mat-error>
+                Please provide a valid to time
+              </mat-error>
+            </mat-form-field><br> <br> <br>
+           <div class="btn-set">
+            <button  mat-raised-button [disabled]="!workingForm.valid" color="primary">Submit</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" mat-raised-button (click)="openDialog()" color="primary">Info</button>
+           </div>
           </form>
         </mat-card-content>
       </mat-card>
-
       
-  <mat-card>
-    <mat-card-title>
-     Define Response Time
-    </mat-card-title>
-    <mat-card-subtitle>
-      Enter response time for the wearable
-    </mat-card-subtitle><br>
-    <mat-card-content>
-
-      <form [formGroup]="timeForm" (ngSubmit)="onSubmitTimeForm(timeForm.value)" >
-        <div class="min">
-        <mat-form-field  >
-
-            <mat-label>Minutes</mat-label>
-            <mat-select class="minutes" formControlName="minutes" [disabled]="minStatus" (selectionChange)="getMin($event)" [required]="requiredStatus1">
-              <mat-option *ngFor="let a of min"  [value]="a">{{a}}</mat-option>
-            </mat-select>
-
-           <mat-error *ngIf="!minStatus">
-            Please select minimum minutes as 1
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="secStatus">
-        <mat-form-field  > 
-
-          <mat-label>Seconds</mat-label>
-          <mat-select class="seconds" formControlName="seconds"  [disabled]="secStatus" (selectionChange)="getSec($event)" [required]="requiredStatus2" >
-            <mat-option *ngFor="let b of sec" [value]="b">{{b}}</mat-option>
-          </mat-select>
-
-         <mat-error *ngIf="!secStatus">
-          Please select minimum second as 1
-        </mat-error>
-    </mat-form-field>
-  </div>
-        <br><br>
-        <button class="btn-set" mat-raised-button [disabled]="timeFormStatus"  color="primary">Submit</button>
-      </form>
-    </mat-card-content>
-  </mat-card>
 </div>

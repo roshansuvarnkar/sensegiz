@@ -65,11 +65,15 @@ export class SettingsComponent implements OnInit {
     this.refreshSetting()
     this.maxThresholdMinsec()
 
+
     this.workingForm = this.fb.group({
-      shift: ['', Validators.required],
-      fromTime: ['', Validators.required],
-      toTime: ['', Validators.required]
+      shift: [{value:'',disabled: true}, Validators.required],
+      fromTime: [{value:'',disabled: true}, Validators.required],
+      toTime: [{value:'',disabled: true}, Validators.required]
     });
+    this.bufferForm = this.fb.group({
+      buffer: [{value:'',disabled: true},[Validators.required, Validators.min(0)]]
+    })
 
 
     this.distanceForm = this.fb.group({
@@ -92,9 +96,6 @@ export class SettingsComponent implements OnInit {
     //   inactivity: ['',[Validators.required,Validators.max(120), Validators.min(0)]]
     // });
 
-    this.bufferForm = this.fb.group({
-      buffer: ['',[Validators.required, Validators.min(0)]]
-    })
 
     // this.timeForm=this.fb.group({
     //   minutes:[{value:'',disabled: false},Validators.required],
@@ -130,7 +131,10 @@ export class SettingsComponent implements OnInit {
 
   }
 
-
+  contactTeam(){
+    alert("Please contact SenseGiz Team for this setting")
+  
+    }
 
   refreshSetting(){
     var data={
