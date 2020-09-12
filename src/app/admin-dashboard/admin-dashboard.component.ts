@@ -16,6 +16,7 @@ export class AdminDashboardComponent implements OnInit {
 
    adminAddUserform: FormGroup;
    public loginInvalid: boolean;
+   registered:boolean=false
    passwordType: string = 'password';
    passwordIcon: string = 'visibility_off';
    adminData:any=[]
@@ -29,11 +30,13 @@ export class AdminDashboardComponent implements OnInit {
       private general: GeneralMaterialsService
     ) {
     }
-    // ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\W_]+$
+
+    // Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/) 	letter,digit,special character
 
   ngOnInit(): void {
     this.adminAddUserform = this.fb.group({
       userName: ['', Validators.email],
+      mobileNum:['',Validators.required],
       portalPassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
         Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
       ]],
@@ -45,21 +48,25 @@ export class AdminDashboardComponent implements OnInit {
       ]]
     });
     this.refreshAdminData()
-    
   }
 
  onSubmit(data) {
+   data.mobileNum=data.mobileNum.replace(/\s/g,'')
+   console.log("admin register==",data)
+
     if (this.adminAddUserform.valid) {
       try {
         this.api.createUser(data).then((res:any)=>{
-        	// console.log("created==",res)
+        	console.log("created==",res)
 			if(res.status){
+        this.registered=false
 				var msg = "User Created successfully"
 				this.general.openSnackBar(msg,'')
 				this.adminAddUserform.reset()
 				this.refreshAdminData()
+			}else{
+        this.registered=true
       }
-    
         })      	
       } catch (err) {
       }
@@ -69,7 +76,7 @@ export class AdminDashboardComponent implements OnInit {
 
 refreshAdminData(){
     this.api.getAdminData().then((res:any)=>{
-    	// console.log("data===",res)
+    	console.log("data===",res)
 		if(res.status){
 			this.adminData=res.success
 		}

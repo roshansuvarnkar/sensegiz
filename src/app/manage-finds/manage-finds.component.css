@@ -82,7 +82,10 @@ height: 18px;
       cursor: pointer;
       font-size: smaller;
   }
-
+  .upload {
+    position: absolute;
+    top: 0.5rem;
+}
   .search{
       width: 120px;
 

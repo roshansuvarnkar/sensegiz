@@ -1,9 +1,11 @@
-<br>
-<div class="marquee">
-  <p >Please contact SenseGiz Team before making any changes in Settings</p>
-</div>
+
+<!-- <div >
+  <p class=" marquee">Please contact SenseGiz Team before making any changes in Settings</p>
+</div>  -->
+<marquee class=" marquee" behavior="" direction="left">Please contact SenseGiz Team before making any changes in settings</marquee>
 <div class="setting">
-  <mat-card>
+ 
+  <mat-card (click)="contactTeam()">
     <mat-card-title>
        Define Buffer
     </mat-card-title>
@@ -13,13 +15,18 @@
     <mat-card-content>
       <form [formGroup]="bufferForm" (ngSubmit)="onSubmitBufferForm(bufferForm.value)">
         <mat-form-field>
-          <input type='number' min="0" max="5" matInput placeholder="Buffer" formControlName="buffer" (click)="bufferval($event)"  required>
-          <mat-error>
-            Please provide a valid buffer and maximum value you can set is 5
+          <input type='number' min="0" max="5" matInput placeholder="Buffer" formControlName="buffer" (input)="bufferval($event)" disbaled required>
+          <mat-error >
+            Please provide a valid buffer 
           </mat-error>
+         
         </mat-form-field>
+        <mat-error class="bufferError" *ngIf="bufferValue">
+         Maximum value you can set is 5
+        </mat-error>
+     
         <br><br><br>
-        <button class="btn-set" mat-raised-button [disabled]="!bufferForm.valid" color="primary">Submit</button>
+        <button class="btn-set"  disabled mat-raised-button disabled color="primary">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>
@@ -45,7 +52,22 @@
     </mat-card-content>
   </mat-card>
 
- 
+  <mat-card>
+    <mat-card-title>
+     Two Step Authentication
+    </mat-card-title>
+    <mat-card-subtitle>
+      Enable or Disable two step authentication
+    </mat-card-subtitle><br> 
+    <mat-card-content>
+    
+          <mat-slide-toggle class="toggle" color="primary" [checked]= "twoStepAuthStatus.status" (change)="twoStepAuthchange($event)" >{{twoStepAuthStatus.value}}</mat-slide-toggle>
+
+        <br><br> <br>
+        <button class="btn-set" mat-raised-button (click)="onSubmitTwoAuth(twoStepAuthStatus.status)" color="primary">Submit</button>
+   
+    </mat-card-content>
+  </mat-card>
   
 
   <!-- <mat-card>
@@ -199,39 +221,42 @@
   </mat-card>
 
   
-  <mat-card>
+  <mat-card (click)="contactTeam()">
     <mat-card-title>
       Define Shift Time
     </mat-card-title>
     <mat-card-subtitle>
       Enter time for each shift
     </mat-card-subtitle>
-    <mat-card-content>
+    <mat-card-content class="shift">
+      <mat-error *ngIf="multipleshift">
+        You cannot have multiple shift, to update shift click info
+      </mat-error>
       <form [formGroup]="workingForm" (ngSubmit)="onSubmitWorkForm(workingForm.value)">
         <mat-form-field>
-          <input matInput placeholder="Shift name" formControlName="shift"  required>
+          <input matInput placeholder="Shift name" formControlName="shift" disabled  required>
           <mat-error>
             Please provide a valid shift name
-          </mat-error>
+          </mat-error> 
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input type='time' matInput placeholder="From time" formControlName="fromTime" required>
+          <input type='time' matInput placeholder="From time" formControlName="fromTime"  disabled required>
           <mat-icon matPrefix >schedule</mat-icon>
           <mat-error>
             Please provide a valid from time
           </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input  type='time' matInput  placeholder="To time" formControlName="toTime" required >
+          <input  type='time' matInput  placeholder="To time" formControlName="toTime" disabled required >
           <mat-icon matPrefix >schedule</mat-icon>
           <mat-error>
             Please provide a valid to time
           </mat-error>
-        </mat-form-field><br>
-        <div class="btn-set">
-          <button  mat-raised-button [disabled]="!workingForm.valid" color="primary">Submit</button> &nbsp;&nbsp;&nbsp;
-          <button type="button" mat-raised-button (click)="openDialog()" color="primary">Info</button>
-         </div>
+        </mat-form-field><br> <br> <br>
+       <div class="btn-set">
+        <button  mat-raised-button disabled color="primary">Submit</button> &nbsp;&nbsp;&nbsp;
+        <button type="button" disabled mat-raised-button (click)="openDialog()" color="primary">Info</button>
+       </div>
       </form>
     </mat-card-content>
   </mat-card>

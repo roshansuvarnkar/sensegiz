@@ -52,7 +52,11 @@ display: none;
 display: block;
 width: 100% !important;
 }
-
+.title {
+  text-align: center;
+  line-height: 1.687rem;
+  font-size: 1.2rem;
+}
 /* .col-2, .desktop{
 display: none;
 } */
@@ -65,12 +69,12 @@ margin-left: 2rem;
 display: block;
 }
 
-.logout,.menubar{
+.menubar{
 display: none;
 }
-.logouticon{
-display: block;
-}
+/* .logout{
+margin-left: -7rem !important;
+} */
 img {
   height: 100%
 }

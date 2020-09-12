@@ -1,0 +1,56 @@
+
+.otp{
+    max-width: 2rem !important;
+}
+.codebox{
+    text-align: center;
+}
+.btn-otp {
+    text-align: center;
+}
+mat-card.mat-card.mat-focus-indicator.auth-card {
+    width: 35%;
+    height: 22rem;
+    margin-top: 7%;
+    margin-left: 35%;
+    box-shadow: 0 2px 8px 0 #ef6c00;
+
+}
+
+.inputField{
+        width: -webkit-fill-available !important;
+}
+.flex1 {
+    display: flex;
+    justify-content: center;
+}
+mat-card-subtitle.mat-card-subtitle {
+    color: #ef6c00;
+    font-size: larger;
+    font-weight: 500;
+}
+
+p.resend{
+  color: #ef6c00;
+  position: absolute;
+  right: 0.2rem;
+  bottom: 0;
+  cursor: pointer;
+
+}
+span.dail {
+    color: #d8270a;
+}
+.otp-exp{
+    text-align:center;
+}
+
+@media only screen and (max-width: 768px){
+    mat-card.mat-card.mat-focus-indicator.auth-card {
+        width: 90% !important;
+        height: 20rem;
+        margin: 1rem !important;
+        /* margin-top: 10%; */
+        box-shadow: 0 2px 8px 0 #ef6c00;
+    }
+}

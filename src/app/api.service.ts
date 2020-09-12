@@ -691,6 +691,102 @@ uploadDeviceFile(data){
   });
 }
 
+twoStepAuth(data){
 
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/setTwostepAuth';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+}
+
+sendOtp(data){
+
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/sendOTP';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+}
+
+confirmOtp(data){
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/confirmOTP';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+
+}
+
+updatePassword(data){
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/updatePassword';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+
+}
+
+createSubUser(data){
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/createSubUser';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+}
+
+getSubUser(){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+     var data=""
+  
+    let url = this.host+'/getSubUser';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,data,httpOptions).subscribe(res=>{
+        resolve(res);
+      })
+    });
+
+}
+
+deleteSubUser(data){
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/deleteSubUser';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+
+}
 
 }

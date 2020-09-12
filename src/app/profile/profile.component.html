@@ -85,9 +85,9 @@
 					User already exist
 				</mat-error>
 
-				 <form [formGroup]="adminAddUserform" (ngSubmit)="onSubmit(adminAddUserform.value)">
+				 <form [formGroup]="subAddUserform" (ngSubmit)="onSubmit(subAddUserform.value)">
 					<mat-form-field class="full-width-input">
-					  <input matInput placeholder="Email" formControlName="userName" required>
+					  <input matInput placeholder="Email" formControlName="subUserName" required>
 					  <mat-error>
 						Please provide a valid email address
 					  </mat-error>
@@ -106,26 +106,8 @@
 					
 					  </mat-error>
 				
-					</mat-form-field>
-					<mat-form-field class="full-width-input">
-					  <input matInput  placeholder="Mobile Password" formControlName="mobilePassword" matInput required >
-					  <mat-error>
-						<p 	matTooltip="Password must contain at least one lowercase letter, one uppercase letter, one number and special character,
-						should be minimum of 8 characters and maximum 20 characters are allowed"
-                        [matTooltipPosition]="'after'">Password Policy</p>
-					
-					  </mat-error>
-					</mat-form-field>
-					<mat-form-field class="full-width-input">
-					  <input matInput  placeholder="User Password" formControlName="userPassword" matInput required >
-					  <mat-error>
-						<p 	matTooltip="Password must contain at least one lowercase letter, one uppercase letter, one number and special character,
-						should be minimum of 8 characters and maximum 20 characters are allowed"
-                        [matTooltipPosition]="'after'">Password Policy</p>
-					
-					  </mat-error>
-					</mat-form-field><br>
-					<button mat-raised-button [disabled]="!adminAddUserform.valid" color="primary">Add user</button>
+					</mat-form-field> <br>
+					<button mat-raised-button [disabled]="!subAddUserform.valid" color="primary">Add user</button>
 				  </form>
 			</mat-card-content>
 		</mat-card>
@@ -136,23 +118,20 @@
 					<thead>
 						<tr>
 							<th scope="col">Sl no.</th>
-							<th scope="col">User Name</th>
-							<th scope="col">Added on</th>
-							<th scope="col">Api key</th>
-							<th scope="col" >Add Ble</th>
-							<th scope="col" >Settings</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Mobile number</th>
+							<th scope="col">Added on</th>							
 							<th scope="col">isDelete</th>
 						</tr>
 					</thead>
 			
-					<tr *ngFor="let a of adminData;let i = index">
+					<tr *ngFor="let a of subUser;let i = index">
 						<td>{{i+1}}</td>
-						<td>{{a.userName}}</td>
-						<td>{{a.createdDate  | date : 'medium' : 'IST'}}</td>
-						<td *ngIf="a.apiKey!==null">{{a.apiKey}}</td>
-						<td *ngIf="a.apiKey==null">Not available</td>
-						<td><mat-icon matListIcon (click)="openDialog(a)">add</mat-icon></td>
-						<td><mat-icon matListIcon (click)="openSetting(a)">settings</mat-icon></td>
+						<td>{{a.subUserName}}</td>
+                        <td>{{a.createdDate  | date : 'medium' : 'IST'}}</td>
+                        <td>{{a.mobileNum}}</td>
+
+						
 						<span>
 							<td *ngIf="a.isDeleted=='N'"><mat-icon matListIcon (click)="delete(a)">done</mat-icon></td>
 							<td *ngIf="a.isDeleted=='Y'"><mat-icon matListIcon (click)="delete(a)">clear</mat-icon></td>

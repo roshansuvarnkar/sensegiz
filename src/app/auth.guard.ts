@@ -19,8 +19,8 @@ constructor(private router: Router, private login: LoginCheckService) {}
 
       this.loginData = this.login.Getlogin()
       this.loginData = JSON.parse(this.loginData)
-
-      if(this.login.loginStatus() && this.loginData.role == next.data.role){
+      var status = this.login.authData()
+      if( status.status && this.loginData.role == next.data.role){
         if(next.data.role == 'admin'){
            this.login.loginCred.next(false)
            this.login.loginCheckStatus.next(true)
