@@ -28,6 +28,7 @@ export class HistoryReportComponent implements OnInit {
   liveData:any=[]
   summaryData:any=[]
   excelData:any=[]
+  countCummulative:any=[]
   dataSource:any
   loginData:any
   from:Date
@@ -41,6 +42,8 @@ export class HistoryReportComponent implements OnInit {
   displayedColumns1: string[] = ['i','contactName','updatedOn', 'totaltime'];
   displayedColumns2: string[] = ['contactDeviceName','updatedOn'];
   displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
+  displayedColumns5: string[] = ['i','username','count','totTime'];
+
   fileName:any
   showSpinner:boolean=false
   title:any
@@ -233,6 +236,54 @@ export class HistoryReportComponent implements OnInit {
         })
 
       }
+      if(this.type=='cummulative'){
+          var date=new Date()
+  var timezone=date.getTimezoneOffset()
+  
+  let m = timezone % 60;
+  timezone = (timezone - m) / 60;
+  let h = timezone
+  let mm = m <= 9 && m >= 0 ? "0"+m : m;
+  let hh = h <= 9 && h >= 0 ? "0"+h : h;
+  var timeZone=''
+  if(m<0 && h<0){
+     timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
+  }
+  else if(m>0 && h>0){
+    timeZone= '-'+(-(hh)+':'+(-mm)).toString()
+  }
+  else{
+    timeZone=hh+':'+mm
+  }
+   var data3={
+    userId:this.loginData.userId,
+    fromDate: this.from,
+    toDate:this.to,
+    zone:timeZone
+  }
+  console.log("hvhs==",data3)
+  this.api.viewCTReport(data3).then((res:any)=>{
+    this.countCummulative=[]
+    console.log("cummulative report==",res)
+    if(res.status){
+      for(let i=0;i<res.data.length;i++){
+        this.countCummulative.push({
+          i:i+1,
+          username:res.data[i].baseDeviceName,
+          count:res.data[i].count,
+          totTime:this.general.convertTime(res.data[i].totalTime)
+
+        });
+      }
+      this.dataSource = new MatTableDataSource(this.countCummulative);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator
+         })
+    }
+  })
+
+      }
 
 }
 
@@ -266,6 +317,7 @@ getUpdate(event) {
 
 getPages() {
 
+ if(this.type=='basedOnDate' || this.type=='basedOnFindName' || this.type=='summaryReport'){
   var tempLen=this.currentPageLength
   //  console.log("paginator event length",tempLen);
   this.loadData(tempLen,0,1)
@@ -285,7 +337,44 @@ getPages() {
   },8000)
  clearTimeout(8*1000)
   // this.showSpinner=true
+ }
+ if(this.type=='cummulative'){
+   var fileName=''
+   var date=new Date()
+   var timezone=date.getTimezoneOffset()
+ 
+   let m = timezone % 60;
+   timezone = (timezone - m) / 60;
+   let h = timezone
+   let mm = m <= 9 && m >= 0 ? "0"+m : m;
+   let hh = h <= 9 && h >= 0 ? "0"+h : h;
+   if(m<0 && h<0){
+      var timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
+   }
+   else if(m>0 && h>0){
+     timeZone= '-'+(-(hh)+':'+(-mm)).toString()
+   }
+   else{
+     timeZone=hh+':'+mm
+   }
+    var data={
+      userId:this.loginData.userId,
+      fromDate: this.from,
+      toDate:this.to,
+      zone:timeZone,
+      type:this.type
+    }
+    fileName="CummulativeReport"
+    console.log("data to send ======",data);
 
+    //apicall
+    
+    this.api.downloadCummulative(data,fileName).then((res:any)=>{
+
+      console.log("report data recieved ======",res);
+  
+    })
+    }
 }
 
 
@@ -340,7 +429,6 @@ getPages() {
           this.title = 'Summary Report of Find Name'+this.deviceName;
           let element = document.getElementById('htmlData');
           this.general.exportToExcel(element,this.fileName, this.title)
-
 
         }
         else{

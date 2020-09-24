@@ -788,5 +788,52 @@ deleteSubUser(data){
   });
 
 }
+downloadCummulative(data,fileName){
+
+  // this.general.loadingFreez.next({status:true})
+
+  let url = this.host+'/downloadCTReport';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,{ observe: 'response', responseType: 'blob' as 'json' }).subscribe(res=>{
+      // console.log("nam--",res)
+      if(res.status==200)
+      this.downloadFile(res,fileName)
+
+      resolve(true);
+    },
+    err=>{
+      console.log("err==",err)
+    })
+  });
+
+}
+
+
+downloadFile(response,fileName){
+  let body = response.body
+  let dataType = body.type;
+  let binaryData = [];
+  binaryData.push(body);
+  // this.general.loadingFreez.next({status:false})
+  let downloadLink = document.createElement('a');
+  downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+  downloadLink.setAttribute('download', fileName);
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+}
+  
+  viewCTReport(data){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+  
+    let url = this.host+'/viewCTReport';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,data,httpOptions).subscribe(res=>{
+        resolve(res);
+      })
+    });
+  
+  }
 
 }

@@ -94,7 +94,50 @@
     </mat-card-content>
   </mat-card> -->
 
+  <mat-card >
+    <span class="card-head">
+      <mat-card-title color="primary">
+         Cumulative Report
+      </mat-card-title>
+      <mat-card-subtitle>
+        Enter date range
+      </mat-card-subtitle>
+    </span> <br>
+    <mat-card-content>
+    <div >
+      <mat-radio-group  color="primary" >
+        <mat-radio-button [value]="1" name="small" (click)="onclickDate1(7)">Last week</mat-radio-button>
+        <mat-radio-button [value]="2" name="small" (click)="onclickDate1(14)">Last two weeks</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  
+      <form [formGroup]="cummulativeForm" (ngSubmit)="onSubmitcummulativeForm(cummulativeForm.value)">
 
+        <mat-form-field>
+          <mat-label>From date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker11" formControlName="fromDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker11"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker11></mat-datepicker>
+          <mat-error>
+            Please provide a valid from date
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>To date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker12" formControlName="toDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker12"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker12></mat-datepicker>
+          <mat-error>
+            Please provide a valid to date
+          </mat-error>
+        </mat-form-field>
+  <br>
+  <br>
+        <button class="btn-set" mat-raised-button [disabled]="!cummulativeForm.valid" color="primary" >Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
 
   <mat-card >
