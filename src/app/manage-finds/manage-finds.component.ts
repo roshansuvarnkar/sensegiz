@@ -25,7 +25,7 @@ loginData:any
 findData:any=[]
 findDataTemp:any
 dataSource: any = [];
-displayedColumns = ['i','deviceId','deviceName','empId','shift',	'infected','battery','emailId','mobileNum',	'edit',	'delete'];
+displayedColumns = ['i','deviceId','deviceName','empId','shift',	'infected','batteryStatus','emailId','mobileNum',	'edit',	'delete'];
 shift = new FormControl('');
 shifts:any=[]
 elementsTemp:any=[]
@@ -93,7 +93,7 @@ refreshFinds(){
               infected: res.success[i].infected,
               edit:'edit',
               delete:'delete',
-              battery:res.success[i].batteryStatus,
+              batteryStatus:res.success[i].batteryStatus,
               emailId:res.success[i].emailId == '' || res.success[i].emailId == 'NULL' ||res.success[i].emailId == 'undefined' ? '-' : res.success[i].emailId,
               mobileNum:res.success[i].mobNum == '' ||res.success[i].mobNum == 'NULL' ||res.success[i].mobNum == 'undefined' ? '-' : res.success[i].mobNum,
               empId:res.success[i].empId == ''||res.success[i].empId == 'NULL' || res.success[i].empId == 'undefined' ? '-' : res.success[i].empId
