@@ -129,20 +129,25 @@ delete(a){
 
 
 search(a){
-  if(a.length>0){
-    this.gatewayData = this.elementsTemp.filter(obj=>{
-      return ((obj.gatewayId.toString().toLowerCase().indexOf(a)>-1) || (obj.gatewayName.toString().toLowerCase().indexOf(a)>-1))
+//   if(a.length>0){
+//     this.gatewayData = this.elementsTemp.filter(obj=>{
+//       return ((obj.gatewayId.toString().toLowerCase().indexOf(a)>-1) || (obj.gatewayName.toString().toLowerCase().indexOf(a)>-1))
+//     })
+//   }
+//   else{
+//     this.gatewayData = this.elementsTemp
+//   }
+//   this.dataSource = new MatTableDataSource(this.gatewayData);
+//   setTimeout(() => {
+//     this.dataSource.sort = this.sort;
+//     this.dataSource.paginator = this.paginator;
+//   })
+
+    this.dataSource = new MatTableDataSource(this.gatewayData);
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.filter =a.trim().toLowerCase()
     })
   }
-  else{
-    this.gatewayData = this.elementsTemp
-  }
-  this.dataSource = new MatTableDataSource(this.gatewayData);
-  setTimeout(() => {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  })
-}
-
 
 }

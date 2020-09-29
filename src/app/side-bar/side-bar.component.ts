@@ -35,7 +35,7 @@ export class SideBarComponent implements OnInit {
     this.loginData = JSON.parse(this.loginData)
     this.refreshFinds()
     //this.checkPage()
-    setInterval(()=>{this.refreshFinds()},60*1000)
+    setInterval(()=>{this.refreshFinds()},30*1000)
 
   }
 
@@ -57,6 +57,7 @@ export class SideBarComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.findData)
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
+
         })
       }
     })
@@ -64,27 +65,32 @@ export class SideBarComponent implements OnInit {
 
 
   clickDevice(data){
-    // console.log("data====",data)
+    console.log("data====",data)
     this.router.navigate(['/device-history'], { queryParams: { record: JSON.stringify(data) } });
   }
 
 
   search(a){
-    if(a.length>0){
-      this.findData = this.findDataTemp.filter(obj=>{
-        return (obj.deviceName.toString().toLowerCase().indexOf(a)>-1)
-      })
-    this.dataSource = new MatTableDataSource(this.findData);
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-    })
-  }
-  else{
+  // if(a.length>0){
+  //   this.findData = this.findDataTemp.filter(obj=>{
+  //     return (obj.deviceName.toString().toLowerCase().indexOf(a)>-1)
+  //   })
+  //   this.dataSource = new MatTableDataSource(this.findData);
+  //   setTimeout(() => {
+  //     this.dataSource.paginator = this.paginator;
+  //   })
+  // }
+  // else{
+  //   this.dataSource = new MatTableDataSource(this.findDataTemp);
+  //   setTimeout(() => {
+  //     this.dataSource.paginator = this.paginator;
+  //   })
+  // }
     this.dataSource = new MatTableDataSource(this.findDataTemp);
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-    })
-  }
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.filter =a.trim().toLowerCase()
+      })
 }
 
 
@@ -93,6 +99,7 @@ getColorIcon(a){
     this.date1 = new Date()
     this.date2 = new Date(a)
     const diffTime = Math.abs(this.date2 - this.date1);
+
     const diffDays = Math.ceil(diffTime / (1000 * 60));
     if(diffDays <= 1440){
       this.color = 'green'

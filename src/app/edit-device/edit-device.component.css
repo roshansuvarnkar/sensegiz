@@ -1,0 +1,47 @@
+::ng-deep input#primaryPhoneInput{
+    border: none;
+    
+}
+::ng-deep .focus{
+outline: unset !important;
+}
+
+
+::ng-deep .btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 !important;
+}
+hr {
+    border: 1px solid #cac6c3 !important;
+    margin-top: 0rem !important;
+    width: 11rem !important;
+}
+::ng-deep label#dial-code {
+    color: #6d6b6b;
+    padding-top: 9px !important;
+    margin-left: 0;
+    margin-right: 0;
+}
+::ng-deep input:-internal-autofill-selected {
+    background-color: white !important;
+}
+::ng-deep input#phone {
+    border: none !important;
+    outline-width: 0 !important;
+}
+::ng-deep input#phone:focus:hover:visited:active:focus-within:focus-visible {
+    border: none !important;
+    outline-width: 0 !important;
+
+}
+.mob{
+    border: 1px solid #cac6c3 !important;
+    margin-top: 0rem !important;
+    width: 11rem !important;
+    margin-left: 0rem !important;
+}
+
+.error{
+  margin-top: -1rem;
+  font-size: smaller;
+}

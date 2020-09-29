@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment'
 import { identifierModuleUrl } from '@angular/compiler';
+import { GeneralMaterialsService } from './general-materials.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class ApiService {
 
   host:string = environment.apiHost
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private general:GeneralMaterialsService) { }
 
   send(data){
     const httpOptions = {
@@ -790,7 +792,7 @@ deleteSubUser(data){
 }
 downloadCummulative(data,fileName){
 
-  // this.general.loadingFreez.next({status:true})
+  this.general.loadingFreez.next({status:true})
 
   let url = this.host+'/downloadCTReport';
   return new Promise((resolve,reject)=>{
@@ -814,12 +816,29 @@ downloadFile(response,fileName){
   let dataType = body.type;
   let binaryData = [];
   binaryData.push(body);
-  // this.general.loadingFreez.next({status:false})
+  this.general.loadingFreez.next({status:false})
   let downloadLink = document.createElement('a');
   downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
   downloadLink.setAttribute('download', fileName);
   document.body.appendChild(downloadLink);
   downloadLink.click();
+}
+downloadReport(data,fileName){
+  this.general.loadingFreez.next({status:true})
+
+  let url = this.host+'/download';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,{ observe: 'response', responseType: 'blob' as 'json' }).subscribe(res=>{
+      if(res.status==200)
+      this.downloadFile(res,fileName)
+
+      resolve(true);
+    },
+    err=>{
+      console.log("err==",err)
+    })
+  });
+
 }
   
   viewCTReport(data){

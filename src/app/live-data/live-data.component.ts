@@ -123,6 +123,14 @@ getTotalCount(val){
           this.paginator.length = this.currentPageSize
         })
       }
+      else{
+        this.dataSource = new MatTableDataSource(this.liveData);
+        setTimeout(() => {
+          this.dataSource.sort = this.sort;
+          //this.dataSource.paginator = this.paginator;
+          this.paginator.length = this.currentPageSize
+        })
+      }
     })
 
  }

@@ -34,11 +34,10 @@ export class DeviceHistoryComponent implements OnInit {
 
     this.route.queryParams.subscribe(params => {
         this.deviceData = JSON.parse(params.record) ;
-        // console.log("records=",this.deviceData )
-       
+         console.log("records=",this.deviceData )
+        this.getTotalCount()
+        this.refreshFinds()
     })
-    this.getTotalCount()
-    this.refreshFinds()
     //setInterval(()=>{this.refreshFinds()},60*1000)
   }
 
@@ -53,9 +52,10 @@ export class DeviceHistoryComponent implements OnInit {
    }
     this.api.getDeviceData(data).then((res:any)=>{
       console.log("find data ======",res);
+      this.findData=[]
+
       if(res.status){
         this.finds=res.success
-        this.findData=[]
         for(let i=0;i<res.success.length;i++){
           this.findData.push({
             i:i+1,
@@ -65,6 +65,7 @@ export class DeviceHistoryComponent implements OnInit {
            })
 
         }
+      }
 
         this.dataSource = new MatTableDataSource(this.findData);
         setTimeout(() => {
@@ -72,7 +73,7 @@ export class DeviceHistoryComponent implements OnInit {
           // this.dataSource.paginator = this.paginator;
 
         });
-      }
+
 
     })
   }

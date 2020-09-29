@@ -1,6 +1,10 @@
 img {
   height: 100%
 }
+body,body-1, .mat-typography {
+  font: 100 14px/20px Roboto, "Helvetica Neue", sans-serif !important;
+  letter-spacing: normal;
+}
 span.flex.logo {
     position: relative;
     height: 4rem;

@@ -43,7 +43,7 @@ export class HistoryReportComponent implements OnInit {
   displayedColumns2: string[] = ['contactDeviceName','updatedOn'];
   displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
   displayedColumns5: string[] = ['i','username','count','totTime'];
-
+  date:any
   fileName:any
   showSpinner:boolean=false
   title:any
@@ -63,6 +63,7 @@ export class HistoryReportComponent implements OnInit {
 
       this.from = data.fromDate
       this.to = data.toDate
+      this.date=data.date
       this.selectedValue=data.valueSelected
       this.deviceName=data.deviceName
      }
@@ -115,129 +116,216 @@ export class HistoryReportComponent implements OnInit {
 
   }
   }
-
   loadData(limit=10,offset=0,type=0){
 
-      if(this.type=='basedOnDate'){
+    if(this.type == 'basedOnDate'){
+      this.basedOnDate(limit=limit,offset=offset,type=type)
+    }
+    if(this.type == 'cummulative'){
+      this.cummulativeReport()
+    }
+    if(this.type == 'basedOnFindName'){
+      this.basedOnFindName(limit=limit,offset=offset,type=type)
+    }
+    if(this.type == 'summaryReport'){
+      this.summaryReport()
 
-        var data={
-          userId:this.loginData.userId,
-          fromDate: this.from,
-          toDate:this.to,
-          limit:limit,
-          offset:offset
-        }
-        this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
-          console.log("find data based on date ======",res);
-          this.liveData=[]
-          if(res.status){
-            if(type==0){
-              this.liveData=res.success
-            }
-            else{
-              this.excelData=[]
-             for(var i=0;i<res.success.length;i++){
-            
-               this.excelData.push({
-               Sl_No:i+1,
-               Base_Person:res.success[i].baseName,
-               Contact_Person:res.success[i].contactName,
-               Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
-               Total_Time:this.general.convertTime(res.success[i].totalTime)
+    }
+   
+}
+basedOnDate(limit,offset,type){
+  console.log(limit,offset)
+  var data={
+    userId:this.loginData.userId,
+    fromDate: this.from,
+    toDate:this.to,
+    limit:limit,
+    offset:offset,
+    zone:this.getZone(this.date)
+  }
+  console.log("data==",data)
+  this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
+    console.log("find data based on date ======",res);
+    this.liveData=[]
+    if(res.status){
+      if(type==0){
+        this.liveData=res.success
+      }
+      else{
+        this.excelData=[]
+        for(var i=0;i<res.success.length;i++){
 
-             })
-             }
-  
-            }
-            this.dataSource = new MatTableDataSource(this.liveData);
-            setTimeout(() => {
-              this.dataSource.sort = this.sort;
-              // this.paginator.length = this.currentPageLength
-            })
-          }
+          this.excelData.push({
+          Sl_No:i+1,
+          Base_Person:res.success[i].baseName,
+          Contact_Person:res.success[i].contactName,
+          Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
+          Total_Time:this.general.convertTime(res.success[i].totalTime)
 
         })
-
-      }
-      if(this.type=='basedOnFindName'){
-
-        var data1={
-          userId:this.loginData.userId,
-          deviceName:this.deviceName,
-          fromDate: this.from,
-          toDate:this.to,
-          offset:offset,
-          limit:limit
-
         }
-        this.api.getDeviceHistoryBasedOnDeviceName(data1).then((res:any)=>{
-          console.log("find data based on name======",res);
-
-          if(res.status){
-            if(type==0){
-              this.liveData=res.success
-            }
-            else{
-              this.excelData=[]
-              for(var i=0;i<res.success.length;i++){
-             
-                this.excelData.push({
-                Sl_No:i+1,
-                Contact_Person:res.success[i].contactName,
-                Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
-                Total_Time:this.general.convertTime(res.success[i].totalTime)
- 
-              })
-              }
-            }
-
-            this.dataSource = new MatTableDataSource(this.liveData);
-            setTimeout(() => {
-              this.dataSource.sort = this.sort;
-              // this.paginator.length = this.currentPageLength
-            })
-          }
-        })
       }
-      if(this.type=='summaryReport'){
-        var data2={
-          userId:this.loginData.userId,
-          deviceName:this.deviceName,
-          fromDate: this.from,
-          toDate:this.to,
+      this.dataSource = new MatTableDataSource(this.liveData);
 
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+        // this.paginator.length = this.currentPageLength
+      })
+    }
+
+  })
+
+}
+basedOnFindName(limit,offset,type){
+  var data={
+    userId:this.loginData.userId,
+    deviceName:this.deviceName,
+    fromDate: this.from,
+    toDate:this.to,
+    offset:offset,
+    limit:limit,
+    zone:this.getZone(this.date)
+
+  }
+  this.api.getDeviceHistoryBasedOnDeviceName(data).then((res:any)=>{
+    console.log("find data based on name ======",res);
+
+    if(res.status){
+      if(type==0){
+        this.liveData=res.success
+      }
+      else{
+        this.excelData=[]
+        for(var i=0;i<res.success.length;i++){
+
+          this.excelData.push({
+          Sl_No:i+1,
+          Contact_Person:res.success[i].contactName,
+          Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
+          Total_Time:this.general.convertTime(res.success[i].totalTime)
+
+        })
         }
-        this.api.getSummaryReport(data2).then((res:any)=>{
-          console.log("summary report ======",res);
-
-          //this.liveData=[]
-          if(res.status){
-
-            var groupDate = this.dataDateReduce(res.success)
-            // console.log("groupDate===",groupDate)
-            this.liveData = Object.keys(groupDate).map((data)=>{
-              return {
-                date : data,
-                data : groupDate[data]
-              }
-            })
-              
-          for(let i=0;i<this.liveData.length;i++){
-
-            for(let j=0;j<this.liveData[i].data.length-1;j++){
-              this.liveData[i].data[j].contactDeviceName = this.liveData[i].data[j].contactDeviceName+','
-            }
-         
-            this.liveData[i].data[this.liveData[i].data.length-1].contactDeviceName=this.liveData[i].data[this.liveData[i].data.length-1].contactDeviceName+'.'
-
-           }
-          
-          }
-        })
 
       }
-      if(this.type=='cummulative'){
-          var date=new Date()
+
+      this.dataSource = new MatTableDataSource(this.liveData);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+        // this.paginator.length = this.currentPageLength
+      })
+    }
+  })
+
+}
+
+// summaryReport(){
+
+//     var data={
+//       userId:this.loginData.userId,
+//       deviceName:this.deviceName,
+//       fromDate: this.from,
+//       toDate:this.to,
+//       zone:this.getZone(this.date)
+//     }
+//     this.api.getSummaryReport(data).then((res:any)=>{
+//       console.log("summary report======",res);
+
+//       this.liveData=[]
+//       if(res.status){
+
+//         var groupDate = this.dataDateReduce(res.success)
+//         // console.log("groupDate===",groupDate)
+//         this.liveData = Object.keys(groupDate).map((data)=>{
+
+//           return {
+//             date : data,
+//             data : groupDate[data]
+//           }
+//         })
+
+//         for(let i=0;i<this.liveData.length;i++){
+
+//           for(let j=0;j<this.liveData[i].data.length-1;j++){
+//             this.liveData[i].data[j].contactDeviceName = this.liveData[i].data[j].contactDeviceName+','
+//           }
+
+//           this.liveData[i].data[this.liveData[i].data.length-1].contactDeviceName=this.liveData[i].data[this.liveData[i].data.length-1].contactDeviceName+'.'
+
+//          }
+
+
+//       }
+//     })
+//   }
+
+
+// dataDateReduce(data){
+// return data.reduce((group,obj)=>{
+//   const date = obj.updatedOn.split('T')[0]
+//   if(!group[date]){
+//     group[date]=[]
+//   }
+//   group[date].push(obj)
+//   return group
+// },{})
+// }
+summaryReport(){
+
+  var data={
+    userId:this.loginData.userId,
+    deviceName:this.deviceName,
+    fromDate: this.from,
+    toDate:this.to,
+
+  }
+  this.api.getSummaryReport(data).then((res:any)=>{
+    console.log("summary report======",res);
+
+    this.liveData=[]
+    if(res.status){
+
+      var groupUser = this.dataDateReduce(res.success)
+      // console.log("groupDate===",groupUser)
+      this.liveData = Object.keys(groupUser).map((data)=>{
+
+        return {
+          date : groupUser[data],
+          data : data
+        }
+      })
+      console.log("live==",this.liveData)
+
+      for(let i=0;i<this.liveData.length;i++){
+
+        for(let j=0;j<this.liveData[i].date.length-1;j++){
+          this.liveData[i].date[j].updatedOn = this.liveData[i].date[j].updatedOn.split('T')[0]+','
+        }
+
+        this.liveData[i].date[this.liveData[i].date.length-1].updatedOn=this.liveData[i].date[this.liveData[i].date.length-1].updatedOn.split('T')[0]+'.'
+
+       }
+
+
+    }
+  })
+}
+
+
+dataDateReduce(data){
+return data.reduce((group,obj)=>{
+const name = obj.contactDeviceName
+console.log("name---",name)
+if(!group[name]){
+  group[name]=[]
+}
+group[name].push(obj)
+console.log("group==",group)
+return group
+},{})
+}
+cummulativeReport(){
+  var date=new Date()
   var timezone=date.getTimezoneOffset()
   
   let m = timezone % 60;
@@ -245,9 +333,8 @@ export class HistoryReportComponent implements OnInit {
   let h = timezone
   let mm = m <= 9 && m >= 0 ? "0"+m : m;
   let hh = h <= 9 && h >= 0 ? "0"+h : h;
-  var timeZone=''
   if(m<0 && h<0){
-     timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
+     var timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
   }
   else if(m>0 && h>0){
     timeZone= '-'+(-(hh)+':'+(-mm)).toString()
@@ -255,14 +342,15 @@ export class HistoryReportComponent implements OnInit {
   else{
     timeZone=hh+':'+mm
   }
-   var data3={
+  var data={
     userId:this.loginData.userId,
     fromDate: this.from,
     toDate:this.to,
     zone:timeZone
+
   }
-  console.log("hvhs==",data3)
-  this.api.viewCTReport(data3).then((res:any)=>{
+  console.log("hvhs==",data)
+  this.api.viewCTReport(data).then((res:any)=>{
     this.countCummulative=[]
     console.log("cummulative report==",res)
     if(res.status){
@@ -283,21 +371,163 @@ export class HistoryReportComponent implements OnInit {
     }
   })
 
-      }
-
 }
+//   loadData(limit=10,offset=0,type=0){
+
+//       if(this.type=='basedOnDate'){
+
+//         var data={
+//           userId:this.loginData.userId,
+//           fromDate: this.from,
+//           toDate:this.to,
+//           limit:limit,
+//           offset:offset
+//         }
+//         this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
+//           console.log("find data based on date ======",res);
+//           this.liveData=[]
+//           if(res.status){
+//             if(type==0){
+//               this.liveData=res.success
+//             }
+//             else{
+//               this.excelData=[]
+//              for(var i=0;i<res.success.length;i++){
+            
+//                this.excelData.push({
+//                Sl_No:i+1,
+//                Base_Person:res.success[i].baseName,
+//                Contact_Person:res.success[i].contactName,
+//                Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
+//                Total_Time:this.general.convertTime(res.success[i].totalTime)
+
+//              })
+//              }
+  
+//             }
+//             this.dataSource = new MatTableDataSource(this.liveData);
+//             setTimeout(() => {
+//               this.dataSource.sort = this.sort;
+//               // this.paginator.length = this.currentPageLength
+//             })
+//           }
+
+//         })
+
+//       }
+//       if(this.type=='basedOnFindName'){
+
+//         var data1={
+//           userId:this.loginData.userId,
+//           deviceName:this.deviceName,
+//           fromDate: this.from,
+//           toDate:this.to,
+//           offset:offset,
+//           limit:limit
+
+//         }
+//         this.api.getDeviceHistoryBasedOnDeviceName(data1).then((res:any)=>{
+//           console.log("find data based on name======",res);
+
+//           if(res.status){
+//             if(type==0){
+//               this.liveData=res.success
+//             }
+//             else{
+//               this.excelData=[]
+//               for(var i=0;i<res.success.length;i++){
+             
+//                 this.excelData.push({
+//                 Sl_No:i+1,
+//                 Contact_Person:res.success[i].contactName,
+//                 Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
+//                 Total_Time:this.general.convertTime(res.success[i].totalTime)
+ 
+//               })
+//               }
+//             }
+
+//             this.dataSource = new MatTableDataSource(this.liveData);
+//             setTimeout(() => {
+//               this.dataSource.sort = this.sort;
+//               // this.paginator.length = this.currentPageLength
+//             })
+//           }
+//         })
+//       }
+//       if(this.type=='summaryReport'){
+//         var data2={
+//           userId:this.loginData.userId,
+//           deviceName:this.deviceName,
+//           fromDate: this.from,
+//           toDate:this.to,
+
+//         }
+//         this.api.getSummaryReport(data2).then((res:any)=>{
+//           console.log("summary report ======",res);
+
+//           //this.liveData=[]
+//           if(res.status){
+
+//             var groupDate = this.dataDateReduce(res.success)
+//             // console.log("groupDate===",groupDate)
+//             this.liveData = Object.keys(groupDate).map((data)=>{
+//               return {
+//                 date : data,
+//                 data : groupDate[data]
+//               }
+//             })
+              
+//           for(let i=0;i<this.liveData.length;i++){
+
+//             for(let j=0;j<this.liveData[i].data.length-1;j++){
+//               this.liveData[i].data[j].contactDeviceName = this.liveData[i].data[j].contactDeviceName+','
+//             }
+         
+//             this.liveData[i].data[this.liveData[i].data.length-1].contactDeviceName=this.liveData[i].data[this.liveData[i].data.length-1].contactDeviceName+'.'
+
+//            }
+          
+//           }
+//         })
+
+//       }
+//       if(this.type=='cummulative'){
+ 
+//         var data3={
+//           userId:this.loginData.userId,
+//           fromDate: this.from,
+//           toDate:this.to,
+//           zone:timeZone
+//         }
+//         console.log("hvhs==",data3)
+//         this.api.viewCTReport(data3).then((res:any)=>{
+//           this.countCummulative=[]
+//           console.log("cummulative report==",res)
+//           if(res.status){
+//             for(let i=0;i<res.data.length;i++){
+//               this.countCummulative.push({
+//                 i:i+1,
+//                 username:res.data[i].baseDeviceName,
+//                 count:res.data[i].count,
+//                 totTime:this.general.convertTime(res.data[i].totalTime)
+
+//               });
+//             }
+//             this.dataSource = new MatTableDataSource(this.countCummulative);
+//             setTimeout(() => {
+//               this.dataSource.sort = this.sort;
+//               this.dataSource.paginator = this.paginator
+//               })
+//           }
+//         })
+
+//       }
+
+// }
 
 
-dataDateReduce(data){
-  return data.reduce((group,obj)=>{
-    const date = obj.updatedOn.split('T')[0]
-    if(!group[date]){
-      group[date]=[]
-    }
-    group[date].push(obj)
-    return group
-  },{})
-}
+
 
 
 
@@ -312,56 +542,100 @@ getUpdate(event) {
 }
 
 
+getZone(date){
+  var timezone=date.getTimezoneOffset()
 
+  let m = timezone % 60;
+  timezone = (timezone - m) / 60;
+  let h = timezone
+  let mm = m <= 9 && m >= 0 ? "0"+m : m;
+  let hh = h <= 9 && h >= 0 ? "0"+h : h;
+  if(m<0 && h<0){
+     var timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
+  }
+  else if(m>0 && h>0){
+    timeZone= '-'+(-(hh)+':'+(-mm)).toString()
+  }
+  else{
+    timeZone=hh+':'+mm
+  }
+  return timeZone
+}
 
 
 getPages() {
+  var dateObj=new Date()
+  var data={}
+//  if(this.type=='basedOnDate' || this.type=='basedOnFindName' || this.type=='summaryReport'){
+//   var tempLen=this.currentPageLength
+//   //  console.log("paginator event length",tempLen);
+//   this.loadData(tempLen,0,1)
+//   var msg = 'Downloading'
+//   this.general.openSnackBar(msg,'')
+//   //  setTimeout(()=>{
+//   //     this.downloadPDF()
+//   //   },5000);
+//   setTimeout(()=>{
 
- if(this.type=='basedOnDate' || this.type=='basedOnFindName' || this.type=='summaryReport'){
-  var tempLen=this.currentPageLength
-  //  console.log("paginator event length",tempLen);
-  this.loadData(tempLen,0,1)
-  var msg = 'Downloading'
-  this.general.openSnackBar(msg,'')
-  //  setTimeout(()=>{
-  //     this.downloadPDF()
-  //   },5000);
+//     this.openExcel()
+
+//   },5000);
+
+//   setTimeout(()=>{
+//     this.loadData(10,0,0)
+//   },8000)
+//  clearTimeout(8*1000)
+//   // this.showSpinner=true
+//  }
+if(this.type=='basedOnDate' || this.type=='basedOnFindName'){
+  if(this.type=='basedOnDate'){
+    data={
+    userId:this.loginData.userId,
+    fromDate: this.from,
+    toDate:this.to,
+    zone:this.getZone(dateObj),
+    type:this.type
+    }
+    fileName="GenericReport"
+  }
+  if(this.type=='basedOnFindName'){
+    data={
+    userId:this.loginData.userId,
+    deviceName:this.deviceName,
+    fromDate: this.from,
+    toDate:this.to,
+    zone:this.getZone(dateObj),
+    type:this.type
+  }
+  fileName="Report-of-Find- "+this.deviceName
+}
+
+  console.log("data to send ======",data);
+
+  this.api.downloadReport(data,fileName).then((res:any)=>{
+
+  console.log("report data recieved ======",res);
+  })
+}
+if(this.type=='summaryReport'){
+  this.general.loadingFreez.next({status:true})
+  console.log("hi")
   setTimeout(()=>{
 
     this.openExcel()
+    this.general.loadingFreez.next({status:false})
 
-  },5000);
+  },6000);
 
-  setTimeout(()=>{
-    this.loadData(10,0,0)
-  },8000)
- clearTimeout(8*1000)
-  // this.showSpinner=true
- }
+}
  if(this.type=='cummulative'){
-   var fileName=''
-   var date=new Date()
-   var timezone=date.getTimezoneOffset()
- 
-   let m = timezone % 60;
-   timezone = (timezone - m) / 60;
-   let h = timezone
-   let mm = m <= 9 && m >= 0 ? "0"+m : m;
-   let hh = h <= 9 && h >= 0 ? "0"+h : h;
-   if(m<0 && h<0){
-      var timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
-   }
-   else if(m>0 && h>0){
-     timeZone= '-'+(-(hh)+':'+(-mm)).toString()
-   }
-   else{
-     timeZone=hh+':'+mm
-   }
-    var data={
+  var fileName=''
+  
+  data={
       userId:this.loginData.userId,
       fromDate: this.from,
       toDate:this.to,
-      zone:timeZone,
+      zone:this.getZone(dateObj),
       type:this.type
     }
     fileName="CummulativeReport"
@@ -374,7 +648,7 @@ getPages() {
       console.log("report data recieved ======",res);
   
     })
-    }
+  }
 }
 
 

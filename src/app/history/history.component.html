@@ -143,7 +143,7 @@
   <mat-card >
     <span class="card-head">
       <mat-card-title color="primary">
-        Social Distancing Violator's Report Based On Username
+        Social Distancing Violators Report Based On Username
       </mat-card-title>
       <mat-card-subtitle>
         Enter username and date range
@@ -205,6 +205,9 @@
       <mat-card-subtitle>
         Enter infected person name and date range
       </mat-card-subtitle>
+      <mat-error *ngIf="daysExceed">
+        Please choose date range of past 15 days from 'To date'
+      </mat-error>
     </span>
     <mat-card-content>
       <div class="radio">

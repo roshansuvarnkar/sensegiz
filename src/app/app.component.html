@@ -1,4 +1,6 @@
-
+<div class="statusFreeze flexWrap" *ngIf = "statusFreeze">
+  <mat-spinner mode="indeterminate"></mat-spinner><span [innerHTML]="freezeMessage"></span>
+</div>
 
 <mat-toolbar>
   <div class="mobilemenu" >

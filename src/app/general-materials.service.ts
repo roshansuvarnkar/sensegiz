@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import{Observable, BehaviorSubject} from 'rxjs'
 import * as XLSX from 'xlsx';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 
@@ -9,8 +10,9 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 export class GeneralMaterialsService {
   _timezone: any = null;
   _timeZoneAbbr: any
+  public loadingFreez : BehaviorSubject<any> = new BehaviorSubject<any>([])
 
-  constructor(private _snackBar: MatSnackBar,private http:HttpClient) {}
+  constructor(private _snackBar: MatSnackBar, private http:HttpClient) {}
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {

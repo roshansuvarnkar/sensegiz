@@ -37,6 +37,8 @@ import { AdminSettingsComponent } from './admin-settings/admin-settings.componen
 import { UserGuideComponent } from './user-guide/user-guide.component';
 
 import { InternationalPhoneNumber2Module  } from 'ngx-international-phone-number2';
+import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
+
 import { TwoStepAuthComponent } from './two-step-auth/two-step-auth.component';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -81,6 +83,7 @@ import { ProfileComponent } from './profile/profile.component';
     FlexLayoutModule,
     HttpClientModule,
     InternationalPhoneNumber2Module,
+    NgxIntlTelInputModule,
     NgCircleProgressModule.forRoot({}),
     MDBBootstrapModule.forRoot(),
     DeviceDetectorModule.forRoot(),

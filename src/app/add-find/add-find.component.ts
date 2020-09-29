@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { LoginCheckService } from '../login-check.service';
 import { GeneralMaterialsService } from '../general-materials.service';
+import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-add-find',
@@ -11,14 +12,18 @@ import { GeneralMaterialsService } from '../general-materials.service';
   styleUrls: ['./add-find.component.css']
 })
 export class AddFindComponent implements OnInit {
-Findform:FormGroup
-gatewayform:FormGroup
-userform:FormGroup
-type:any
-loginData:any
-findStatus:boolean=false
-gatewayStatus:boolean=false
-userStatus:boolean=false
+  SearchCountryField = SearchCountryField;
+	TooltipLabel = TooltipLabel;
+	CountryISO = CountryISO;
+	preferredCountries: CountryISO[] = [CountryISO.India];
+  Findform:FormGroup
+  gatewayform:FormGroup
+  userform:FormGroup
+  type:any
+  loginData:any
+  findStatus:boolean=false
+  gatewayStatus:boolean=false
+  userStatus:boolean=false
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddFindComponent>,
@@ -41,7 +46,7 @@ userStatus:boolean=false
       deviceName: ['', Validators.required],
       deviceId: ['', Validators.required],
       employeeId: [''],
-      mobileNum: ['',[Validators.minLength(10),Validators.maxLength(14)]],
+      mobileNum: [''],
       emailId: ['',[Validators.email]]
     });
 
@@ -55,8 +60,8 @@ userStatus:boolean=false
 
 
     this.userform = this.fb.group({
-      mobileNum: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(14)]],
-      emailId: ['',[Validators.email]]
+      mobileNum: ['',Validators.required],
+      emailId: ['',[Validators.email,Validators.required]]
     });
 
 
@@ -69,12 +74,15 @@ onNoClick(): void {
 }
 
 Findsubmit(data){
+  console.log("find submit data==",data)
   if (this.Findform.valid) {
     try {
       data.tblName ='deviceRegistration'
       data.userId=this.loginData.userId
+      data.mobileNum=data.mobileNum!=null?data.mobileNum.e164Number:''
+      console.log("data of finds====",data)
       this.api.deviceRegister(data).then((res:any)=>{
-        console.log("find submit====",res);
+        console.log("find res data====",res);
         if(res.status){
           var msg = 'Find Registered Successfully'
           this.general.openSnackBar(msg,'')
@@ -85,6 +93,7 @@ Findsubmit(data){
         }
       })
     } catch (err) {
+      console.log("erroe==",err)
     }
   }
 }
@@ -118,6 +127,7 @@ Usersubmit(data){
   if (this.userform.valid) {
     try {
       data.userId=this.loginData.userId
+      data.mobileNum=data.mobileNum.e164Number
       this.api.UserRegister(data).then((res:any)=>{
         // console.log("user submit==",res)
         if(res.status){

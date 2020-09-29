@@ -3,6 +3,7 @@ import { LoginCheckService } from './login-check.service';
 import { Router , ActivatedRoute } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { environment } from '../environments/environment'
+import { GeneralMaterialsService } from './general-materials.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,8 @@ export class AppComponent {
   isDesktopDevice:boolean
   deviceStatus:boolean
   twoStepAuth:any
-
+  statusFreeze:boolean=false
+  freezeMessage:String="Downloading"
   deviceInfo = null;
   host:any = environment.apiHost
 
@@ -32,6 +34,7 @@ export class AppComponent {
     private login:LoginCheckService,
     private router:Router,
     private route:ActivatedRoute,
+    private general:GeneralMaterialsService,
     private deviceService: DeviceDetectorService){
     // this.loginData = this.login.loginStatus()
     this.loginDataInfo = this.login.loginData()
@@ -66,6 +69,10 @@ export class AppComponent {
     this.twoStepAuth=this.login.authData()
   })
 
+  this.general.loadingFreez.subscribe((res:any)=>{
+    console.log("statusfreeze==",res)
+    this.statusFreeze = res.status
+  })
 
   }
 

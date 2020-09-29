@@ -6,6 +6,7 @@ import { ApiService } from '../api.service';
 import { GeneralMaterialsService } from '../general-materials.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { AdminAddBleIdComponent } from '../admin-add-ble-id/admin-add-ble-id.component';
+import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,13 +14,16 @@ import { AdminAddBleIdComponent } from '../admin-add-ble-id/admin-add-ble-id.com
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-
-   adminAddUserform: FormGroup;
-   public loginInvalid: boolean;
-   registered:boolean=false
-   passwordType: string = 'password';
-   passwordIcon: string = 'visibility_off';
-   adminData:any=[]
+  SearchCountryField = SearchCountryField;
+  TooltipLabel = TooltipLabel;
+  CountryISO = CountryISO;
+  preferredCountries: CountryISO[] = [CountryISO.India];
+  adminAddUserform: FormGroup;
+  public loginInvalid: boolean;
+  registered:boolean=false
+  passwordType: string = 'password';
+  passwordIcon: string = 'visibility_off';
+  adminData:any=[]
    constructor(
    		public dialog: MatDialog,
       private fb: FormBuilder,
