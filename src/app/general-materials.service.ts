@@ -144,23 +144,29 @@ startTime(data1,data2){
 
   return date
 }
-getZone(date){
-  var timezone=date.getTimezoneOffset()
+  getZone(date){
+    var timezone=date.getTimezoneOffset()
+    console.log("time zone==",timezone)
 
-  let m = timezone % 60;
-  timezone = (timezone - m) / 60;
-  let h = timezone
-  let mm = m <= 9 && m >= 0 ? "0"+m : m;
-  let hh = h <= 9 && h >= 0 ? "0"+h : h;
-  if(m<0 && h<0){
-     var timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
+    let m = timezone % 60;
+    console.log("m==",m)
+    timezone = (timezone - m) / 60;
+    let h = timezone
+    console.log("h==",m)
+
+    let mm = m <= 9 && m >= 0 ? "0"+m : m;
+    let hh = h <= 9 && h >= 0 ? "0"+h : h;
+  
+    var timezones=-(timezone)
+    console.log("time zone==",timezone)
+
+    if(timezones<0 ){
+      var timeZone= '-'+((hh)+':'+(mm)).toString()
+    }
+    else{
+      timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
+    }
+
+    return timeZone
   }
-  else if(m>0 && h>0){
-    timeZone= '-'+(-(hh)+':'+(-mm)).toString()
-  }
-  else{
-    timeZone=hh+':'+mm
-  }
-  return timeZone
-}
 }

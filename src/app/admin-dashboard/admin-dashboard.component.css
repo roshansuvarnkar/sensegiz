@@ -66,11 +66,16 @@ hr {
     outline-width: 0 !important;
 
 }
+::ng-deep .iti--allow-dropdown input, .iti--allow-dropdown input[type=text], .iti--allow-dropdown input[type=tel], .iti--separate-dial-code input, .iti--separate-dial-code input[type=text], .iti--separate-dial-code input[type=tel] {
+    padding-right: 0px !important;
+    padding-left: 42px !important;
+    margin-left: 0;
+}
 .mob{
     border: 1px solid #cac6c3 !important;
     margin-top: 0rem !important;
-    width: 11rem !important;
-    margin-left: 0rem !important;
+    width: 11.5rem !important;
+    /* margin-left: 0rem !important; */
 }
 
 .error{
