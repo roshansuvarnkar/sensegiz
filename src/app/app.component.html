@@ -6,7 +6,7 @@
   <div class="mobilemenu" >
    <div *ngIf="twoStepAuth?.status && twoStepAuth?.role=='user'">
      <button mat-button [matMenuTriggerFor]="belowMenu" class="menu"><mat-icon>menu</mat-icon></button>
-   <mat-menu #belowMenu="matMenu" yPosition="below">
+    <mat-menu #belowMenu="matMenu" yPosition="below">
      <div class=" title" *ngIf="loginStatus">
        <span>
          <mat-icon >person</mat-icon>
@@ -26,7 +26,7 @@
  
      <!-- <button mat-raised-button class="guide"><span routerLink="/user-guide">User Guide</span></button> -->
  
-   </mat-menu>
+    </mat-menu>
  
    </div>
   </div>

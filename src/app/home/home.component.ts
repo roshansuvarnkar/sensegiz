@@ -34,6 +34,8 @@ totmin:any
 timeout:any
 pageIndex:any
 pageSize:any
+offlineCount:any
+onlineCount:any
 dataPoints:any=[]
   constructor(private api: ApiService,
   private login:LoginCheckService,
@@ -51,6 +53,7 @@ dataPoints:any=[]
     this.refreshCount()
     this.refreshSetting()
     this.maximumContactTime()
+    this.refreshOnlineDevice()
     this.repeatedContacts()
     this.numOfcontactPerDay()
 
@@ -105,6 +108,22 @@ refreshFinds(){
 
 
 
+refreshOnlineDevice(){
+  var date=new Date()
+  var data={
+    userId:this.loginData.userId,
+    zone:this.general.getZone(date),
+    type:'onlineUserData'
+  }
+
+  this.api.getOnlineCount(data).then((res:any)=>{
+    console.log("online data ======",res);
+    if(res.status){
+      this.onlineCount=res.success.length
+      this.offlineCount=this.totalEmp-res.success.length
+    }
+  })
+}
 
 activeUser(){
   // console.log("Active users===",this.activeEmp)
@@ -125,7 +144,44 @@ activeUser(){
 
 }
 
+offlineUser(){
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.height = '90vh';
+  dialogConfig.width = '75vw';
+  dialogConfig.data = {
+    type:"offlineUserData",
+   
+  }
+  const dialogRef = this.dialog.open(HomeCountViewComponent, dialogConfig);
 
+  dialogRef.afterClosed().subscribe(result => {
+    this.refreshFinds()
+    this.refreshOnlineDevice()
+
+  });
+
+}
+onlineUser(){
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.height = '90vh';
+  dialogConfig.width = '75vw';
+  dialogConfig.data = {
+    type:"onlineUserData",
+   
+  }
+  const dialogRef = this.dialog.open(HomeCountViewComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(result => {
+    this.refreshFinds()
+    this.refreshOnlineDevice()
+
+  });
+
+}
 
 
 infectedUser(){
@@ -148,9 +204,6 @@ infectedUser(){
        });
 
 }
-
-
-
 
 
 normalUser(){
@@ -188,6 +241,7 @@ refresh(){
   this.refreshSetting()
   this.maximumContactTime()
   this.repeatedContacts()
+  this.refreshOnlineDevice()
   this.numOfcontactPerDay()
   this.refreshFinds()
 
@@ -225,9 +279,6 @@ refreshSetting(){
     }
   })
 }
-
-
-
 
 
 
@@ -353,6 +404,5 @@ numOfcontactPerDay(){
     }
 
   })
- 
-}
+ }
 }

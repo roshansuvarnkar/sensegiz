@@ -17,7 +17,7 @@
           </span>
   </div> <br>
   <div>
-  <p  mat-dialog-title> From {{from}} to {{to}} </p>
+  <p  mat-dialog-title> From {{from1}} to {{to1}} </p>
     <div class="mat-elevation-z8">
 
 
@@ -42,19 +42,24 @@
               <td mat-cell *matCellDef="let live " (click)="orderContactOpen(live)"> {{live.contactName}} </td>
             </ng-container>
 
-            <!-- <ng-container matColumnDef="location">
+            <ng-container matColumnDef="location">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
               <td mat-cell *matCellDef="let live "> {{live.location}} </td>
-            </ng-container> -->
+            </ng-container>
 
+            <ng-container matColumnDef="startTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Time </th>
+              <td mat-cell *matCellDef="let live"> {{live.startTime | date : 'medium' }} </td>
+            </ng-container>
+    
             <ng-container matColumnDef="updatedOn">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Time </th>
-              <td mat-cell *matCellDef="let live"> {{live.updatedOn | date : 'medium'}} </td>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> End Time </th>
+              <td mat-cell *matCellDef="let live"> {{live.updatedOn | date : 'medium' }} </td>
             </ng-container>
 
             <ng-container matColumnDef="totaltime">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Time (hh:mm:ss) </th>
-              <td mat-cell *matCellDef="let live"> {{convertDate(live.totalTime)}} </td>
+              <td mat-cell *matCellDef="let live"> {{live.totalTime}} </td>
             </ng-container>
 
        </div>
@@ -227,10 +232,10 @@
               <td mat-cell *matCellDef="let live " (click)="orderContactOpen(live)"> {{live.contactName}} </td>
             </ng-container>
 
-            <!-- <ng-container matColumnDef="location">
+            <ng-container matColumnDef="location">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
               <td mat-cell *matCellDef="let live "> {{live.location}} </td>
-            </ng-container> -->
+            </ng-container>
 
             <ng-container matColumnDef="updatedOn">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Time </th>
@@ -277,8 +282,8 @@
 
       <tr>
         <th>Sl No.</th>
-        <th>Date Of Incident</th>
-        <th>Contacted Users</th>
+        <th>Contacted User</th>
+        <th>Date Of contacts</th>
       </tr>
      </thead>
      <tr *ngFor = "let a of liveData;let i=index">

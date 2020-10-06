@@ -19,9 +19,34 @@
         </div><br><br>
         <div class="row">
           <div class="first-cont">
-            <div class="regi" >
+            <div class="regi">
               Active Users <br><br>
+              <circle-progress (click)="onlineUser()"
+              class="circle"
+                [percent]="onlineCount"
+                [showUnits]="false"
+                [showBackground] = "true"
+                [backgroundColor]= "'#ef6c00'"
+                [outerStrokeColor] = "'#ffffff'"
+                [outerStrokeWidth] = 6
+                [showInnerStroke] = false
+                [radius] = 60
+                [titleColor] = "'#ffffff'"
+                [showSubtitle] = false
+                [backgroundPadding] = 5
+                [animation]="true"
+                [animationDuration]="500"
+                [startFromZero]="true"
+                [responsive]="false"
+              ></circle-progress>
+              
+            </div>
+            
+            <div class="infe" >
+          
               <circle-progress (click)="activeUser()"
+                c
+                class="circle"
                 fill="green"
                 [percent]="activeEmp"
                 [showUnits]="false"
@@ -39,10 +64,34 @@
                 [startFromZero]="true"
                 [responsive]="false"
               ></circle-progress>
+              <br> <br> Registered Users 
+            </div>
+            <div class="regi">
+              Offline Users <br><br>
+              <circle-progress (click)="offlineUser()"
+                class="circle"
+                [percent]="offlineCount"
+                [showUnits]="false"
+                [showBackground] = "true"
+                [backgroundColor]= "'#ef6c00'"
+                [outerStrokeColor] = "'#ffffff'"
+                [outerStrokeWidth] = 6
+                [showInnerStroke] = false
+                [radius] = 60
+                [titleColor] = "'#ffffff'"
+                [showSubtitle] = false
+                [backgroundPadding] = 5
+                [animation]="true"
+                [animationDuration]="500"
+                [startFromZero]="true"
+                [responsive]="false"
+              ></circle-progress>
+              
             </div>
             <div class="infe">
-              Infected Users <br><br>
+             
               <circle-progress (click)="infectedUser()"
+                class="circle"
                 [percent]="infectedEmp"
                 [showUnits]="false"
                 [showBackground] = "true"
@@ -59,7 +108,8 @@
                 [startFromZero]="true"
                 [responsive]="false"
               ></circle-progress>
-            </div>
+             <br> <br>Infected Users 
+            </div> <br> 
             <!-- <div class="count">
               Normal User <br><br>
               <circle-progress (click)="normalUser()"
@@ -80,6 +130,8 @@
                 [responsive]="false"
               ></circle-progress><br><br>
             </div> -->
+
+
           </div>
         </div>
 
@@ -149,7 +201,7 @@
   <div class="second">
     <mat-card>
       <mat-card-content>
-        <div id="chartContainer" style="height: 245px; width: 100%;"></div>
+        <div id="chartContainer" style="height: 202px; width: 100%;"></div>
       </mat-card-content>
     </mat-card>
   </div>

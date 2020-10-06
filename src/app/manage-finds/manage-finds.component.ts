@@ -94,6 +94,7 @@ refreshFinds(){
               edit:'edit',
               delete:'delete',
               batteryStatus:res.success[i].batteryStatus,
+              batteryUpdatedOn:res.success[i].batteryUpdatedOn,
               emailId:res.success[i].emailId == '' || res.success[i].emailId == 'NULL' ||res.success[i].emailId == 'undefined' ? '-' : res.success[i].emailId,
               mobileNum:res.success[i].mobNum == '' ||res.success[i].mobNum == 'NULL' ||res.success[i].mobNum == 'undefined' ? '-' : res.success[i].mobNum,
               empId:res.success[i].empId == ''||res.success[i].empId == 'NULL' || res.success[i].empId == 'undefined' ? '-' : res.success[i].empId
@@ -111,7 +112,9 @@ refreshFinds(){
   })
 }
 
-
+getBatteryUpdatedOn(value){
+  return value
+}
 
 
 refreshShift(){

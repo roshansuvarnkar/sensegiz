@@ -23,7 +23,7 @@
           <ng-template matStepLabel>Fill out your Find Id</ng-template>
           <mat-form-field>
             <mat-label>Find Id</mat-label>
-            <input type="number" matInput formControlName="deviceId" placeholder="Ex. 1" disabled required>
+            <input type="number" min="1" matInput formControlName="deviceId" placeholder="Ex. 1" disabled required>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>

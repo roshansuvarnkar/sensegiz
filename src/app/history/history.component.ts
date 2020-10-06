@@ -207,11 +207,14 @@ onclickSummaryReport(data){
          var month = ("0" + (date1.getMonth() + 1)).slice(-2);
          var day = ("0" + date1.getDate()).slice(-2);
          var from = year + '-' + month + '-'  + day
+         var from1 = day + '-' + month + '-'  + year
+
 
          var year1 = date2.getFullYear();
          var month1 = ("0" + (date2.getMonth() + 1)).slice(-2);
          var day1 = ("0" + date2.getDate()).slice(-2);
          var to = year1 + '-' + month1 + '-'  + day1
+         var to1 = day1 + '-' + month1 + '-'  + year1
 
          const dialogConfig = new MatDialogConfig();
          dialogConfig.disableClose = true;
@@ -222,6 +225,8 @@ onclickSummaryReport(data){
            type:"basedOnDate",
            fromDate:from,
            toDate:to,
+           fromDate1:from1,
+           toDate1:to1,
            date:date1
          }
          const dialogRef = this.dialog.open(HistoryReportComponent, dialogConfig);
@@ -331,7 +336,7 @@ onclickSummaryReport(data){
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
     
         console.log(diffDays + " days");
-      if(diffDays<=15){
+      if(diffDays<15){
         this.daysExceed=false
         var year = this.date1.getFullYear();
         var month = ("0" + (this.date1.getMonth() + 1)).slice(-2);

@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { ApiService } from '../api.service';
 import { LoginCheckService } from '../login-check.service';
+import { GeneralMaterialsService } from '../general-materials.service';
 import {Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -33,6 +34,7 @@ displayedColumns: string[] = ['i','baseName', 'contactName', 'startTime','update
   constructor(
     private api: ApiService,
     private login:LoginCheckService,
+    private general:GeneralMaterialsService,
     private router:Router
   ) { }
 
@@ -111,7 +113,7 @@ getTotalCount(val){
             contactName:res.success[i].contactName,
             updatedOn:res.success[i].updatedOn,
             totalTime:res.success[i].totalTime,
-            startTime:this.startTime(res.success[i].totalTime,res.success[i].updatedOn),
+            startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn),
 
           })
         }
@@ -154,23 +156,7 @@ getTotalCount(val){
 }
 
 
-startTime(data1,data2){
-  console.log(data1,data2)
-  var date=new Date(data2)
-  if(data1!="00:00:00" || data1!='-'){
-    var a=data1.split(':')
-    date.setHours(date.getHours() -a[0]);
-    date.setMinutes(date.getMinutes() - a[1]); 
-    date.setSeconds(date.getSeconds() - a[2]); 
-    // console.log("new date==",date)
-  }
-  if(data1=="00:00:00" || data1=='-'){
-    date.setSeconds(date.getSeconds() - 5); 
-  }
- 
 
-  return date
-}
 
      getUpdate(event) {
       // console.log("paginator event",event);

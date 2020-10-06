@@ -23,7 +23,7 @@
           <ng-template matStepLabel>Fill out your Find Id</ng-template>
           <mat-form-field>
             <mat-label>Find Id</mat-label>
-            <input type="number" matInput formControlName="deviceId" placeholder="Ex. 1" required>
+            <input type="number" min="1" matInput formControlName="deviceId" placeholder="Ex. 1" required>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>
@@ -134,7 +134,7 @@
           <ng-template matStepLabel>Fill out your Gateway Id</ng-template>
           <mat-form-field>
             <mat-label>Gateway Id</mat-label>
-            <input matInput formControlName="deviceId" placeholder="Ex. 1" required>
+            <input matInput min="1" formControlName="deviceId" placeholder="Ex. 1" required>
             <mat-error>
               Enter gateway Id with character 12
             </mat-error>

@@ -127,4 +127,40 @@ convertTime(a){
   }
   return date
 }
+startTime(data1,data2){
+  console.log(data1,data2)
+  var date=new Date(data2)
+  if(data1!="00:00:00" || data1!='-'){
+    var a=data1.split(':')
+    date.setHours(date.getHours() -a[0]);
+    date.setMinutes(date.getMinutes() - a[1]); 
+    date.setSeconds(date.getSeconds() - a[2]); 
+    // console.log("new date==",date)
+  }
+  if(data1=="00:00:00" || data1=='-'){
+    date.setSeconds(date.getSeconds() - 5); 
+  }
+ 
+
+  return date
+}
+getZone(date){
+  var timezone=date.getTimezoneOffset()
+
+  let m = timezone % 60;
+  timezone = (timezone - m) / 60;
+  let h = timezone
+  let mm = m <= 9 && m >= 0 ? "0"+m : m;
+  let hh = h <= 9 && h >= 0 ? "0"+h : h;
+  if(m<0 && h<0){
+     var timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
+  }
+  else if(m>0 && h>0){
+    timeZone= '-'+(-(hh)+':'+(-mm)).toString()
+  }
+  else{
+    timeZone=hh+':'+mm
+  }
+  return timeZone
+}
 }

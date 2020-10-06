@@ -31,14 +31,16 @@ export class HistoryReportComponent implements OnInit {
   countCummulative:any=[]
   dataSource:any
   loginData:any
-  from:Date
-  to:Date
+  from:any
+  to:any
+  from1:any
+  to1:any
   index:any
   selectedValue:any
   deviceName:any
   currentPageLength:any=10
   currentPageSize:any=10
-  displayedColumns: string[] = ['i','baseName','contactName', 'updatedOn', 'totaltime'];
+  displayedColumns: string[] = ['i','baseName','contactName','startTime','updatedOn', 'totaltime'];
   displayedColumns1: string[] = ['i','contactName','updatedOn', 'totaltime'];
   displayedColumns2: string[] = ['contactDeviceName','updatedOn'];
   displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
@@ -63,6 +65,8 @@ export class HistoryReportComponent implements OnInit {
 
       this.from = data.fromDate
       this.to = data.toDate
+      this.from1 = data.fromDate1
+      this.to1 = data.toDate1
       this.date=data.date
       this.selectedValue=data.valueSelected
       this.deviceName=data.deviceName
@@ -141,7 +145,7 @@ basedOnDate(limit,offset,type){
     toDate:this.to,
     limit:limit,
     offset:offset,
-    zone:this.getZone(this.date)
+    zone:this.general.getZone(this.date)
   }
   console.log("data==",data)
   this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
@@ -149,7 +153,18 @@ basedOnDate(limit,offset,type){
     this.liveData=[]
     if(res.status){
       if(type==0){
-        this.liveData=res.success
+        for(var i=0;i<res.success.length;i++){
+
+          this.liveData.push({
+          i:i+1,
+          baseName:res.success[i].baseName,
+          contactName:res.success[i].contactName,
+          updatedOn:this.general.updatedOnDate(res.success[i].updatedOn),
+          startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn),
+          totalTime:this.general.convertTime(res.success[i].totalTime)
+
+        })
+        }
       }
       else{
         this.excelData=[]
@@ -160,6 +175,7 @@ basedOnDate(limit,offset,type){
           Base_Person:res.success[i].baseName,
           Contact_Person:res.success[i].contactName,
           Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
+          startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn),
           Total_Time:this.general.convertTime(res.success[i].totalTime)
 
         })
@@ -184,7 +200,7 @@ basedOnFindName(limit,offset,type){
     toDate:this.to,
     offset:offset,
     limit:limit,
-    zone:this.getZone(this.date)
+    zone:this.general.getZone(this.date)
 
   }
   this.api.getDeviceHistoryBasedOnDeviceName(data).then((res:any)=>{
@@ -326,27 +342,12 @@ return group
 }
 cummulativeReport(){
   var date=new Date()
-  var timezone=date.getTimezoneOffset()
-  
-  let m = timezone % 60;
-  timezone = (timezone - m) / 60;
-  let h = timezone
-  let mm = m <= 9 && m >= 0 ? "0"+m : m;
-  let hh = h <= 9 && h >= 0 ? "0"+h : h;
-  if(m<0 && h<0){
-     var timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
-  }
-  else if(m>0 && h>0){
-    timeZone= '-'+(-(hh)+':'+(-mm)).toString()
-  }
-  else{
-    timeZone=hh+':'+mm
-  }
+
   var data={
     userId:this.loginData.userId,
     fromDate: this.from,
     toDate:this.to,
-    zone:timeZone
+    zone:this.general.getZone(date)
 
   }
   console.log("hvhs==",data)
@@ -542,25 +543,7 @@ getUpdate(event) {
 }
 
 
-getZone(date){
-  var timezone=date.getTimezoneOffset()
 
-  let m = timezone % 60;
-  timezone = (timezone - m) / 60;
-  let h = timezone
-  let mm = m <= 9 && m >= 0 ? "0"+m : m;
-  let hh = h <= 9 && h >= 0 ? "0"+h : h;
-  if(m<0 && h<0){
-     var timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
-  }
-  else if(m>0 && h>0){
-    timeZone= '-'+(-(hh)+':'+(-mm)).toString()
-  }
-  else{
-    timeZone=hh+':'+mm
-  }
-  return timeZone
-}
 
 
 getPages() {
@@ -593,7 +576,7 @@ if(this.type=='basedOnDate' || this.type=='basedOnFindName'){
     userId:this.loginData.userId,
     fromDate: this.from,
     toDate:this.to,
-    zone:this.getZone(dateObj),
+    zone:this.general.getZone(dateObj),
     type:this.type
     }
     fileName="GenericReport"
@@ -604,7 +587,7 @@ if(this.type=='basedOnDate' || this.type=='basedOnFindName'){
     deviceName:this.deviceName,
     fromDate: this.from,
     toDate:this.to,
-    zone:this.getZone(dateObj),
+    zone:this.general.getZone(dateObj),
     type:this.type
   }
   fileName="Report-of-Find- "+this.deviceName
@@ -635,7 +618,7 @@ if(this.type=='summaryReport'){
       userId:this.loginData.userId,
       fromDate: this.from,
       toDate:this.to,
-      zone:this.getZone(dateObj),
+      zone:this.general.getZone(dateObj),
       type:this.type
     }
     fileName="CummulativeReport"
