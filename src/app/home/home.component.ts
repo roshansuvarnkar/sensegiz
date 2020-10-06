@@ -109,6 +109,7 @@ refreshFinds(){
 
 
 refreshOnlineDevice(){
+  console.log("total empp==",this.totalEmp)
   var date=new Date()
   var data={
     userId:this.loginData.userId,
@@ -261,8 +262,10 @@ refreshCount(){
       this.infectedEmp = res.success[1].inectedEmp
       this.normalEmp = res.success[2].normalEmp
       this.activeEmp = res.success[3].activeEmp
+      this.refreshOnlineDevice()
     }
   })
+ 
 }
 
 
