@@ -118,10 +118,10 @@ refreshOnlineDevice(){
 
   this.api.getOnlineCount(data).then((res:any)=>{
     console.log("online data ======",res);
-    if(res.status){
+    if(res.status == true){
       this.onlineCount=res.success.length
       this.offlineCount=this.totalEmp-res.success.length
-    }else{
+    }else if(res.status == false){
       this.offlineCount=this.totalEmp-0
     }
   })
@@ -255,7 +255,7 @@ refreshCount(){
     userId:this.loginData.userId,
   }
   this.api.getCountData(data).then((res:any)=>{
-    // console.log("count data ======",res);
+    console.log("count data ======",res);
     if(res.status){
       this.totalEmp = res.success[0].totalEmp
       this.infectedEmp = res.success[1].inectedEmp
