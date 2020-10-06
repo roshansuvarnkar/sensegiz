@@ -121,6 +121,8 @@ refreshOnlineDevice(){
     if(res.status){
       this.onlineCount=res.success.length
       this.offlineCount=this.totalEmp-res.success.length
+    }else{
+      this.offlineCount=this.totalEmp-0
     }
   })
 }
