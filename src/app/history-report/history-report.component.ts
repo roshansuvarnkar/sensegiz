@@ -48,6 +48,7 @@ export class HistoryReportComponent implements OnInit {
   date:any
   fileName:any
   showSpinner:boolean=false
+  language:any
   title:any
 
     constructor(
@@ -75,6 +76,8 @@ export class HistoryReportComponent implements OnInit {
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
 
     this.getTotalCount()
 

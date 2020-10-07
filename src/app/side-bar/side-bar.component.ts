@@ -28,11 +28,14 @@ export class SideBarComponent implements OnInit {
   date2:any
   date1:any
   index:any
+  language:any
   constructor(private api: ApiService,private login:LoginCheckService,private router:Router) { }
 
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
     this.refreshFinds()
     //this.checkPage()
     setInterval(()=>{this.refreshFinds()},30*1000)

@@ -18,6 +18,8 @@ export class EditDeviceComponent implements OnInit {
 	preferredCountries: CountryISO[] = [CountryISO.India];
   type:any
   deviceData:any
+  language:any
+  loginData:any
   Findform:FormGroup
   gatewayform:FormGroup
   userform:FormGroup
@@ -35,6 +37,10 @@ export class EditDeviceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginData = this.login.Getlogin()
+    this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
     this.Findform = this.fb.group({
       deviceName: ['', Validators.required],
       deviceId: [{value: '', disabled: true}, Validators.required],

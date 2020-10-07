@@ -31,6 +31,7 @@ dataSource:any
 index:any
 pageIndex:any
 pagesize:any
+language:any
 displayedColumns: string[] = ['i', 'deviceId', 'deviceName'];
 
   constructor(private api: ApiService,
@@ -45,6 +46,8 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName'];
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
     this.loadData()
   }
  

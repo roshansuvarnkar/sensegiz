@@ -36,6 +36,7 @@ storeData:any
 fileupload:FormGroup
 loading:boolean=false
 format:boolean=false
+language:any
 @ViewChild('fileInput') fileInput:ElementRef
 constructor(public dialog: MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private fb:FormBuilder) {}
 
@@ -60,6 +61,8 @@ openDialog(): void {
 ngOnInit(): void {
   this.loginData = this.login.Getlogin()
   this.loginData = JSON.parse(this.loginData)
+  this.language=this.loginData.language
+  console.log("language==",this.language)
 
   this.fileupload = this.fb.group({
     fileData:null,

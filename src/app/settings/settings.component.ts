@@ -26,6 +26,7 @@ export class SettingsComponent implements OnInit {
   buzzerTimeForm:FormGroup
   buzzerConfigForm:FormGroup
   twoStepAuthForm:FormGroup
+  languageForm:FormGroup
   loginData:any
   setting:any
   duration:any
@@ -48,6 +49,7 @@ export class SettingsComponent implements OnInit {
   coin:any=[]
   min:any=[]
   sec:any=[]
+  language:any
   tempImagePath:any
   // buzzerValue:any=[1,2,3,4,5]
   
@@ -62,6 +64,8 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
     this.refreshSetting()
     this.maxThresholdMinsec()
 
@@ -125,6 +129,9 @@ export class SettingsComponent implements OnInit {
     this.uploadForm = this.fb.group({
       fileData:null,
       type:'logo',
+    });
+    this.languageForm = this.fb.group({
+      language: ['', Validators.required],
     });
 
      
@@ -233,6 +240,9 @@ export class SettingsComponent implements OnInit {
           status:true
         }
       }
+      this.languageForm.patchValue({
+        language:res.success[0].language.toString()
+      })
     }
   })
 }
@@ -702,6 +712,15 @@ export class SettingsComponent implements OnInit {
       }
 
 
+   }
+
+   onSubmitlanguageForm(data){
+     console.log("language===",data)
+     data.userId=this.loginData.userId
+     this.api.setLanguage(data).then((res:any)=>{
+       console.log("res======",res)
+       this.refreshSetting()
+     })
    }
 
    inactivityChange(event){

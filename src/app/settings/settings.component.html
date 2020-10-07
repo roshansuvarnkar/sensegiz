@@ -392,6 +392,31 @@
     </form>
   </mat-card-content>
 </mat-card>
+<mat-card>
+  <mat-card-title>
+    Set Language
+  </mat-card-title>
+  <mat-card-subtitle>
+    Choose language
+  </mat-card-subtitle><br> 
+  <mat-card-content>
+    <form [formGroup]="languageForm" (ngSubmit)="onSubmitlanguageForm(languageForm.value)">
+      <mat-form-field>
+        <mat-label>Set language</mat-label>
+       <mat-select formControlName="language" required>
+         <mat-option value="english">English</mat-option>
+         <mat-option value="japanese">Japanese</mat-option>
+
+       </mat-select>
+        <mat-error>
+          Please choose language
+        </mat-error>
+      </mat-form-field>
+      <br><br><br>
+      <button class="btn-set" mat-raised-button [disabled]="!languageForm.valid" color="primary">Submit</button>
+    </form>
+  </mat-card-content>
+</mat-card>
 
 
 </div>

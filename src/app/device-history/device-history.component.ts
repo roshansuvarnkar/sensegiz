@@ -19,6 +19,7 @@ export class DeviceHistoryComponent implements OnInit {
   finds:any=[]
   findData:any=[]
   loginData:any
+  language:any
   dataSource:any
   currentPageLength:any=10
   currentPageSize:any=10
@@ -30,7 +31,8 @@ export class DeviceHistoryComponent implements OnInit {
 
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
-
+    this.language=this.loginData.language
+    console.log("language==",this.language)
 
     this.route.queryParams.subscribe(params => {
         this.deviceData = JSON.parse(params.record) ;

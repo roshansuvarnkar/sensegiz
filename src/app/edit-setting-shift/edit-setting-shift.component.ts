@@ -19,7 +19,7 @@ export class EditSettingShiftComponent implements OnInit {
 	shifts:any
 	loginData:any
 	dataGet:any
-
+	language:any
     constructor(
 	    private fb: FormBuilder,
 	    public dialogRef: MatDialogRef<EditSettingShiftComponent>,
@@ -36,8 +36,10 @@ export class EditSettingShiftComponent implements OnInit {
   	}
 
 	ngOnInit(): void {
-	  this.loginData = this.login.Getlogin()
-	  this.loginData = JSON.parse(this.loginData)
+		this.loginData = this.login.Getlogin()
+		this.loginData = JSON.parse(this.loginData)
+		this.language=this.loginData.language
+		console.log("language==",this.language)
 
 	  this.route.queryParams.subscribe(params => {
 		this.dataGet = JSON.parse(params.record) ;

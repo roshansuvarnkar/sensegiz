@@ -24,6 +24,7 @@ export class AdminDashboardComponent implements OnInit {
   passwordType: string = 'password';
   passwordIcon: string = 'visibility_off';
   adminData:any=[]
+  language:any
    constructor(
    		public dialog: MatDialog,
       private fb: FormBuilder,

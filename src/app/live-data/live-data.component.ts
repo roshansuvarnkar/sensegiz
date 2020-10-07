@@ -27,7 +27,7 @@ currentLength:any
 count= 0
 currentPageLength:number = 10;
 currentPageSize:number = 10;
-
+language:any
 displayedColumns: string[] = ['i','baseName', 'contactName', 'startTime','updatedOn','totalTime'];
 
 
@@ -41,6 +41,8 @@ displayedColumns: string[] = ['i','baseName', 'contactName', 'startTime','update
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
     this.count=0
     this.refresh()
     // console.log("count",this.count)

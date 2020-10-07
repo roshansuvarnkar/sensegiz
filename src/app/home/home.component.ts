@@ -36,6 +36,7 @@ pageIndex:any
 pageSize:any
 offlineCount:any
 onlineCount:any
+language:any
 dataPoints:any=[]
   constructor(private api: ApiService,
   private login:LoginCheckService,
@@ -47,6 +48,8 @@ dataPoints:any=[]
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
     // this.checkUrl = this.router.url
 
     this.refreshFinds()

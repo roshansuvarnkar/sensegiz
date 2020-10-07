@@ -19,6 +19,7 @@ export class ManageUsersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   loginData:any
+  language:any
   userData:any=[]
   dataSource: any = [];
   displayedColumns = ['i','mobileNum','emailId','edit',	'delete'];
@@ -45,6 +46,8 @@ export class ManageUsersComponent implements OnInit {
   ngOnInit() {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
     this.refreshUsers()
   }
 
