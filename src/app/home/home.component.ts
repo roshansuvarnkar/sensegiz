@@ -262,7 +262,7 @@ refreshCount(){
       this.infectedEmp = res.success[1].inectedEmp
       this.normalEmp = res.success[2].normalEmp
       this.activeEmp = res.success[3].activeEmp
-      this.refreshOnlineDevice()
+     
     }
   })
  

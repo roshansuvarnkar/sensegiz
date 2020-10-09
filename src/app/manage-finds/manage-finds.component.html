@@ -6,7 +6,7 @@
 <div class="flex">
   
   <div class="upload">
-   <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)">
+   <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)"> 
      <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
      <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br>
 
@@ -14,7 +14,7 @@
       <span *ngIf="format" style="color:red"> Please check format: Name*, employeeId[optional], deviceId*, emailId[optional], mobileNumber[optional]</span>
 
  
-   </form>
+   </form> <br>
   </div> 
    <button class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
 
@@ -23,11 +23,7 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 
-
-
 </div>
-
-
 
 <!-- 
 <div class="table">
