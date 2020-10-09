@@ -60,7 +60,7 @@ mat-radio-group.mat-radio-group.wearable.ng-untouched.ng-pristine.ng-valid {
   display: flex;*/
   line-height: 30px; 
   font-weight: 500 !important;
-  font-size: x-large !important;
+  font-size: 1.5rem !important;
   font-family: sans-serif !important;
   /* -moz-animation: marquee 5s linear infinite;
   -webkit-animation: marquee 5s linear infinite;

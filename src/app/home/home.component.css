@@ -73,7 +73,7 @@ mat-progress-bar.mat-progress-bar.mat-primary {
     flex-wrap: wrap;
     justify-content: space-evenly;
     text-align: center;
-    font-size: 1rem;
+    /*font-size: 1rem;*/
     font-family: monospace;
     font-weight: 400;
     width: 100%;
