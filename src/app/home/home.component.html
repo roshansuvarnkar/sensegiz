@@ -1,256 +1,254 @@
 
 <div class="main-home">
 
-<div class="home">
-  <div class="first">
-    <mat-card>
-      <mat-card-content>
-        <div class="row tot-head">
-          <span class="tot">
-            <mat-icon >account_circle</mat-icon>
-          </span><br>
-          <span class="tot">
-            <mat-label *ngIf="language=='english'">Total number of users</mat-label>:
-             <mat-label *ngIf="language=='japanese'">ユーザー数の合計</mat-label>:
-            <mat-label>{{totalEmp}}</mat-label>
-            <br>
-            <!-- <mat-label>Total Finds</mat-label> :
-            <mat-label>{{totalEmp}}</mat-label> -->
-          </span>
-        </div><br><br>
-        <div class="row">
-          <div class="first-cont">
-            <div class="regi">
-              <span *ngIf="language=='english'">Active Users</span> 
-              <span *ngIf="language=='japanese'">アクティブユーザー数</span><br><br>
-              <circle-progress (click)="onlineUser()"
-              class="circle"
-                [percent]="onlineCount"
-                [showUnits]="false"
-                [showBackground] = "true"
-                [backgroundColor]= "'#ef6c00'"
-                [outerStrokeColor] = "'#ffffff'"
-                [outerStrokeWidth] = 6
-                [showInnerStroke] = false
-                [radius] = 60
-                [titleColor] = "'#ffffff'"
-                [showSubtitle] = false
-                [backgroundPadding] = 5
-                [animation]="true"
-                [animationDuration]="500"
-                [startFromZero]="true"
-                [responsive]="false"
-              ></circle-progress>
+  <div class="home">
+    <div class="first">
+      <mat-card>
+        <mat-card-content>
+          <div class="row tot-head">
+            <span class="tot">
+              <mat-icon >account_circle</mat-icon>
+            </span><br>
+            <span class="tot">
+              <mat-label *ngIf="language=='english'">Total number of users</mat-label>:
+               <mat-label *ngIf="language=='japanese'">ユーザー数の合計</mat-label>:
+              <mat-label>{{totalEmp}}</mat-label>
+              <br>
+              <!-- <mat-label>Total Finds</mat-label> :
+              <mat-label>{{totalEmp}}</mat-label> -->
+            </span>
+          </div><br><br>
+          <div class="row">
+            <div class="first-cont">
+              <div class="regi">
+                <span *ngIf="language=='english'">Active Users</span> 
+                <span *ngIf="language=='japanese'">アクティブユーザー数</span><br><br>
+                <circle-progress (click)="onlineUser()"
+                class="circle"
+                  [percent]="onlineCount"
+                  [showUnits]="false"
+                  [showBackground] = "true"
+                  [backgroundColor]= "'#ef6c00'"
+                  [outerStrokeColor] = "'#ffffff'"
+                  [outerStrokeWidth] = 6
+                  [showInnerStroke] = false
+                  [radius] = 60
+                  [titleColor] = "'#ffffff'"
+                  [showSubtitle] = false
+                  [backgroundPadding] = 5
+                  [animation]="true"
+                  [animationDuration]="500"
+                  [startFromZero]="true"
+                  [responsive]="false"
+                ></circle-progress>
+                
+              </div>
               
-            </div>
+              <div class="infe" >
             
-            <div class="infe" >
-          
-              <circle-progress (click)="activeUser()"
-                c
-                class="circle"
-                fill="green"
-                [percent]="activeEmp"
-                [showUnits]="false"
-                [showBackground] = "true"
-                [backgroundColor]= "'#ef6c00'"
-                [outerStrokeColor] = "'#ffffff'"
-                [outerStrokeWidth] = 6
-                [showInnerStroke] = false
-                [radius] = 60
-                [titleColor] = "'#ffffff'"
-                [showSubtitle] = false
-                [backgroundPadding] = 5
-                [animation]="true"
-                [animationDuration]="500"
-                [startFromZero]="true"
-                [responsive]="false"
-              ></circle-progress>
-<<<<<<< HEAD
-              <br> <br> <span *ngIf="language=='english'">Registered Users</span> 
-              <span *ngIf="language=='japanese'">登録ユーザー名</span> 
-=======
-              <br> 
->>>>>>> 52bed63801fec1a78dcc115c570190c8d5a1f60f
-            </div>
-            <div class="regi">
-                <span *ngIf="language=='english'">Offline Users</span>
-                <span *ngIf="language=='japanese'">Offline Users</span>
-               <br><br>
-              <circle-progress (click)="offlineUser()"
-                class="circle"
-                [percent]="offlineCount"
-                [showUnits]="false"
-                [showBackground] = "true"
-                [backgroundColor]= "'#ef6c00'"
-                [outerStrokeColor] = "'#ffffff'"
-                [outerStrokeWidth] = 6
-                [showInnerStroke] = false
-                [radius] = 60
-                [titleColor] = "'#ffffff'"
-                [showSubtitle] = false
-                [backgroundPadding] = 5
-                [animation]="true"
-                [animationDuration]="500"
-                [startFromZero]="true"
-                [responsive]="false"
-              ></circle-progress>
-              
-            </div>
-            <div class="infe">
-             
-              <circle-progress (click)="infectedUser()"
-                class="circle"
-                [percent]="infectedEmp"
-                [showUnits]="false"
-                [showBackground] = "true"
-                [backgroundColor]= "'#ef6c00'"
-                [outerStrokeColor] = "'#ffffff'"
-                [outerStrokeWidth] = 6
-                [showInnerStroke] = false
-                [radius] = 60
-                [titleColor] = "'#ffffff'"
-                [showSubtitle] = false
-                [backgroundPadding] = 5
-                [animation]="true"
-                [animationDuration]="500"
-                [startFromZero]="true"
-                [responsive]="false"
-              ></circle-progress>
-<<<<<<< HEAD
-             <br> <br><span *ngIf="language=='english'">Infected Users</span>
-                      <span *ngIf="language=='japanese'">感染したユーザー数</span>
-=======
-             <br> 
->>>>>>> 52bed63801fec1a78dcc115c570190c8d5a1f60f
-            </div> <br> 
-            <!-- <div class="count">
-              Normal User <br><br>
-              <circle-progress (click)="normalUser()"
-                [percent]="normalEmp"
-                [showUnits]="false"
-                [showBackground] = "true"
-                [backgroundColor]= "'#ef6c00'"
-                [outerStrokeColor] = "'#ffffff'"
-                [outerStrokeWidth] = 6
-                [showInnerStroke] = false
-                [radius] = 60
-                [titleColor] = "'#ffffff'"
-                [showSubtitle] = false
-                [backgroundPadding] = 5
-                [animation]="true"
-                [animationDuration]="500"
-                [startFromZero]="true"
-                [responsive]="false"
-              ></circle-progress><br><br>
-            </div> -->
+                <circle-progress (click)="activeUser()"
+                  c
+                  class="circle"
+                  fill="green"
+                  [percent]="activeEmp"
+                  [showUnits]="false"
+                  [showBackground] = "true"
+                  [backgroundColor]= "'#ef6c00'"
+                  [outerStrokeColor] = "'#ffffff'"
+                  [outerStrokeWidth] = 6
+                  [showInnerStroke] = false
+                  [radius] = 60
+                  [titleColor] = "'#ffffff'"
+                  [showSubtitle] = false
+                  [backgroundPadding] = 5
+                  [animation]="true"
+                  [animationDuration]="500"
+                  [startFromZero]="true"
+                  [responsive]="false"
+                ></circle-progress>
 
+                <br> <br> <span *ngIf="language=='english'">Registered Users</span> 
+                <span *ngIf="language=='japanese'">登録ユーザー名</span> 
 
+                <br> 
+              </div>
+              <div class="regi">
+                  <span *ngIf="language=='english'">Offline Users</span>
+                  <span *ngIf="language=='japanese'">Offline Users</span>
+                 <br><br>
+                <circle-progress (click)="offlineUser()"
+                  class="circle"
+                  [percent]="offlineCount"
+                  [showUnits]="false"
+                  [showBackground] = "true"
+                  [backgroundColor]= "'#ef6c00'"
+                  [outerStrokeColor] = "'#ffffff'"
+                  [outerStrokeWidth] = 6
+                  [showInnerStroke] = false
+                  [radius] = 60
+                  [titleColor] = "'#ffffff'"
+                  [showSubtitle] = false
+                  [backgroundPadding] = 5
+                  [animation]="true"
+                  [animationDuration]="500"
+                  [startFromZero]="true"
+                  [responsive]="false"
+                ></circle-progress>
+                
+              </div>
+              <div class="infe">
+               
+                <circle-progress (click)="infectedUser()"
+                  class="circle"
+                  [percent]="infectedEmp"
+                  [showUnits]="false"
+                  [showBackground] = "true"
+                  [backgroundColor]= "'#ef6c00'"
+                  [outerStrokeColor] = "'#ffffff'"
+                  [outerStrokeWidth] = 6
+                  [showInnerStroke] = false
+                  [radius] = 60
+                  [titleColor] = "'#ffffff'"
+                  [showSubtitle] = false
+                  [backgroundPadding] = 5
+                  [animation]="true"
+                  [animationDuration]="500"
+                  [startFromZero]="true"
+                  [responsive]="false"
+                ></circle-progress>
+ 
+               <br> <br><span *ngIf="language=='english'">Infected Users</span>
+                        <span *ngIf="language=='japanese'">感染したユーザー数</span>
+               <br> 
+              </div> <br> 
+              <!-- <div class="count">
+                Normal User <br><br>
+                <circle-progress (click)="normalUser()"
+                  [percent]="normalEmp"
+                  [showUnits]="false"
+                  [showBackground] = "true"
+                  [backgroundColor]= "'#ef6c00'"
+                  [outerStrokeColor] = "'#ffffff'"
+                  [outerStrokeWidth] = 6
+                  [showInnerStroke] = false
+                  [radius] = 60
+                  [titleColor] = "'#ffffff'"
+                  [showSubtitle] = false
+                  [backgroundPadding] = 5
+                  [animation]="true"
+                  [animationDuration]="500"
+                  [startFromZero]="true"
+                  [responsive]="false"
+                ></circle-progress><br><br>
+              </div> -->
+  
+  
+            </div>
           </div>
-        </div>
-
-
-      </mat-card-content>
-    </mat-card>
-    <br>
-    <mat-card>
-      <mat-card-content>
-        <mat-icon >settings</mat-icon><br>
-
-            <mat-card class="settingcard">
-              <mat-card-content class="setting" routerLink="/settings">
-                <mat-label *ngIf="language=='english'">  Minimum social distance</mat-label>
-                 <mat-label *ngIf="language=='japanese'"> 最小ソーシャルディスタンス設定距離</mat-label>
-                <mat-label>  {{setting?.distance}} meter</mat-label>
-                <mat-icon >keyboard_arrow_right</mat-icon>
-              </mat-card-content>
-            </mat-card><br>
-            <mat-card class="settingcard">
-              <mat-card-content class="setting" routerLink="/settings">
-                <mat-label *ngIf="language=='english'">Violation alert</mat-label>
-                <mat-label *ngIf="language=='japanese'">接近違反警告</mat-label>
-                <mat-label class="tab-set">{{setting?.threshold}}</mat-label>
-                <mat-icon>keyboard_arrow_right</mat-icon>
-              </mat-card-content>
-            </mat-card><br>
-            <!-- <mat-card class="settingcard">
-              <mat-card-content class="setting" routerLink="/settings">
-                <mat-label>Transmission power</mat-label>
-                <mat-label class="tab-set">{{setting?.txPower}} feet</mat-label>
-                <mat-icon>keyboard_arrow_right</mat-icon>
-              </mat-card-content>
-            </mat-card> -->
-      </mat-card-content>
-    </mat-card>
-
-  </div>
-
-  <div class="three">
-    <mat-card>
-      <mat-card-title *ngIf="language=='english'">Frequent Violators</mat-card-title>
-        <mat-card-title *ngIf="language=='japanese'">頻繁な接近違反者</mat-card-title>
-      <mat-card-content>
-        <mat-card *ngFor="let data of contactDeviceMax; let i = index">
-          <mat-card-content>
-            <div class="tab-head">
-              <span class="tab-emp">
-                <span><li></li></span>
-                <span class="emp-pad"><mat-icon >person_outline</mat-icon></span>
-                <span class="rec">
-                  <span class="emp-pad">{{data.baseDeviceName}}</span>
-                  <span class="emp-pad">{{data.totalCount}}</span>
-                </span>
-
-              </span>
-              <span class="tab-btn">
-                <button mat-raised-button class="btn" (click)="sendWarning(data.id,data.totalCount)">Send warning</button>
-              </span>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </mat-card-content> 
+  
+  
+        </mat-card-content>
       </mat-card>
-  </div>
-
-</div>
-
-<div class="rowhome">
-  <div class="second">
-    <mat-card>
-      <mat-card-content>
-        <div id="chartContainer" style="height: 202px; width: 100%;"></div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div class="four">
-    <mat-card>
-      <mat-card-title class="search-title">
-        <span class="search-head" *ngIf="language=='english'">
-           Cumulative time
-        </span><span class="search-head" *ngIf="language=='japanese'">
-           Cumulative time
-        </span>
-      </mat-card-title>
-        <mat-card >
-          <mat-card-content *ngFor="let data of contactTimeMax; let i = index">
-            <div class="row">
-              <div class="col-md-6">
-                <span class="max-emp">
-                  <mat-icon>person_outline</mat-icon>&nbsp;
-                  <mat-label>{{data.baseName}}</mat-label>
+      <br>
+      <mat-card>
+        <mat-card-content>
+          <mat-icon >settings</mat-icon><br>
+  
+              <mat-card class="settingcard">
+                <mat-card-content class="setting" routerLink="/settings">
+                  <mat-label *ngIf="language=='english'">  Minimum social distance</mat-label>
+                   <mat-label *ngIf="language=='japanese'"> 最小ソーシャルディスタンス設定距離</mat-label>
+                  <mat-label>  {{setting?.distance}} meter</mat-label>
+                  <mat-icon >keyboard_arrow_right</mat-icon>
+                </mat-card-content>
+              </mat-card><br>
+              <mat-card class="settingcard">
+                <mat-card-content class="setting" routerLink="/settings">
+                  <mat-label *ngIf="language=='english'">Violation alert</mat-label>
+                  <mat-label *ngIf="language=='japanese'">接近違反警告</mat-label>
+                  <mat-label class="tab-set">{{setting?.threshold}}</mat-label>
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+                </mat-card-content>
+              </mat-card><br>
+              <!-- <mat-card class="settingcard">
+                <mat-card-content class="setting" routerLink="/settings">
+                  <mat-label>Transmission power</mat-label>
+                  <mat-label class="tab-set">{{setting?.txPower}} feet</mat-label>
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+                </mat-card-content>
+              </mat-card> -->
+        </mat-card-content>
+      </mat-card>
+  
+    </div>
+  
+    <div class="three">
+      <mat-card>
+        <mat-card-title *ngIf="language=='english'">Frequent Violators</mat-card-title>
+          <mat-card-title *ngIf="language=='japanese'">頻繁な接近違反者</mat-card-title>
+        <mat-card-content>
+          <mat-card *ngFor="let data of contactDeviceMax; let i = index">
+            <mat-card-content>
+              <div class="tab-head">
+                <span class="tab-emp">
+                  <span><li></li></span>
+                  <span class="emp-pad"><mat-icon >person_outline</mat-icon></span>
+                  <span class="rec">
+                    <span class="emp-pad">{{data.baseDeviceName}}</span>
+                    <span class="emp-pad">{{data.totalCount}}</span>
+                  </span>
+  
+                </span>
+                <span class="tab-btn">
+                  <button mat-raised-button class="btn" (click)="sendWarning(data.id,data.totalCount)">Send warning</button>
                 </span>
               </div>
-              <div class="col-md-6">
-                <span class="max-prg">
-                  <mat-label>Time : {{data.totTime}} hrs / {{data.totmin}} mins</mat-label>
-                  <mat-progress-bar mode="determinate" [value]="data.totmin"></mat-progress-bar>
-                </span>
-              </div>
-            </div>
-          </mat-card-content>
+            </mat-card-content>
+          </mat-card>
+        </mat-card-content> 
         </mat-card>
-    </mat-card>
+    </div>
+  
   </div>
-</div>
-
-</div>
+  
+  <div class="rowhome">
+    <div class="second">
+      <mat-card>
+        <mat-card-content>
+          <div id="chartContainer" style="height: 202px; width: 100%;"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="four">
+      <mat-card>
+        <mat-card-title class="search-title">
+          <span class="search-head" *ngIf="language=='english'">
+             Cumulative time
+          </span><span class="search-head" *ngIf="language=='japanese'">
+             Cumulative time
+          </span>
+        </mat-card-title>
+          <mat-card >
+            <mat-card-content *ngFor="let data of contactTimeMax; let i = index">
+              <div class="row">
+                <div class="col-md-6">
+                  <span class="max-emp">
+                    <mat-icon>person_outline</mat-icon>&nbsp;
+                    <mat-label>{{data.baseName}}</mat-label>
+                  </span>
+                </div>
+                <div class="col-md-6">
+                  <span class="max-prg">
+                    <mat-label>Time : {{data.totTime}} hrs / {{data.totmin}} mins</mat-label>
+                    <mat-progress-bar mode="determinate" [value]="data.totmin"></mat-progress-bar>
+                  </span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+      </mat-card>
+    </div>
+  </div>
+  
+  </div>
+  
