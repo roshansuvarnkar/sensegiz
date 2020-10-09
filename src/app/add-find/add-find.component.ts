@@ -13,9 +13,9 @@ import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input
 })
 export class AddFindComponent implements OnInit {
   SearchCountryField = SearchCountryField;
-	TooltipLabel = TooltipLabel;
-	CountryISO = CountryISO;
-	preferredCountries: CountryISO[] = [CountryISO.India];
+  TooltipLabel = TooltipLabel;
+  CountryISO = CountryISO;
+  preferredCountries: CountryISO[] = [CountryISO.India];
   Findform:FormGroup
   gatewayform:FormGroup
   userform:FormGroup
@@ -24,7 +24,6 @@ export class AddFindComponent implements OnInit {
   findStatus:boolean=false
   gatewayStatus:boolean=false
   userStatus:boolean=false
-  language:any
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddFindComponent>,
@@ -42,8 +41,7 @@ export class AddFindComponent implements OnInit {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
 
-    this.language=this.loginData.language
-    console.log("language====",this.language)
+
     this.Findform = this.fb.group({
       deviceName: ['', Validators.required],
       deviceId: ['', Validators.required],

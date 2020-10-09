@@ -718,11 +718,11 @@ export class SettingsComponent implements OnInit {
      console.log("language===",data)
      data.userId=this.loginData.userId
      this.api.setLanguage(data).then((res:any)=>{
-       console.log("res======",res)
-       this.refreshSetting()
-        this.loginData = this.login.Getlogin()
-        this.loginData = JSON.parse(this.loginData)
-        this.language=this.loginData.language
+       this.general.updateItem('sensegizlogin','language',data.language)
+      this.refreshSetting()
+      setTimeout(()=>{
+        window.location.reload()
+      },1000)
      })
    }
 
@@ -737,7 +737,7 @@ export class SettingsComponent implements OnInit {
      this.api.updateInactivityStatus(data).then((res:any)=>{
        if(res.status){
          this.refreshSetting()
-         var msg = 'al'
+         var msg = 'Inactivity updated Successfully'
          this.general.openSnackBar(msg,'')
        }
      }).catch(err=>{

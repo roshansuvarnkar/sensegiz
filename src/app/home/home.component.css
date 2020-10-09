@@ -146,7 +146,7 @@ mat-label.tab-set {
   }
   .rowhome {
       width: 100%;
-      margin: 0 1rem 0 1rem;
+      margin: 0 1rem 0 0;
   }
   .first{
     margin: 1rem 0 2rem 0;

@@ -60,7 +60,7 @@ dataPoints:any=[]
     this.repeatedContacts()
     this.numOfcontactPerDay()
 
-    this.timeout=setInterval(()=>{this.refresh()},60*1000)
+    this.timeout=setInterval(()=>{this.refresh()},30*1000)
 
 }
 ngOnDestroy() {
@@ -108,9 +108,6 @@ refreshFinds(){
   })
 }
 
-
-
-
 refreshOnlineDevice(){
   console.log("total empp==",this.totalEmp)
   var date=new Date()
@@ -125,8 +122,11 @@ refreshOnlineDevice(){
     if(res.status == true){
       this.onlineCount=res.success.length
       this.offlineCount=this.totalEmp-res.success.length
+      console.log("offlineCount empp==",this.offlineCount)
     }else if(res.status == false){
       this.offlineCount=this.totalEmp-0
+      console.log("offlineCount empp==",this.offlineCount)
+
     }
   })
 }
@@ -191,7 +191,6 @@ onlineUser(){
 
 
 infectedUser(){
- 
 
       // console.log("Infected users===",this.infectedEmp)
        const dialogConfig = new MatDialogConfig();
@@ -265,7 +264,7 @@ refreshCount(){
       this.infectedEmp = res.success[1].inectedEmp
       this.normalEmp = res.success[2].normalEmp
       this.activeEmp = res.success[3].activeEmp
-      this.refreshOnlineDevice()
+     
     }
   })
  
