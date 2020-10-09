@@ -718,8 +718,11 @@ export class SettingsComponent implements OnInit {
      console.log("language===",data)
      data.userId=this.loginData.userId
      this.api.setLanguage(data).then((res:any)=>{
-       console.log("res======",res)
-       this.refreshSetting()
+       this.general.updateItem('sensegizlogin','language',data.language)
+      this.refreshSetting()
+      setTimeout(()=>{
+        window.location.reload()
+      },1000)
      })
    }
 

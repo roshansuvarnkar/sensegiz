@@ -5,7 +5,7 @@ import { ApiService } from '../api.service';
 import { LoginCheckService } from '../login-check.service';
 import { GeneralMaterialsService } from '../general-materials.service';
 import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
-import { AnyRecordWithTtl } from 'dns';
+
 
 @Component({
   selector: 'app-add-find',
@@ -25,7 +25,7 @@ export class AddFindComponent implements OnInit {
   findStatus:boolean=false
   gatewayStatus:boolean=false
   userStatus:boolean=false
-  language:AnyRecordWithTtl
+  language:any
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddFindComponent>,
