@@ -1,4 +1,6 @@
-<mat-tab-group mat-stretch-tabs>
+
+
+<mat-tab-group mat-stretch-tabs *ngIf="language=='english'">
   <mat-tab label="Manage Finds">
     <app-manage-finds></app-manage-finds>
   </mat-tab>
@@ -6,6 +8,17 @@
     <app-manage-gateways></app-manage-gateways>
   </mat-tab>
   <mat-tab label="Manage Users">
+    <app-manage-users></app-manage-users>
+  </mat-tab>
+</mat-tab-group>
+<mat-tab-group mat-stretch-tabs *ngIf="language=='japanese'">
+  <mat-tab label="追跡対象者の登録・管理">
+    <app-manage-finds></app-manage-finds>
+  </mat-tab>
+  <mat-tab label="ゲートウエイの登録・管理">
+    <app-manage-gateways></app-manage-gateways>
+  </mat-tab>
+  <mat-tab label="管理者の登録・管理">
     <app-manage-users></app-manage-users>
   </mat-tab>
 </mat-tab-group>

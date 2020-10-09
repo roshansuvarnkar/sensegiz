@@ -54,15 +54,26 @@
  
  <div *ngIf="twoStepAuth?.status && twoStepAuth?.role=='user'">
    <mat-toolbar color="primary" class="menubar">
-     <span routerLink="/home">Home</span>
-     <!-- <span routerLink="/exception">Exception</span> -->
+    <div class="toolbar" *ngIf="language=='english';else changelang">
+        <span routerLink="/home">Home</span>
+         <!-- <span routerLink="/exception">Exception</span> -->
 
-     <span routerLink="/dashboard">Manage People</span>
-     <span routerLink="/live-data">Social Distancing</span>
-      <span routerLink="/settings">Settings</span>
-      <span routerLink="/history">Reports</span>
- 
-    <span routerLink="/user-guide">User Guide</span>
+        <span routerLink="/dashboard">Manage People</span>
+        <span routerLink="/live-data">Social Distancing</span>
+        <span routerLink="/settings">Settings</span>
+        <span routerLink="/history">Reports</span>
+        <span routerLink="/user-guide">User Guide</span>
+    </div>
+   <ng-template #changelang >
+      <div class="toolbar">
+        <span routerLink="/home">ホームページ</span>
+        <span routerLink="/dashboard">管理画面</span>
+        <span routerLink="/live-data">ソーシャル・ディスタンシング</span>
+        <span routerLink="/settings">設定</span>
+        <span routerLink="/history">レポート</span>
+        <span routerLink="/user-guide">ユーザーガイド</span>
+    </div>
+   </ng-template>
  
  
    </mat-toolbar>

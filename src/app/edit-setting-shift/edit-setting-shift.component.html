@@ -1,6 +1,7 @@
 <div class="head" *ngIf="type=='shifts'">
 	<div class="content">
-    	<p class="center">Shifts</p>
+    	<p class="center" *ngIf="language=='english'">Shifts</p>
+    		<p class="center" *ngIf="language=='japanese'">追跡対象となる時間帯</p>
 		<span>
 			<button mat-button mat-dialog-close><mat-icon >clear</mat-icon></button>
 		</span>

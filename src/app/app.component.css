@@ -9,6 +9,9 @@ span.flex.logo {
     position: relative;
     height: 4rem;
 }
+.toolbar {
+    display: contents;
+}
 .menubar{
   display: flex;
   justify-content: space-evenly;

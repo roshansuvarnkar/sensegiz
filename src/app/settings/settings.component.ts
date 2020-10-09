@@ -720,6 +720,9 @@ export class SettingsComponent implements OnInit {
      this.api.setLanguage(data).then((res:any)=>{
        console.log("res======",res)
        this.refreshSetting()
+        this.loginData = this.login.Getlogin()
+        this.loginData = JSON.parse(this.loginData)
+        this.language=this.loginData.language
      })
    }
 
@@ -734,7 +737,7 @@ export class SettingsComponent implements OnInit {
      this.api.updateInactivityStatus(data).then((res:any)=>{
        if(res.status){
          this.refreshSetting()
-         var msg = 'Inactivity updated Successfully'
+         var msg = 'al'
          this.general.openSnackBar(msg,'')
        }
      }).catch(err=>{

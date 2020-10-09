@@ -1,7 +1,7 @@
 
 
 <div class="history">
-  <mat-card >
+  <mat-card *ngIf="language=='english'">
     <span class="card-head">
       <mat-card-title color="primary">
         Generic Report
@@ -48,6 +48,52 @@
    </mat-card-content>
   </mat-card>
 
+<mat-card *ngIf="language=='japanese'">
+    <span class="card-head">
+      <mat-card-title color="primary">
+        全体接触内容レポート
+      </mat-card-title>
+      <mat-card-subtitle>
+        日付範囲の入力
+      </mat-card-subtitle>
+    </span>
+    <mat-card-content>
+     <div class="radio radio1">
+      <mat-radio-group  color="primary">
+        <mat-radio-button [value]="1" name="small" (click)="onclickDate(7)">先週</mat-radio-button>
+        <mat-radio-button [value]="2" name="small" (click)="onclickDate(14)">過去2週間</mat-radio-button>
+      </mat-radio-group><br><br>
+     </div>
+<div class="date">
+  <form [formGroup]="dateForm" (ngSubmit)="onSubmitDateForm(dateForm.value)">
+
+    <mat-form-field>
+      <mat-label>From date</mat-label>
+      <input matInput [matDatepicker]="myDatepicker1" formControlName="fromDate" required>
+      <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker1></mat-datepicker>
+      <mat-error>
+        Please provide a valid from date
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>To date</mat-label>
+      <input matInput [matDatepicker]="myDatepicker2" formControlName="toDate" required>
+      <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker2></mat-datepicker>
+      <mat-error>
+        Please provide a valid to date
+      </mat-error>
+    </mat-form-field>
+<br>
+<br>
+    <button class="btn-set" mat-raised-button [disabled]="!dateForm.valid" color="primary" >レポート作成</button>
+  </form>
+
+</div> 
+   </mat-card-content>
+  </mat-card>
 
 
   <!-- <mat-card >
@@ -94,7 +140,7 @@
     </mat-card-content>
   </mat-card> -->
 
-  <mat-card >
+  <mat-card *ngIf="language=='english'">
     <span class="card-head">
       <mat-card-title color="primary">
          Cumulative Report
@@ -138,9 +184,52 @@
       </form>
     </mat-card-content>
   </mat-card>
+    <mat-card *ngIf="language=='japanese'">
+    <span class="card-head">
+      <mat-card-title color="primary">
+         Cumulative Report
+      </mat-card-title>
+      <mat-card-subtitle>
+        Enter date range
+      </mat-card-subtitle>
+    </span> <br>
+    <mat-card-content>
+    <div >
+      <mat-radio-group  color="primary" class="radio">
+        <mat-radio-button [value]="1" name="small" (click)="onclickDate1(7)">先週</mat-radio-button>
+        <mat-radio-button [value]="2" name="small" (click)="onclickDate1(14)">過去2週間</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  
+      <form [formGroup]="cummulativeForm" (ngSubmit)="onSubmitcummulativeForm(cummulativeForm.value)">
 
+        <mat-form-field>
+          <mat-label>From date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker11" formControlName="fromDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker11"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker11></mat-datepicker>
+          <mat-error>
+            Please provide a valid from date
+          </mat-error>
+        </mat-form-field>
 
-  <mat-card >
+        <mat-form-field>
+          <mat-label>To date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker12" formControlName="toDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker12"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker12></mat-datepicker>
+          <mat-error>
+            Please provide a valid to date
+          </mat-error>
+        </mat-form-field>
+  <br>
+  <br>
+        <button class="btn-set" mat-raised-button [disabled]="!cummulativeForm.valid" color="primary" >レポート作成</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="language=='english'">
     <span class="card-head">
       <mat-card-title color="primary">
         Social Distancing Violators Report Based On Username
@@ -194,10 +283,63 @@
       </form>
     </mat-card-content>
   </mat-card>
+     <mat-card *ngIf="language=='japanese'">
+    <span class="card-head">
+      <mat-card-title color="primary">
+        ソーシャルディスタンス内に近づいた追跡対象者の全接触者リスト
+      </mat-card-title>
+      <mat-card-subtitle>
+        追跡対象者名と日付範囲を入力
+      </mat-card-subtitle>
+    </span>
+    <mat-card-content>
+      <div class="radio ">
+      <mat-radio-group  color="primary">
+        <mat-radio-button [value]="1" name="small" (change)="onclickFindName(7)">先週</mat-radio-button>
+        <mat-radio-button [value]="2" name="small" (change)="onclickFindName(14)">過去2週間</mat-radio-button>
+      </mat-radio-group>
+    </div><br>
+      <form [formGroup]="findNameForm" (ngSubmit)="onSubmitFindName(findNameForm.value)">
 
+        <mat-form-field class="full-width-input">
+          <input type='text' matInput placeholder="User Name" formControlName="deviceName"  [matAutocomplete]="auto"  (keyup)="userSuggestion($event)" required>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let user of username" [value]="user">
+              {{user}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error>
+            Please provide a valid user name
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>From date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker5" formControlName="fromDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker5"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker5></mat-datepicker>
+          <mat-error>
+            Please provide a valid from date
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>To date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker6" formControlName="toDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker6"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker6></mat-datepicker>
+          <mat-error>
+            Please provide a valid to date
+          </mat-error>
+        </mat-form-field>
+  <br><br><br>
+        <button class="btn-set" mat-raised-button [disabled]="!findNameForm.valid" color="primary">レポート作成</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
   <!-- summary from -->
 
-  <mat-card >
+  <mat-card *ngIf="language=='english'">
     <span class="card-head">
       <mat-card-title color="primary">
         Summary Report of Infected User
@@ -259,6 +401,71 @@
         </mat-form-field>
   <br> <br><br>
         <button class="btn-set" mat-raised-button [disabled]="!summaryReportForm.valid" color="primary">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+    <mat-card *ngIf="language=='japanese'" >
+    <span class="card-head">
+      <mat-card-title color="primary">
+       感染した対象者のソーシャルディスタンス内に近づいた全接触者リスト
+      </mat-card-title>
+      <mat-card-subtitle>
+        感染者の名前と日付範囲を入力
+      </mat-card-subtitle>
+      <mat-error *ngIf="daysExceed">
+        Please choose the proper date range with less than 15 days.
+      </mat-error>
+    </span>
+    <mat-card-content>
+      <div class="radio">
+      <mat-radio-group  color="primary">
+        <mat-radio-button [value]="1" name="small" (change)="onclickSummaryReport(7)">先週</mat-radio-button>
+        <mat-radio-button [value]="2" name="small" (change)="onclickSummaryReport(14)">過去2週間</mat-radio-button>
+      </mat-radio-group>
+    </div><br>
+      <form [formGroup]="summaryReportForm" (ngSubmit)="onSubmitSummaryReport(summaryReportForm.value)">
+
+        <mat-form-field class="full-width-input">
+          <input type='text' matInput placeholder="User Name" formControlName="deviceName" [matAutocomplete]="auto" (keyup)="infectedSuggestion($event)" required>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let user of username" [value]="user">
+              {{user}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error>
+            Please provide a valid user name
+          </mat-error>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="full-width-input">
+          <input type='date' matInput placeholder="From date" formControlName="fromDate" required>
+          <mat-icon matPrefix >calendar_today</mat-icon>
+          <mat-error>
+            Please provide a valid from date
+          </mat-error>
+        </mat-form-field> -->
+
+        <mat-form-field>
+          <mat-label>From date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker7" formControlName="fromDate"  required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker7"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker7></mat-datepicker>
+          <mat-error>
+            Please provide a valid from date
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>To date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker8" formControlName="toDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker8"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker8></mat-datepicker>
+          <mat-error>
+            Please provide a valid to date
+          </mat-error>
+        </mat-form-field>
+  <br> <br><br>
+        <button class="btn-set" mat-raised-button [disabled]="!summaryReportForm.valid" color="primary">レポート作成</button>
       </form>
     </mat-card-content>
   </mat-card>

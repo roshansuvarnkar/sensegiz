@@ -3,11 +3,16 @@
 
 
 <div  class="sidebar">
-	<span class="head">Registered Users</span>
+	<span class="head" *ngIf="language=='english'">Registered Users</span>
+    <span class="head" *ngIf="language=='japanese'">登録ユーザー名</span>
 	<hr>
-  <mat-form-field class="search">
+  <mat-form-field class="search"  *ngIf="language=='english'">
 		<input matInput placeholder="Search device" autocomplete="off" matInput (input)="search($event.target.value)">
 		<mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+   <mat-form-field class="search"  *ngIf="language=='japanese'">
+    <input matInput placeholder="デバイス（タグ）を検索" autocomplete="off" matInput (input)="search($event.target.value)">
+    <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" >
