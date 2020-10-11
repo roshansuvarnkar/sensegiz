@@ -50,7 +50,7 @@ displayedColumns: string[] = ['i','baseName', 'contactName', 'startTime','update
     clearInterval(this.timeout)
   }
   refresh(){
-    this.getTotalCount(0)
+   
     this.refreshData(this.count)
   }
   prevDayData(){

@@ -45,3 +45,11 @@ hr {
   margin-top: -1rem;
   font-size: smaller;
 }
+mat-horizontal-stepper,mat-step,.step-phone{
+    position: relative;
+    z-index: 0;
+  }
+  .intl-phone{
+    position: absolute;
+    z-index: auto;
+  }
