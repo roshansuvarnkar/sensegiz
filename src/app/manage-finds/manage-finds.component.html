@@ -7,7 +7,8 @@
   
   <div class="upload">
    <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)">
-     <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
+ 
+     <span><input type="file" #fileInput (change)="fileChange($event.target.files)"  >
      <button *ngIf="language=='english'" class="upload-btn" mat-flat-button color="primary" >Upload</button> <button *ngIf="language=='japanese'" class="upload-btn" mat-flat-button color="primary" >アップロード</button></span> <br> <br>
 
       <span *ngIf="loading" style="color:red">Please choose xlsx or xls file*</span>

@@ -2,7 +2,9 @@
 <!-- <div >
   <p class=" marquee">Please contact SenseGiz Team before making any changes in Settings</p>
 </div>  -->
-<marquee class=" marquee" behavior="" direction="left">Please contact SenseGiz Team before making any changes in settings</marquee>
+<marquee class=" marquee" behavior="" direction="left" *ngIf="language=='english'"> Please contact SenseGiz Team before making any changes in settings</marquee>
+<marquee class=" marquee" behavior="" direction="left" *ngIf="language=='japanese'"> この設定については、インディゴーチームにお問い合わせください</marquee>
+
 <div class="setting">
  
   <mat-card (click)="contactTeam()" *ngIf="language=='english'">
@@ -45,7 +47,7 @@
         <mat-form-field>
           <input type='number' min="0" max="5" matInput placeholder="タグ内メモリーの接触データ保存数" formControlName="buffer" (input)="bufferval($event)" disbaled required>
           <mat-error>
-            Please provide a valid buffer 
+            有効な保存量を提供してください 
           </mat-error>
       
         </mat-form-field>
@@ -92,7 +94,7 @@
         <mat-form-field>
           <input type='number' min="0" matInput placeholder="最大接触回数" formControlName="threshold"  required>
           <mat-error>
-            Please provide a valid threshold
+            有効なしきい値を入力してください
           </mat-error>
         </mat-form-field>
         <br><br><br>
@@ -260,10 +262,10 @@
       </mat-form-field>
         <div *ngIf="buzzerConfigStatus" >
           <mat-form-field >
-            <mat-label>Enter seconds in multiple of 5</mat-label>
+            <mat-label>5の倍数で秒を入力します</mat-label>
               <input type='number' matInput formControlName="durationSec" required >
               <mat-error  >
-                Please enter minimum seconds is 10
+                最小秒数は10秒です。
               </mat-error>
           </mat-form-field>
         </div>
@@ -334,17 +336,17 @@
           <mat-radio-button value="1" name="small" >腕バンド</mat-radio-button>
         </mat-radio-group><br>
         <mat-form-field>
-          <mat-label>Select distance</mat-label>
+          <mat-label>距離を選択</mat-label>
 
             <mat-select formControlName="distance"  required>
               <mat-option value="1">
-                1 meter
+                1メートル
               </mat-option>
               <mat-option value="2">
-                2 meter
+                2メートル
               </mat-option>
               <mat-option value="3">
-                3 meter
+                3 メートル
               </mat-option>
             </mat-select>
 
@@ -412,27 +414,27 @@
     </mat-card-subtitle>
     <mat-card-content class="shift">
       <mat-error *ngIf="multipleshift">
-        You cannot have multiple shift, to update shift click info
+        シフトクリック情報を更新するために、複数のシフトを持つことはできません
       </mat-error>
       <form [formGroup]="workingForm" (ngSubmit)="onSubmitWorkForm(workingForm.value)">
         <mat-form-field>
           <input matInput placeholder="追跡対象時間" formControlName="shift" disabled  required>
           <mat-error>
-            Please provide a valid shift name
+           有効なシフト名を入力してください
           </mat-error> 
         </mat-form-field>
         <mat-form-field class="full-width-input">
           <input type='time' matInput placeholder="開始時間" formControlName="fromTime"  disabled required>
           <mat-icon matPrefix >schedule</mat-icon>
           <mat-error>
-            Please provide a valid from time
+            有効な開始時刻を入力してください
           </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width-input">
           <input  type='time' matInput  placeholder="終了時間" formControlName="toTime" disabled required >
           <mat-icon matPrefix >schedule</mat-icon>
           <mat-error>
-            Please provide a valid to time
+            有効な時間を提供してください
           </mat-error>
         </mat-form-field><br> <br> <br>
        <div class="btn-set">
@@ -575,14 +577,15 @@
 </mat-card>
   <mat-card *ngIf="language=='japanese'">
   <mat-card-title>
-    Upload Logo
+   ロゴをアップロード
   </mat-card-title>
   <mat-card-subtitle>
-    Select logo
+   ロゴを選択
   </mat-card-subtitle><br>
   <mat-card-content>
     <form action="" [formGroup]="uploadForm" (ngSubmit)="formSubmit(uploadForm.value)">
-      <input class="input-file" type="file" #fileInput  (change)="fileChange($event.target.files);"/><br><br>
+
+     <input class="input-file" type="file" #fileInput  (change)="fileChange($event.target.files);"/><br><br>
       <span *ngIf="loading" style="color:red">Please choose jpg/jpeg/png*</span>
       <br><br><br>  
           <button class="btn-set" mat-raised-button color="primary">レポート作成</button>
@@ -616,22 +619,22 @@
 </mat-card>
 <mat-card *ngIf="language=='japanese'">
   <mat-card-title>
-    Set Language
+    言語を選択
   </mat-card-title>
   <mat-card-subtitle>
-    Choose language
+    言語を選択
   </mat-card-subtitle><br> 
   <mat-card-content>
     <form [formGroup]="languageForm" (ngSubmit)="onSubmitlanguageForm(languageForm.value)">
       <mat-form-field>
-        <mat-label>Set language</mat-label>
+        <mat-label>言語を選択</mat-label>
        <mat-select formControlName="language" required>
          <mat-option value="english">English</mat-option>
-         <mat-option value="japanese">Japanese</mat-option>
+         <mat-option value="japanese">Japanese(日本語)</mat-option>
 
        </mat-select>
         <mat-error>
-          Please choose language
+          言語を選択してください
         </mat-error>
       </mat-form-field>
       <br><br><br>

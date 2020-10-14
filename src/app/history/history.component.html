@@ -68,22 +68,22 @@
   <form [formGroup]="dateForm" (ngSubmit)="onSubmitDateForm(dateForm.value)">
 
     <mat-form-field>
-      <mat-label>From date</mat-label>
+      <mat-label>日付から</mat-label>
       <input matInput [matDatepicker]="myDatepicker1" formControlName="fromDate" required>
       <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
       <mat-datepicker #myDatepicker1></mat-datepicker>
       <mat-error>
-        Please provide a valid from date
+       有効な開始日を入力してください
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>To date</mat-label>
+      <mat-label>現在まで</mat-label>
       <input matInput [matDatepicker]="myDatepicker2" formControlName="toDate" required>
       <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
       <mat-datepicker #myDatepicker2></mat-datepicker>
       <mat-error>
-        Please provide a valid to date
+         有効な日付を入力してください 
       </mat-error>
     </mat-form-field>
 <br>
@@ -187,10 +187,10 @@
     <mat-card *ngIf="language=='japanese'">
     <span class="card-head">
       <mat-card-title color="primary">
-         Cumulative Report
+         累積レポート
       </mat-card-title>
       <mat-card-subtitle>
-        Enter date range
+        日付範囲を入力してください
       </mat-card-subtitle>
     </span> <br>
     <mat-card-content>
@@ -204,22 +204,22 @@
       <form [formGroup]="cummulativeForm" (ngSubmit)="onSubmitcummulativeForm(cummulativeForm.value)">
 
         <mat-form-field>
-          <mat-label>From date</mat-label>
+          <mat-label>日付から</mat-label>
           <input matInput [matDatepicker]="myDatepicker11" formControlName="fromDate" required>
           <mat-datepicker-toggle matSuffix [for]="myDatepicker11"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker11></mat-datepicker>
           <mat-error>
-            Please provide a valid from date
+            有効な開始日を入力してください
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>To date</mat-label>
+          <mat-label> 現在まで</mat-label>
           <input matInput [matDatepicker]="myDatepicker12" formControlName="toDate" required>
           <mat-datepicker-toggle matSuffix [for]="myDatepicker12"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker12></mat-datepicker>
           <mat-error>
-            Please provide a valid to date
+            有効な日付を入力してください
           </mat-error>
         </mat-form-field>
   <br>
@@ -302,7 +302,7 @@
       <form [formGroup]="findNameForm" (ngSubmit)="onSubmitFindName(findNameForm.value)">
 
         <mat-form-field class="full-width-input">
-          <input type='text' matInput placeholder="User Name" formControlName="deviceName"  [matAutocomplete]="auto"  (keyup)="userSuggestion($event)" required>
+          <input type='text' matInput placeholder="ユーザー名" formControlName="deviceName"  [matAutocomplete]="auto"  (keyup)="userSuggestion($event)" required>
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let user of username" [value]="user">
               {{user}}
@@ -314,22 +314,22 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>From date</mat-label>
+          <mat-label>日付から</mat-label>
           <input matInput [matDatepicker]="myDatepicker5" formControlName="fromDate" required>
           <mat-datepicker-toggle matSuffix [for]="myDatepicker5"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker5></mat-datepicker>
           <mat-error>
-            Please provide a valid from date
+            有効な開始日を入力してください
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>To date</mat-label>
+          <mat-label>現在まで</mat-label>
           <input matInput [matDatepicker]="myDatepicker6" formControlName="toDate" required>
           <mat-datepicker-toggle matSuffix [for]="myDatepicker6"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker6></mat-datepicker>
           <mat-error>
-            Please provide a valid to date
+            有効な日付を入力してください
           </mat-error>
         </mat-form-field>
   <br><br><br>
@@ -413,7 +413,7 @@
         感染者の名前と日付範囲を入力
       </mat-card-subtitle>
       <mat-error *ngIf="daysExceed">
-        Please choose the proper date range with less than 15 days.
+       15日未満の適切な日付範囲を選択してください。.
       </mat-error>
     </span>
     <mat-card-content>
@@ -426,7 +426,7 @@
       <form [formGroup]="summaryReportForm" (ngSubmit)="onSubmitSummaryReport(summaryReportForm.value)">
 
         <mat-form-field class="full-width-input">
-          <input type='text' matInput placeholder="User Name" formControlName="deviceName" [matAutocomplete]="auto" (keyup)="infectedSuggestion($event)" required>
+          <input type='text' matInput placeholder="ユーザー名  " formControlName="deviceName" [matAutocomplete]="auto" (keyup)="infectedSuggestion($event)" required>
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let user of username" [value]="user">
               {{user}}
@@ -446,22 +446,22 @@
         </mat-form-field> -->
 
         <mat-form-field>
-          <mat-label>From date</mat-label>
+          <mat-label>日付から</mat-label>
           <input matInput [matDatepicker]="myDatepicker7" formControlName="fromDate"  required>
           <mat-datepicker-toggle matSuffix [for]="myDatepicker7"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker7></mat-datepicker>
           <mat-error>
-            Please provide a valid from date
+            有効な開始日を入力してください
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>To date</mat-label>
+          <mat-label>現在まで</mat-label>
           <input matInput [matDatepicker]="myDatepicker8" formControlName="toDate" required>
           <mat-datepicker-toggle matSuffix [for]="myDatepicker8"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker8></mat-datepicker>
           <mat-error>
-            Please provide a valid to date
+             有効な日付を入力してください
           </mat-error>
         </mat-form-field>
   <br> <br><br>

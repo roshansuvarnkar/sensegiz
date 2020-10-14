@@ -21,6 +21,7 @@ export class AddFindComponent implements OnInit {
   userform:FormGroup
   type:any
   loginData:any
+  language:any
   findStatus:boolean=false
   gatewayStatus:boolean=false
   userStatus:boolean=false
@@ -40,6 +41,7 @@ export class AddFindComponent implements OnInit {
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+      this.language=this.loginData.language
 
 
     this.Findform = this.fb.group({

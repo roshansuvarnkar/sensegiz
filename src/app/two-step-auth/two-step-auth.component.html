@@ -55,8 +55,8 @@
                 <mat-error *ngIf="invalidUser" class="otp-exp">
                     Invalid user
                 </mat-error>
-                <span class="dail" *ngIf="type">Note* : Please provide registered mobile number with valid country dail code 
-                    if you are authenticating through mobile number to get OTP.
+                <span class="dail" *ngIf="type">注：登録済みの携帯電話番号に有効な国のダイヤルコードを入力してください 
+                    OTPを取得するために携帯電話番号を介して認証している場合……
                 </span>
             
                <div class="flex1" *ngIf="otpField">
@@ -75,18 +75,18 @@
                
                </div>
                <mat-error *ngIf="otpExpired" class="otp-exp">
-                OTP expired
+                OTPの有効期限が切れました
             </mat-error>
             <mat-error *ngIf="invalidOTP"  class="otp-exp"> 
                 Invalid OTP
             </mat-error>
             <div class="btn-otp">
-                <button *ngIf="sendOTP" class="sendotp" mat-raised-button color="primary" (click)="sendOtp(twoStepAuthForm.value.username)">Send OTP</button>&nbsp;&nbsp;
+                <button *ngIf="sendOTP" class="sendotp" mat-raised-button color="primary" (click)="sendOtp(twoStepAuthForm.value.username)"> OTPを送信する</button>&nbsp;&nbsp;
                 <button class="btn-sub" mat-raised-button color="primary" [disabled]="!twoStepAuthForm.valid" *ngIf="otpField" (click)="submit(twoStepAuthForm.value)">レポート作成</button>&nbsp;&nbsp;
  
             </div> 
             
-            <span><p (click)="sendOtp(twoStepAuthForm.value.username)" class="resend">Resend OTP</p></span>
+            <span><p (click)="sendOtp(twoStepAuthForm.value.username)" class="resend">OTPを再送する  </p></span>
             </form>
         </mat-card-content>
     

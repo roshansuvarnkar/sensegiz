@@ -3,11 +3,12 @@
 <div *ngIf="type=='finds'" >
 
   <div class="flexWrap space-between">
-    <h2 mat-dialog-title>Add Find Details</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
+    <h2 mat-dialog-title *ngIf="language=='english'">Add Find Details</h2>
+    <h2 mat-dialog-title *ngIf="language=='japanese'">ファインドの詳細を追加</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
   </div>
 
 
-  <mat-horizontal-stepper  #stepper  >
+  <mat-horizontal-stepper  #stepper  *ngIf="language=='english'" >
     <form [formGroup]="Findform" >
       <mat-step >
           <ng-template matStepLabel class="stepper">Fill out your name</ng-template>
@@ -105,20 +106,118 @@
       </mat-step>
     </form>
   </mat-horizontal-stepper>
+<!-- japanese -->
+<mat-horizontal-stepper  #stepper  *ngIf="language=='japanese'" >
+    <form [formGroup]="Findform" >
+      <mat-step >
+          <ng-template matStepLabel class="stepper">あなたの名前を記入してください</ng-template>
+          <mat-form-field>
+            <mat-label>名前 </mat-label>
+            <input matInput placeholder="ユーザー名" formControlName="deviceName" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>次</button>
+          </div>
+      </mat-step>
+      <mat-step >
+          <ng-template matStepLabel>ファインドIDを入力してください</ng-template>
+          <mat-form-field>
+            <mat-label>ファインドのID</mat-label>
+            <input type="number" min="1" matInput formControlName="deviceId" placeholder="Ex. 1" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>戻る</button>
+            <button mat-button matStepperNext>次</button>
+          </div>
+      </mat-step>
+      <mat-step >
+        <ng-template matStepLabel>従業員IDを入力してください   </ng-template>
+        <mat-form-field>
+          <mat-label>従業員ID</mat-label>
+          <input type="text" matInput formControlName="employeeId" placeholder="Ex. 1" >
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>戻る</button>
+          <button mat-button matStepperNext>次</button>
+        </div>
+    </mat-step>
+    <mat-step >
+      <ng-template matStepLabel>メールIDを入力してください</ng-template>
+      <mat-form-field>
+        <mat-label>E-mail連絡先</mat-label>
+        <input type="email" matInput formControlName="emailId" placeholder="Ex. xyz@gmail.com" >
+        <mat-error>
+          有効なメールIDを入力してください. Ex.xyz@gmail.com
+        </mat-error>
+
+      </mat-form-field> <br><br>
+      <div>
+        <button mat-button matStepperPrevious>戻る</button>
+        <button mat-button matStepperNext>次</button>
+      </div>
+  </mat-step>
+  <mat-step >
+    <ng-template matStepLabel>あなたの携帯電話番号を入力してください</ng-template>
+    <!-- <mat-form-field>
+      <mat-label>Mobile Number</mat-label>
+      <input type="tel" matInput formControlName="mobileNum" placeholder="Mobile Number" >
+      <mat-error>
+        Please provide valid mobile number
+      </mat-error>
+    </mat-form-field> -->
+    <!-- <international-phone-number2   placeholder="Mobile number" [defaultCountry]="'in'" formControlName="mobileNum">
+    </international-phone-number2> -->
+    <div class="wrapper">
+      <ngx-intl-tel-input [cssClass]="'custom'"
+        [preferredCountries]="preferredCountries"
+        [enableAutoCountrySelect]="true"
+        [enablePlaceholder]="true"
+        [searchCountryFlag]="true"
+        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+        [selectFirstCountry]="true"
+        [selectedCountryISO]="CountryISO.India"
+        [maxLength]="15"
+        [tooltipField]="TooltipLabel.Name"
+        [phoneValidation]="true"
+        [separateDialCode]="false"
+        name="mobileNum"
+        formControlName="mobileNum">
+      </ngx-intl-tel-input>
+     <hr class="mob">
+     <mat-error *ngIf="Findform.get('mobileNum').status=='INVALID'" class="error" >
+     有効な携帯電話番号を入力してください
+     </mat-error> 
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>戻る</button>
+      <button mat-button matStepperNext>次</button>
+    </div>
+</mat-step>
 
 
+      <mat-step>
+        <ng-template matStepLabel>完了  </ng-template>
+        <p>これで完了です.</p>
+        <div>
+          <button mat-button matStepperPrevious>戻る</button>
+          <button mat-button [disabled]="!Findform.valid" (click)="Findsubmit(Findform.value)" >完了</button>
+        </div>
+      </mat-step>
+    </form>
+  </mat-horizontal-stepper>
 </div>
 
 
 
 <div *ngIf="type=='gateways'">
   <div class="flexWrap space-between">
-    <h2 mat-dialog-title>Add Gateway Details</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
+    <h2 mat-dialog-title *ngIf="language=='english'">Add Gateway Details</h2>
+     <h2 mat-dialog-title *ngIf="language=='japanese'">ゲートウェイの詳細を追加</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
   </div>
 
 
 
-  <mat-horizontal-stepper  #stepper  >
+  <mat-horizontal-stepper  #stepper *ngIf="language=='english'"  >
     <form [formGroup]="gatewayform" >
       <mat-step >
           <ng-template matStepLabel class="stepper">Fill out your gateway nick name</ng-template>
@@ -154,6 +253,43 @@
       </mat-step>
     </form>
   </mat-horizontal-stepper>
+<!-- japanese -->
+<mat-horizontal-stepper  #stepper *ngIf="language=='japanese'" >
+    <form [formGroup]="gatewayform" >
+      <mat-step >
+          <ng-template matStepLabel class="stepper">ゲートウェイのニックネームを入力してください</ng-template>
+          <mat-form-field>
+            <mat-label>ゲートウェイのニックネーム</mat-label>
+            <input matInput placeholder="ユーザー名" formControlName="deviceName" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>次</button>
+          </div>
+      </mat-step>
+      <mat-step >
+          <ng-template matStepLabel>ゲートウェイIDを入力してください</ng-template>
+          <mat-form-field>
+            <mat-label>ゲートウエイID</mat-label>
+            <input matInput min="1" formControlName="deviceId" placeholder="Ex. 1" required>
+            <mat-error>
+             文字12でゲートウェイIDを入力してください
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>戻る</button>
+            <button mat-button matStepperNext>次</button>
+          </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>完了</ng-template>
+        <p>これで完了です.</p>
+        <div>
+          <button mat-button matStepperPrevious>戻る</button>
+          <button mat-button [disabled]="!gatewayform.valid" (click)="Gatewaysubmit(gatewayform.value)" >完了</button>
+        </div>
+      </mat-step>
+    </form>
+  </mat-horizontal-stepper>
 
 </div>
 
@@ -168,12 +304,13 @@
 
 <div *ngIf="type=='users'">
   <div class="flexWrap space-between">
-    <h2 mat-dialog-title>Add User Details</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
+    <h2 mat-dialog-title *ngIf="language=='english'">Add User Details</h2>
+      <h2 mat-dialog-title *ngIf="language=='japanese'">ユーザーの詳細を追加</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
   </div>
 
 
 
-  <mat-horizontal-stepper  #stepper >
+  <mat-horizontal-stepper  #stepper *ngIf="language=='english'" >
     <form [formGroup]="userform" >
       <mat-step >
           <ng-template matStepLabel class="stepper" >Fill out user mobile number</ng-template>
@@ -232,8 +369,68 @@
           <button mat-button [disabled]="!userform.valid" (click)="Usersubmit(userform.value)" >Done</button>
         </div>
       </mat-step>
+    </form> 
+  </mat-horizontal-stepper>
+<!-- japanese -->
+<mat-horizontal-stepper  #stepper *ngIf="language=='japanese'" >
+    <form [formGroup]="userform" >
+      <mat-step >
+          <ng-template matStepLabel class="stepper" >あなたの携帯電話番号を入力してください</ng-template>
+          <!-- <mat-form-field>
+            <mat-label>User Mobile number</mat-label>
+            <input matInput type="number" placeholder="Mobile number" formControlName="mobileNum" required>
+            <mat-error>
+              Please provide valid mobile number
+            </mat-error>
+          </mat-form-field> -->
+          <!-- <international-phone-number2   placeholder="Mobile number" [defaultCountry]="'in'" formControlName="mobileNum">
+          </international-phone-number2> -->
+          <div class="wrapper">
+            <ngx-intl-tel-input [cssClass]="'custom'"
+              [preferredCountries]="preferredCountries"
+              [enableAutoCountrySelect]="true"
+              [enablePlaceholder]="true"
+              [searchCountryFlag]="true"
+              [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+              [selectFirstCountry]="true"
+              [selectedCountryISO]="CountryISO.India"
+              [maxLength]="15"
+              [tooltipField]="TooltipLabel.Name"
+              [phoneValidation]="true"
+              [separateDialCode]="false"
+              name="mobileNum"
+              formControlName="mobileNum">
+            </ngx-intl-tel-input>
+            <hr class="mob">
+            <mat-error *ngIf="userform.get('mobileNum').status=='INVALID'" class="error" >
+              有効な携帯電話番号を入力してください
+             </mat-error> 
+          </div>
+          <div>
+            <button mat-button matStepperNext> 次</button>
+          </div>
+      </mat-step>
+      <mat-step >
+        <ng-template matStepLabel>メールIDを入力してください</ng-template>
+        <mat-form-field>
+          <mat-label>E-mail連絡先</mat-label>
+          <input matInput type='email' placeholder="E-mail連絡先" formControlName="emailId" required>
+          <mat-error>
+            有効なメールIDを入力してください. Ex.xyz@gmail.com
+          </mat-error>
+        </mat-form-field> <br><br>
+        <div>
+          <button mat-button matStepperNext> 次</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>完了</ng-template>
+        <p>これで完了です.</p>
+        <div>
+          <button mat-button matStepperPrevious>戻る</button>
+          <button mat-button [disabled]="!userform.valid" (click)="Usersubmit(userform.value)" >完了</button>
+        </div>
+      </mat-step>
     </form>
   </mat-horizontal-stepper>
-
-
 </div>

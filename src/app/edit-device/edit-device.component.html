@@ -3,11 +3,12 @@
 <div *ngIf="type=='finds'">
 
   <div class="flexWrap space-between">
-    <h2 mat-dialog-title>Edit Find Details</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
+    <h2 mat-dialog-title *ngIf="language=='english'">Edit Find Details</h2>
+     <h2 mat-dialog-title  *ngIf="language=='japanese'">ファインドの詳細を編集する</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
   </div>
 
 
-  <mat-horizontal-stepper  #stepper >
+  <mat-horizontal-stepper  *ngIf="language=='english'"  #stepper >
     <form [formGroup]="Findform" >
       <mat-step >
           <ng-template matStepLabel>Fill out your name</ng-template>
@@ -108,18 +109,121 @@
   </mat-horizontal-stepper>
 
 
+
+<!-- Japanese -->
+  <mat-horizontal-stepper  *ngIf="language=='japanese'"  #stepper >
+    <form [formGroup]="Findform" >
+      <mat-step >
+          <ng-template matStepLabel>あなたの名前を記入してください</ng-template>
+          <mat-form-field>
+            <mat-label> 名前</mat-label>
+            <input matInput placeholder="ユーザー名" formControlName="deviceName" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext> 次</button>
+          </div>
+      </mat-step>
+      <mat-step >
+          <ng-template matStepLabel>ファインドIDを入力してください</ng-template>
+          <mat-form-field>
+            <mat-label>ファインドのID</mat-label>
+            <input type="number" min="1" matInput formControlName="deviceId" placeholder="Ex. 1" disabled required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>戻る</button>
+            <button mat-button matStepperNext>次</button>
+          </div>
+      </mat-step>
+
+      <mat-step >
+        <ng-template matStepLabel>従業員IDを入力してください</ng-template>
+        <mat-form-field>
+          <mat-label>従業員ID</mat-label>
+          <input type="text" matInput formControlName="empId" placeholder="Employee Id" >
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>戻る</button>
+          <button mat-button matStepperNext>次</button>
+        </div>
+    </mat-step>
+
+      <mat-step >
+        <ng-template matStepLabel>あなたの携帯電話番号を入力してください</ng-template>
+        <!-- <mat-form-field>
+          <mat-label>Mobile Number</mat-label>
+          <input type="tel" matInput formControlName="mobileNum" placeholder="Mobile Number" >
+          <mat-error>
+            Please provide valid mobile number
+          </mat-error>
+        </mat-form-field> -->
+        <!-- <international-phone-number2   placeholder="Enter Mobile number" [defaultCountry]="'in'" formControlName="mobileNum">
+         </international-phone-number2> -->
+         <div class="wrapper">
+          <ngx-intl-tel-input [cssClass]="'custom'"
+            [preferredCountries]="preferredCountries"
+            [enableAutoCountrySelect]="true"
+            [enablePlaceholder]="true"
+            [searchCountryFlag]="true"
+            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+            [selectFirstCountry]="true"
+            [selectedCountryISO]="CountryISO.India"
+            [maxLength]="15"
+            [tooltipField]="TooltipLabel.Name"
+            [phoneValidation]="true"
+            [separateDialCode]="false"
+            name="mobileNum"
+            formControlName="mobileNum">
+          </ngx-intl-tel-input>
+          <hr class="mob">
+          <mat-error *ngIf="Findform.get('mobileNum').status=='INVALID'" class="error" >
+           有効な携帯電話番号を入力してください
+           </mat-error> 
+        </div>
+        <div>
+          <button mat-button matStepperPrevious>戻る</button>
+          <button mat-button matStepperNext>次</button>
+        </div>
+    </mat-step>
+
+      <mat-step >
+        <ng-template matStepLabel>メールIDを入力してください</ng-template>
+        <mat-form-field>
+          <mat-label>E-mail連絡先</mat-label>
+          <input type="email" matInput formControlName="E-mailId" placeholder="Ex. xyz@gmail.com" >
+          <mat-error>
+            有効なメールIDを入力してください. Ex.xyz@gmail.com
+          </mat-error>
+        </mat-form-field> <br><br>
+        <div>
+          <button mat-button matStepperPrevious>戻る</button>
+          <button mat-button matStepperNext>次</button>
+        </div>
+    </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>:完了</ng-template>
+        <p>これで完了です.</p>
+        <div>
+          <button mat-button matStepperPrevious>戻る</button>
+          <button mat-button [disabled]="!Findform.valid" (click)="Findsubmit(Findform.value)" >:完了</button>
+        </div>
+      </mat-step>
+    </form>
+  </mat-horizontal-stepper>
+  <!-- end of japanese -->
 </div>
 
 
 
 <div *ngIf="type=='gateways'">
   <div class="flexWrap space-between">
-    <h2 mat-dialog-title>Edit Gateway Details</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
+    <h2 mat-dialog-title *ngIf="language=='english'">Edit Gateway Details</h2>
+    <h2 mat-dialog-title *ngIf="language=='japanese'">ゲートウェイの詳細の編集</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
   </div>
 
 
 
-  <mat-horizontal-stepper  #stepper >
+  <mat-horizontal-stepper *ngIf="language=='english'" #stepper >
     <form [formGroup]="gatewayform" >
       <mat-step >
           <ng-template matStepLabel>Fill out your gateway nick name</ng-template>
@@ -152,6 +256,40 @@
       </mat-step>
     </form>
   </mat-horizontal-stepper>
+<!-- japanese -->
+  <mat-horizontal-stepper *ngIf="language=='japanese'" #stepper >
+    <form [formGroup]="gatewayform" >
+      <mat-step >
+          <ng-template matStepLabel>ゲートウェイのニックネームを入力してください</ng-template>
+          <mat-form-field>
+            <mat-label>ゲートウェイのニックネーム</mat-label>
+            <input matInput placeholder="ユーザー名" formControlName="deviceName" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext> 次</button>
+          </div>
+      </mat-step>
+      <mat-step >
+          <ng-template matStepLabel>ゲートウェイIDを入力してください</ng-template>
+          <mat-form-field>
+            <mat-label>ゲートウエイID</mat-label>
+            <input  matInput formControlName="deviceId" placeholder="Ex. 1" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>戻る</button>
+            <button mat-button matStepperNext> 次</button>
+          </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>完了</ng-template>
+        <p>これで完了です.</p>
+        <div>
+          <button mat-button matStepperPrevious>戻る</button>
+          <button mat-button [disabled]="!gatewayform.valid" (click)="Gatewaysubmit(gatewayform.value)" >完了</button>
+        </div>
+      </mat-step>
+    </form>
+  </mat-horizontal-stepper>
 
 </div>
 
@@ -166,12 +304,13 @@
 
 <div *ngIf="type=='users'">
   <div class="flexWrap space-between">
-    <h2 mat-dialog-title>Edit User Details</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
+    <h2 mat-dialog-title *ngIf="language=='english'">Edit User Details</h2>
+    <h2 mat-dialog-title *ngIf="language=='japanese'">ユーザーの詳細を編集する</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
   </div>
 
 
 
-  <mat-horizontal-stepper  #stepper >
+  <mat-horizontal-stepper *ngIf="language=='english'"  #stepper >
     <form [formGroup]="userform" >
       <mat-step >
           <ng-template matStepLabel>Fill out user mobile number</ng-template>
@@ -232,5 +371,68 @@
       </mat-step>
     </form>
   </mat-horizontal-stepper>
+<!-- japanese -->
+  <mat-horizontal-stepper *ngIf="language=='japanese'"  #stepper >
+    <form [formGroup]="userform" >
+      <mat-step >
+          <ng-template matStepLabel>ユーザーの携帯電話番号を入力してください</ng-template>
+          <!-- <mat-form-field>
+            <mat-label>User Mobile number</mat-label>
+            <input matInput  placeholder="Mobile number" formControlName="mobileNum" required>
+            <mat-error>
+              Please provide valid mobile number
+            </mat-error>
+          </mat-form-field> -->
+          <!-- <international-phone-number2   placeholder="Enter Mobile number" [defaultCountry]="'in'" formControlName="mobileNum">
+          </international-phone-number2> -->
+          <div class="wrapper">
+            <ngx-intl-tel-input [cssClass]="'custom'"
+              [preferredCountries]="preferredCountries"
+              [enableAutoCountrySelect]="true"
+              [enablePlaceholder]="true"
+              [searchCountryFlag]="true"
+              [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+              [selectFirstCountry]="true"
+              [selectedCountryISO]="CountryISO.India"
+              [maxLength]="15"
+              [tooltipField]="TooltipLabel.Name"
+              [phoneValidation]="true"
+              [separateDialCode]="false"
+              name="mobileNum"
+              formControlName="mobileNum">
+            </ngx-intl-tel-input>
+            <hr class="mob">
+            <mat-error *ngIf="userform.get('mobileNum').status=='INVALID'" class="error" >
+              有効な携帯電話番号を入力してください
+             </mat-error> 
+          </div>
+          <div>
+            <button mat-button matStepperNext>次</button>
+          </div>
+      </mat-step>
+      <mat-step >
+        <ng-template matStepLabel>Fill out user email id</ng-template>
+        <mat-form-field>
+          <mat-label>User email Id</mat-label>
+          <input matInput type='email' placeholder="Email" formControlName="emailId" required>
+          <mat-error>
+            Please provide valid email id. Ex.xyz@gmail.com
+          </mat-error>
+        </mat-form-field> <br><br>
+        <div>
+          <button mat-button matStepperNext>次</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>完了</ng-template>
+        <p>これで完了です.</p>
+        <div>
+          <button mat-button matStepperPrevious>戻る</button>
+          <button mat-button [disabled]="!userform.valid" (click)="Usersubmit(userform.value)" >完了</button>
+        </div>
+      </mat-step>
+    </form>
+  </mat-horizontal-stepper>
+
 
 </div>

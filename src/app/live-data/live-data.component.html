@@ -10,7 +10,7 @@
 </div>
 <div class="day" *ngIf="language=='japanese'">
   <span class="prev" (click)="prevDayData()"> <mat-icon>keyboard_arrow_left</mat-icon> 前日のデータ</span>
-  <span class="prev" *ngIf="count != 0" (click)="nextDayData()"> Next Day Data <mat-icon>keyboard_arrow_right</mat-icon></span>
+  <span class="prev" *ngIf="count != 0" (click)="nextDayData()">翌日データ <mat-icon>keyboard_arrow_right</mat-icon></span>
 </div>
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort >
