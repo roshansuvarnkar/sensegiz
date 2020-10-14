@@ -17,13 +17,15 @@ table.mat-table {
   margin-top: 1rem;
   /* text-align: center; */
 }
-
+.mat-icon.mat-icon.notranslate.publish.material-icons.mat-icon-no-color{
+height:30px !important;
+}
 ::ng-deep .mat-sort-header-container {
 display:flex;
 justify-content:center;
 font-weight: 500;
 font-size: 0.9rem;
-color: #ef6c00;
+
 }
 .center {
 text-align: center;
@@ -34,14 +36,16 @@ font-weight: 500;
 .search{
 position: absolute;
   top: 2rem;
-  right: 1rem;
+  right: 1rem;color: #ef6c00;
 }
 .upload {
  position: absolute;
- top: 2.3rem;
+ top: 3rem;
+
 }
-
-
+.upload-mob-btn{
+display: none;
+}
 
 .batteryContainer {
 display: -webkit-box;
@@ -74,26 +78,42 @@ border-radius: 2px;
 height: 18px;
 }
 
-
-
+.cursor{
+cursor: pointer;
+}
+.upload-btn{
+display: block;
+color: #ef6c00;
+ text-decoration: underline orange;
+}
 @media only screen and (max-width: 768px) {
   table.table thead th {
       font-weight: 600;
       cursor: pointer;
       font-size: smaller;
   }
-  .upload {
+  .upload-mob-btn{
+    display: block;
+    color: #ef6c00;
     position: absolute;
-    top: 0.5rem;
-    margin-left: 1.2rem;
+     left: 0;
+     top: 0;
+  }
+  .upload {
+  position: absolute;
+  top: 0.5rem;
+  margin-left: 1.2rem;
 }
+  /* .upload-btn{
+    display: none;
+  } */
   .search{
       width: 120px;
-
   }
   button.mat-focus-indicator.button.mat-flat-button.mat-button-base.mat-primary {
       margin-left: 1.2rem;
 
   }
+
 
 }

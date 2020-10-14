@@ -92,7 +92,9 @@ export class HistoryReportComponent implements OnInit {
         userId:this.loginData.userId,
         fromDate: this.from,
         toDate:this.to,
+        zone:this.general.getZone(this.date)
       }
+        console.log("count of report on date ======",data);
 
       this.api.getHistoryDateReportTotalCount(data).then((res:any)=>{
         // console.log("length of report on date ======",res);
@@ -110,6 +112,7 @@ export class HistoryReportComponent implements OnInit {
       deviceName:this.deviceName,
       fromDate: this.from,
       toDate:this.to,
+      zone:this.general.getZone(this.date)
     }
 
     this.api.getHistoryNameReportTotalCount(data1).then((res:any)=>{
@@ -296,6 +299,7 @@ summaryReport(){
     deviceName:this.deviceName,
     fromDate: this.from,
     toDate:this.to,
+    zone:this.general.getZone(this.date)
 
   }
   this.api.getSummaryReport(data).then((res:any)=>{
@@ -376,163 +380,6 @@ cummulativeReport(){
   })
 
 }
-//   loadData(limit=10,offset=0,type=0){
-
-//       if(this.type=='basedOnDate'){
-
-//         var data={
-//           userId:this.loginData.userId,
-//           fromDate: this.from,
-//           toDate:this.to,
-//           limit:limit,
-//           offset:offset
-//         }
-//         this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
-//           console.log("find data based on date ======",res);
-//           this.liveData=[]
-//           if(res.status){
-//             if(type==0){
-//               this.liveData=res.success
-//             }
-//             else{
-//               this.excelData=[]
-//              for(var i=0;i<res.success.length;i++){
-            
-//                this.excelData.push({
-//                Sl_No:i+1,
-//                Base_Person:res.success[i].baseName,
-//                Contact_Person:res.success[i].contactName,
-//                Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
-//                Total_Time:this.general.convertTime(res.success[i].totalTime)
-
-//              })
-//              }
-  
-//             }
-//             this.dataSource = new MatTableDataSource(this.liveData);
-//             setTimeout(() => {
-//               this.dataSource.sort = this.sort;
-//               // this.paginator.length = this.currentPageLength
-//             })
-//           }
-
-//         })
-
-//       }
-//       if(this.type=='basedOnFindName'){
-
-//         var data1={
-//           userId:this.loginData.userId,
-//           deviceName:this.deviceName,
-//           fromDate: this.from,
-//           toDate:this.to,
-//           offset:offset,
-//           limit:limit
-
-//         }
-//         this.api.getDeviceHistoryBasedOnDeviceName(data1).then((res:any)=>{
-//           console.log("find data based on name======",res);
-
-//           if(res.status){
-//             if(type==0){
-//               this.liveData=res.success
-//             }
-//             else{
-//               this.excelData=[]
-//               for(var i=0;i<res.success.length;i++){
-             
-//                 this.excelData.push({
-//                 Sl_No:i+1,
-//                 Contact_Person:res.success[i].contactName,
-//                 Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
-//                 Total_Time:this.general.convertTime(res.success[i].totalTime)
- 
-//               })
-//               }
-//             }
-
-//             this.dataSource = new MatTableDataSource(this.liveData);
-//             setTimeout(() => {
-//               this.dataSource.sort = this.sort;
-//               // this.paginator.length = this.currentPageLength
-//             })
-//           }
-//         })
-//       }
-//       if(this.type=='summaryReport'){
-//         var data2={
-//           userId:this.loginData.userId,
-//           deviceName:this.deviceName,
-//           fromDate: this.from,
-//           toDate:this.to,
-
-//         }
-//         this.api.getSummaryReport(data2).then((res:any)=>{
-//           console.log("summary report ======",res);
-
-//           //this.liveData=[]
-//           if(res.status){
-
-//             var groupDate = this.dataDateReduce(res.success)
-//             // console.log("groupDate===",groupDate)
-//             this.liveData = Object.keys(groupDate).map((data)=>{
-//               return {
-//                 date : data,
-//                 data : groupDate[data]
-//               }
-//             })
-              
-//           for(let i=0;i<this.liveData.length;i++){
-
-//             for(let j=0;j<this.liveData[i].data.length-1;j++){
-//               this.liveData[i].data[j].contactDeviceName = this.liveData[i].data[j].contactDeviceName+','
-//             }
-         
-//             this.liveData[i].data[this.liveData[i].data.length-1].contactDeviceName=this.liveData[i].data[this.liveData[i].data.length-1].contactDeviceName+'.'
-
-//            }
-          
-//           }
-//         })
-
-//       }
-//       if(this.type=='cummulative'){
- 
-//         var data3={
-//           userId:this.loginData.userId,
-//           fromDate: this.from,
-//           toDate:this.to,
-//           zone:timeZone
-//         }
-//         console.log("hvhs==",data3)
-//         this.api.viewCTReport(data3).then((res:any)=>{
-//           this.countCummulative=[]
-//           console.log("cummulative report==",res)
-//           if(res.status){
-//             for(let i=0;i<res.data.length;i++){
-//               this.countCummulative.push({
-//                 i:i+1,
-//                 username:res.data[i].baseDeviceName,
-//                 count:res.data[i].count,
-//                 totTime:this.general.convertTime(res.data[i].totalTime)
-
-//               });
-//             }
-//             this.dataSource = new MatTableDataSource(this.countCummulative);
-//             setTimeout(() => {
-//               this.dataSource.sort = this.sort;
-//               this.dataSource.paginator = this.paginator
-//               })
-//           }
-//         })
-
-//       }
-
-// }
-
-
-
-
 
 
 

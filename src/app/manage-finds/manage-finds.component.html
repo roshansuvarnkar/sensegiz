@@ -6,16 +6,18 @@
 <div class="flex">
   
   <div class="upload">
-   <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)">
  
-     <span><input type="file" #fileInput (change)="fileChange($event.target.files)"  >
-     <button *ngIf="language=='english'" class="upload-btn" mat-flat-button color="primary" >Upload</button> <button *ngIf="language=='japanese'" class="upload-btn" mat-flat-button color="primary" >アップロード</button></span> <br> <br>
+
+   <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)"> 
+     <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
+     <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
+     <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
+     <span *ngIf="language=='english'"  id="button" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
+      <span *ngIf="language=='japanese'"  id="button" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
 
       <span *ngIf="loading" style="color:red">Please choose xlsx or xls file*</span>
       <span *ngIf="format" style="color:red"> Please check format: Name*, employeeId, deviceId*, emailId, mobileNumber</span>
-
- 
-   </form>
+   </form> <br>
   </div> 
    <button *ngIf="language=='english'" class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
     <button *ngIf="language=='japanese'" class="button" mat-flat-button color="primary" (click)="openDialog()">追跡対象者の追加</button>
@@ -29,11 +31,7 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 
-
-
 </div>
-
-
 
 <!-- 
 <div class="table">
@@ -185,12 +183,12 @@
 
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
-          <td mat-cell *matCellDef="let live"  (click)="edit(live)"> <mat-icon>{{live.edit}}</mat-icon></td>
+          <td mat-cell *matCellDef="let live"  (click)="edit(live)" class="cursor"> <mat-icon>{{live.edit}}</mat-icon></td>
         </ng-container>
 
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
-          <td mat-cell *matCellDef="let live"  (click)="delete(live)"><mat-icon>{{live.delete}}</mat-icon> </td>
+          <td mat-cell *matCellDef="let live"  (click)="delete(live)" class="cursor"><mat-icon>{{live.delete}}</mat-icon> </td>
         </ng-container>
 
    </div>

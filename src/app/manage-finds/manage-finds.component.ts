@@ -33,10 +33,10 @@ tempImagePath:any=''
 header:any
 worksheet:any
 storeData:any
+language:any
 fileupload:FormGroup
 loading:boolean=false
 format:boolean=false
-language:any
 @ViewChild('fileInput') fileInput:ElementRef
 constructor(public dialog: MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private fb:FormBuilder) {}
 
@@ -62,8 +62,6 @@ ngOnInit(): void {
   this.loginData = this.login.Getlogin()
   this.loginData = JSON.parse(this.loginData)
   this.language=this.loginData.language
-  console.log("language==",this.language)
-
   this.fileupload = this.fb.group({
     fileData:null,
     type:'devices',
@@ -94,10 +92,10 @@ refreshFinds(){
               deviceName: res.success[i].deviceName,
               shift: res.success[i].shiftName ,
               infected: res.success[i].infected,
+              batteryUpdatedOn:res.success[i].batteryUpdatedOn,
               edit:'edit',
               delete:'delete',
               batteryStatus:res.success[i].batteryStatus,
-              batteryUpdatedOn:res.success[i].batteryUpdatedOn,
               emailId:res.success[i].emailId == '' || res.success[i].emailId == 'NULL' ||res.success[i].emailId == 'undefined' ? '-' : res.success[i].emailId,
               mobileNum:res.success[i].mobNum == '' ||res.success[i].mobNum == 'NULL' ||res.success[i].mobNum == 'undefined' ? '-' : res.success[i].mobNum,
               empId:res.success[i].empId == ''||res.success[i].empId == 'NULL' || res.success[i].empId == 'undefined' ? '-' : res.success[i].empId
@@ -115,9 +113,7 @@ refreshFinds(){
   })
 }
 
-getBatteryUpdatedOn(value){
-  return value
-}
+
 
 
 refreshShift(){
@@ -175,7 +171,7 @@ delete(a){
 
 infected(a){
   if(confirm('Are you sure to do this operation')){
-    // console.log("yes",a)
+    console.log("yes",a)
     var inf = a.infected == 0 ? 1 :0
     var data = {
       deviceId:a.deviceId,
@@ -232,16 +228,12 @@ search(a){
   //   this.findData= this.elementsTemp
 
   // }
-  // this.dataSource = new MatTableDataSource(this.findData);
-  // setTimeout(() => {
-  //   this.dataSource.sort = this.sort;
-  //   this.dataSource.paginator = this.paginator;
-  // })
   this.dataSource = new MatTableDataSource(this.findData);
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.filter =a.trim().toLowerCase()
-      })
+  setTimeout(() => {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.filter =a.trim().toLowerCase()
+  })
 }
 
 
@@ -272,6 +264,9 @@ getBatteryStatus(value){
     return {}
   }
 }
+getBatteryUpdatedOn(value){
+  return value
+}
 
 
 
@@ -300,6 +295,8 @@ fileChange(files){
    }
  }
 this.readExcel(files[0])
+
+
 }
 
 readExcel(file) {  
@@ -322,9 +319,15 @@ readExcel(file) {
      
   }  
   readFile.readAsArrayBuffer(file);  
+  console.log(this.fileupload)
+  var msg = 'Uploading file'
+  this.general.openSnackBar(msg,'')
+  setTimeout(()=>{this.fileSubmit(this.fileupload.value)},6*1000)
   
 }
-
+onclick(){
+  document.getElementById('file').click()
+}
 
 clearFile(){
 this.fileupload.get('fileData').setValue(null);
@@ -337,42 +340,45 @@ randomNumber(min=1, max=20) {
    return Math.random() * (max - min) + min;
 }
 
+
 fileSubmit(data){
-  console.log(data)
+  console.log("file upload data",data)
+
   var type=data.fileData.filename.split('.')
   console.log("type==",type[type.length-1].toString())
-if(type[type.length-1]=='xlsx'.toString() || type[type.length-1]=='xls'){
- 
-  this.loading=false
-  if(data.header[0].toLowerCase()=='name' && data.header[2].toLowerCase()=='deviceid' && data.header[1].toLowerCase()=="employeeid" && 
-   data.header[3]=="mobilenumber".toLowerCase() && data.header[4]=="emailid".toLowerCase()){
-    this.format=false
-    var msg = 'Please wait..!it takes few minutes to upload'
-    this.general.openSnackBar(msg,'')
-    data.userId =  this.loginData.userId
-    data.fileData.filename = this.loginData.userId.toString() + parseInt(this.randomNumber().toString()) + data.fileData.filename
-      console.log("file===",data)
-    this.api.uploadDeviceFile(data).then((res:any)=>{
-      if(res.status){
-        console.log("res file ===",res)
-        this.clearFile()
-        var msg = 'uploaded'
-        this.general.openSnackBar(msg,'')
-       }
-     })
+  if(type[type.length-1]=='xlsx'.toString() || type[type.length-1]=='xls'){
+  
+    this.loading=false
+    if(data.header[0].toLowerCase()=='name' && data.header[2].toLowerCase()=='deviceid'|| data.header[1].toLowerCase()=="employeeid" || 
+    data.header[3]=="mobilenumber".toLowerCase() || data.header[4]=="emailid".toLowerCase()){
+      this.format=false
+      var msg = 'Please wait..! It takes few minutes to upload'
+      this.general.openSnackBar(msg,'')
+      data.userId =  this.loginData.userId
+      data.fileData.filename = this.loginData.userId.toString() + parseInt(this.randomNumber().toString()) + data.fileData.filename
+        console.log("file===",data)
+      this.api.uploadDeviceFile(data).then((res:any)=>{
+        if(res.status){
+          console.log("res file ===",res)
+          this.clearFile()
+          var msg = 'uploaded'
+          this.general.openSnackBar(msg,'')
+        
+        }
+        
+      })
 
-}
-else{
-  this.format=true
   }
-}
-else{
-   this.loading=true
- }
+  else{
+
+    this.format=true
+    }
+  }
+  else{
+    this.loading=true
+    }
  
  }
 
 
-
 }
-

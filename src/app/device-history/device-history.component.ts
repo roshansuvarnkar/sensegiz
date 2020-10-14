@@ -6,6 +6,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Timestamp } from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
+import { GeneralMaterialsService } from '../general-materials.service';
+
 @Component({
   selector: 'app-device-history',
   templateUrl: './device-history.component.html',
@@ -25,7 +27,7 @@ export class DeviceHistoryComponent implements OnInit {
   currentPageSize:any=10
   displayedColumns: string[] = ['i','deviceName', 'contactDeviceName', 'updatedOn'];
 
-  constructor(private api: ApiService,private login:LoginCheckService,private route: ActivatedRoute) { }
+  constructor(private api: ApiService,private login:LoginCheckService,private route: ActivatedRoute,private general:GeneralMaterialsService ) { }
 
   ngOnInit(): void {
 
@@ -82,10 +84,11 @@ export class DeviceHistoryComponent implements OnInit {
 
 getTotalCount(){
   // console.log("device name==",this.deviceData.deviceName)
+  var date=new Date()
   var data={
     userId:this.loginData.userId,
-    deviceName:this.deviceData.deviceName
-
+    deviceName:this.deviceData.deviceName,
+    zone:this.general.getZone(date)
 
   }
 
