@@ -7,8 +7,10 @@
   
   <div class="upload">
    <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)"> 
-     <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
-     <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br>
+     <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
+     <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
+     <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
+     <span id="button" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
       <span *ngIf="loading" style="color:red">Please choose xlsx or xls file*</span>
       <span *ngIf="format" style="color:red"> Please check format: Name*, employeeId, deviceId*, emailId, mobileNumber</span>
    </form> <br>
