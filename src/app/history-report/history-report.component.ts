@@ -91,6 +91,7 @@ export class HistoryReportComponent implements OnInit {
         toDate:this.to,
         zone:this.general.getZone(this.date)
       }
+        console.log("count of report on date ======",data);
 
       this.api.getHistoryDateReportTotalCount(data).then((res:any)=>{
         // console.log("length of report on date ======",res);
@@ -295,6 +296,7 @@ summaryReport(){
     deviceName:this.deviceName,
     fromDate: this.from,
     toDate:this.to,
+    zone:this.general.getZone(this.date)
 
   }
   this.api.getSummaryReport(data).then((res:any)=>{
