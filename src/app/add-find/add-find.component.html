@@ -24,6 +24,7 @@
           <mat-form-field>
             <mat-label>Find Id</mat-label>
             <input type="number" min="1" matInput formControlName="deviceId" placeholder="Ex. 1" required>
+            <mat-error >Device ID cannot be 0 or empty</mat-error>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>
@@ -87,7 +88,7 @@
      <mat-error *ngIf="Findform.get('mobileNum').status=='INVALID'" class="error" >
       Please provide valid mobile number
      </mat-error> 
-    </div><br>
+    </div><br> <br>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button matStepperNext>Next</button>
@@ -156,12 +157,6 @@
   </mat-horizontal-stepper>
 
 </div>
-
-
-
-
-
-
 
 
 

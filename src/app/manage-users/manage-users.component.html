@@ -53,12 +53,12 @@
 
           <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
-            <td mat-cell *matCellDef="let live"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
+            <td mat-cell *matCellDef="let live" class="cursor"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
           </ng-container>
 
           <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
-            <td mat-cell *matCellDef="let live"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
+            <td mat-cell *matCellDef="let live" class="cursor"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
           </ng-container>
 
      </div>

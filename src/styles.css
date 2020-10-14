@@ -64,7 +64,9 @@ tr {
   display: none !important;
 }
 
-
+.cursor{
+  cursor: pointer;
+}
 /* .select-panel {
   max-width: fit-content !important;
 } */

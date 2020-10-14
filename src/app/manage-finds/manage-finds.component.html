@@ -9,11 +9,8 @@
    <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)"> 
      <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
      <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br>
-
       <span *ngIf="loading" style="color:red">Please choose xlsx or xls file*</span>
-      <span *ngIf="format" style="color:red"> Please check format: Name*, employeeId[optional], deviceId*, emailId[optional], mobileNumber[optional]</span>
-
- 
+      <span *ngIf="format" style="color:red"> Please check format: Name*, employeeId, deviceId*, emailId, mobileNumber</span>
    </form> <br>
   </div> 
    <button class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
@@ -175,12 +172,12 @@
 
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
-          <td mat-cell *matCellDef="let live"  (click)="edit(live)"> <mat-icon>{{live.edit}}</mat-icon></td>
+          <td mat-cell *matCellDef="let live"  (click)="edit(live)" class="cursor"> <mat-icon>{{live.edit}}</mat-icon></td>
         </ng-container>
 
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
-          <td mat-cell *matCellDef="let live"  (click)="delete(live)"><mat-icon>{{live.delete}}</mat-icon> </td>
+          <td mat-cell *matCellDef="let live"  (click)="delete(live)" class="cursor"><mat-icon>{{live.delete}}</mat-icon> </td>
         </ng-container>
 
    </div>

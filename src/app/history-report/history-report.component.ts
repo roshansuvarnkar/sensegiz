@@ -89,6 +89,7 @@ export class HistoryReportComponent implements OnInit {
         userId:this.loginData.userId,
         fromDate: this.from,
         toDate:this.to,
+        zone:this.general.getZone(this.date)
       }
 
       this.api.getHistoryDateReportTotalCount(data).then((res:any)=>{
@@ -107,6 +108,7 @@ export class HistoryReportComponent implements OnInit {
       deviceName:this.deviceName,
       fromDate: this.from,
       toDate:this.to,
+      zone:this.general.getZone(this.date)
     }
 
     this.api.getHistoryNameReportTotalCount(data1).then((res:any)=>{

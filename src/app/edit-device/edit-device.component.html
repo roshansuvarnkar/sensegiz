@@ -71,10 +71,10 @@
             formControlName="mobileNum">
           </ngx-intl-tel-input>
           <hr class="mob">
-          <mat-error *ngIf="Findform.get('mobileNum').status=='INVALID'  && userform.get('mobileNum').touched==true" class="error" >
+          <mat-error *ngIf="Findform.get('mobileNum').status=='INVALID'  && Findform.get('mobileNum').touched==true" class="error" >
             Please provide valid mobile number
            </mat-error> 
-        </div> <br>
+        </div> <br> <br>  
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
@@ -201,7 +201,7 @@
 							formControlName="mobileNum">
             </ngx-intl-tel-input>
             <hr class="mob">
-            <mat-error *ngIf="userform.get('mobileNum').status=='INVALID'" class="error" >
+            <mat-error *ngIf="userform.get('mobileNum').status=='INVALID' && userform.get('mobileNum').touched==true" class="error" >
               Please provide valid mobile number
              </mat-error> 
 					</div> <br>
