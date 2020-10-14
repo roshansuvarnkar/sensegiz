@@ -28,7 +28,14 @@
 ::ng-deep .focus{
 outline: unset !important;
 }
-
+mat-horizontal-stepper,mat-step,.step-phone{
+  position: relative;
+  z-index: 0;
+}
+.intl-phone{
+  position: absolute;
+  z-index: auto;
+}
 
 ::ng-deep .btn.focus, .btn:focus {
   outline: 0;

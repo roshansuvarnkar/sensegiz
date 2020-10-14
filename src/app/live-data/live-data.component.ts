@@ -52,7 +52,7 @@ displayedColumns: string[] = ['i','baseName', 'contactName', 'startTime','update
     clearInterval(this.timeout)
   }
   refresh(){
-    this.getTotalCount(0)
+   
     this.refreshData(this.count)
   }
   prevDayData(){
@@ -76,10 +76,12 @@ displayedColumns: string[] = ['i','baseName', 'contactName', 'startTime','update
   }
 
 getTotalCount(val){
+  var date=new Date()
   var data={
     userId:this.loginData.userId,
     tblName:'deviceData',
-    count:val
+    count:val,
+    zone:this.general.getZone(date)
   }
 
   this.api.getLiveDataTotalCount(data).then((res:any)=>{
@@ -94,14 +96,15 @@ getTotalCount(val){
 
 
   refreshData(value,limit=10,offset=0){
-
+    var date=new Date()
 
     var data={
       userId:this.loginData.userId,
       tblName:'deviceData',
       count:value,
       offset:offset,
-      limit:limit
+      limit:limit,
+      zone:this.general.getZone(date)
     }
 
     this.api.getLiveData(data).then((res:any)=>{

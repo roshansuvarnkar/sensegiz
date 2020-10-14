@@ -114,7 +114,7 @@
 							formControlName="mobileNum">
 						</ngx-intl-tel-input>
 						<hr class="mob">
-						<mat-error *ngIf="adminAddUserform.get('mobileNum').status=='INVALID'" class="error" >
+						<mat-error *ngIf="adminAddUserform.get('mobileNum').status=='INVALID'  && adminAddUserform.get('mobileNum').touched==true" class="error" >
 						  Please provide valid mobile number
 						</mat-error> 
 					</div>

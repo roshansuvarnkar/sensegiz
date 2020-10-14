@@ -64,7 +64,9 @@ tr {
   display: none !important;
 }
 
-
+.cursor{
+  cursor: pointer;
+}
 /* .select-panel {
   max-width: fit-content !important;
 } */
@@ -94,17 +96,18 @@ a.canvasjs-chart-credit {
 .mat-select-panel {
  
   width: 25rem;
-  margin-left: 2rem;
-  padding: 0 2rem 0 0;
+  margin-left: 1.3rem;
+  /* padding: 0 2rem 0 1rem; */
 }
 
-/* .cdk-overlay-pane{
+.cdk-overlay-pane{
   max-width: 95vw !important;
-  width: 100% !important;
-  margin-top: 4rem;
-} */
+  width: 95vw !important;
+  /* margin-top: 4rem; */
+}
+
 .mat-menu-panel {
-  min-width: 121px;
+  min-width: 112px;
   max-width: 280px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -112,7 +115,7 @@ a.canvasjs-chart-credit {
   border-radius: 4px;
   outline: 0;
   min-height: 64px;
-  margin-top: 0.6rem !important;
+  margin-top:0.5rem !important;
 }
 
 .table {

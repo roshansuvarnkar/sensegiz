@@ -44,7 +44,7 @@ export class AddFindComponent implements OnInit {
 
     this.Findform = this.fb.group({
       deviceName: ['', Validators.required],
-      deviceId: ['', Validators.required],
+      deviceId: ['', [Validators.required,Validators.min(1)]],
       employeeId: [''],
       mobileNum: [''],
       emailId: ['',[Validators.email]]
@@ -74,6 +74,7 @@ onNoClick(): void {
 }
 
 Findsubmit(data){
+  console.log("this.findform===",this.Findform)
   console.log("find submit data==",data)
   if (this.Findform.valid) {
     try {

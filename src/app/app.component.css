@@ -99,7 +99,7 @@ color: #f7a30bfa;
 .flex {
 display: flex;
 width: 100%;
-justify-content: space-evenly !important;
+/* justify-content: space-evenly !important; */
 }
 
 }

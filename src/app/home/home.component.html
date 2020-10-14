@@ -29,6 +29,7 @@
                 <circle-progress (click)="onlineUser()"
                 class="circle"
                   [percent]="onlineCount"
+                  [maxPercent]="onlineCount"
                   [showUnits]="false"
                   [showBackground] = "true"
                   [backgroundColor]= "'#ef6c00'"
@@ -50,10 +51,11 @@
               <div class="infe" >
             
                 <circle-progress (click)="activeUser()"
-                  c
+                  
                   class="circle"
                   fill="green"
                   [percent]="activeEmp"
+                  [maxPercent]="activeEmp"
                   [showUnits]="false"
                   [showBackground] = "true"
                   [backgroundColor]= "'#ef6c00'"
@@ -77,6 +79,7 @@
                 <circle-progress (click)="offlineUser()"
                   class="circle"
                   [percent]="offlineCount"
+                  [maxPercent]="offlineCount"
                   [showUnits]="false"
                   [showBackground] = "true"
                   [backgroundColor]= "'#ef6c00'"
@@ -99,6 +102,7 @@
                 <circle-progress (click)="infectedUser()"
                   class="circle"
                   [percent]="infectedEmp"
+                  [maxPercent]="infectedEmp"
                   [showUnits]="false"
                   [showBackground] = "true"
                   [backgroundColor]= "'#ef6c00'"

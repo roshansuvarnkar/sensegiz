@@ -338,6 +338,7 @@ randomNumber(min=1, max=20) {
 }
 
 fileSubmit(data){
+  
   console.log(data)
   var type=data.fileData.filename.split('.')
   console.log("type==",type[type.length-1].toString())
