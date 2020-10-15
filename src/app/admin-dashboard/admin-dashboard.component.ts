@@ -56,8 +56,8 @@ export class AdminDashboardComponent implements OnInit {
   }
 
  onSubmit(data) {
-   data.mobileNum=data.mobileNum.replace(/\s/g,'')
-   console.log("admin register==",data)
+  data.mobileNum=data.mobileNum!=null?data.mobileNum.e164Number:''
+     console.log("admin register==",data)
 
     if (this.adminAddUserform.valid) {
       try {
