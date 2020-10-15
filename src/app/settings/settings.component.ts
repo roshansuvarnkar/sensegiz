@@ -216,29 +216,65 @@ export class SettingsComponent implements OnInit {
           }
 
         if( res.success[0].inactivityStatus == 1){
+         if(this.language=='english'){
           this.inactivityStatusValue = {
             value:true,
             status:'Disable'
           }
+         
+         }
+         else{
+          this.inactivityStatusValue = {
+            value:true,
+            status:'無効にする'
+          }
+        }
         }
         else{
-          this.inactivityStatusValue = {
-            value:false,
-            status:'Enable'
+          if(this.language=='english'){
+            this.inactivityStatusValue = {
+              value:false,
+              status:'Enable'
+            }
+           
+           }
+           else{
+            this.inactivityStatusValue = {
+              value:false,
+              status:'有効にする'
+            }
           }
+        
         }
       
       if(res.success[0].twoStepAuth== "N"){
-        this.twoStepAuthStatus={
-          value:'Enable',
-          status:false
+        if(this.language=='english'){
+          this.twoStepAuthStatus={
+            value:'Enable',
+            status:false
+          }
+        }
+        else{
+          this.twoStepAuthStatus={
+            value:'有効にする',
+            status:false
+          }
         }
       }
       else{
-        this.twoStepAuthStatus={
-          value:'Disable',
-          status:true
+        if(this.language=='english'){
+          this.twoStepAuthStatus={
+            value:'Disable',
+            status:true
+          }
         }
+        else{
+          this.twoStepAuthStatus={
+            value:':無効にする',
+            status:true
+          }
+        }
+       
       }
       this.languageForm.patchValue({
         language:res.success[0].language.toString()
@@ -336,16 +372,34 @@ export class SettingsComponent implements OnInit {
    twoStepAuthchange(event){
      console.log(event)
      if(event.checked==true){
-       this.twoStepAuthStatus={
-         value:'Disable',
-         status:true
-       }
+      if(this.language=='english'){
+        this.twoStepAuthStatus={
+          value:'Disable',
+          status:true
+        }
+      }
+      else{
+        this.twoStepAuthStatus={
+          value:'無効にする',
+          status:true
+        }
+      }
+     
      }  
      else{
-      this.twoStepAuthStatus={
-        value:'Enable',
-        status:false
+      if(this.language=='english'){
+        this.twoStepAuthStatus={
+          value:'Enable',
+          status:false
+        }
       }
+      else{
+        this.twoStepAuthStatus={
+          value:'有効にする',
+          status:false
+        }
+      }
+   
      }
    }
    onSubmitDistanceForm(data) {

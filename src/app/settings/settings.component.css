@@ -29,6 +29,12 @@ button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary
   right: 7.5rem;
   cursor:pointer;
 }
+button.mat-focus-indicator.btn-set-jp.mat-raised-button.mat-button-base.mat-primary {
+  position: absolute;
+  bottom: 1rem;
+  right: 6.5rem;
+  cursor:pointer;
+}
 input.input-file {
   margin-left: 3.5rem;
   margin-top: 1.1rem;

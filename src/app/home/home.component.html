@@ -13,8 +13,8 @@
               <mat-icon >account_circle</mat-icon>
             </span><br>
             <span class="tot">
-              <mat-label *ngIf="language=='english'">Total number of users</mat-label>:
-              <mat-label *ngIf="language=='japanese'">ユーザー数の合計</mat-label>
+              <mat-label *ngIf="language=='english'">Total number of users :</mat-label>
+              <mat-label *ngIf="language=='japanese'">ユーザー数の合計 :</mat-label>
               <mat-label>{{totalEmp}}</mat-label>
               <br>
               <!-- <mat-label>Total Finds</mat-label> :
@@ -168,7 +168,8 @@
                 <mat-card-content class="setting" routerLink="/settings">
                   <mat-label *ngIf="language=='english'">Violation alert</mat-label>
                   <mat-label *ngIf="language=='japanese'">接近違反警告</mat-label>
-                  <mat-label class="tab-set">{{setting?.threshold}}</mat-label>
+                  <mat-label class="tab-set-jp" *ngIf="language=='english'">{{setting?.threshold}}</mat-label>
+                  <mat-label class="tab-set" *ngIf="language=='japanese'">{{setting?.threshold}}</mat-label>
                   <mat-icon>keyboard_arrow_right</mat-icon>
                 </mat-card-content>
               </mat-card><br>

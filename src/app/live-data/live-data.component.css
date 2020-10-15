@@ -13,6 +13,7 @@ table.mat-table {
   font-size: 0.9rem;
   color: #ef6c00;
 }
+
 .center {
   text-align: center;
   font-size: 1.6rem;
@@ -36,4 +37,14 @@ mat-icon{
 }
 @media only screen and (max-width: 768px) {
 
+  ::ng-deep .mat-sort-header-container {
+    display: inline;
+    justify-content:center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #ef6c00;
+    
+    
+  }
+ 
 }

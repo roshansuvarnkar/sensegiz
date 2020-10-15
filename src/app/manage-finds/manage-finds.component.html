@@ -286,12 +286,12 @@
 
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 編集 </th>
-          <td mat-cell *matCellDef="let live"  (click)="edit(live)"> <mat-icon>{{live.edit}}</mat-icon></td>
+          <td mat-cell *matCellDef="let live"  (click)="edit(live)" class="cursor"> <mat-icon>{{live.edit}}</mat-icon></td>
         </ng-container>
 
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 削除 </th>
-          <td mat-cell *matCellDef="let live"  (click)="delete(live)"><mat-icon>{{live.delete}}</mat-icon> </td>
+          <td mat-cell *matCellDef="let live"  (click)="delete(live)" class="cursor"><mat-icon>{{live.delete}}</mat-icon> </td>
         </ng-container>
 
    </div>

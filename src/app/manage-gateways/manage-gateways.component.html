@@ -59,12 +59,12 @@
 
           <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
-            <td mat-cell *matCellDef="let live"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
+            <td mat-cell *matCellDef="let live" class="cursor"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
           </ng-container>
 
           <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
-            <td mat-cell *matCellDef="let live"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
+            <td mat-cell *matCellDef="let live" class="cursor"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
           </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -95,12 +95,12 @@
 
           <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> 編集 </th>
-            <td mat-cell *matCellDef="let live"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
+            <td mat-cell *matCellDef="let live" class="cursor"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
           </ng-container>
 
           <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> 削除 </th>
-            <td mat-cell *matCellDef="let live"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
+            <td mat-cell *matCellDef="let live" class="cursor"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
           </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
