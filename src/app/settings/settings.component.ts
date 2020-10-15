@@ -130,9 +130,9 @@ export class SettingsComponent implements OnInit {
       fileData:null,
       type:'logo',
     });
-    this.languageForm = this.fb.group({
-      language: ['', Validators.required],
-    });
+    // this.languageForm = this.fb.group({
+    //   language: ['', Validators.required],
+    // });
 
      
 
@@ -276,9 +276,9 @@ export class SettingsComponent implements OnInit {
         }
        
       }
-      this.languageForm.patchValue({
-        language:res.success[0].language.toString()
-      })
+      // this.languageForm.patchValue({
+      //   language:res.success[0].language.toString()
+      // })
     }
   })
 }
@@ -768,17 +768,17 @@ export class SettingsComponent implements OnInit {
 
    }
 
-   onSubmitlanguageForm(data){
-     console.log("language===",data)
-     data.userId=this.loginData.userId
-     this.api.setLanguage(data).then((res:any)=>{
-       this.general.updateItem('sensegizlogin','language',data.language)
-      this.refreshSetting()
-      setTimeout(()=>{
-        window.location.reload()
-      },1000)
-     })
-   }
+  //  onSubmitlanguageForm(data){
+  //    console.log("language===",data)
+  //    data.userId=this.loginData.userId
+  //    this.api.setLanguage(data).then((res:any)=>{
+  //      this.general.updateItem('sensegizlogin','language',data.language)
+  //     this.refreshSetting()
+  //     setTimeout(()=>{
+  //       window.location.reload()
+  //     },1000)
+  //    })
+  //  }
 
    inactivityChange(event){
      var checked = event.checked == true ? 1 : 2

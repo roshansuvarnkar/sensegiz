@@ -24,6 +24,7 @@ export class AdminSettingsComponent implements OnInit {
   min:any=[]
   sec:any=[]
   dataGet:any
+  languageForm:FormGroup
   statusCustomise:boolean=false
   selectedValue:boolean=false
   selectStatus1:boolean=false
@@ -63,7 +64,9 @@ export class AdminSettingsComponent implements OnInit {
       fromTime: ['', Validators.required],
       toTime: ['', Validators.required]
     });
-
+    this.languageForm = this.fb.group({
+      language: ['', Validators.required],
+    });
     this.route.queryParams.subscribe(params => {
       this.dataGet = JSON.parse(params.record) ;
       // console.log("data==",this.dataGet.userId)
@@ -112,6 +115,9 @@ export class AdminSettingsComponent implements OnInit {
         })
         this.scanningForm.patchValue({
           seconds:res.success[0].scanningInterval.toString()
+        })
+        this.languageForm.patchValue({
+          language:res.success[0].language.toString()
         })
 
       }
@@ -317,6 +323,17 @@ export class AdminSettingsComponent implements OnInit {
    }
 
 
+   onSubmitlanguageForm(data){
+    console.log("language===",data)
+    data.userId=this.dataGet.userId
+    this.api.setLanguage(data).then((res:any)=>{
+      this.general.updateItem('sensegizlogin','language',data.language)
+     this.refreshSetting()
+    //  setTimeout(()=>{
+    //    window.location.reload()
+    //  },1000)
+    })
+  }
 
  
    onSubmitBufferForm(value){

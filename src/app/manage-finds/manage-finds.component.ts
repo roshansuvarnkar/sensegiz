@@ -11,6 +11,7 @@ import {MatSort} from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Timestamp } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Component({
@@ -37,8 +38,17 @@ language:any
 fileupload:FormGroup
 loading:boolean=false
 format:boolean=false
+isMobile:boolean
+isTablet:boolean
+isDesktopDevice:boolean
+deviceInfo=null
 @ViewChild('fileInput') fileInput:ElementRef
-constructor(public dialog: MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private fb:FormBuilder) {}
+constructor(public dialog: MatDialog,
+  private api: ApiService,
+  private login:LoginCheckService,
+  private general:GeneralMaterialsService,
+  private fb:FormBuilder,
+  private deviceService: DeviceDetectorService) {}
 
 
 openDialog(): void {
@@ -59,6 +69,11 @@ openDialog(): void {
 
 
 ngOnInit(): void {
+
+  this.deviceInfo = this.deviceService.getDeviceInfo();
+  this.isMobile = this.deviceService.isMobile();
+  this.isTablet = this.deviceService.isTablet();
+  this.isDesktopDevice = this.deviceService.isDesktop();
   this.loginData = this.login.Getlogin()
   this.loginData = JSON.parse(this.loginData)
   this.language=this.loginData.language
@@ -372,10 +387,22 @@ fileSubmit(data){
   else{
 
     this.format=true
+    if(this.isMobile==true || this.isTablet==true){
+      var msg = 'Please check format: Name*, employeeId, deviceId*, emailId, mobileNumber'
+      this.general.openSnackBar(msg,'')
+    }else{
+
+    }
     }
   }
   else{
     this.loading=true
+    if(this.isMobile==true || this.isTablet==true){
+      var msg = 'Please choose xlsx or xls file*'
+      this.general.openSnackBar(msg,'')
+    }else{
+      
+    }
     }
  
  }

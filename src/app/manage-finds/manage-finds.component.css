@@ -43,9 +43,7 @@ position: absolute;
  top: 3rem;
 
 }
-.upload-mob-btn{
-display: none;
-}
+
 
 .batteryContainer {
 display: -webkit-box;
@@ -92,21 +90,15 @@ color: #ef6c00;
       cursor: pointer;
       font-size: smaller;
   }
-  .upload-mob-btn{
-    display: block;
-    color: #ef6c00;
-    position: absolute;
-     left: 0;
-     top: 0;
-  }
+ .error{
+   display: none;
+ }
   .upload {
   position: absolute;
   top: 0.5rem;
-  margin-left: 1.2rem;
+  left:1rem;
 }
-  /* .upload-btn{
-    display: none;
-  } */
+
   .search{
       width: 120px;
   }
