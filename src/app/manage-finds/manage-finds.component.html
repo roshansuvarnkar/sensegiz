@@ -5,21 +5,21 @@
 <br>
 <div class="flex">
   
-  <div class="upload">
+    <div class="upload">
+      <form action="" [formGroup]="fileupload" >
+        <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
+        <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
+        <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
+        <span id="button" *ngIf="language=='english'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
+        <span id="button" *ngIf="language=='japanese'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
+        <!-- <div class="upload-mob-btn "><span (click)="onclick()" > <mat-icon id="button" >cloud_upload</mat-icon>  </span> </div><br> <br> -->
+  
+        <span *ngIf="loading" style="color:red">Please choose xlsx or xls file*</span>
+        <span *ngIf="format" style="color:red"> Please check format: Name, employeeId, deviceId, emailId, mobileNumber</span>
+    
+      </form>
+     </div>  <br>
  
-
-   <form action="" [formGroup]="fileupload" > 
-     <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
-     <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
-     <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
-     <span *ngIf="language=='english'"  id="button" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> 
-    <br>
-     <span *ngIf="loading" style="color:red" class="error">Please choose xlsx or xls file*</span>
-     <span *ngIf="format" style="color:red" class="error"> Please check format: Name*, employeeId, deviceId*, emailId, mobileNumber</span>
-    </span>
-
-   </form> <br>
-  </div> 
    <button *ngIf="language=='english'" class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
     <button *ngIf="language=='japanese'" class="button" mat-flat-button color="primary" (click)="openDialog()">追跡対象者の追加</button>
 
