@@ -22,7 +22,7 @@
   </div> <br>
   <div>
   <p  mat-dialog-title> From {{from1}} to {{to1}} </p>
-    <form [formGroup]="selectMin">
+    <!-- <form [formGroup]="selectMin">
       <mat-form-field>
         <mat-select (selectionChange)="filterTotTime($event)" formControlName="minute" matNativeControl placeholder="Select total time">
           <mat-option [value]="0">none</mat-option>
@@ -32,7 +32,7 @@
           <mat-option [value]="20">20 min </mat-option>
         </mat-select>
       </mat-form-field>
-    </form>
+    </form> -->
     <div class="mat-elevation-z8">
 
 
@@ -215,7 +215,7 @@
   </div> <br>
   <div>
   <p  mat-dialog-title> From {{from}} to {{to}} </p>
-  <form [formGroup]="selectMin">
+  <!-- <form [formGroup]="selectMin">
     <mat-form-field >
       <mat-select (selectionChange)="filterTotTime($event)" formControlName="minute" matNativeControl placeholder="Select total time">
         <mat-option [value]="0">none</mat-option>
@@ -227,7 +227,7 @@
     </mat-form-field>
 
 
-    </form>
+    </form> -->
     <div class="mat-elevation-z8">
 
 
@@ -306,7 +306,7 @@
   </div> <br>
       <p class="center-head" mat-dialog-title *ngIf="language=='english'">Social Distancing Violator's Name - {{deviceName | titlecase}}</p>
       <p class="center-head" mat-dialog-title *ngIf="language=='japanese'">ソーシャル・ディスタンシング違反者の名前 - {{deviceName | titlecase}}</p>
-        <form [formGroup]="selectMin">
+        <!-- <form [formGroup]="selectMin">
           <mat-form-field >
             <mat-select (selectionChange)="filterTotTime($event)" formControlName="minute" matNativeControl placeholder="Select total time">
               <mat-option [value]="0">none</mat-option>
@@ -316,7 +316,7 @@
               <mat-option [value]="20">20 min </mat-option>
             </mat-select>
           </mat-form-field>
-        </form>
+        </form> -->
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort >
 

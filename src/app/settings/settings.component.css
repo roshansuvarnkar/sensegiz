@@ -74,7 +74,11 @@ mat-radio-group.mat-radio-group.wearable.ng-untouched.ng-pristine.ng-valid {
   /* animation: marquee 15s linear infinite forwards; */
   color:red;
 }
-
+ng-deep .custom-file-input {
+  display: contents !important;
+  border: transparent !important;
+  font-size:large !important;
+}
 /* @keyframes marquee {
   0% {
     

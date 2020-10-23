@@ -568,7 +568,10 @@
   </mat-card-subtitle><br>
   <mat-card-content>
     <form action="" [formGroup]="uploadForm" (ngSubmit)="formSubmit(uploadForm.value)">
-      <input class="input-file" type="file" #fileInput  (change)="fileChange($event.target.files);"/>
+      <!-- <label class="custom-file-input" for="Upload" > -->
+      
+      <input class="input-file" id="Upload" type="file" #fileInput  (change)="fileChange($event.target.files);"/>
+    <!-- </label> -->
      <br>
       <span *ngIf="loading" style="color:red">Please choose jpg/jpeg/png*</span>
       <br><br><br>  
@@ -585,9 +588,10 @@
   </mat-card-subtitle><br>
   <mat-card-content>
     <form action="" [formGroup]="uploadForm" (ngSubmit)="formSubmit(uploadForm.value)">
-
-     <input class="input-file" type="file"  #fileInput  (change)="fileChange($event.target.files);"/>
+      <!-- <mat-label class="custom-file-input" for="Upload" > Upload -->
       
+     <input class="input-file" type="file" id="Upload"  #fileInput  (change)="fileChange($event.target.files);"   />
+    <!-- </mat-label> -->
      <br>
       <span *ngIf="loading" style="color:red">Please choose jpg/jpeg/png*</span>
       <br><br><br>  

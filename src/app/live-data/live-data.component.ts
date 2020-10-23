@@ -105,52 +105,70 @@ getTotalCount(val){
 }
 
 
-  refreshData(value,limit=10,offset=0){
-    var date=new Date()
+refreshData(value,limit=10,offset=0){
+  this.liveData=[]
+  var date=new Date()
+  var data={
+    userId:this.loginData.userId,
+    tblName:'deviceData',
+    count:value,
+    zone:this.general.getZone(date),
+    offset:offset,
+    limit:limit
+  }
+ 
 
-    var data={
-      userId:this.loginData.userId,
-      tblName:'deviceData',
-      count:value,
-      offset:offset,
-      limit:limit,
-      zone:this.general.getZone(date)
-    }
-
-    this.api.getLiveData(data).then((res:any)=>{
-      console.log("live data ======",res);
+  this.api.getLiveData(data).then((res:any)=>{
+  
+    console.log("live data ======",res);
+    if(res.status){
       this.liveData=[]
-      if(res.status){
+      this.totTime=[]
+        // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
+          this.totTime=res.success
         for(var i=0;i<res.success.length;i++){
           this.liveData.push({
             i:i+1,
             baseName:res.success[i].baseName,
             contactName:res.success[i].contactName,
+            location:res.success[i].location,
             updatedOn:res.success[i].updatedOn,
             totalTime:res.success[i].totalTime,
-            startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn),
-
+            startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn)
           })
         }
-        this.currentPageLength = res.success.length;
+        // this.currentPageLength = res.success.length;
         this.dataSource = new MatTableDataSource(this.liveData);
         setTimeout(() => {
           this.dataSource.sort = this.sort;
           //this.dataSource.paginator = this.paginator;
           this.paginator.length = this.currentPageSize
         })
-      }
-      else{
-        this.dataSource = new MatTableDataSource(this.liveData);
-        setTimeout(() => {
-          this.dataSource.sort = this.sort;
-          //this.dataSource.paginator = this.paginator;
-          this.paginator.length = this.currentPageSize
-        })
-      }
-    })
+      // }
+      // else{
+      //   this.totTime=res.success
+      //   console.log("this.tottttttt===",this.totTime)
+    
+      //   if(this.selectMin.get('minute').value!=''){
+      //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+          
+      //     this.filterTotTime(this.selectMin.get('minute').value)
+      
+      //   }
+      // }
+    }
+    else if(res.success==false){
+      this.liveData=[]
+      this.dataSource = new MatTableDataSource(this.liveData);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+        //this.dataSource.paginator = this.paginator;
+        this.paginator.length = this.currentPageSize
+      })
+    }
+  })
 
- }
+}
  convertDate(a){
   // console.log("a===",a)
   var timeArr = a.split(':')

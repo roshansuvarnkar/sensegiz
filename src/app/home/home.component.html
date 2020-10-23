@@ -10,22 +10,24 @@
         <mat-card-content>
           <div class="row tot-head">
             <span class="tot">
-              <mat-icon >account_circle</mat-icon>
+              <mat-icon >account_circle</mat-icon> &nbsp;&nbsp;User status
             </span><br>
             <span class="tot">
               <mat-label *ngIf="language=='english'">Total number of users :</mat-label>
               <mat-label *ngIf="language=='japanese'">ユーザー数の合計 :</mat-label>
               <mat-label>{{totalEmp}}</mat-label>
               <br>
+             
               <!-- <mat-label>Total Finds</mat-label> :
               <mat-label>{{totalEmp}}</mat-label> -->
             </span>
           </div><br><br>
           <div class="row">
+           
             <div class="first-cont">
               <div class="regi">
-                <span *ngIf="language=='english'">Active Users</span>
-              <span *ngIf="language=='japanese'">アクティブユーザー数</span><br><br>
+                <span *ngIf="language=='english'">Active </span>
+              <span *ngIf="language=='japanese'">アクティブユーザー数</span><br>
                 <circle-progress (click)="onlineUser()"
                 class="circle"
                   [percent]="onlineCount"
@@ -71,12 +73,12 @@
                   [startFromZero]="true"
                   [responsive]="false"
                 ></circle-progress>
-                <br> <br> <span *ngIf="language=='english'">Registered Users</span>
+                <br>  <span *ngIf="language=='english'">Registered </span>
                 <span *ngIf="language=='japanese'">登録ユーザー数</span>
               </div>
               <div class="regi">
-                <span *ngIf="language=='english'">Offline Users</span>
-                <span *ngIf="language=='japanese'">オフラインユーザー数</span><br><br>
+                <span *ngIf="language=='english'">Offline </span>
+                <span *ngIf="language=='japanese'">オフラインユーザー数</span><br>
                 <circle-progress (click)="offlineUser()"
                   class="circle"
                   [percent]="offlineCount"
@@ -120,7 +122,7 @@
                   [responsive]="false"
                 ></circle-progress>
 
-                <br> <br><span *ngIf="language=='english'">Infected Users</span>
+                <br><span *ngIf="language=='english'">Infected </span>
                 <span *ngIf="language=='japanese'">感染したユーザー数</span>
               </div> <br>
               <!-- <div class="count">
@@ -171,9 +173,9 @@
 
                   <mat-label *ngIf="language=='japanese'">警告のための接触違反回数</mat-label>
 
-                  <mat-label *ngIf="language=='japanese'">接近違反警告</mat-label>
-                  <mat-label class="tab-set-jp" *ngIf="language=='english'">{{setting?.threshold}}</mat-label>
-                  <mat-label class="tab-set" *ngIf="language=='japanese'">{{setting?.threshold}}</mat-label>
+                  <!-- <mat-label *ngIf="language=='japanese'">接近違反警告</mat-label> -->
+                  <mat-label class="tab-set" *ngIf="language=='english'">{{setting?.threshold}}</mat-label>
+                  <mat-label class="tab-set-jp" *ngIf="language=='japanese'">{{setting?.threshold}}</mat-label>
 
                   <mat-icon>keyboard_arrow_right</mat-icon>
                 </mat-card-content>

@@ -90,7 +90,7 @@ hr {
   }
   mat-card.mat-card.mat-focus-indicator.tab {
     /* max-width: fit-content !important; */
-    width: 140%;
+    width: fit-content !important;
 }
 mat-card.mat-card.mat-focus-indicator.sub {
     max-width: 20rem;

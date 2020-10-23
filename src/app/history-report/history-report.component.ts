@@ -171,7 +171,7 @@ basedOnDate(limit,offset){
 
       console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
    
-      if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
+      // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
         for(var i=0;i<res.success.length;i++){
 
@@ -194,18 +194,18 @@ basedOnDate(limit,offset){
         // this.paginator.length = this.currentPageLength
       })
     
-      }
-      else{
-        this.totTime=res.success
-        console.log("this.tottttttt===",this.totTime)
+      // }
+      // else{
+      //   this.totTime=res.success
+      //   console.log("this.tottttttt===",this.totTime)
 
-        if(this.selectMin.get('minute').value!=''){
-          console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+      //   if(this.selectMin.get('minute').value!=''){
+      //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
           
-          this.filterTotTime(this.selectMin.get('minute').value)
+      //     this.filterTotTime(this.selectMin.get('minute').value)
       
-        }
-      }
+      //   }
+      // }
     }
 
   })
@@ -232,25 +232,25 @@ basedOnFindName(limit,offset){
       
         this.totTime=res.success
    
-      if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
+      // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         this.liveData=res.success
       this.dataSource = new MatTableDataSource(this.liveData);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
         // this.paginator.length = this.currentPageLength
       })
-      }
-      else{
-        this.totTime=res.success
-        console.log("this.tottttttt===",this.totTime)
+      // }
+      // else{
+      //   this.totTime=res.success
+      //   console.log("this.tottttttt===",this.totTime)
 
-        if(this.selectMin.get('minute').value!=''){
-          console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+      //   if(this.selectMin.get('minute').value!=''){
+      //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
           
-          this.filterTotTime(this.selectMin.get('minute').value)
+      //     this.filterTotTime(this.selectMin.get('minute').value)
       
-        }
-      }
+      //   }
+      // }
     }
   })
 
@@ -394,7 +394,7 @@ cummulativeReport(){
     console.log("cummulative report==",res)
     if(res.status){
       this.totTime=res.data
-      if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
+      // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
         for(let i=0;i<res.data.length;i++){
           this.liveData.push({
@@ -411,18 +411,18 @@ cummulativeReport(){
           this.dataSource.paginator = this.paginator
            })
     
-      }
-      else{
-        this.totTime=res.success
-        console.log("this.tottttttt===",this.totTime)
+      // }
+      // else{
+      //   this.totTime=res.success
+      //   console.log("this.tottttttt===",this.totTime)
 
-        if(this.selectMin.get('minute').value!=''){
-          console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+      //   if(this.selectMin.get('minute').value!=''){
+      //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
           
-          this.filterTotTime(this.selectMin.get('minute').value)
+      //     this.filterTotTime(this.selectMin.get('minute').value)
       
-        }
-      }
+      //   }
+      // }
 
     }
   })
