@@ -14,8 +14,8 @@
         <span id="button" *ngIf="language=='japanese'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
         <!-- <div class="upload-mob-btn "><span (click)="onclick()" > <mat-icon id="button" >cloud_upload</mat-icon>  </span> </div><br> <br> -->
   
-        <span *ngIf="loading" style="color:red">Please choose xlsx or xls file*</span>
-        <span *ngIf="format" style="color:red"> Please check format: Name, employeeId, deviceId, emailId, mobileNumber</span>
+        <span  [ngStyle]="{'display':isDesktopDevice === true && loading===true ? 'block' : 'none','color': loading===true?'red':'red' }">Please choose xlsx or xls file*</span>
+        <span [ngStyle]="{'display':isDesktopDevice === true && format===true? 'block' : 'none','color': format===true?'red':'red' }"> Please check format: Name, employeeId, deviceId, emailId, mobileNumber</span>
     
       </form>
      </div>  <br>

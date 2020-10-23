@@ -151,11 +151,11 @@
     </span> <br>
     <mat-card-content>
     <div >
-      <mat-radio-group  color="primary" class="radio radio1">
+      <mat-radio-group  color="primary" class="radio ">
         <mat-radio-button [value]="1" name="small" (click)="onclickDate1(7)">Last week</mat-radio-button>
         <mat-radio-button [value]="2" name="small" (click)="onclickDate1(14)">Last two weeks</mat-radio-button>
       </mat-radio-group>
-    </div>
+    </div> <br> 
   
       <form [formGroup]="cummulativeForm" (ngSubmit)="onSubmitcummulativeForm(cummulativeForm.value)">
 
@@ -192,7 +192,7 @@
       <mat-card-subtitle>
         日付範囲を入力してください
       </mat-card-subtitle>
-    </span> <br>
+    </span> 
     <mat-card-content>
     <div >
       <mat-radio-group  color="primary" class="radio radio1">
@@ -247,7 +247,7 @@
     </div><br>
       <form [formGroup]="findNameForm" (ngSubmit)="onSubmitFindName(findNameForm.value)">
 
-        <mat-form-field class="full-width-input">
+        <mat-form-field class="example-full-width">
           <input type='text' matInput placeholder="User Name" formControlName="deviceName"  [matAutocomplete]="auto"  (keyup)="userSuggestion($event)" required>
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let user of username" [value]="user">

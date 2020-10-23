@@ -8,6 +8,7 @@ import {MatSort} from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Timestamp } from 'rxjs';
 import { ThrowStmt } from '@angular/compiler';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -28,14 +29,18 @@ count= 0
 currentPageLength:number = 10;
 currentPageSize:number = 10;
 language:any
+limit:any
+offset:any
+selectMin:FormGroup
 displayedColumns: string[] = ['i','baseName', 'contactName', 'startTime','updatedOn','totalTime'];
-
+totTime:any=[]
 
   constructor(
     private api: ApiService,
     private login:LoginCheckService,
     private general:GeneralMaterialsService,
-    private router:Router
+    private router:Router,
+    private fb:FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +49,12 @@ displayedColumns: string[] = ['i','baseName', 'contactName', 'startTime','update
     this.language=this.loginData.language
     console.log("language==",this.language)
     this.count=0
+    this.selectMin=this.fb.group({
+      minute:['null']
+    })
     this.refresh()
+    this.getTotalCount(0)
+
     // console.log("count",this.count)
     this.timeout=setInterval(()=>{this.refresh()},60*500)
   }
@@ -159,17 +169,52 @@ getTotalCount(val){
   }
   return date
 }
+getUpdate(event) {
+  // console.log("paginator event",event);
+  // console.log("paginator event length", this.currentPageLength);
+ this.limit = event.pageSize
+  this.offset = event.pageIndex*event.pageSize
+  this.refreshData(this.count,this.limit,this.offset)
+}
+
+filterTotTime(event){
+  console.log("event value===",event,"  tot===", this.totTime)
+  var arr=[]
+  
+if(event.value !="0" && this.selectMin.get('minute').value!=''){
+
+    console.log("tot===", this.totTime)
+    this.totTime.filter((obj,index)=>{
+  
+      if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
+      arr.push({
+      
+          baseName:obj.baseName,
+          contactName:obj.contactName,
+          updatedOn:obj.updatedOn,
+          location:obj.location,
+          startTime:this.general.startTime(obj.totalTime,obj.updatedOn),
+          totalTime:obj.totalTime
+    
+        })
+        console.log("arrr==",arr)
+        return arr
+      }
+  })
+    
+
+    this.dataSource = new MatTableDataSource(arr);
+    setTimeout(() => {
+      this.dataSource.sort = this.sort;
+
+    })
+  }
+else{
+  this.refreshData(this.count,this.limit,this.offset)
+}
 
 
-
-
-     getUpdate(event) {
-      // console.log("paginator event",event);
-      // console.log("paginator event length", this.currentPageLength);
-      var limit = event.pageSize
-      var offset = event.pageIndex*event.pageSize
-      this.refreshData(this.count,limit,offset)
-    }
+}
 
 
 }

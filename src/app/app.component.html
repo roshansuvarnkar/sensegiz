@@ -57,6 +57,15 @@
            <mat-icon >exit_to_app</mat-icon>
          </span>
        </span>
+          <span class="flex title" *ngIf="loginStatus && twoStepAuth?.role=='admin' && (isMobile || isTablet)">
+          <span>
+            <mat-icon >person</mat-icon>
+          </span>
+          <p >{{loginDataInfo.userName}}</p>&emsp;&nbsp;&emsp;
+          <span  (click)="logout()" class="logout">
+            <mat-icon >exit_to_app</mat-icon>
+          </span>
+      </span>
      </span>
    </span><br>
    </mat-toolbar>

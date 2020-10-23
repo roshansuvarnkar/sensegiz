@@ -185,29 +185,56 @@ delete(a){
 
 
 infected(a){
-  if(confirm('Are you sure to do this operation')){
-    console.log("yes",a)
-    var inf = a.infected == 0 ? 1 :0
-    var data = {
-      deviceId:a.deviceId,
-      userId:this.loginData.userId,
-      infected:inf
-    }
-    this.api.editInfectedPerson(data).then((res:any)=>{
-      // console.log("infected data ======",res);
-      if(res.status){
-        this.refreshFinds()
-        var msg = 'Employee updated Successfully'
-        this.general.openSnackBar(msg,'')
+  if(this.language=='english'){
+    if(confirm('Are you sure to do this operation')){
+      console.log("yes",a)
+      var inf = a.infected == 0 ? 1 :0
+      var data = {
+        deviceId:a.deviceId,
+        userId:this.loginData.userId,
+        infected:inf
       }
-    })
+      this.api.editInfectedPerson(data).then((res:any)=>{
+        // console.log("infected data ======",res);
+        if(res.status){
+          this.refreshFinds()
+          var msg = 'Employee updated Successfully'
+          this.general.openSnackBar(msg,'')
+        }
+      })
+    }
+    else{
+      this.refreshFinds()
+
+    }
   }
   else{
-    this.refreshFinds()
+    if(confirm('追跡対象者の追加')){
+      console.log("yes",a)
+      var inf = a.infected == 0 ? 1 :0
+      var data = {
+        deviceId:a.deviceId,
+        userId:this.loginData.userId,
+        infected:inf
+      }
+      this.api.editInfectedPerson(data).then((res:any)=>{
+        // console.log("infected data ======",res);
+        if(res.status){
+          this.refreshFinds()
+          var msg = 'Employee updated Successfully'
+          this.general.openSnackBar(msg,'')
+        }
+      })
+    }
+    else{
+      this.refreshFinds()
 
+    }
   }
 
 }
+
+
 
 
 onShiftSelection(a){
@@ -387,22 +414,22 @@ fileSubmit(data){
   else{
 
     this.format=true
-    if(this.isMobile==true || this.isTablet==true){
-      var msg = 'Please check format: Name*, employeeId, deviceId*, emailId, mobileNumber'
-      this.general.openSnackBar(msg,'')
-    }else{
+      if(this.isMobile==true || this.isTablet==true){
+        var msg = 'Please check format: Name*, employeeId, deviceId*, emailId, mobileNumber'
+        this.general.openSnackBar(msg,'')
+      }else{
 
-    }
+      }
     }
   }
   else{
     this.loading=true
-    if(this.isMobile==true || this.isTablet==true){
-      var msg = 'Please choose xlsx or xls file*'
-      this.general.openSnackBar(msg,'')
-    }else{
-      
-    }
+      if(this.isMobile==true || this.isTablet==true){
+        var msg = 'Please choose xlsx or xls file*'
+        this.general.openSnackBar(msg,'')
+      }else{
+        
+      }
     }
  
  }

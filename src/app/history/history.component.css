@@ -71,4 +71,7 @@ button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary
     /* .history{
         margin-left: 2rem;
     } */
+    ::ng-deep .mat-autocomplete-panel{
+        width:0 !important;
+    }
 }

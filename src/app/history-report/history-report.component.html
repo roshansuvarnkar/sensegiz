@@ -13,7 +13,8 @@
 
 
   <div class="content">
-    <p class="center" *ngIf="language=='english'">REPORT</p><p class="center" *ngIf="language=='japanese'">レポート</p>
+    <p class="center" *ngIf="language=='english'">REPORT</p>
+    <p class="center" *ngIf="language=='japanese'">レポート</p>
             <span  class="icon">
               <mat-icon class="download2" (click)="getPages()">cloud_download</mat-icon>
             <button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
@@ -21,6 +22,17 @@
   </div> <br>
   <div>
   <p  mat-dialog-title> From {{from1}} to {{to1}} </p>
+    <form [formGroup]="selectMin">
+      <mat-form-field>
+        <mat-select (selectionChange)="filterTotTime($event)" formControlName="minute" matNativeControl placeholder="Select total time">
+          <mat-option [value]="0">none</mat-option>
+          <mat-option [value]="5">5 min </mat-option>
+          <mat-option [value]="10">10 min </mat-option>
+          <mat-option [value]="15">15 min </mat-option>
+          <mat-option [value]="20">20 min </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
     <div class="mat-elevation-z8">
 
 
@@ -38,7 +50,11 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Base Person </th>
               <td mat-cell *matCellDef="let live"> {{live.baseName}} </td>
             </ng-container>
-
+            
+            <ng-container matColumnDef="empId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Id </th>
+              <td mat-cell *matCellDef="let live "> {{live.empId}} </td>
+            </ng-container>
 
             <ng-container matColumnDef="contactName">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
@@ -114,6 +130,7 @@
   </div>
     <mat-paginator
     (page)="getUpdate($event)"
+  
     [length] = "currentPageLength"
     [pageSize]="currentPageSize"
     [pageSizeOptions] = "[5, 10, 25, 100]"
@@ -198,6 +215,19 @@
   </div> <br>
   <div>
   <p  mat-dialog-title> From {{from}} to {{to}} </p>
+  <form [formGroup]="selectMin">
+    <mat-form-field >
+      <mat-select (selectionChange)="filterTotTime($event)" formControlName="minute" matNativeControl placeholder="Select total time">
+        <mat-option [value]="0">none</mat-option>
+        <mat-option [value]="5">5 min </mat-option>
+        <mat-option [value]="10">10 min </mat-option>
+        <mat-option [value]="15">15 min </mat-option>
+        <mat-option [value]="20">20 min </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    </form>
     <div class="mat-elevation-z8">
 
 
@@ -207,7 +237,7 @@
        <div *ngIf="language=='english'">
             <ng-container matColumnDef="i">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl No. </th>
-              <td mat-cell *matCellDef="let live"> {{live.i}} </td>
+              <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
             </ng-container>
 
 
@@ -233,7 +263,7 @@
        <div *ngIf="language=='japanese'">
             <ng-container matColumnDef="i">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> シリアル番号. </th>
-              <td mat-cell *matCellDef="let live"> {{live.i}} </td>
+              <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
             </ng-container>
 
 
@@ -269,19 +299,29 @@
 <div *ngIf="type =='basedOnFindName'" id="htmlData">
   <div class="content">
     <p class="center" *ngIf="language=='english'">REPORT</p><p class="center" *ngIf="language=='japanese'">レポート</p>
-            <span class="icon">
-              <mat-icon class="download2" (click)="getPages()">cloud_download</mat-icon>
-
-            <button mat-button mat-dialog-close><mat-icon >clear</mat-icon></button>
-          </span>
-    </div> <br>
+        <span class="icon">
+          <mat-icon class="download2" (click)="getPages()">cloud_download</mat-icon>
+          <button mat-button mat-dialog-close><mat-icon >clear</mat-icon></button>
+        </span>
+  </div> <br>
       <p class="center-head" mat-dialog-title *ngIf="language=='english'">Social Distancing Violator's Name - {{deviceName | titlecase}}</p>
-         <p class="center-head" mat-dialog-title *ngIf="language=='japanese'">ソーシャル・ディスタンシング違反者の名前 - {{deviceName | titlecase}}</p>
+      <p class="center-head" mat-dialog-title *ngIf="language=='japanese'">ソーシャル・ディスタンシング違反者の名前 - {{deviceName | titlecase}}</p>
+        <form [formGroup]="selectMin">
+          <mat-form-field >
+            <mat-select (selectionChange)="filterTotTime($event)" formControlName="minute" matNativeControl placeholder="Select total time">
+              <mat-option [value]="0">none</mat-option>
+              <mat-option [value]="5">5 min </mat-option>
+              <mat-option [value]="10">10 min </mat-option>
+              <mat-option [value]="15">15 min </mat-option>
+              <mat-option [value]="20">20 min </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort >
 
 
-       <div *ngIf="language=='english'">
+        <div *ngIf="language=='english'">
           <ng-container matColumnDef="i">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl No. </th>
               <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
@@ -314,8 +354,8 @@
               <td mat-cell *matCellDef="let live"> {{convertDate(live.totalTime)}} </td>
             </ng-container>
 
-       </div>
-  <div *ngIf="language=='japanese'">
+        </div>
+        <div *ngIf="language=='japanese'">
           <ng-container matColumnDef="i">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> シリアル番号. </th>
               <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
@@ -380,30 +420,30 @@
     <p class="center-head" mat-dialog-title *ngIf="language=='japanese'">感染したユーザー数 - {{deviceName | titlecase}}</p>
     <div class="tab-align">
       <table class="table table-borderless">
-     <thead>
-
-      <tr *ngIf="language=='english'">
-        <th>Sl No.</th>
-        <th>Contacted User</th>
-        <th>Date Of contacts</th>
-      </tr>
-      <tr *ngIf="language=='japanese'">
-        <th>シリアル番号.</th>
-        <th>連絡先ユーザー</th>
-        <th> 連絡日</th>
-      </tr>
-     </thead>
-     <tr *ngFor = "let a of liveData;let i=index">
-      <td>{{i+1}} </td>
-      <td>{{a.data}}</td>
-      <td>
-        <span *ngFor = 'let b of a.date;let j=index'>
-          {{b.updatedOn}}
-        </span>
-      </td>
-      <!-- <td>{{a.location}}</td> -->
-
-    </tr> 
+        <thead>
+          <tr *ngIf="language=='english'">
+            <th>Sl No.</th>
+            <th>Contacted User</th>
+            <th>Date Of contacts</th>
+          </tr>
+          <tr *ngIf="language=='japanese'">
+            <th>シリアル番号.</th>
+            <th>連絡先ユーザー</th>
+            <th> 連絡日</th>
+          </tr>
+        </thead>
+      <tr *ngFor = "let a of liveData;let i=index">
+        <td>{{i+1}} </td>
+        <td>{{a.data}}</td>
+        <td>
+          <!-- <span *ngFor = 'let b of a.date;let j=index'>
+            {{b.updatedOn}}
+          </span> -->
+          <span>
+              {{callUpdatedon(a.date)}}
+          </span>
+        </td>
+      </tr> 
 
         <!-- <tr *ngFor = "let a of liveData;let i=index">
           <td>{{i+1}} </td>
@@ -418,7 +458,5 @@
         </tr> -->
       </table>
     </div>
-
-</div>
-
+  </div>
 </div>

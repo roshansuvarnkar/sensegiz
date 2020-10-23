@@ -3,6 +3,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular
 import { ApiService } from '../api.service';
 import { LoginCheckService } from '../login-check.service';
 import { GeneralMaterialsService } from '../general-materials.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -21,7 +22,7 @@ export class HistoryReportComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   @ViewChild('htmlData') htmlData:ElementRef;
-
+  selectMin:FormGroup
   type:any
   dateBased:any
   findNameBased:any
@@ -40,7 +41,7 @@ export class HistoryReportComponent implements OnInit {
   deviceName:any
   currentPageLength:any=10
   currentPageSize:any=10
-  displayedColumns: string[] = ['i','baseName','contactName','startTime','updatedOn', 'totaltime'];
+  displayedColumns: string[] = ['i','baseName','contactName','empId','startTime','updatedOn', 'totaltime'];
   displayedColumns1: string[] = ['i','contactName','updatedOn', 'totaltime'];
   displayedColumns2: string[] = ['contactDeviceName','updatedOn'];
   displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
@@ -50,6 +51,10 @@ export class HistoryReportComponent implements OnInit {
   showSpinner:boolean=false
   language:any
   title:any
+  totTime:any=[]
+  filterValue:any
+  limit:any
+  offset:any
 
     constructor(
       public dialog: MatDialog,
@@ -58,6 +63,7 @@ export class HistoryReportComponent implements OnInit {
       private general:GeneralMaterialsService,
       private router:Router,
       public dialogRef: MatDialogRef<HistoryReportComponent>,
+      private fb:FormBuilder,
        @Inject(MAT_DIALOG_DATA)  data,
     ) {
       this.type=data.type
@@ -78,7 +84,9 @@ export class HistoryReportComponent implements OnInit {
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
     console.log("language==",this.language)
-
+    this.selectMin=this.fb.group({
+      minute:['null']
+    })
     this.getTotalCount()
 
     this.loadData()
@@ -126,16 +134,16 @@ export class HistoryReportComponent implements OnInit {
 
   }
   }
-  loadData(limit=10,offset=0,type=0){
+  loadData(limit=10,offset=0){
 
     if(this.type == 'basedOnDate'){
-      this.basedOnDate(limit=limit,offset=offset,type=type)
+      this.basedOnDate(limit=limit,offset=offset)
     }
     if(this.type == 'cummulative'){
       this.cummulativeReport()
     }
     if(this.type == 'basedOnFindName'){
-      this.basedOnFindName(limit=limit,offset=offset,type=type)
+      this.basedOnFindName(limit=limit,offset=offset)
     }
     if(this.type == 'summaryReport'){
       this.summaryReport()
@@ -143,7 +151,7 @@ export class HistoryReportComponent implements OnInit {
     }
    
 }
-basedOnDate(limit,offset,type){
+basedOnDate(limit,offset){
   console.log(limit,offset)
   var data={
     userId:this.loginData.userId,
@@ -157,48 +165,53 @@ basedOnDate(limit,offset,type){
   this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
     console.log("find data based on date ======",res);
     this.liveData=[]
+    this.totTime=[]
     if(res.status){
-      if(type==0){
+      this.totTime=res.success
+
+      console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+   
+      if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
+        console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
         for(var i=0;i<res.success.length;i++){
 
           this.liveData.push({
           i:i+1,
           baseName:res.success[i].baseName,
           contactName:res.success[i].contactName,
+          empId:res.success[i].empId==null || res.success[i].empId==null?'-':res.success[i].empId,
           updatedOn:this.general.updatedOnDate(res.success[i].updatedOn),
           startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn),
           totalTime:this.general.convertTime(res.success[i].totalTime)
 
         })
         }
-      }
-      else{
-        this.excelData=[]
-        for(var i=0;i<res.success.length;i++){
-
-          this.excelData.push({
-          Sl_No:i+1,
-          Base_Person:res.success[i].baseName,
-          Contact_Person:res.success[i].contactName,
-          Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
-          startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn),
-          Total_Time:this.general.convertTime(res.success[i].totalTime)
-
-        })
-        }
-      }
+  
       this.dataSource = new MatTableDataSource(this.liveData);
 
       setTimeout(() => {
         this.dataSource.sort = this.sort;
         // this.paginator.length = this.currentPageLength
       })
+    
+      }
+      else{
+        this.totTime=res.success
+        console.log("this.tottttttt===",this.totTime)
+
+        if(this.selectMin.get('minute').value!=''){
+          console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+          
+          this.filterTotTime(this.selectMin.get('minute').value)
+      
+        }
+      }
     }
 
   })
 
 }
-basedOnFindName(limit,offset,type){
+basedOnFindName(limit,offset){
   var data={
     userId:this.loginData.userId,
     deviceName:this.deviceName,
@@ -209,33 +222,35 @@ basedOnFindName(limit,offset,type){
     zone:this.general.getZone(this.date)
 
   }
+  this.liveData=[]
+  this.totTime=[]
   this.api.getDeviceHistoryBasedOnDeviceName(data).then((res:any)=>{
     console.log("find data based on name ======",res);
 
     if(res.status){
-      if(type==0){
+   
+      
+        this.totTime=res.success
+   
+      if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         this.liveData=res.success
-      }
-      else{
-        this.excelData=[]
-        for(var i=0;i<res.success.length;i++){
-
-          this.excelData.push({
-          Sl_No:i+1,
-          Contact_Person:res.success[i].contactName,
-          Contact_Time:this.general.updatedOnDate(res.success[i].updatedOn),
-          Total_Time:this.general.convertTime(res.success[i].totalTime)
-
-        })
-        }
-
-      }
-
       this.dataSource = new MatTableDataSource(this.liveData);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
         // this.paginator.length = this.currentPageLength
       })
+      }
+      else{
+        this.totTime=res.success
+        console.log("this.tottttttt===",this.totTime)
+
+        if(this.selectMin.get('minute').value!=''){
+          console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+          
+          this.filterTotTime(this.selectMin.get('minute').value)
+      
+        }
+      }
     }
   })
 
@@ -319,15 +334,15 @@ summaryReport(){
       })
       console.log("live==",this.liveData)
 
-      for(let i=0;i<this.liveData.length;i++){
+      // for(let i=0;i<this.liveData.length;i++){
 
-        for(let j=0;j<this.liveData[i].date.length-1;j++){
-          this.liveData[i].date[j].updatedOn = this.liveData[i].date[j].updatedOn.split('T')[0]+','
-        }
+      //   for(let j=0;j<this.liveData[i].date.length-1;j++){
+      //     this.liveData[i].date[j].updatedOn = this.liveData[i].date[j].updatedOn.split('T')[0]+','
+      //   }
 
-        this.liveData[i].date[this.liveData[i].date.length-1].updatedOn=this.liveData[i].date[this.liveData[i].date.length-1].updatedOn.split('T')[0]+'.'
+      //   this.liveData[i].date[this.liveData[i].date.length-1].updatedOn=this.liveData[i].date[this.liveData[i].date.length-1].updatedOn.split('T')[0]+'.'
 
-       }
+      //  }
 
 
     }
@@ -336,16 +351,31 @@ summaryReport(){
 
 
 dataDateReduce(data){
-return data.reduce((group,obj)=>{
-const name = obj.contactDeviceName
-console.log("name---",name)
-if(!group[name]){
-  group[name]=[]
+  return data.reduce((group,obj)=>{
+  const name = obj.contactDeviceName
+  console.log("name---",name,"this.deviceName====",this.deviceName)
+  if(name!=this.deviceName){
+      if(!group[name]){
+        group[name]=[]
+      }
+      group[name].push(obj)
+    }
+    console.log("group==",group)
+    return group
+ 
+  },{})
 }
-group[name].push(obj)
-console.log("group==",group)
-return group
-},{})
+callUpdatedon(date){
+  var a=[]
+  var data=date.filter((obj,index)=>{
+     console.log(a.includes(obj.updatedOn))
+    if(!a.includes(obj.updatedOn)){
+        a.push(obj.updatedOn)
+    }
+  })
+  console.log("aaa==",a)
+  a[a.length-1]= a[a.length-1]+'.'
+  return a
 }
 cummulativeReport(){
   var date=new Date()
@@ -359,23 +389,41 @@ cummulativeReport(){
   }
   console.log("hvhs==",data)
   this.api.viewCTReport(data).then((res:any)=>{
-    this.countCummulative=[]
+    this.liveData=[]
+    this.totTime=[]
     console.log("cummulative report==",res)
     if(res.status){
-      for(let i=0;i<res.data.length;i++){
-        this.countCummulative.push({
-          i:i+1,
-          username:res.data[i].baseDeviceName,
-          count:res.data[i].count,
-          totTime:this.general.convertTime(res.data[i].totalTime)
-
-        });
+      this.totTime=res.data
+      if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
+        console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
+        for(let i=0;i<res.data.length;i++){
+          this.liveData.push({
+            i:i+1,
+            username:res.data[i].baseDeviceName,
+            count:res.data[i].count,
+            totTime:this.general.convertTime(res.data[i].totalTime)
+  
+          });
+        }
+        this.dataSource = new MatTableDataSource(this.liveData);
+        setTimeout(() => {
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator
+           })
+    
       }
-      this.dataSource = new MatTableDataSource(this.countCummulative);
-      setTimeout(() => {
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator
-         })
+      else{
+        this.totTime=res.success
+        console.log("this.tottttttt===",this.totTime)
+
+        if(this.selectMin.get('minute').value!=''){
+          console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+          
+          this.filterTotTime(this.selectMin.get('minute').value)
+      
+        }
+      }
+
     }
   })
 
@@ -384,12 +432,15 @@ cummulativeReport(){
 
 
 getUpdate(event) {
-  // console.log("paginator event",event);
-  // console.log("paginator event length", this.currentPageLength);
-  var limit = event.pageSize
-  var offset = event.pageIndex*event.pageSize
+  console.log("paginator event",event);
+  console.log("form value", this.selectMin);
+  this.limit = event.pageSize
+  this.offset = event.pageIndex*event.pageSize
   // console.log("limit==",limit,"offset==",offset)
-  this.loadData(limit,offset)
+  this.loadData(this.limit,this.offset)
+
+
+
 }
 
 
@@ -527,7 +578,92 @@ if(this.type=='summaryReport'){
     return date
   }
 
+  filterTotTime(event){
+    console.log("event value===",event,"  tot===", this.totTime)
+    var arr=[]
+    
+  if(event.value !="0" && this.selectMin.get('minute').value!=''){
+    if(this.type == 'basedOnDate' ){
+      console.log("tot===", this.totTime)
+      this.totTime.filter((obj,index)=>{
+    
+        if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
+        arr.push({
+        
+            baseName:obj.baseName,
+            contactName:obj.contactName,
+            empId:obj.empId==null ||obj.empId==''?'-':obj.empId,
+            updatedOn:obj.updatedOn,
+            startTime:this.general.startTime(obj.totalTime,obj.updatedOn),
+            totalTime:this.general.convertTime(obj.totalTime)
+      
+          })
+          console.log("arrr==",arr)
+          return arr
+        }
+    
+      
+      })
+      
 
+      this.dataSource = new MatTableDataSource(arr);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+
+      })
+
+    }
+    if(this.type == 'basedOnFindName'  ){
+      
+      this.totTime.filter((obj,index)=>{
+    
+        if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
+          arr.push(obj)
+          console.log("arrr==",arr)
+          return arr
+        }
+
+      })
+      
+
+      this.dataSource = new MatTableDataSource(arr);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+
+      })
+
+    }
+    if(this.type == 'cummulative' ){
+      
+      this.totTime.filter((obj,index)=>{
+    
+        if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
+          arr.push({
+            username:obj.baseDeviceName,
+            count:obj.count,
+            totTime:this.general.convertTime(obj.totalTime)
+          })
+            console.log("arrr==",arr)
+            return arr
+          }
+      
+        
+        })
+
+        this.dataSource = new MatTableDataSource(arr);
+        setTimeout(() => {
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+
+        })
+    }
+  
+  }
+  else{
+    this.loadData(this.limit,this.offset)
+  }
+
+  }
 
   openExcel(){
 
@@ -538,25 +674,25 @@ if(this.type=='summaryReport'){
           this.general.exportToExcel(element,this.fileName, this.title)
 
         }
-        else{
-          console.log("this.excelData====",this.excelData)
-          if(this.type=='basedOnDate'){
-            this.fileName='GenricReport.xlsx'
-            this.title = 'Based on date'+this.from+" "+this.to;
+      //   else{
+      //     console.log("this.excelData====",this.excelData)
+      //     if(this.type=='basedOnDate'){
+      //       this.fileName='GenricReport.xlsx'
+      //       this.title = 'Based on date'+this.from+" "+this.to;
 
-            this.general.exportAsExcelFile(this.excelData,this.fileName, this.title)
+      //       this.general.exportAsExcelFile(this.excelData,this.fileName, this.title)
 
-          }
-          if(this.type=='basedOnFindName'){
-            this.fileName='Report-Of-Find-'+this.liveData[0].baseName+'.xlsx'
-            this.title = 'Based on Find Name'+this.deviceName;
-            let element = document.getElementById('htmlData');
+      //     }
+      //     if(this.type=='basedOnFindName'){
+      //       this.fileName='Report-Of-Find-'+this.liveData[0].baseName+'.xlsx'
+      //       this.title = 'Based on Find Name'+this.deviceName;
+      //       let element = document.getElementById('htmlData');
 
-            this.general.exportAsExcelFile(this.excelData,this.fileName, this.title)
+      //       this.general.exportAsExcelFile(this.excelData,this.fileName, this.title)
 
-          }
+      //     }
 
-      }
+      // }
 
   }
 
