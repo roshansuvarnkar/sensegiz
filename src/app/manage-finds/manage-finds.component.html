@@ -4,31 +4,35 @@
 </fieldset> -->
 <br>
 <div class="flex">
-  
-  <div class="upload">
- 
 
-   <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)" *ngIf="language=='english'"> 
-     <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
-     <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
-     <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
-     <span  id="button" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
-      
+    <div class="upload">
+      <form action="" [formGroup]="fileupload" *ngIf="language=='english'">
+        <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
+        <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
+        <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
+        <span id="button" *ngIf="language=='english'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
+        <span id="button" *ngIf="language=='japanese'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
+        <!-- <div class="upload-mob-btn "><span (click)="onclick()" > <mat-icon id="button" >cloud_upload</mat-icon>  </span> </div><br> <br> -->
 
-      <span *ngIf="loading" style="color:red">Please choose xlsx or xls file*</span>
-      <span *ngIf="format" style="color:red"> Please check format: Name*, employeeId, deviceId*, emailId, mobileNumber</span>
-   </form> <br>
-    <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)" *ngIf="language=='japanese'"> 
-     <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
-     <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
-     <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
-    
-      <span  id="button" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
+        <span  [ngStyle]="{'display':isDesktopDevice === true && loading===true ? 'block' : 'none','color': loading===true?'red':'red' }" >Please choose xlsx or xls file*</span>
+        <span [ngStyle]="{'display':isDesktopDevice === true && format===true? 'block' : 'none','color': format===true?'red':'red' }"> Please check format: Name, employeeId, deviceId, emailId, mobileNumber</span>
 
-      <span *ngIf="loading" style="color:red">xlsxまたはxlsファイルを選択してください*</span>
-      <span *ngIf="format" style="color:red"> 形式を確認してください： 名前*, 従業員ID, デバイスID番号*, メールID, 携帯番号</span>
-   </form><br>
-  </div> 
+      </form>
+      <form action="" [formGroup]="fileupload" *ngIf="language=='japanese'">
+        <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
+        <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
+        <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
+        <span id="button" *ngIf="language=='english'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
+        <span id="button" *ngIf="language=='japanese'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
+        <!-- <div class="upload-mob-btn "><span (click)="onclick()" > <mat-icon id="button" >cloud_upload</mat-icon>  </span> </div><br> <br> -->
+
+        <span  [ngStyle]="{'display':isDesktopDevice === true && loading===true ? 'block' : 'none','color': loading===true?'red':'red' }" >xlsxまたはxlsファイルを選択してください*</span>
+        <span [ngStyle]="{'display':isDesktopDevice === true && format===true? 'block' : 'none','color': format===true?'red':'red' }"> 形式を確認してください： 名前*, 従業員ID, デバイスID番号*, メールID, 携帯番号</span>
+
+      </form>
+     </div>  <br>
+
+
    <button *ngIf="language=='english'" class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
     <button *ngIf="language=='japanese'" class="button" mat-flat-button color="primary" (click)="openDialog()">追跡対象者の追加</button>
 
@@ -43,7 +47,7 @@
 
 </div>
 
-<!-- 
+<!--
 <div class="table">
   <table  mdbTable class="table table-hover z-depth-1" mdbTable >
     <thead>
@@ -79,7 +83,7 @@
           <span *ngIf="el.infected==1">
             <mat-slide-toggle color="primary" [checked]="true" (change)="infected(el)"></mat-slide-toggle>
           </span>
-         
+
 
         </td>
         <td><mat-icon matListIcon (click)="edit(el)">{{el.edit}}</mat-icon></td>
@@ -111,7 +115,7 @@
           <td mat-cell *matCellDef="let live"> {{live.deviceId}} </td>
         </ng-container>
 
-        
+
         <ng-container matColumnDef="deviceName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Name </th>
           <td mat-cell *matCellDef="let live "> {{live.deviceName}} </td>
@@ -124,7 +128,7 @@
 
         <ng-container matColumnDef="shift">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Shift </th>
-          <td mat-cell *matCellDef="let live"> 
+          <td mat-cell *matCellDef="let live">
             <mat-form-field>
              <mat-label>Shift</mat-label>
               <mat-select  [(value)]="live.shift" (selectionChange)="onShiftSelection(live)">
@@ -132,7 +136,7 @@
                   {{b.shiftName}}
                 </mat-option>
               </mat-select>
-            </mat-form-field> 
+            </mat-form-field>
             <!-- {{live.shift}} -->
 
           </td>
@@ -140,7 +144,7 @@
 
         <ng-container matColumnDef="infected">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Infected </th>
-          <td mat-cell *matCellDef="let live"> 
+          <td mat-cell *matCellDef="let live">
              <span *ngIf="live.infected==0">
             <mat-slide-toggle color="primary" [checked]="false" (change)="infected(live)"></mat-slide-toggle>
           </span>
@@ -159,26 +163,26 @@
           </td>
         </ng-container> -->
         <ng-container matColumnDef="batteryStatus">
-              
+
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Battery</th>
-          
-          <td mat-cell *matCellDef="let live "  class="cursor"> 
+
+          <td mat-cell *matCellDef="let live "  class="cursor">
             <span  *ngIf="getBatteryUpdatedOn(live.batteryUpdatedOn)!='0000-00-00 00:00:00' &&  live.batteryStatus!='0'" matTooltip="last synced time : {{getBatteryUpdatedOn(live.batteryUpdatedOn) | date: 'medium'}}" >
               <div class="batteryContainer">
                 <div class="batteryOuter"><div id="batteryLevel"  [ngStyle]="getBatteryStatus(live.batteryStatus)" > </div></div>
                 <div class="batteryBump"></div>
                 </div>
-              </span> 
-          
+              </span>
+
             <span  *ngIf="getBatteryUpdatedOn(live.batteryUpdatedOn)=='0000-00-00 00:00:00' || live.batteryStatus=='0'" >
               <div class="batteryContainer">
                 <div class="batteryOuter"><div id="batteryLevel"  [ngStyle]="getBatteryStatus(live.batteryStatus)" > </div></div>
                 <div class="batteryBump"></div>
               </div>
             </span>
-         
+
         </td>
-       
+
       </ng-container>
 
         <ng-container matColumnDef="emailId"  >
@@ -204,17 +208,17 @@
    </div>
     <div *ngIf="language=='japanese'" >
       <ng-container matColumnDef="i"  >
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> シリアル番号. </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> シリアル 番号. </th>
           <td mat-cell *matCellDef="let live" > {{live.i}} </td>
         </ng-container>
 
 
         <ng-container matColumnDef="deviceId">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> デバイスID番号</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> デバイスID 番号</th>
           <td mat-cell *matCellDef="let live"> {{live.deviceId}} </td>
         </ng-container>
 
-        
+
         <ng-container matColumnDef="deviceName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 追跡対象者の氏名 </th>
           <td mat-cell *matCellDef="let live "> {{live.deviceName}} </td>
@@ -227,7 +231,7 @@
 
         <ng-container matColumnDef="shift">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 追跡対象となる時間帯 </th>
-          <td mat-cell *matCellDef="let live"> 
+          <td mat-cell *matCellDef="let live">
             <mat-form-field>
              <mat-label>追跡対象となる時間帯</mat-label>
               <mat-select  [(value)]="live.shift" (selectionChange)="onShiftSelection(live)">
@@ -235,7 +239,7 @@
                   {{b.shiftName}}
                 </mat-option>
               </mat-select>
-            </mat-form-field> 
+            </mat-form-field>
             <!-- {{live.shift}} -->
 
           </td>
@@ -243,7 +247,7 @@
 
         <ng-container matColumnDef="infected">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 感染状況のチェック欄 </th>
-          <td mat-cell *matCellDef="let live"> 
+          <td mat-cell *matCellDef="let live">
              <span *ngIf="live.infected==0">
             <mat-slide-toggle color="primary" [checked]="false" (change)="infected(live)"></mat-slide-toggle>
           </span>
@@ -262,26 +266,26 @@
           </td>
         </ng-container> -->
         <ng-container matColumnDef="batteryStatus">
-              
+
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 電池残量レベル</th>
-          
-          <td mat-cell *matCellDef="let live "  class="cursor"> 
+
+          <td mat-cell *matCellDef="let live "  class="cursor">
             <span  *ngIf="getBatteryUpdatedOn(live.batteryUpdatedOn)!='0000-00-00 00:00:00' &&  live.batteryStatus!='0'" matTooltip="最新の同期時刻 : {{getBatteryUpdatedOn(live.batteryUpdatedOn) | date: 'medium'}}" >
               <div class="batteryContainer">
                 <div class="batteryOuter"><div id="batteryLevel"  [ngStyle]="getBatteryStatus(live.batteryStatus)" > </div></div>
                 <div class="batteryBump"></div>
                 </div>
-              </span> 
-          
+              </span>
+
             <span  *ngIf="getBatteryUpdatedOn(live.batteryUpdatedOn)=='0000-00-00 00:00:00' || live.batteryStatus=='0'" >
               <div class="batteryContainer">
                 <div class="batteryOuter"><div id="batteryLevel"  [ngStyle]="getBatteryStatus(live.batteryStatus)" > </div></div>
                 <div class="batteryBump"></div>
               </div>
             </span>
-         
+
         </td>
-       
+
       </ng-container>
 
         <ng-container matColumnDef="emailId"  >
@@ -290,18 +294,18 @@
         </ng-container>
 
         <ng-container matColumnDef="mobileNum"  >
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> 携帯電話番号. </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 携帯電話 番号. </th>
           <td mat-cell *matCellDef="let live" > {{live.mobileNum}} </td>
         </ng-container>
 
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 編集 </th>
-          <td mat-cell *matCellDef="let live"  (click)="edit(live)"> <mat-icon>{{live.edit}}</mat-icon></td>
+          <td mat-cell *matCellDef="let live"  (click)="edit(live)" class="cursor"> <mat-icon>{{live.edit}}</mat-icon></td>
         </ng-container>
 
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 削除 </th>
-          <td mat-cell *matCellDef="let live"  (click)="delete(live)"><mat-icon>{{live.delete}}</mat-icon> </td>
+          <td mat-cell *matCellDef="let live"  (click)="delete(live)" class="cursor"><mat-icon>{{live.delete}}</mat-icon> </td>
         </ng-container>
 
    </div>

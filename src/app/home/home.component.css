@@ -117,6 +117,9 @@ span.rec {
 mat-label.tab-set {
     margin-left: 3rem;
 }
+mat-label.tab-set-jp {
+    margin-left: 7rem;
+}
 ::ng-deep svg.circle {
     height: 100px !important;
     width: 100px !important;

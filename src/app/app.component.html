@@ -14,14 +14,26 @@
        <p >{{loginDataInfo.userName}}</p> 
       
      </div><hr>
-     <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>Home</button>
-     <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>Manage People</button>
-     <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>Social Distancing</button>
-     <!-- <button mat-menu-item routerLink="/location"> <mat-icon>place</mat-icon>Location</button> -->
- 
-     <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>Settings</button>
-     <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>Reports</button>
-     <button mat-menu-item  (click)="logout()" class="logout"><mat-icon >exit_to_app</mat-icon>Logout</button>
+    <div *ngIf="language=='english'">
+      <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>Home</button>
+      <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>Manage People</button>
+      <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>Social Distancing</button>
+      <!-- <button mat-menu-item routerLink="/location"> <mat-icon>place</mat-icon>Location</button> -->
+  
+      <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>Settings</button>
+      <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>Reports</button>
+      <button mat-menu-item  (click)="logout()" class="logout"><mat-icon >exit_to_app</mat-icon>Logout</button>
+    </div>
+    <div *ngIf="language=='japanese'">
+      <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>ホームページ</button>
+      <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>管理画面 </button>
+      <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>ソーシャル・ディスタンシング </button>
+      <!-- <button mat-menu-item routerLink="/location"> <mat-icon>place</mat-icon>Location</button> -->
+  
+      <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>設定</button>
+      <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>レポート</button>
+      <button mat-menu-item  (click)="logout()" class="logout"><mat-icon >exit_to_app</mat-icon>ログアウト</button>
+    </div>
  
  
      <!-- <button mat-raised-button class="guide"><span routerLink="/user-guide">User Guide</span></button> -->
@@ -45,6 +57,15 @@
            <mat-icon >exit_to_app</mat-icon>
          </span>
        </span>
+          <span class="flex title" *ngIf="loginStatus && twoStepAuth?.role=='admin' && (isMobile || isTablet)">
+          <span>
+            <mat-icon >person</mat-icon>
+          </span>
+          <p >{{loginDataInfo.userName}}</p>&emsp;&nbsp;&emsp;
+          <span  (click)="logout()" class="logout">
+            <mat-icon >exit_to_app</mat-icon>
+          </span>
+      </span>
      </span>
    </span><br>
    </mat-toolbar>

@@ -1,5 +1,5 @@
 
-  
+
 
   <!-- nammi -->
 <div class="main-home">
@@ -13,8 +13,8 @@
               <mat-icon >account_circle</mat-icon>
             </span><br>
             <span class="tot">
-              <mat-label *ngIf="language=='english'">Total number of users</mat-label>:
-              <mat-label *ngIf="language=='japanese'">ユーザー数の合計</mat-label>
+              <mat-label *ngIf="language=='english'">Total number of users :</mat-label>
+              <mat-label *ngIf="language=='japanese'">ユーザー数の合計 :</mat-label>
               <mat-label>{{totalEmp}}</mat-label>
               <br>
               <!-- <mat-label>Total Finds</mat-label> :
@@ -24,7 +24,7 @@
           <div class="row">
             <div class="first-cont">
               <div class="regi">
-                <span *ngIf="language=='english'">Active Users</span> 
+                <span *ngIf="language=='english'">Active Users</span>
               <span *ngIf="language=='japanese'">アクティブユーザー数</span><br><br>
                 <circle-progress (click)="onlineUser()"
                 class="circle"
@@ -45,13 +45,13 @@
                   [startFromZero]="true"
                   [responsive]="false"
                 ></circle-progress>
-                
+
               </div>
-              
+
               <div class="infe" >
-            
+
                 <circle-progress (click)="activeUser()"
-                  
+
                   class="circle"
                   fill="green"
                   [percent]="activeEmp"
@@ -71,11 +71,11 @@
                   [startFromZero]="true"
                   [responsive]="false"
                 ></circle-progress>
-                <br> <br> <span *ngIf="language=='english'">Registered Users</span> 
-                <span *ngIf="language=='japanese'">登録ユーザー数</span> 
+                <br> <br> <span *ngIf="language=='english'">Registered Users</span>
+                <span *ngIf="language=='japanese'">登録ユーザー数</span>
               </div>
               <div class="regi">
-                <span *ngIf="language=='english'">Offline Users</span> 
+                <span *ngIf="language=='english'">Offline Users</span>
                 <span *ngIf="language=='japanese'">オフラインユーザー数</span><br><br>
                 <circle-progress (click)="offlineUser()"
                   class="circle"
@@ -96,10 +96,10 @@
                   [startFromZero]="true"
                   [responsive]="false"
                 ></circle-progress>
-                
+
               </div>
               <div class="infe">
-               
+
                 <circle-progress (click)="infectedUser()"
                   class="circle"
                   [percent]="infectedEmp"
@@ -119,10 +119,10 @@
                   [startFromZero]="true"
                   [responsive]="false"
                 ></circle-progress>
-               
+
                 <br> <br><span *ngIf="language=='english'">Infected Users</span>
                 <span *ngIf="language=='japanese'">感染したユーザー数</span>
-              </div> <br> 
+              </div> <br>
               <!-- <div class="count">
                 Normal User <br><br>
                 <circle-progress (click)="normalUser()"
@@ -143,19 +143,19 @@
                   [responsive]="false"
                 ></circle-progress><br><br>
               </div> -->
-  
-  
+
+
             </div>
           </div>
-  
-  
+
+
         </mat-card-content>
       </mat-card>
       <br>
       <mat-card>
         <mat-card-content>
           <mat-icon >settings</mat-icon><br>
-  
+
               <mat-card class="settingcard">
                 <mat-card-content class="setting" routerLink="/settings">
                   <mat-label *ngIf="language=='english'">  Minimum social distance</mat-label>
@@ -168,8 +168,13 @@
               <mat-card class="settingcard">
                 <mat-card-content class="setting" routerLink="/settings">
                   <mat-label *ngIf="language=='english'">Violation alert</mat-label>
+
                   <mat-label *ngIf="language=='japanese'">警告のための接触違反回数</mat-label>
-                  <mat-label class="tab-set">{{setting?.threshold}}</mat-label>
+
+                  <mat-label *ngIf="language=='japanese'">接近違反警告</mat-label>
+                  <mat-label class="tab-set-jp" *ngIf="language=='english'">{{setting?.threshold}}</mat-label>
+                  <mat-label class="tab-set" *ngIf="language=='japanese'">{{setting?.threshold}}</mat-label>
+
                   <mat-icon>keyboard_arrow_right</mat-icon>
                 </mat-card-content>
               </mat-card><br>
@@ -182,9 +187,9 @@
               </mat-card> -->
         </mat-card-content>
       </mat-card>
-  
+
     </div>
-  
+
     <div class="three">
       <mat-card>
         <mat-card-title *ngIf="language=='english'">Frequent Violators</mat-card-title>
@@ -200,7 +205,7 @@
                     <span class="emp-pad">{{data.baseDeviceName}}</span>
                     <span class="emp-pad">{{data.totalCount}}</span>
                   </span>
-  
+
                 </span>
                 <span class="tab-btn" *ngIf="language=='english'">
                   <button mat-raised-button class="btn" (click)="sendWarning(data.id,data.totalCount)">Send warning</button>
@@ -211,12 +216,12 @@
               </div>
             </mat-card-content>
           </mat-card>
-        </mat-card-content> 
+        </mat-card-content>
         </mat-card>
     </div>
-  
+
   </div>
-  
+
   <div class="rowhome">
     <div class="second">
       <mat-card>
@@ -255,6 +260,6 @@
       </mat-card>
     </div>
   </div>
-  
+
   </div>
   

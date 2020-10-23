@@ -11,6 +11,7 @@ import {MatSort} from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Timestamp } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Component({
@@ -37,8 +38,17 @@ language:any
 fileupload:FormGroup
 loading:boolean=false
 format:boolean=false
+isMobile:boolean
+isTablet:boolean
+isDesktopDevice:boolean
+deviceInfo=null
 @ViewChild('fileInput') fileInput:ElementRef
-constructor(public dialog: MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private fb:FormBuilder) {}
+constructor(public dialog: MatDialog,
+  private api: ApiService,
+  private login:LoginCheckService,
+  private general:GeneralMaterialsService,
+  private fb:FormBuilder,
+  private deviceService: DeviceDetectorService) {}
 
 
 openDialog(): void {
@@ -59,6 +69,11 @@ openDialog(): void {
 
 
 ngOnInit(): void {
+
+  this.deviceInfo = this.deviceService.getDeviceInfo();
+  this.isMobile = this.deviceService.isMobile();
+  this.isTablet = this.deviceService.isTablet();
+  this.isDesktopDevice = this.deviceService.isDesktop();
   this.loginData = this.login.Getlogin()
   this.loginData = JSON.parse(this.loginData)
   this.language=this.loginData.language
@@ -163,12 +178,12 @@ delete(a){
       if(res.status){
         this.refreshFinds()
          var msg = 'Device Deleted Successfully'
-        
+
         this.general.openSnackBar(msg,'')
       }
     })
   }
-    }
+}
 
     else if(this.language=='japanese'){
      if(confirm('デバイスを削除してもよろしいですか')){
@@ -181,7 +196,7 @@ delete(a){
       // console.log("find data ======",res);
       if(res.status){
         this.refreshFinds()
-        
+
         var msg = 'デバイスが正常に削除されました'
         this.general.openSnackBar(msg,'')
       }
@@ -191,54 +206,58 @@ delete(a){
 
 }
 
-
-//unable to convert
 infected(a){
-
-if(this.language=='english'){
-  if(confirm('Are you sure to do this operation')){
-    console.log("yes",a)
-    var inf = a.infected == 0 ? 1 :0
-    var data = {
-      deviceId:a.deviceId,
-      userId:this.loginData.userId,
-      infected:inf
-    }
-    this.api.editInfectedPerson(data).then((res:any)=>{
-      // console.log("infected data ======",res);
-      if(res.status){
-        this.refreshFinds()
-        var msg = 'Employee updated Successfully'
+  if(this.language=='english'){
+    if(confirm('Are you sure to do this operation')){
+      console.log("yes",a)
+      var inf = a.infected == 0 ? 1 :0
+      var data = {
+        deviceId:a.deviceId,
+        userId:this.loginData.userId,
+        infected:inf
+      }
+      this.api.editInfectedPerson(data).then((res:any)=>{
+        // console.log("infected data ======",res);
+        if(res.status){
+          this.refreshFinds()
+          var msg = 'Employee updated Successfully'
           this.general.openSnackBar(msg,'')
-      }
-    })
-  }
+        }
+      })
     }
-    else if(this.language=='japanese'){
-    if(confirm('この操作を実行してもよろしいですか?')){
-    console.log("yes",a)
-    var inf = a.infected == 0 ? 1 :0
-    var data = {
-      deviceId:a.deviceId,
-      userId:this.loginData.userId,
-      infected:inf
-    }
-    this.api.editInfectedPerson(data).then((res:any)=>{
-      // console.log("infected data ======",res);
-      if(res.status){
-        this.refreshFinds()
-        var msg = '従業員が正常に更新されました'
-        this.general.openSnackBar(msg,'')
-      }
-    })
-  }
-    }
-  else{
-    this.refreshFinds()
+    else{
+      this.refreshFinds()
 
+    }
+  }
+  else{
+    if(confirm('この操作を実行してもよろしいですか?')){
+      console.log("yes",a)
+      var inf = a.infected == 0 ? 1 :0
+      var data = {
+        deviceId:a.deviceId,
+        userId:this.loginData.userId,
+        infected:inf
+      }
+      this.api.editInfectedPerson(data).then((res:any)=>{
+        // console.log("infected data ======",res);
+        if(res.status){
+          this.refreshFinds()
+          var msg = '従業員は正常に更新されました'
+          this.general.openSnackBar(msg,'')
+        }
+      })
+    }
+    else{
+      this.refreshFinds()
+
+    }
   }
 
 }
+
+
+
 
 
 onShiftSelection(a){
@@ -347,32 +366,32 @@ this.readExcel(files[0])
 
 }
 
-readExcel(file) {  
-  let readFile = new FileReader();  
-  readFile.onload = (e) => {  
-    this.storeData = readFile.result;  
-    var data = new Uint8Array(this.storeData);  
-    var arr = new Array();  
-    for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);  
-    var bstr = arr.join("");  
-    var workbook = XLSX.read(bstr, { type: "binary" });  
-    var first_sheet_name = workbook.SheetNames[0];  
-    this.worksheet = workbook.Sheets[first_sheet_name];  
+readExcel(file) {
+  let readFile = new FileReader();
+  readFile.onload = (e) => {
+    this.storeData = readFile.result;
+    var data = new Uint8Array(this.storeData);
+    var arr = new Array();
+    for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+    var bstr = arr.join("");
+    var workbook = XLSX.read(bstr, { type: "binary" });
+    var first_sheet_name = workbook.SheetNames[0];
+    this.worksheet = workbook.Sheets[first_sheet_name];
     this.header=XLSX.utils.sheet_to_json(this.worksheet, { header: 1 })
 
     this.fileupload.patchValue({
       header:this.header[0]
     })
 
-     
-  }  
-  readFile.readAsArrayBuffer(file);  
+
+  }
+  readFile.readAsArrayBuffer(file);
   console.log(this.fileupload)
   if(this.language=='english'){ var msg = 'Uploading file'}
   else if(this.language=='japanese'){ var msg = 'ファイルをアップロードしています。'}
   this.general.openSnackBar(msg,'')
   setTimeout(()=>{this.fileSubmit(this.fileupload.value)},6*1000)
-  
+
 }
 onclick(){
   document.getElementById('file').click()
@@ -396,9 +415,9 @@ fileSubmit(data){
   var type=data.fileData.filename.split('.')
   console.log("type==",type[type.length-1].toString())
   if(type[type.length-1]=='xlsx'.toString() || type[type.length-1]=='xls'){
-  
+
     this.loading=false
-    if(data.header[0].toLowerCase()=='name' && data.header[2].toLowerCase()=='deviceid'|| data.header[1].toLowerCase()=="employeeid" || 
+    if(data.header[0].toLowerCase()=='name' && data.header[2].toLowerCase()=='deviceid'|| data.header[1].toLowerCase()=="employeeid" ||
     data.header[3]=="mobilenumber".toLowerCase() || data.header[4]=="emailid".toLowerCase()){
       this.format=false
       if(this.language=='english'){var msg = 'Please wait..! It takes few minutes to upload'}
@@ -414,21 +433,33 @@ fileSubmit(data){
            if(this.language=='english'){var msg = 'uploaded'}
            else if(this.language=='japanese'){var msg = 'アップロードしました。'}
           this.general.openSnackBar(msg,'')
-        
+
         }
-        
+
       })
 
   }
   else{
 
     this.format=true
+      if(this.isMobile==true || this.isTablet==true){
+        var msg = 'Please check format: Name*, employeeId, deviceId*, emailId, mobileNumber'
+        this.general.openSnackBar(msg,'')
+      }else{
+
+      }
     }
   }
   else{
     this.loading=true
+      if(this.isMobile==true || this.isTablet==true){
+        var msg = 'Please choose xlsx or xls file*'
+        this.general.openSnackBar(msg,'')
+      }else{
+
+      }
     }
- 
+
  }
 
 
