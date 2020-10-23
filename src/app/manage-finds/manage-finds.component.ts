@@ -150,6 +150,8 @@ edit(data){
 
 
 delete(a){
+
+ if(this.language=='english'){
   if(confirm('Are you sure you want to delete the device')){
     // console.log("yes",a)
     var data = {
@@ -160,16 +162,40 @@ delete(a){
       // console.log("find data ======",res);
       if(res.status){
         this.refreshFinds()
-        var msg = 'Device Deleted Successfully'
+         var msg = 'Device Deleted Successfully'
+        
         this.general.openSnackBar(msg,'')
       }
     })
   }
+    }
+
+    else if(this.language=='japanese'){
+     if(confirm('デバイスを削除してもよろしいですか')){
+    // console.log("yes",a)
+    var data = {
+      id:a.id,
+      tblName:'deviceRegistration'
+    }
+    this.api.deletedeviceandUser(data).then((res:any)=>{
+      // console.log("find data ======",res);
+      if(res.status){
+        this.refreshFinds()
+        
+        var msg = 'デバイスが正常に削除されました'
+        this.general.openSnackBar(msg,'')
+      }
+    })
+  }
+    }
+
 }
 
 
-
+//unable to convert
 infected(a){
+
+if(this.language=='english'){
   if(confirm('Are you sure to do this operation')){
     console.log("yes",a)
     var inf = a.infected == 0 ? 1 :0
@@ -183,10 +209,30 @@ infected(a){
       if(res.status){
         this.refreshFinds()
         var msg = 'Employee updated Successfully'
+          this.general.openSnackBar(msg,'')
+      }
+    })
+  }
+    }
+    else if(this.language=='japanese'){
+    if(confirm('この操作を実行してもよろしいですか?')){
+    console.log("yes",a)
+    var inf = a.infected == 0 ? 1 :0
+    var data = {
+      deviceId:a.deviceId,
+      userId:this.loginData.userId,
+      infected:inf
+    }
+    this.api.editInfectedPerson(data).then((res:any)=>{
+      // console.log("infected data ======",res);
+      if(res.status){
+        this.refreshFinds()
+        var msg = '従業員が正常に更新されました'
         this.general.openSnackBar(msg,'')
       }
     })
   }
+    }
   else{
     this.refreshFinds()
 
@@ -206,7 +252,8 @@ onShiftSelection(a){
     // console.log("shift update data ======",res);
     if(res.status){
       this.refreshFinds()
-      var msg = 'Employee Shift updated Successfully'
+       if(this.language=='english'){ var msg = 'Employee Shift updated Successfully'}
+       else if(this.language=='japanese'){var msg = '従業員シフトが正常に更新されました'}
       this.general.openSnackBar(msg,'')
     }
   })
@@ -271,7 +318,8 @@ getBatteryUpdatedOn(value){
 
 
 fileChange(files){
-  alert("Format should be: Name*, employeeId, deviceId*, mobileNumber, emailId ")
+  if(this.language=='english'){alert("Format should be: Name*, employeeId, deviceId*, mobileNumber, emailId ")}
+  else if(this.language=='japanese'){alert("フォーマット： 名前*, 従業員ID, デバイスID番号*, メールID, 携帯番号 ")}
   this.loading=false
   this.format=false
 
@@ -320,7 +368,8 @@ readExcel(file) {
   }  
   readFile.readAsArrayBuffer(file);  
   console.log(this.fileupload)
-  var msg = 'Uploading file'
+  if(this.language=='english'){ var msg = 'Uploading file'}
+  else if(this.language=='japanese'){ var msg = 'ファイルをアップロードしています。'}
   this.general.openSnackBar(msg,'')
   setTimeout(()=>{this.fileSubmit(this.fileupload.value)},6*1000)
   
@@ -352,7 +401,8 @@ fileSubmit(data){
     if(data.header[0].toLowerCase()=='name' && data.header[2].toLowerCase()=='deviceid'|| data.header[1].toLowerCase()=="employeeid" || 
     data.header[3]=="mobilenumber".toLowerCase() || data.header[4]=="emailid".toLowerCase()){
       this.format=false
-      var msg = 'Please wait..! It takes few minutes to upload'
+      if(this.language=='english'){var msg = 'Please wait..! It takes few minutes to upload'}
+      else if(this.language=='japanese'){var msg = 'お待ちください..！アップロードには数分かかります'}
       this.general.openSnackBar(msg,'')
       data.userId =  this.loginData.userId
       data.fileData.filename = this.loginData.userId.toString() + parseInt(this.randomNumber().toString()) + data.fileData.filename
@@ -361,7 +411,8 @@ fileSubmit(data){
         if(res.status){
           console.log("res file ===",res)
           this.clearFile()
-          var msg = 'uploaded'
+           if(this.language=='english'){var msg = 'uploaded'}
+           else if(this.language=='japanese'){var msg = 'アップロードしました。'}
           this.general.openSnackBar(msg,'')
         
         }

@@ -78,7 +78,7 @@
                 OTPの有効期限が切れました
             </mat-error>
             <mat-error *ngIf="invalidOTP"  class="otp-exp"> 
-                Invalid OTP
+                OTP（ワンタイムパスワード）を無効にする
             </mat-error>
             <div class="btn-otp">
                 <button *ngIf="sendOTP" class="sendotp" mat-raised-button color="primary" (click)="sendOtp(twoStepAuthForm.value.username)"> OTPを送信する</button>&nbsp;&nbsp;

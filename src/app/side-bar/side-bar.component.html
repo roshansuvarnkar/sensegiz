@@ -22,11 +22,14 @@
             <td mat-cell *matCellDef="let live" > <mat-icon matListIcon [style.color]="getColorIcon(live.updatedOn)">label_important</mat-icon> </td>
           </ng-container>
 
-          <ng-container matColumnDef="deviceName">
+          <ng-container matColumnDef="deviceName" *ngIf="language=='english'">
             <th mat-header-cell *matHeaderCellDef ></th>
             <td mat-cell *matCellDef="let live"    (click)="clickDevice(live)"><span *ngIf="live.updatedOn!='0000-00-00 00:00:00'" matTooltip="last synced time: {{live.updatedOn | date : 'medium'}}">{{live.deviceName}}</span> <span *ngIf="live.updatedOn=='0000-00-00 00:00:00'">{{live.deviceName}}</span> </td>
           </ng-container>
-
+              <ng-container matColumnDef="deviceName" *ngIf="language=='japanese'">
+            <th mat-header-cell *matHeaderCellDef ></th>
+            <td mat-cell *matCellDef="let live"    (click)="clickDevice(live)"><span *ngIf="live.updatedOn!='0000-00-00 00:00:00'" matTooltip="最新の同期時刻: {{live.updatedOn | date : 'medium'}}">{{live.deviceName}}</span> <span *ngIf="live.updatedOn=='0000-00-00 00:00:00'">{{live.deviceName}}</span> </td>
+          </ng-container>
        </div>
 
 

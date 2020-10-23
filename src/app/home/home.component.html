@@ -72,11 +72,11 @@
                   [responsive]="false"
                 ></circle-progress>
                 <br> <br> <span *ngIf="language=='english'">Registered Users</span> 
-                <span *ngIf="language=='japanese'">登録ユーザー名</span> 
+                <span *ngIf="language=='japanese'">登録ユーザー数</span> 
               </div>
               <div class="regi">
                 <span *ngIf="language=='english'">Offline Users</span> 
-                <span *ngIf="language=='japanese'">オフラインユーザー</span><br><br>
+                <span *ngIf="language=='japanese'">オフラインユーザー数</span><br><br>
                 <circle-progress (click)="offlineUser()"
                   class="circle"
                   [percent]="offlineCount"
@@ -159,15 +159,16 @@
               <mat-card class="settingcard">
                 <mat-card-content class="setting" routerLink="/settings">
                   <mat-label *ngIf="language=='english'">  Minimum social distance</mat-label>
-                  <mat-label *ngIf="language=='japanese'"> 最小ソーシャルディスタンス設定距離</mat-label>
-                  <mat-label>  {{setting?.distance}} meter</mat-label>
+                  <mat-label *ngIf="language=='japanese'"> ソーシャルディスタンス設定距離</mat-label>
+                  <mat-label *ngIf="language=='english'">  {{setting?.distance}} meter</mat-label>
+                  <mat-label *ngIf="language=='japanese'">  {{setting?.distance}} メートル</mat-label>
                   <mat-icon >keyboard_arrow_right</mat-icon>
                 </mat-card-content>
               </mat-card><br>
               <mat-card class="settingcard">
                 <mat-card-content class="setting" routerLink="/settings">
                   <mat-label *ngIf="language=='english'">Violation alert</mat-label>
-                  <mat-label *ngIf="language=='japanese'">接近違反警告</mat-label>
+                  <mat-label *ngIf="language=='japanese'">警告のための接触違反回数</mat-label>
                   <mat-label class="tab-set">{{setting?.threshold}}</mat-label>
                   <mat-icon>keyboard_arrow_right</mat-icon>
                 </mat-card-content>
@@ -201,8 +202,11 @@
                   </span>
   
                 </span>
-                <span class="tab-btn">
+                <span class="tab-btn" *ngIf="language=='english'">
                   <button mat-raised-button class="btn" (click)="sendWarning(data.id,data.totalCount)">Send warning</button>
+                </span>
+                 <span class="tab-btn" *ngIf="language=='japanese'">
+                  <button mat-raised-button class="btn" (click)="sendWarning(data.id,data.totalCount)">警告を送信する</button>
                 </span>
               </div>
             </mat-card-content>
@@ -227,7 +231,7 @@
          <span class="search-head" *ngIf="language=='english'">
            Cumulative time
         </span><span class="search-head" *ngIf="language=='japanese'">
-          累積時間
+          各ユーザーの接触累積時間
         </span>
         </mat-card-title>
           <mat-card >

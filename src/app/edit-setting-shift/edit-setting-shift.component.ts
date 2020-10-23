@@ -131,26 +131,45 @@ export class EditSettingShiftComponent implements OnInit {
 		this.api.editSettingShift(a).then((res:any)=>{
         // console.log("shift edit==",res)
         if(res.status){
-          var msg = 'Shift updated Successfully'
+          if(this.language=='english'){ var msg = 'Shift updated Successfully'}
+           else if(this.language=='japanese'){var msg = 'シフトが正常に更新されました'}
           this.general.openSnackBar(msg,'')
         }
         this.refreshShift()
       })
 	}
 
-
+//Unable to convert
   delete(a){
     // console.log("delete===",a);
+     if(this.language=='english'){
+
     if(confirm("Are you sure you want to delete the shift")){
       this.api.deleteShift(a).then((res:any)=>{
         // console.log("shift delete==",res)
         if(res.status){
-          var msg = 'Shift deleted Successfully'
+         if(this.language=='english'){ var msg = 'Shift deleted Successfully'}
+		 else if(this.language=='japanese'){var msg = 'Shift deleted Successfully'}
           this.general.openSnackBar(msg,'')
         }
         this.refreshShift()
       })
     }
+    }
+
+    else if(this.language=='japanese'){
+    if(confirm("シフト内容を削除してもよろしいですか")){
+      this.api.deleteShift(a).then((res:any)=>{
+        // console.log("shift delete==",res)
+        if(res.status){
+         if(this.language=='english'){ var msg = 'Shift deleted Successfully'}
+		 else if(this.language=='japanese'){var msg = 'Shift deleted Successfully'}
+          this.general.openSnackBar(msg,'')
+        }
+        this.refreshShift()
+      })
+    }
+}
   }
 
 }

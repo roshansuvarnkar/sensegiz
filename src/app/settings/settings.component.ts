@@ -139,7 +139,8 @@ export class SettingsComponent implements OnInit {
   }
 
   contactTeam(){
-    alert("Please contact SenseGiz Team for this setting")
+   if(this.language=='english') {alert("Please contact SenseGiz Team for this setting")}
+  else if(this.language=='japanese') {alert("この設定については、インディゴーチームにお問い合わせください ")}
   
     }
 
@@ -299,7 +300,8 @@ export class SettingsComponent implements OnInit {
            if(res.status){
             this.multipleshift=false
          
-            var msg = 'Shift time update Successfully'
+            if(this.language=='english') {var msg = 'Shift time update Successfully'}
+            else if(this.language=='japanese'){var msg = 'シフトが正常に更新されました'}
             this.general.openSnackBar(msg,'')
            
            }else{
@@ -323,10 +325,12 @@ export class SettingsComponent implements OnInit {
           if(res.status){
             this.refreshSetting()
             if(data==true){
-              var msg = 'Two step authentication enabled'
+            if(this.language=='english'){ var msg = 'Two step authentication enabled'}
+             else if(this.language=='japanese'){ var msg = '2段階認証が有効になりました'}
               this.general.openSnackBar(msg,'')
             }else{
-              var msg = 'Two step authentication disabled'
+              if(this.language=='english'){ var msg = 'Two step authentication disabled'}
+              else if(this.language=='japanese'){var msg = '2段階認証が無効になっています'}
               this.general.openSnackBar(msg,'')
             }
           }
@@ -383,7 +387,8 @@ export class SettingsComponent implements OnInit {
            if(res.status){
              this.refreshSetting()
              this.api.updateWearableType(data).then((res:any)=>{
-             var msg = 'Minimum distance and wearable type updated Successfully'
+             if(this.language=='english'){var msg = 'Minimum distance and wearable type updated Successfully'}
+             if(this.language=='japanese'){var msg = '最小距離とウェアラブルタイプが正常に更新されました'}
              this.general.openSnackBar(msg,'')
          })
         }
@@ -404,7 +409,8 @@ export class SettingsComponent implements OnInit {
           //  console.log("contact threshold insrted or updated",res)
            if(res.status){
              this.refreshSetting()
-             var msg = 'Max contact threshold updated Successfully'
+            if(this.language=='english'){ var msg = 'Max contact threshold updated Successfully'}
+             else if(this.language=='japanese'){ var msg = '最大連絡先しきい値が正常に更新されました'}
              this.general.openSnackBar(msg,'')
            }
          })
@@ -424,7 +430,8 @@ export class SettingsComponent implements OnInit {
           //  console.log("tx power updated",res)
            if(res.status){
              this.refreshSetting()
-             var msg = 'Transmission power updated Successfully'
+              if(this.language=='english'){var msg = 'Transmission power updated Successfully'}
+               else if(this.language=='japanese'){var msg = '無線電波の出力は正常に更新されました'}
              this.general.openSnackBar(msg,'')
            }
          })
@@ -449,7 +456,8 @@ export class SettingsComponent implements OnInit {
           // console.log("Inactivity response===",res)
           if(res.status){
             this.refreshSetting()
-            var msg = 'Inactivity updated Successfully'
+           if(this.language=='english'){ var msg = 'Inactivity updated Successfully'}
+           else if(this.language=='english'){ var msg = '非アクティブが正常に更新されました'}
             this.general.openSnackBar(msg,'')
           }
         })
@@ -478,7 +486,8 @@ export class SettingsComponent implements OnInit {
           // console.log("Buffer response===",res)
           if(res.status){
             this.refreshSetting()
-            var msg = 'Buffer updated Successfully'
+            if(this.language=='english'){var msg = 'Buffer updated Successfully'}
+            else if(this.language=='japanese'){var msg = '保存量が正常に更新されました'}
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
@@ -510,7 +519,8 @@ export class SettingsComponent implements OnInit {
   //     //  console.log("duration==",res)
   //     if(res.status){
   //       this.refreshSetting()
-  //       var msg = 'Minimum duration threshold updated Successfully'
+  //      if(this.language=='english'){ var msg = 'Minimum duration threshold updated Successfully'}
+   //      else if(this.language=='japanese'){ var msg = '最小接触時間のしきい値は正常に更新されました'}
   //       this.general.openSnackBar(msg,'')
   //     }
   //   })
@@ -555,7 +565,8 @@ export class SettingsComponent implements OnInit {
           // console.log("wearable type===",res)
           if(res.status){
             this.refreshSetting()
-            var msg='Wearable type updated Successfully'
+           if(this.language=='english'){ var msg='Wearable type updated Successfully'}
+           else if(this.language=='japanese'){ var msg='ウェアラブルタイプが正常に更新されました'}
             this.general.openSnackBar(msg,'')
             this.refreshSetting()
           }
@@ -580,7 +591,8 @@ export class SettingsComponent implements OnInit {
           // console.log("buzzer congig===",res)
           if(res.status){
             this.refreshSetting()
-            var msg='Buzzer configured Successfully'
+             if(this.language=='english'){ var msg='Alert configured Successfully'}
+             else if(this.language=='japanese'){ var msg='アラートが正常に構成されました'}
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
@@ -600,7 +612,8 @@ export class SettingsComponent implements OnInit {
           // console.log("Scanning Interval===",res)
           if(res.status){
             this.refreshSetting()
-            var msg='Interval second Successfully'
+            if(this.language=='english'){var msg='Interval second Successfully'}
+            else if(this.language=='japanese'){var msg='インターバル秒が正常に'}
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
@@ -737,7 +750,8 @@ export class SettingsComponent implements OnInit {
      this.api.updateInactivityStatus(data).then((res:any)=>{
        if(res.status){
          this.refreshSetting()
-         var msg = 'Inactivity updated Successfully'
+        if(this.language=='english'){ var msg = 'Inactivity updated Successfully'}
+          if(this.language=='japanese'){ var msg = '非アクティブが正常に更新されましたs'}
          this.general.openSnackBar(msg,'')
        }
      }).catch(err=>{

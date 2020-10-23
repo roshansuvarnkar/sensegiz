@@ -112,6 +112,7 @@ edit(data){
 
 
 delete(a){
+if(this.language=='english'){
   if(confirm('Are you sure you want to delete the gateway')){
     // console.log("yes",a)
     var data = {
@@ -127,6 +128,26 @@ delete(a){
       }
     })
   }
+  }
+    else if(this.language=='japanese'){
+  if(confirm('ゲートウェイを削除してもよろしいですか')){
+    // console.log("yes",a)
+    var data = {
+      id:a.id,
+      tblName:'gatewayRegistration'
+    }
+    this.api.deletedeviceandUser(data).then((res:any)=>{
+      // console.log("gateway data ======",res);
+      if(res.status){
+        this.refreshGateway()
+        var msg = 'ゲートウェイが正常に削除されました'
+        this.general.openSnackBar(msg,'')
+      }
+    })
+  }
+  }
+
+
 }
 
 

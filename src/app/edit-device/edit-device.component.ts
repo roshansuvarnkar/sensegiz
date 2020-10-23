@@ -104,11 +104,13 @@ export class EditDeviceComponent implements OnInit {
         this.api.editDeviceRegister(data).then((res:any)=>{
           // console.log("find submit====",res);
           if(res.status){
-            var msg = 'Device Updated Successfully'
+            if(this.language=='english'){ var msg = 'Device Updated Successfully'}
+            else if(this.language=='japanese'){ var msg = 'デバイスが正常に更新されました'}
             this.general.openSnackBar(msg,'')
           }
           else if(!res.status && res.alreadyExisted){
-            var msg = 'Device Name Already exists, try different Name'
+            if(this.language=='english'){ var msg = 'Device Name Already exists, try different Name'}
+             else if(this.language=='japanese'){ var msg = 'デバイス名はすでに存在します。別の名前を試してください'}
             this.general.openSnackBar(msg,'')
           }
         
@@ -129,11 +131,13 @@ export class EditDeviceComponent implements OnInit {
         this.api.editDeviceRegister(data).then((res:any)=>{
           // console.log("gateway submit==",res)
           if(res.status){
-            var msg = 'Gateway Updated Successfully'
+            if(this.language=='english'){var msg = 'Gateway Updated Successfully'}
+            else if(this.language=='japanese'){ var msg = 'ゲートウェイが正常に更新されました'}
             this.general.openSnackBar(msg,'')
           }
           else if(!res.status && res.alreadyExisted){
-            var msg = 'Gateway Name  Already exists, try different gateway'
+           if(this.language=='english'){ var msg = 'Gateway Name  Already exists, try different gateway'}
+           else if(this.language=='japanese'){ var msg = 'ゲートウェイ名またはゲートウェイIDはすでに存在します。別のゲートウェイを試してください'}
             this.general.openSnackBar(msg,'')
           }
         })
@@ -152,11 +156,13 @@ export class EditDeviceComponent implements OnInit {
         this.api.EditUserRegister(data).then((res:any)=>{
           // console.log("user submit==",res)
           if(res.status){
-            var msg = 'User Updated Successfully'
+              if(this.language=='english'){var msg = 'User Updated Successfully'}
+                else if(this.language=='japanese'){var msg = 'ユーザーが正常に更新されました'}
             this.general.openSnackBar(msg,'')
           }
           else if(!res.status && res.alreadyExisted){
-            var msg = 'Email Id or Mobile Number Already exists, try different device'
+             if(this.language=='english'){ var msg = 'Email Id or Mobile Number Already exists, try different device'}
+              else if(this.language=='japanese'){var msg = 'メールIDまたは携帯電話番号はすでに存在します。別のデバイスを試してください'}
             this.general.openSnackBar(msg,'')
           }
         })

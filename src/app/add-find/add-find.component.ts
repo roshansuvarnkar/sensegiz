@@ -87,11 +87,14 @@ Findsubmit(data){
       this.api.deviceRegister(data).then((res:any)=>{
         console.log("find res data====",res);
         if(res.status){
-          var msg = 'Find Registered Successfully'
+          if(this.language=='english'){var msg = 'Find Registered Successfully'}
+            else if(this.language=='japanese'){var msg = 'ファインドが正常に登録されました'}
           this.general.openSnackBar(msg,'')
         }
         else if(!res.status && res.alreadyExisted){
-          var msg = 'Device Name or Device Id Already exists, try different device'
+           if(this.language=='english'){var msg = 'Device Name or Device Id Already exists, try different device'}
+            else if(this.language=='japanese'){var msg = 'デバイス名またはデバイスIDはすでに存在します。別のデバイスを試してください'}
+
           this.general.openSnackBar(msg,'')
         }
       })
@@ -111,11 +114,13 @@ Gatewaysubmit(data){
       this.api.deviceRegister(data).then((res:any)=>{
         // console.log("gateway submit==",res)
         if(res.status){
-          var msg = 'Gateway Registered Successfully'
+         if(this.language=='english'){ var msg = 'Gateway Registered Successfully'}
+          else if(this.language=='japanese'){var msg = 'ゲートウェイが正常に登録されました'}
           this.general.openSnackBar(msg,'')
         }
         else if(!res.status && res.alreadyExisted){
-          var msg = 'Gateway Name or Gateway Id Already exists, try different gateway'
+          if(this.language=='english'){ var msg = 'Gateway Name or Gateway Id Already exists, try different gateway'}
+           else if(this.language=='japanese'){var msg = 'ゲートウェイ名またはゲートウェイIDはすでに存在します。別のゲートウェイを試してください'}
           this.general.openSnackBar(msg,'')
         }
       })
@@ -134,11 +139,13 @@ Usersubmit(data){
       this.api.UserRegister(data).then((res:any)=>{
         // console.log("user submit==",res)
         if(res.status){
-          var msg = 'User Registered Successfully'
+        if(this.language=='english'){  var msg = 'User Registered Successfully'}
+         else if(this.language=='japanese'){ var msg = 'ユーザーが正常に登録されました'}
           this.general.openSnackBar(msg,'')
         }
         else if(!res.status && res.alreadyExisted){
-          var msg = 'EmailId or Mobile Number Already exists, try different device'
+          if(this.language=='english'){ var msg = 'EmailId or Mobile Number Already exists, try different device'}
+          else if(this.language=='japanese'){var msg = 'メールIDまたは携帯電話番号はすでに存在します。別のデバイスを試してください'}
           this.general.openSnackBar(msg,'')
         }
       })

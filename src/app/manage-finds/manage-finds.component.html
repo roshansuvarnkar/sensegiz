@@ -8,16 +8,26 @@
   <div class="upload">
  
 
-   <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)"> 
+   <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)" *ngIf="language=='english'"> 
      <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
      <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
      <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
-     <span *ngIf="language=='english'"  id="button" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
-      <span *ngIf="language=='japanese'"  id="button" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
+     <span  id="button" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
+      
 
       <span *ngIf="loading" style="color:red">Please choose xlsx or xls file*</span>
       <span *ngIf="format" style="color:red"> Please check format: Name*, employeeId, deviceId*, emailId, mobileNumber</span>
    </form> <br>
+    <form action="" [formGroup]="fileupload" (ngSubmit)="fileSubmit(fileupload.value)" *ngIf="language=='japanese'"> 
+     <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
+     <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
+     <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
+    
+      <span  id="button" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
+
+      <span *ngIf="loading" style="color:red">xlsxまたはxlsファイルを選択してください*</span>
+      <span *ngIf="format" style="color:red"> 形式を確認してください： 名前*, 従業員ID, デバイスID番号*, メールID, 携帯番号</span>
+   </form><br>
   </div> 
    <button *ngIf="language=='english'" class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
     <button *ngIf="language=='japanese'" class="button" mat-flat-button color="primary" (click)="openDialog()">追跡対象者の追加</button>
@@ -256,7 +266,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 電池残量レベル</th>
           
           <td mat-cell *matCellDef="let live "  class="cursor"> 
-            <span  *ngIf="getBatteryUpdatedOn(live.batteryUpdatedOn)!='0000-00-00 00:00:00' &&  live.batteryStatus!='0'" matTooltip="last synced time : {{getBatteryUpdatedOn(live.batteryUpdatedOn) | date: 'medium'}}" >
+            <span  *ngIf="getBatteryUpdatedOn(live.batteryUpdatedOn)!='0000-00-00 00:00:00' &&  live.batteryStatus!='0'" matTooltip="最新の同期時刻 : {{getBatteryUpdatedOn(live.batteryUpdatedOn) | date: 'medium'}}" >
               <div class="batteryContainer">
                 <div class="batteryOuter"><div id="batteryLevel"  [ngStyle]="getBatteryStatus(live.batteryStatus)" > </div></div>
                 <div class="batteryBump"></div>

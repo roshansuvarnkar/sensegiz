@@ -79,11 +79,13 @@ sendWarning(id,value){
   this.api.showWarning(data).then((res:any)=>{
     // console.log("warning ======",res);
     if(res.status){
-      var msg = 'Warning sent Successfully'
+     if(this.language=='english'){ var msg = 'Warning sent Successfully'}
+     else if(this.language=='japanese'){var msg = '警告が正常に送信されました'}
       this.general.openSnackBar(msg,'')
     }
     else{
-      var msg = 'EmailId or Mobile number is not registered'
+      if(this.language=='english'){var msg = 'EmailId or Mobile number is not registered'}
+      else if(this.language=='japanese'){var msg = 'メールIDまたは携帯電話番号が登録されていません'}
       this.general.openSnackBar(msg,'')
     }
   })
@@ -365,6 +367,7 @@ numOfcontactPerDay(){
 
      
 
+     if(this.language=='english'){
       var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
                     exportEnabled: true,
@@ -384,10 +387,32 @@ numOfcontactPerDay(){
                       dataPoints:this.dataPoints
                     }]
                   });
+}
+else if(this.language=='japanese'){
+ var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    exportEnabled: true,
+                    title: {
+                      text: "一日当たりのトータル接触回数",
+                      fontColor: "#ef6c00",
+                    },
+                    axisY:{
 
+                      gridThickness: 0
+                    },
+                    dataPointWidth: 30,
+
+                    data: [{
+                      type: "column",
+
+                      dataPoints:this.dataPoints
+                    }]
+                  });
+}
       chart.render();
       chart.destroy()
       chart=null;
+      if(this.language=='english'){
       chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         exportEnabled: true,
@@ -407,6 +432,29 @@ numOfcontactPerDay(){
           dataPoints:this.dataPoints
         }]
       });
+      }
+      else if(this.language=='japanese'){
+      chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        exportEnabled: true,
+        title: {
+          text: "一日当たりのトータル接触回数",
+          fontColor: "#ef6c00",
+        },
+        axisY:{
+
+          gridThickness: 0
+        },
+        dataPointWidth: 30,
+
+        data: [{
+          type: "column",
+
+          dataPoints:this.dataPoints
+        }]
+      });
+      }
+
       chart.render();
     }
 

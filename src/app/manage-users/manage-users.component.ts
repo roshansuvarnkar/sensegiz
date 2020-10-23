@@ -106,6 +106,7 @@ export class ManageUsersComponent implements OnInit {
 
 
   delete(a){
+  if(this.language=='english'){
     if(confirm('Are you sure you want to delete the user')){
       // console.log("yes",a)
       var data = {
@@ -116,11 +117,30 @@ export class ManageUsersComponent implements OnInit {
         // console.log("find data ======",res);
         if(res.status){
           this.refreshUsers()
-          var msg = 'Contact Deleted Successfully'
+         var msg = 'Contact Deleted Successfully'
           this.general.openSnackBar(msg,'')
         }
       })
     }
+  }
+    else if(this.language=='japanese'){
+    if(confirm('ユーザー情報を削除してもよろしいですか')){
+      // console.log("yes",a)
+      var data = {
+        id:a.id,
+        tblName:'userDetails'
+      }
+      this.api.deletedeviceandUser(data).then((res:any)=>{
+        // console.log("find data ======",res);
+        if(res.status){
+          this.refreshUsers()
+         var msg = '連絡先が正常に削除されましたy'
+          this.general.openSnackBar(msg,'')
+        }
+      })
+    }
+  }
+
   }
 
 
