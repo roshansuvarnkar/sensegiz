@@ -22,135 +22,108 @@
               <mat-label>{{totalEmp}}</mat-label> -->
             </span>
           </div><br><br>
-          <div class="row">
-           
-            <div class="first-cont">
-              <div class="regi">
-                <span *ngIf="language=='english'">Active </span>
+          <div class="first-cont cursor">
+            <div >
+              <span *ngIf="language=='english'">Active </span>
               <span *ngIf="language=='japanese'">アクティブユーザー数</span><br>
-                <circle-progress (click)="onlineUser()"
+              <circle-progress (click)="onlineUser()"
                 class="circle"
-                  [percent]="onlineCount"
-                  [maxPercent]="onlineCount"
-                  [showUnits]="false"
-                  [showBackground] = "true"
-                  [backgroundColor]= "'#ef6c00'"
-                  [outerStrokeColor] = "'#ffffff'"
-                  [outerStrokeWidth] = 6
-                  [showInnerStroke] = false
-                  [radius] = 60
-                  [titleColor] = "'#ffffff'"
-                  [showSubtitle] = false
-                  [backgroundPadding] = 5
-                  [animation]="true"
-                  [animationDuration]="500"
-                  [startFromZero]="true"
-                  [responsive]="false"
-                ></circle-progress>
-
-              </div>
-
-              <div class="infe" >
-
-                <circle-progress (click)="activeUser()"
-
-                  class="circle"
-                  fill="green"
-                  [percent]="activeEmp"
-                  [maxPercent]="activeEmp"
-                  [showUnits]="false"
-                  [showBackground] = "true"
-                  [backgroundColor]= "'#ef6c00'"
-                  [outerStrokeColor] = "'#ffffff'"
-                  [outerStrokeWidth] = 6
-                  [showInnerStroke] = false
-                  [radius] = 60
-                  [titleColor] = "'#ffffff'"
-                  [showSubtitle] = false
-                  [backgroundPadding] = 5
-                  [animation]="true"
-                  [animationDuration]="500"
-                  [startFromZero]="true"
-                  [responsive]="false"
-                ></circle-progress>
-                <br>  <span *ngIf="language=='english'">Registered </span>
-                <span *ngIf="language=='japanese'">登録ユーザー数</span>
-              </div>
-              <div class="regi">
-                <span *ngIf="language=='english'">Offline </span>
-                <span *ngIf="language=='japanese'">オフラインユーザー数</span><br>
-                <circle-progress (click)="offlineUser()"
-                  class="circle"
-                  [percent]="offlineCount"
-                  [maxPercent]="offlineCount"
-                  [showUnits]="false"
-                  [showBackground] = "true"
-                  [backgroundColor]= "'#ef6c00'"
-                  [outerStrokeColor] = "'#ffffff'"
-                  [outerStrokeWidth] = 6
-                  [showInnerStroke] = false
-                  [radius] = 60
-                  [titleColor] = "'#ffffff'"
-                  [showSubtitle] = false
-                  [backgroundPadding] = 5
-                  [animation]="true"
-                  [animationDuration]="500"
-                  [startFromZero]="true"
-                  [responsive]="false"
-                ></circle-progress>
-
-              </div>
-              <div class="infe">
-
-                <circle-progress (click)="infectedUser()"
-                  class="circle"
-                  [percent]="infectedEmp"
-                  [maxPercent]="infectedEmp"
-                  [showUnits]="false"
-                  [showBackground] = "true"
-                  [backgroundColor]= "'#ef6c00'"
-                  [outerStrokeColor] = "'#ffffff'"
-                  [outerStrokeWidth] = 6
-                  [showInnerStroke] = false
-                  [radius] = 60
-                  [titleColor] = "'#ffffff'"
-                  [showSubtitle] = false
-                  [backgroundPadding] = 5
-                  [animation]="true"
-                  [animationDuration]="500"
-                  [startFromZero]="true"
-                  [responsive]="false"
-                ></circle-progress>
-
-                <br><span *ngIf="language=='english'">Infected </span>
-                <span *ngIf="language=='japanese'">感染したユーザー数</span>
-              </div> <br>
-              <!-- <div class="count">
-                Normal User <br><br>
-                <circle-progress (click)="normalUser()"
-                  [percent]="normalEmp"
-                  [showUnits]="false"
-                  [showBackground] = "true"
-                  [backgroundColor]= "'#ef6c00'"
-                  [outerStrokeColor] = "'#ffffff'"
-                  [outerStrokeWidth] = 6
-                  [showInnerStroke] = false
-                  [radius] = 60
-                  [titleColor] = "'#ffffff'"
-                  [showSubtitle] = false
-                  [backgroundPadding] = 5
-                  [animation]="true"
-                  [animationDuration]="500"
-                  [startFromZero]="true"
-                  [responsive]="false"
-                ></circle-progress><br><br>
-              </div> -->
-
+                [percent]="onlineCount"
+                [maxPercent]="onlineCount"
+                [showUnits]="false"
+                [showBackground] = "true"
+                [backgroundColor]= "'#ef6c00'"
+                [outerStrokeColor] = "'#ffffff'"
+                [outerStrokeWidth] = 6
+                [showInnerStroke] = false
+                [radius] = 60
+                [titleColor] = "'#ffffff'"
+                [showSubtitle] = false
+                [backgroundPadding] = 5
+                [animation]="true"
+                [animationDuration]="500"
+                [startFromZero]="true"
+                [responsive]="false"
+              ></circle-progress>
 
             </div>
+            <div >
+              <span *ngIf="language=='english'">Offline </span>
+              <span *ngIf="language=='japanese'">オフラインユーザー数</span><br>
+              <circle-progress (click)="offlineUser()"
+                class="circle"
+                [percent]="offlineCount"
+                [maxPercent]="offlineCount"
+                [showUnits]="false"
+                [showBackground] = "true"
+                [backgroundColor]= "'#ef6c00'"
+                [outerStrokeColor] = "'#ffffff'"
+                [outerStrokeWidth] = 6
+                [showInnerStroke] = false
+                [radius] = 60
+                [titleColor] = "'#ffffff'"
+                [showSubtitle] = false
+                [backgroundPadding] = 5
+                [animation]="true"
+                [animationDuration]="500"
+                [startFromZero]="true"
+                [responsive]="false"
+              ></circle-progress>
+
+            </div> 
+          </div> 
+          <div class="first-cont cursor">
+           <div>
+              <span *ngIf="language=='english'">Registered </span>
+              <span *ngIf="language=='japanese'">登録ユーザー数</span>
+            <br>
+              <circle-progress (click)="activeUser()"
+                class="circle"
+                [percent]="activeEmp"
+                [maxPercent]="activeEmp"
+                [showUnits]="false"
+                [showBackground] = "true"
+                [backgroundColor]= "'#ef6c00'"
+                [outerStrokeColor] = "'#ffffff'"
+                [outerStrokeWidth] = 6
+                [showInnerStroke] = false
+                [radius] = 60
+                [titleColor] = "'#ffffff'"
+                [showSubtitle] = false
+                [backgroundPadding] = 5
+                [animation]="true"
+                [animationDuration]="500"
+                [startFromZero]="true"
+                [responsive]="false"
+              ></circle-progress>
+                            
+            </div>
+
+            <div>
+              <span *ngIf="language=='english'">Infected </span>
+              <span *ngIf="language=='japanese'">感染したユーザー数</span><br>
+              <circle-progress (click)="infectedUser()"
+                class="circle"
+                [percent]="infectedEmp"
+                [maxPercent]="infectedEmp"
+                [showUnits]="false"
+                [showBackground] = "true"
+                [backgroundColor]= "'#ef6c00'"
+                [outerStrokeColor] = "'#ffffff'"
+                [outerStrokeWidth] = 6
+                [showInnerStroke] = false
+                [radius] = 60
+                [titleColor] = "'#ffffff'"
+                [showSubtitle] = false
+                [backgroundPadding] = 5
+                [animation]="true"
+                [animationDuration]="500"
+                [startFromZero]="true"
+                [responsive]="false"
+              ></circle-progress>
+                     
+            </div>
           </div>
-
-
         </mat-card-content>
       </mat-card>
       <br>
@@ -228,7 +201,7 @@
     <div class="second">
       <mat-card>
         <mat-card-content>
-          <div id="chartContainer" style="height: 202px; width: 100%;"></div>
+          <div id="chartContainer" style="height: 300px; width: 100%;"></div>
         </mat-card-content>
       </mat-card>
     </div>

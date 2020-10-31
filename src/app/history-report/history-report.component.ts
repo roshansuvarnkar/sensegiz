@@ -368,13 +368,13 @@ dataDateReduce(data){
 callUpdatedon(date){
   var a=[]
   var data=date.filter((obj,index)=>{
-     console.log(a.includes(obj.updatedOn))
-    if(!a.includes(obj.updatedOn)){
-        a.push(obj.updatedOn)
-    }
+     console.log(obj.updatedOn)
+     if(!a.includes(obj.updatedOn)){
+       a.push(obj.updatedOn)
+     }
+      
   })
   console.log("aaa==",a)
-  a[a.length-1]= a[a.length-1]+'.'
   return a
 }
 cummulativeReport(){
