@@ -180,13 +180,13 @@ delete(a){
          var msg = 'Device Deleted Successfully'
 
         this.general.openSnackBar(msg,'')
-      }
-    })
+        }
+      })
+    }
   }
-}
 
-    else if(this.language=='japanese'){
-     if(confirm('デバイスを削除してもよろしいですか')){
+  else if(this.language=='japanese'){
+    if(confirm('デバイスを削除してもよろしいですか')){
     // console.log("yes",a)
     var data = {
       id:a.id,
@@ -195,15 +195,13 @@ delete(a){
     this.api.deletedeviceandUser(data).then((res:any)=>{
       // console.log("find data ======",res);
       if(res.status){
-        this.refreshFinds()
-
-        var msg = 'デバイスが正常に削除されました'
-        this.general.openSnackBar(msg,'')
-      }
-    })
-  }
+          this.refreshFinds()
+          var msg = 'デバイスが正常に削除されました'
+          this.general.openSnackBar(msg,'')
+        }
+      })
     }
-
+  }
 }
 
 infected(a){
@@ -227,7 +225,6 @@ infected(a){
     }
     else{
       this.refreshFinds()
-
     }
   }
   else{
@@ -250,14 +247,67 @@ infected(a){
     }
     else{
       this.refreshFinds()
-
     }
   }
-
 }
 
 
+isolated(a){
+  var inf=0
+  var data={}
+  if(this.language=='english'){
+    
+    if(confirm('Are you sure to do this operation')){
+      console.log("yes",a)
+      inf = a.infected == 0 ? 1 :0
+      if(inf == 0){
+        var isolate = a.isolate == 0 ? 1 :0
+        data = {
+          deviceId:a.deviceId,
+          userId:this.loginData.userId,
+          isolate:isolate
+        }
+        this.api.editInfectedPerson(data).then((res:any)=>{
+          // console.log("infected data ======",res);
+          if(res.status){
+            this.refreshFinds()
+            var msg = 'Employee updated Successfully'
+            this.general.openSnackBar(msg,'')
+          }
+        })
+      }
+      else{
+        alert("You cannot isolate infected person.")
+      }
+    }
+    else{
+      this.refreshFinds()
+    }
 
+  }
+  else{
+    if(confirm('この操作を実行してもよろしいですか?')){
+      console.log("yes",a)
+      var inf = a.infected == 0 ? 1 :0
+      data = {
+        deviceId:a.deviceId,
+        userId:this.loginData.userId,
+        infected:inf
+      }
+      this.api.editInfectedPerson(data).then((res:any)=>{
+        // console.log("infected data ======",res);
+        if(res.status){
+          this.refreshFinds()
+          var msg = '従業員は正常に更新されました'
+          this.general.openSnackBar(msg,'')
+        }
+      })
+    }
+    else{
+      this.refreshFinds()
+    }
+  }
+}
 
 
 onShiftSelection(a){
