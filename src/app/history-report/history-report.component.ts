@@ -704,9 +704,11 @@ if(this.type=='summaryReport'){
     var a=[]
     data.filter((obj)=>{
      
-       if(!a.includes(obj.contactDevice)){
-         a.push(obj.contactDevice)
-       }
+      if(obj.contactDeviceName!=this.deviceName){
+        if(!a.includes(obj.contactDevice)){
+          a.push(obj.contactDevice)
+        }
+      }else{}
         
     })
     return a
