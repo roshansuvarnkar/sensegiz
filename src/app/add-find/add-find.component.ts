@@ -47,7 +47,7 @@ export class AddFindComponent implements OnInit {
     this.Findform = this.fb.group({
       deviceName: ['', Validators.required],
       deviceId: ['', [Validators.required,Validators.min(1)]],
-      employeeId: [''],
+      empId: [''],
       mobileNum: [''],
       emailId: ['',[Validators.email]]
     });

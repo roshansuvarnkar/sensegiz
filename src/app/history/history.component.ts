@@ -68,7 +68,8 @@ daysExceed:boolean=false
     this.summaryReportForm = this.fb.group({
       deviceName: ['', Validators.required],
       fromDate: ['', Validators.required],
-      toDate: ['', Validators.required]
+      toDate: ['', Validators.required],
+      // minutes:['']
     });
 
     this.refreshFinds()

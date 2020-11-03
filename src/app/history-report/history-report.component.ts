@@ -55,6 +55,7 @@ export class HistoryReportComponent implements OnInit {
   filterValue:any
   limit:any
   offset:any
+  deviceIdData:any
 
     constructor(
       public dialog: MatDialog,
@@ -321,10 +322,12 @@ summaryReport(){
     console.log("summary report======",res);
 
     this.liveData=[]
+    this.deviceIdData=[]
     if(res.status){
 
       var groupUser = this.dataDateReduce(res.success)
-      // console.log("groupDate===",groupUser)
+      this.deviceIdData=this.deviceId(res.success)
+
       this.liveData = Object.keys(groupUser).map((data)=>{
 
         return {
@@ -353,14 +356,14 @@ summaryReport(){
 dataDateReduce(data){
   return data.reduce((group,obj)=>{
   const name = obj.contactDeviceName
-  console.log("name---",name,"this.deviceName====",this.deviceName)
+  // console.log("name---",name,"this.deviceName====",this.deviceName)
   if(name!=this.deviceName){
       if(!group[name]){
         group[name]=[]
       }
       group[name].push(obj)
     }
-    console.log("group==",group)
+    // console.log("group==",group)
     return group
  
   },{})
@@ -368,13 +371,13 @@ dataDateReduce(data){
 callUpdatedon(date){
   var a=[]
   var data=date.filter((obj,index)=>{
-     console.log(obj.updatedOn)
+    //  console.log(obj.updatedOn)
      if(!a.includes(obj.updatedOn)){
        a.push(obj.updatedOn)
      }
       
   })
-  console.log("aaa==",a)
+  // console.log("aaa==",a)
   return a
 }
 cummulativeReport(){
@@ -697,7 +700,29 @@ if(this.type=='summaryReport'){
   }
 
 
-
+  deviceId(data){
+    var a=[]
+    data.filter((obj)=>{
+     
+       if(!a.includes(obj.contactDevice)){
+         a.push(obj.contactDevice)
+       }
+        
+    })
+    return a
+  }
+  sendWarning(){
+    var data={
+      userId:this.loginData.userId,
+      deviceId:this.deviceIdData,
+      infectedPersonName:this.deviceName,
+      adminEmailId:this.loginData.userName
+    }
+    console.log("sendwarning data=====",data)
+    this.api.infectedContactalert(data).then((res:any)=>{
+      console.log("infectedContactalert res===",res)
+    })
+  }
 
 
 

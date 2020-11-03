@@ -817,6 +817,19 @@ setLanguage(data){
   });
 
 }
+infectedContactalert(data){
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/infectedContactAlert';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+
+}
 downloadCummulative(data,fileName){
 
   this.general.loadingFreez.next({status:true})
