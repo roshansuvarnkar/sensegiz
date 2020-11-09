@@ -442,8 +442,6 @@ getUpdate(event) {
   // console.log("limit==",limit,"offset==",offset)
   this.loadData(this.limit,this.offset)
 
-
-
 }
 
 

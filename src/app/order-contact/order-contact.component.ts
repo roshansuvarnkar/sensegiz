@@ -29,35 +29,35 @@ export class OrderContactComponent implements OnInit {
   orderType:any=[
   		{
   			id:2,
-  			name:"Second lever order"
+  			name:"Second level order"
   		},
   		{
   			id:3,
-  			name:"Third lever order"
+  			name:"Third level order"
   		},
   		{
   			id:4,
-  			name:"Fourth lever order"
+  			name:"Fourth level order"
   		},
   		{
   			id:5,
-  			name:"Fifth lever order"
+  			name:"Fifth level order"
   		},
   		{
   			id:6,
-  			name:"Sixth lever order"
+  			name:"Sixth level order"
   		},
   		{
   			id:7,
-  			name:"Seventh lever order"
+  			name:"Seventh level order"
   		},
   		{
   			id:8,
-  			name:"Eighth lever order"
+  			name:"Eighth level order"
   		},
   		{
   			id:9,
-  			name:"Ninth lever order"
+  			name:"Ninth level order"
   		},
   	]
     constructor(
