@@ -257,13 +257,14 @@ infected(a){
 isolated(a){
   var inf=0
   var data={}
+  var isolate = a.isolated == 0 ? 1 :0
   if(this.language=='english'){
     
     if(confirm('Are you sure to do this operation?')){
       console.log("yes",a)
       
-      if(a.infected == 0){
-        var isolate = a.isolated == 0 ? 1 :0
+      if(a.infected == 0 ){
+     
         data = {
           deviceId:a.deviceId,
           userId:this.loginData.userId,
@@ -294,7 +295,7 @@ isolated(a){
       console.log("yes",a)
       
       if(a.infected == 0){
-        var isolate = a.isolated == 0 ? 1 :0
+
         data = {
           deviceId:a.deviceId,
           userId:this.loginData.userId,

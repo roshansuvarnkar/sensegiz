@@ -221,7 +221,20 @@
   <mat-horizontal-stepper  #stepper *ngIf="language=='english'"  >
     <form [formGroup]="gatewayform" >
       <mat-step >
-          <ng-template matStepLabel class="stepper">Fill out your gateway nick name</ng-template>
+        <ng-template matStepLabel class="stepper">Gateway Type</ng-template>
+        <mat-form-field>
+          <mat-label>Select Gateway Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option [value]="0">Ethernet Gateway</mat-option>
+            <mat-option [value]="1">Wifi Gateway</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+      <mat-step >
+          <ng-template matStepLabel class="stepper">Gateway Nick Name</ng-template>
           <mat-form-field>
             <mat-label>Gateway Nick Name</mat-label>
             <input matInput placeholder="User Name" formControlName="deviceName" required>

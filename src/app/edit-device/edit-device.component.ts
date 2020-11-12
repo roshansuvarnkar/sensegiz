@@ -53,7 +53,9 @@ export class EditDeviceComponent implements OnInit {
 
     this.gatewayform = this.fb.group({
       deviceName: ['', Validators.required],
-      deviceId: [{value: '', disabled: true}, Validators.required]
+      deviceId: [{value: '', disabled: true}, Validators.required],
+      type:[{value: '', disabled: true}, Validators.required],
+
     });
 
 
@@ -77,7 +79,9 @@ export class EditDeviceComponent implements OnInit {
     else if(this.type=='gateways'){
       this.gatewayform.patchValue({
         deviceName: this.deviceData.gatewayName,
-        deviceId: this.deviceData.gatewayId
+        deviceId: this.deviceData.gatewayId,
+        // type:this.deviceData.type
+
       });
     }
 
