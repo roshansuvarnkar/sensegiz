@@ -254,69 +254,7 @@
 
     </div>
     <!-- End of Sd-jp -->
-    <div *ngIf="language=='english'">
-      <p><b>5. <u>Report</u></b></p>
-    
-      <ul>
-        <li>Report tab allows admin to view and download reports. There are four different reports available for SDCT option B,</li>
-        <li>Admin can view and download the reports from last week or two weeks just by selecting the radio button. Moreover, if you want to view or download the last month report or for any duration then please do select the date range. </li>
-            <div class="center"><img src="./assets/images-en/Report.png" alt=""></div>
-            <ol>
-              <li><b>Generic Report</b></li>
-              <ul><li>The generic report shows violation details such as base person and contact person name with violation start time and end time with the total time in 12 hours format w.r.to the country time.</li></ul>
-        
-              <div class="center2"><img src="./assets/images-en/generic.png" alt=""></div>
-              <li><b>Cumulative Report</b></li>
-              <ul>
-                <li>Cumulative report is specifically for the top management professionals, when CxO wants to see the crisp report of all the registered users with their total number of violations and violation duration. </li>
-                <li>Following report shows total number of violations and respective total time for all the 51 registered users.</li>
-                   <div class="center2"><img src="./assets/images-en/cumulative.png" alt=""></div>
-              </ul>
-              <li><b>Social Distancing Violator’sReport based on Username</b></li>
-              <ul><li>This report gives the detailed data for a particular violator and his primary contacts with the contact time as well as total time for each violations the violator has made.</li></ul>
-                  <div class="center2"><img src="./assets/images-en/violators.png" alt=""></div>
-                  <li><b>SummaryReport of an Infected User</b></li>
-                  <ul>
-                    <li>This report shows the summary of primary contacts for the selected infected person and for selected duration. Once admin marks someone as covid-19 infected then this report gives idea that to whom all he met post marking as infected. </li>
-                    <li>With our upcoming feature of isolation and send warning, an automatic warning will be sent via email ‘To’ all the primary contacts keeping admin in the ‘CC’. Moreover, the admin can mark these primary contacts as isolated and accordingly take the precautionary measures.</li>
-                        <div class="center2"><img src="./assets/images-en/summary.png" alt=""></div>
-                  </ul>
-                  </ol>
-         </ul>
-    </div>
-
-    <!-- Report japanese -->
-
-     <div *ngIf="language=='japanese'">
-      <p><b>5. <u>レポート</u></b></p>
-    
-      <ul>
-        <li>[レポート]タブでは、管理者はレポートの表示、およびダウンロードができます。4種類のレポートがあります。</li>
-        <li>管理者は選択ボタンから前週1週間分、または2週間分のレポートを表示、もしくはダウンロードできます。さらに、過去のデータに関しては、日付範囲を選択することにより任意の期間のレポートを表示またはダウンロードすることが可能です。</li>
-            <div class="center"><img src="./assets/images-jp/Report-jp.png" alt=""></div>
-            <ol>
-              <li><b>全体の接触機会レポート</b></li>
-              <ul><li>全体の接触機会レポートは、ベースパーソンとソーシャルディスタンス内に接触した人の名前、接近開始時刻と終了時刻、及びその接触累積時間が表示されます。</li></ul>
-        
-              <div class="center"><img src="./assets/images-jp/generic-jp.PNG" alt=""></div>
-              <li><b>累積された接触機会レポート</b></li>
-              <ul>
-                <li>累積された接触機会レポートは、管理者が指定した期間内でのすべての登録ユーザーに対する接触した合計数と、接触累積トータル時間を確認するためのものです。 </li>
-                <li>次のレポートは、51人の登録ユーザーすべての接触回数と接触累積時間を示しています。</li>
-                   <div class="center"><img src="./assets/images-jp/cumulative-jp.PNG" alt=""></div>
-              </ul>
-              <li><b>特定された人のソーシャルディスタンス内接触者リスト</b></li>
-              <ul><li>このレポートは、特定した人がソーシャルディスタンス内に接触した人の名前と、その接触開始時間、及び接触合計時間を示したものです。</li></ul>
-                  <div class="center"><img src="./assets/images-jp/violators-jp.PNG" alt=""></div>
-                  <li><b>感染者による濃厚接触者リスト</b></li>
-                  <ul>
-                    <li>このレポートは、イベントが行われた後、COVID-19感染が判明した人から感染の連絡を受け、対象感染者がイベント期間中にソーシャルディスタンス内に近づいたすべての接触候補者をリスト化したものです</li>
-                    <li>管理者は、感染者と十分な接触があった候補者に対して、「イベント期間中に感染者と濃厚接触があった可能性がある」旨の警告メールを接触候補者に送信することにより、感染有・無の早期検査の実施、及び感染拡大を防ぐ対処方法が可能となります。</li>
-                        <div class="center"><img src="./assets/images-jp/summary-jp.PNG" alt=""></div>
-                  </ul>
-                  </ol>
-         </ul>
-    </div>
+   
         <!-- Settings -->
 
          <div *ngIf="language=='english'">
@@ -406,5 +344,71 @@
           時間枠でカスタマイズ可能です。これにより、タグデバイスのバッテリー寿命が大幅に節約されます。将来的には、一つの会社内で複数のシフトを運営できる監視システムを持てるように、現在改善作業中です。</li>
             <li><b>ロゴのアップロード：</b>このオプションを使用すると、管理者はIndyGoロゴの代わりに自社のロゴをアップロードできます。</li>
        </ul>
+    </div>
+
+
+
+     <div *ngIf="language=='english'">
+      <p><b>6. <u>Report</u></b></p>
+    
+      <ul>
+        <li>Report tab allows admin to view and download reports. There are four different reports available for SDCT option B,</li>
+        <li>Admin can view and download the reports from last week or two weeks just by selecting the radio button. Moreover, if you want to view or download the last month report or for any duration then please do select the date range. </li>
+            <div class="center"><img src="./assets/images-en/Report.png" alt=""></div>
+            <ol>
+              <li><b>Generic Report</b></li>
+              <ul><li>The generic report shows violation details such as base person and contact person name with violation start time and end time with the total time in 12 hours format w.r.to the country time.</li></ul>
+        
+              <div class="center2"><img src="./assets/images-en/generic.png" alt=""></div>
+              <li><b>Cumulative Report</b></li>
+              <ul>
+                <li>Cumulative report is specifically for the top management professionals, when CxO wants to see the crisp report of all the registered users with their total number of violations and violation duration. </li>
+                <li>Following report shows total number of violations and respective total time for all the 51 registered users.</li>
+                   <div class="center2"><img src="./assets/images-en/cumulative.png" alt=""></div>
+              </ul>
+              <li><b>Social Distancing Violator’sReport based on Username</b></li>
+              <ul><li>This report gives the detailed data for a particular violator and his primary contacts with the contact time as well as total time for each violations the violator has made.</li></ul>
+                  <div class="center2"><img src="./assets/images-en/violators.png" alt=""></div>
+                  <li><b>SummaryReport of an Infected User</b></li>
+                  <ul>
+                    <li>This report shows the summary of primary contacts for the selected infected person and for selected duration. Once admin marks someone as covid-19 infected then this report gives idea that to whom all he met post marking as infected. </li>
+                    <li>With our upcoming feature of isolation and send warning, an automatic warning will be sent via email ‘To’ all the primary contacts keeping admin in the ‘CC’. Moreover, the admin can mark these primary contacts as isolated and accordingly take the precautionary measures.</li>
+                        <div class="center2"><img src="./assets/images-en/summary.png" alt=""></div>
+                  </ul>
+                  </ol>
+         </ul>
+    </div>
+
+    <!-- Report japanese -->
+
+     <div *ngIf="language=='japanese'">
+      <p><b>6. <u>レポート</u></b></p>
+    
+      <ul>
+        <li>[レポート]タブでは、管理者はレポートの表示、およびダウンロードができます。4種類のレポートがあります。</li>
+        <li>管理者は選択ボタンから前週1週間分、または2週間分のレポートを表示、もしくはダウンロードできます。さらに、過去のデータに関しては、日付範囲を選択することにより任意の期間のレポートを表示またはダウンロードすることが可能です。</li>
+            <div class="center"><img src="./assets/images-jp/Report-jp.png" alt=""></div>
+            <ol>
+              <li><b>全体の接触機会レポート</b></li>
+              <ul><li>全体の接触機会レポートは、ベースパーソンとソーシャルディスタンス内に接触した人の名前、接近開始時刻と終了時刻、及びその接触累積時間が表示されます。</li></ul>
+        
+              <div class="center"><img src="./assets/images-jp/generic-jp.PNG" alt=""></div>
+              <li><b>累積された接触機会レポート</b></li>
+              <ul>
+                <li>累積された接触機会レポートは、管理者が指定した期間内でのすべての登録ユーザーに対する接触した合計数と、接触累積トータル時間を確認するためのものです。 </li>
+                <li>次のレポートは、51人の登録ユーザーすべての接触回数と接触累積時間を示しています。</li>
+                   <div class="center"><img src="./assets/images-jp/cumulative-jp.PNG" alt=""></div>
+              </ul>
+              <li><b>特定された人のソーシャルディスタンス内接触者リスト</b></li>
+              <ul><li>このレポートは、特定した人がソーシャルディスタンス内に接触した人の名前と、その接触開始時間、及び接触合計時間を示したものです。</li></ul>
+                  <div class="center"><img src="./assets/images-jp/violators-jp.PNG" alt=""></div>
+                  <li><b>感染者による濃厚接触者リスト</b></li>
+                  <ul>
+                    <li>このレポートは、イベントが行われた後、COVID-19感染が判明した人から感染の連絡を受け、対象感染者がイベント期間中にソーシャルディスタンス内に近づいたすべての接触候補者をリスト化したものです</li>
+                    <li>管理者は、感染者と十分な接触があった候補者に対して、「イベント期間中に感染者と濃厚接触があった可能性がある」旨の警告メールを接触候補者に送信することにより、感染有・無の早期検査の実施、及び感染拡大を防ぐ対処方法が可能となります。</li>
+                        <div class="center"><img src="./assets/images-jp/summary-jp.PNG" alt=""></div>
+                  </ul>
+                  </ol>
+         </ul>
     </div>
   </div>

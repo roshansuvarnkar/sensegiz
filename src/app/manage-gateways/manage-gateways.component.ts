@@ -23,7 +23,7 @@ export class ManageGatewaysComponent implements OnInit {
   gatewayData:any=[]
   elementsTemp:any=[]
   dataSource: any = [];
-  displayedColumns = ['i','gatewayId','gatewayName','currentVersion','edit',	'delete'];
+  displayedColumns = ['i','gatewayId','gatewayName','currentVersion','bleVersion','edit',	'delete'];
   // ,'currentVersion'
   constructor(private dialog:MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
 
@@ -70,11 +70,13 @@ refreshGateway(){
 
       for (let i = 0; i <res.success.length; i++) {
         this.gatewayData.push(
-          {   i:i+1,
+          { 
+              i:i+1,
               id: res.success[i].id,
               gatewayId: res.success[i].gatewayId,
               gatewayName: res.success[i].gatewayName,
               currentVersion:res.success[i].currentVersion,
+              bleVersion:res.success[i].bleVersion,
               edit:'edit',
               delete:'delete'
           });

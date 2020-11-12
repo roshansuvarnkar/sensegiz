@@ -56,7 +56,6 @@ dataPoints:any=[]
     this.refreshCount()
     this.refreshSetting()
     this.maximumContactTime()
-    this.refreshOnlineDevice()
     this.repeatedContacts()
     this.numOfcontactPerDay()
 
@@ -248,7 +247,6 @@ refresh(){
   this.refreshSetting()
   this.maximumContactTime()
   this.repeatedContacts()
-  this.refreshOnlineDevice()
   this.numOfcontactPerDay()
   this.refreshFinds()
 
@@ -266,7 +264,7 @@ refreshCount(){
       this.infectedEmp = res.success[1].inectedEmp
       this.normalEmp = res.success[2].normalEmp
       this.activeEmp = res.success[3].activeEmp
-     
+      this.refreshOnlineDevice()
     }
   })
  
@@ -344,7 +342,7 @@ numOfcontactPerDay(){
     userId:this.loginData.userId,
   }
   this.api.getPerDayCount(data).then((res:any)=>{
-    // console.log("repeated contacts data ======",res);
+    console.log("repeated contacts data ======",res);
     if(res.status){
       this.dataPoints=[]
       this.countPerday = res.success.reverse()

@@ -1,7 +1,6 @@
 <div class="head" *ngIf="type=='shifts'">
 	<div class="content">
-    	<p class="center" *ngIf="language=='english'">Shifts</p>
-    		<p class="center" *ngIf="language=='japanese'">追跡対象となる時間帯</p>
+    	<p class="center" >Shifts</p>
 		<span>
 			<button mat-button mat-dialog-close><mat-icon >clear</mat-icon></button>
 		</span>
@@ -40,7 +39,7 @@
 
 					<button type="button" mat-raised-button color="primary" (click)="submit(item.value)">Submit</button>
 
-					<td><mat-icon matListIcon (click)="delete(item.value)">delete</mat-icon></td>
+					<td ><mat-icon matListIcon (click)="delete(item.value)" class="cursor">delete</mat-icon></td>
 
 		          </ng-container>
 		        </div>

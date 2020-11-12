@@ -53,7 +53,9 @@ export class EditDeviceComponent implements OnInit {
 
     this.gatewayform = this.fb.group({
       deviceName: ['', Validators.required],
-      deviceId: [{value: '', disabled: true}, Validators.required]
+      deviceId: [{value: '', disabled: true}, Validators.required],
+      type:[{value: '', disabled: true}, Validators.required],
+
     });
 
 
@@ -77,7 +79,9 @@ export class EditDeviceComponent implements OnInit {
     else if(this.type=='gateways'){
       this.gatewayform.patchValue({
         deviceName: this.deviceData.gatewayName,
-        deviceId: this.deviceData.gatewayId
+        deviceId: this.deviceData.gatewayId,
+        // type:this.deviceData.type
+
       });
     }
 
@@ -94,22 +98,24 @@ export class EditDeviceComponent implements OnInit {
   Findsubmit(data){
     if (this.Findform.valid) {
       try {
-         console.log("find edit===",data)
         //  var mobNum=data.mobileNum.replace(/\s/g,'')
           // console.log("mon num==",mobNum)
-        data.tblName='deviceRegistration'
-        data.id=this.deviceData.id
-        data.userId=this.deviceData.userId
-        data.mobileNum=data.mobileNum!=null ||data.mobileNum!=undefined  ?data.mobileNum.e164Number:''
+          data.tblName='deviceRegistration'
+          data.id=this.deviceData.id
+          data.userId=this.loginData.userId
+          data.deviceId=this.deviceData.deviceId
+          data.mobileNum=data.mobileNum!=null ||data.mobileNum!=undefined  ?data.mobileNum.e164Number:''
+        console.log("find edit===",data)
+
         this.api.editDeviceRegister(data).then((res:any)=>{
-          // console.log("find submit====",res);
+          console.log("find submit====",res);
           if(res.status){
             if(this.language=='english'){ var msg = 'Device Updated Successfully'}
             else if(this.language=='japanese'){ var msg = 'デバイスが正常に更新されました'}
             this.general.openSnackBar(msg,'')
           }
           else if(!res.status && res.alreadyExisted){
-            if(this.language=='english'){ var msg = 'Device Name Already exists, try different Name'}
+            if(this.language=='english'){ var msg = 'Device Name or EmployeeId Already exists, try different Name'}
              else if(this.language=='japanese'){ var msg = 'デバイス名はすでに存在します。別の名前を試してください'}
             this.general.openSnackBar(msg,'')
           }
@@ -121,23 +127,30 @@ export class EditDeviceComponent implements OnInit {
   }
 
 
-
   Gatewaysubmit(data){
     if (this.gatewayform.valid) {
       try {
         data.tblName='gatewayRegistration'
         data.id=this.deviceData.id
-        data.userId=this.deviceData.userId
+        data.userId=this.loginData.userId
+        data.deviceId= this.deviceData.gatewayId
+        console.log("gateway data==",data)
+
         this.api.editDeviceRegister(data).then((res:any)=>{
-          // console.log("gateway submit==",res)
+          console.log("gateway submit==",res)
           if(res.status){
-            if(this.language=='english'){var msg = 'Gateway Updated Successfully'}
-            else if(this.language=='japanese'){ var msg = 'ゲートウェイが正常に更新されました'}
+            if(this.language=='english'){
+              var msg = 'Gateway Updated Successfully'
+            }
+            else if(this.language=='japanese'){ 
+              var msg = 'ゲートウェイが正常に更新されました'
             this.general.openSnackBar(msg,'')
+            }
           }
           else if(!res.status && res.alreadyExisted){
-           if(this.language=='english'){ var msg = 'Gateway Name  Already exists, try different gateway'}
-           else if(this.language=='japanese'){ var msg = 'ゲートウェイ名またはゲートウェイIDはすでに存在します。別のゲートウェイを試してください'}
+            if(this.language=='english'){ var msg = 'Gateway Name Already exists, try different gateway'}
+
+            else if(this.language=='japanese'){ var msg = 'ゲートウェイ名またはゲートウェイIDはすでに存在します。別のゲートウェイを試してください'}
             this.general.openSnackBar(msg,'')
           }
         })
@@ -146,13 +159,14 @@ export class EditDeviceComponent implements OnInit {
     }
   }
 
-
   Usersubmit(data){
 
     if (this.userform.valid) {
       try {
         data.id=this.deviceData.id
         data.mobileNum=data.mobileNum.e164Number
+        data.userId=this.loginData.userId
+
         this.api.EditUserRegister(data).then((res:any)=>{
           // console.log("user submit==",res)
           if(res.status){

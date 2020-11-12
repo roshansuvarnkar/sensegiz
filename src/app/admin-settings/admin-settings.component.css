@@ -20,6 +20,11 @@ mat-card {
     border: 1px solid red;
     color: red;
   }
+  .wearable {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: -1rem;
+  }
   button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary {
     position: absolute;
     bottom: 1rem;

@@ -47,7 +47,7 @@ export class AddFindComponent implements OnInit {
     this.Findform = this.fb.group({
       deviceName: ['', Validators.required],
       deviceId: ['', [Validators.required,Validators.min(1)]],
-      employeeId: [''],
+      empId: [''],
       mobileNum: [''],
       emailId: ['',[Validators.email]]
     });
@@ -56,7 +56,8 @@ export class AddFindComponent implements OnInit {
 
     this.gatewayform = this.fb.group({
       deviceName: ['', Validators.required],
-      deviceId: ['', [Validators.required,Validators.minLength(12), Validators.maxLength(12)]]
+      deviceId: ['', [Validators.required,Validators.minLength(12), Validators.maxLength(12)]],
+      type:['',Validators.required]
     });
 
 
@@ -111,6 +112,10 @@ Gatewaysubmit(data){
     try {
       data.tblName='gatewayRegistration'
       data.userId=this.loginData.userId
+      data.gatewayType=data.type == '0'?'ethernet':'wifi'
+
+      console.log("gateway submit==",data)
+
       this.api.deviceRegister(data).then((res:any)=>{
         // console.log("gateway submit==",res)
         if(res.status){

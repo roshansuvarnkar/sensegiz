@@ -55,6 +55,7 @@ export class HistoryReportComponent implements OnInit {
   filterValue:any
   limit:any
   offset:any
+  deviceIdData:any
 
     constructor(
       public dialog: MatDialog,
@@ -171,7 +172,7 @@ basedOnDate(limit,offset){
 
       console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
    
-      if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
+      // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
         for(var i=0;i<res.success.length;i++){
 
@@ -194,18 +195,18 @@ basedOnDate(limit,offset){
         // this.paginator.length = this.currentPageLength
       })
     
-      }
-      else{
-        this.totTime=res.success
-        console.log("this.tottttttt===",this.totTime)
+      // }
+      // else{
+      //   this.totTime=res.success
+      //   console.log("this.tottttttt===",this.totTime)
 
-        if(this.selectMin.get('minute').value!=''){
-          console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+      //   if(this.selectMin.get('minute').value!=''){
+      //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
           
-          this.filterTotTime(this.selectMin.get('minute').value)
+      //     this.filterTotTime(this.selectMin.get('minute').value)
       
-        }
-      }
+      //   }
+      // }
     }
 
   })
@@ -232,25 +233,25 @@ basedOnFindName(limit,offset){
       
         this.totTime=res.success
    
-      if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
+      // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         this.liveData=res.success
       this.dataSource = new MatTableDataSource(this.liveData);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
         // this.paginator.length = this.currentPageLength
       })
-      }
-      else{
-        this.totTime=res.success
-        console.log("this.tottttttt===",this.totTime)
+      // }
+      // else{
+      //   this.totTime=res.success
+      //   console.log("this.tottttttt===",this.totTime)
 
-        if(this.selectMin.get('minute').value!=''){
-          console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+      //   if(this.selectMin.get('minute').value!=''){
+      //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
           
-          this.filterTotTime(this.selectMin.get('minute').value)
+      //     this.filterTotTime(this.selectMin.get('minute').value)
       
-        }
-      }
+      //   }
+      // }
     }
   })
 
@@ -321,10 +322,12 @@ summaryReport(){
     console.log("summary report======",res);
 
     this.liveData=[]
+    this.deviceIdData=[]
     if(res.status){
 
       var groupUser = this.dataDateReduce(res.success)
-      // console.log("groupDate===",groupUser)
+      this.deviceIdData=this.deviceId(res.success)
+
       this.liveData = Object.keys(groupUser).map((data)=>{
 
         return {
@@ -352,15 +355,15 @@ summaryReport(){
 
 dataDateReduce(data){
   return data.reduce((group,obj)=>{
-  const name = obj.contactDeviceName
-  console.log("name---",name,"this.deviceName====",this.deviceName)
+    const name = obj.contactDeviceName == this.deviceName?obj.baseDeviceName: obj.contactDeviceName
+    // console.log("name---",name,"this.deviceName====",this.deviceName)
   if(name!=this.deviceName){
       if(!group[name]){
         group[name]=[]
       }
       group[name].push(obj)
     }
-    console.log("group==",group)
+    // console.log("group==",group)
     return group
  
   },{})
@@ -368,13 +371,13 @@ dataDateReduce(data){
 callUpdatedon(date){
   var a=[]
   var data=date.filter((obj,index)=>{
-     console.log(a.includes(obj.updatedOn))
-    if(!a.includes(obj.updatedOn)){
-        a.push(obj.updatedOn)
-    }
+    //  console.log(obj.updatedOn)
+     if(!a.includes(obj.updatedOn)){
+       a.push(obj.updatedOn)
+     }
+      
   })
-  console.log("aaa==",a)
-  a[a.length-1]= a[a.length-1]+'.'
+  // console.log("aaa==",a)
   return a
 }
 cummulativeReport(){
@@ -394,7 +397,7 @@ cummulativeReport(){
     console.log("cummulative report==",res)
     if(res.status){
       this.totTime=res.data
-      if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
+      // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
         for(let i=0;i<res.data.length;i++){
           this.liveData.push({
@@ -411,18 +414,18 @@ cummulativeReport(){
           this.dataSource.paginator = this.paginator
            })
     
-      }
-      else{
-        this.totTime=res.success
-        console.log("this.tottttttt===",this.totTime)
+      // }
+      // else{
+      //   this.totTime=res.success
+      //   console.log("this.tottttttt===",this.totTime)
 
-        if(this.selectMin.get('minute').value!=''){
-          console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+      //   if(this.selectMin.get('minute').value!=''){
+      //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
           
-          this.filterTotTime(this.selectMin.get('minute').value)
+      //     this.filterTotTime(this.selectMin.get('minute').value)
       
-        }
-      }
+      //   }
+      // }
 
     }
   })
@@ -438,8 +441,6 @@ getUpdate(event) {
   this.offset = event.pageIndex*event.pageSize
   // console.log("limit==",limit,"offset==",offset)
   this.loadData(this.limit,this.offset)
-
-
 
 }
 
@@ -697,7 +698,30 @@ if(this.type=='summaryReport'){
   }
 
 
-
+  deviceId(data){
+    var a=[]
+    data.filter((obj)=>{
+      obj.contactDevice=obj.contactDeviceName== this.deviceName?obj.baseDevice: obj.contactDevice
+        if(!a.includes(obj.contactDevice)){
+          a.push(obj.contactDevice)
+        }
+    
+        
+    })
+    return a
+  }
+  sendWarning(){
+    var data={
+      userId:this.loginData.userId,
+      deviceId:this.deviceIdData,
+      infectedPersonName:this.deviceName,
+      adminEmailId:this.loginData.userName
+    }
+    console.log("sendwarning data=====",data)
+    this.api.infectedContactalert(data).then((res:any)=>{
+      console.log("infectedContactalert res===",res)
+    })
+  }
 
 
 

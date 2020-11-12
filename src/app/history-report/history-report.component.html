@@ -51,7 +51,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Base Person </th>
               <td mat-cell *matCellDef="let live"> {{live.baseName}} </td>
             </ng-container>
-            
+
             <ng-container matColumnDef="empId">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Id </th>
               <td mat-cell *matCellDef="let live "> {{live.empId}} </td>
@@ -71,7 +71,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Time </th>
               <td mat-cell *matCellDef="let live"> {{live.startTime | date : 'medium' }} </td>
             </ng-container>
-    
+
             <ng-container matColumnDef="updatedOn">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> End Time </th>
               <td mat-cell *matCellDef="let live"> {{live.updatedOn | date : 'medium' }} </td>
@@ -94,13 +94,23 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header>追跡対象者名</th>
               <td mat-cell *matCellDef="let live"> {{live.baseName}} </td>
             </ng-container>
+<<<<<<< HEAD
 
-           
+
+=======
+
+            <ng-container matColumnDef="empId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> 従業員ID</th>
+              <td mat-cell *matCellDef="let live "> {{live.empId}} </td>
+            </ng-container>
+>>>>>>> c8a19bc21c0b87455070c17d0071954e32874d73
 
             <ng-container matColumnDef="contactName">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> 接触した相手名 </th>
               <td mat-cell *matCellDef="let live " (click)="orderContactOpen(live)"> {{live.contactName}} </td>
             </ng-container>
+
+
 
             <ng-container matColumnDef="location">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> ロケーション </th>
@@ -111,7 +121,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> 接触開始時間 </th>
               <td mat-cell *matCellDef="let live"> {{live.startTime | date : 'medium' }} </td>
             </ng-container>
-    
+
             <ng-container matColumnDef="updatedOn">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> 接触終了時間 </th>
               <td mat-cell *matCellDef="let live"> {{live.updatedOn | date : 'medium' }} </td>
@@ -132,7 +142,7 @@
   </div>
     <mat-paginator
     (page)="getUpdate($event)"
-  
+
     [length] = "currentPageLength"
     [pageSize]="currentPageSize"
     [pageSizeOptions] = "[5, 10, 25, 100]"
@@ -231,7 +241,7 @@
     </mat-form-field>
 
 
-    </form>
+    </form> -->
     <div class="mat-elevation-z8">
 
 
@@ -310,7 +320,7 @@
   </div> <br>
       <p class="center-head" mat-dialog-title *ngIf="language=='english'">Social Distancing Violator's Name - {{deviceName | titlecase}}</p>
       <p class="center-head" mat-dialog-title *ngIf="language=='japanese'">ソーシャル・ディスタンシング違反者の名前 - {{deviceName | titlecase}}</p>
-        <form [formGroup]="selectMin">
+        <!-- <form [formGroup]="selectMin">
           <mat-form-field >
             <mat-select (selectionChange)="filterTotTime($event)" formControlName="minute" matNativeControl placeholder="Select total time">
               <mat-option [value]="0">none</mat-option>
@@ -320,7 +330,7 @@
               <mat-option [value]="20">20 min </mat-option>
             </mat-select>
           </mat-form-field>
-        </form>
+        </form> -->
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort >
 
@@ -422,6 +432,11 @@
     </div> <br>
     <p class="center-head" mat-dialog-title *ngIf="language=='english'">Infected User - {{deviceName | titlecase}}</p>
     <p class="center-head" mat-dialog-title *ngIf="language=='japanese'">感染したユーザー数 - {{deviceName | titlecase}}</p>
+    <div class="btn">
+      <button mat-raised-button  class="btn-color" (click)="sendWarning()" *ngIf="language=='english'">Send warning</button>
+    <button mat-raised-button  class="btn-color"  (click)="sendWarning()" *ngIf="language=='japanese'">警告を送信する</button>
+    </div>  <br>
+
     <div class="tab-align">
       <table class="table table-borderless">
         <thead>
@@ -443,11 +458,12 @@
           <!-- <span *ngFor = 'let b of a.date;let j=index'>
             {{b.updatedOn}}
           </span> -->
-          <span>
-              {{callUpdatedon(a.date)}}
+          <span *ngFor = 'let b of callUpdatedon(a.date)'>
+
+            {{b| date: "dd-MM-y"}},
           </span>
         </td>
-      </tr> 
+      </tr>
 
         <!-- <tr *ngFor = "let a of liveData;let i=index">
           <td>{{i+1}} </td>

@@ -11,6 +11,19 @@
   <mat-horizontal-stepper  *ngIf="language=='english'"  #stepper >
     <form [formGroup]="Findform" >
       <mat-step >
+        <ng-template matStepLabel class="stepper">Gateway Type</ng-template>
+        <mat-form-field>
+          <mat-label>Select Gateway Type</mat-label>
+          <mat-select>
+            <mat-option [value]="0">Ethernet Gateway</mat-option>
+            <mat-option [value]="1">Wifi Gateway</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+      <mat-step >
           <ng-template matStepLabel>Fill out your name</ng-template>
           <mat-form-field>
             <mat-label>Name</mat-label>
@@ -74,8 +87,8 @@
           <hr class="mob">
           <mat-error *ngIf="Findform.get('mobileNum').status=='INVALID'  && Findform.get('mobileNum').touched==true" class="error" >
             Please provide valid mobile number
-           </mat-error> 
-        </div> <br> <br>  
+           </mat-error>
+        </div> <br> <br>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
@@ -177,7 +190,7 @@
           <hr class="mob">
           <mat-error *ngIf="Findform.get('mobileNum').status=='INVALID'" class="error" >
            有効な携帯電話番号を入力してください
-           </mat-error> 
+           </mat-error>
         </div>
         <div>
           <button mat-button matStepperPrevious>戻る</button>
@@ -225,6 +238,19 @@
 
   <mat-horizontal-stepper *ngIf="language=='english'" #stepper >
     <form [formGroup]="gatewayform" >
+      <mat-step >
+        <ng-template matStepLabel class="stepper">Gateway Type</ng-template>
+        <mat-form-field disabled>
+          <mat-label>Select Gateway Type</mat-label>
+          <mat-select>
+            <mat-option [value]="0">Ethernet Gateway</mat-option>
+            <mat-option [value]="1">Wifi Gateway</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
       <mat-step >
           <ng-template matStepLabel>Fill out your gateway nick name</ng-template>
           <mat-form-field>
@@ -342,7 +368,7 @@
             <hr class="mob">
             <mat-error *ngIf="userform.get('mobileNum').status=='INVALID' && userform.get('mobileNum').touched==true" class="error" >
               Please provide valid mobile number
-             </mat-error> 
+             </mat-error>
 					</div> <br>
           <div>
             <button mat-button matStepperNext>Next</button>
@@ -404,7 +430,7 @@
             <hr class="mob">
             <mat-error *ngIf="userform.get('mobileNum').status=='INVALID'" class="error" >
               有効な携帯電話番号を入力してください
-             </mat-error> 
+             </mat-error>
           </div>
           <div>
             <button mat-button matStepperNext>次</button>
