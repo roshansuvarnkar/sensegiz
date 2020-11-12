@@ -2,6 +2,18 @@
     text-align: center;
     margin: 2rem 0 2rem 0;
 }
+.center1 {
+    text-align: center;
+    margin: 2rem 0 2rem 10rem;
+    width: 50%;
+
+}
+.center2 {
+  text-align: center;
+    margin: 2rem 0 2rem 5rem;
+    width: 75%;
+
+}
 p {
     font-size:x-large;
     color: #ef6c00;
@@ -21,6 +33,17 @@ li {
 }
 img {
     width: 80%;
+    border: 1px solid #ccc;
+}
+h3{
+       display: block;
+  font-size: 1.17em;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+    font-family: sans-serif;
 }
 @media only screen and (max-width: 768px){
     p {
@@ -43,4 +66,9 @@ img {
     img {
         width: 100%;
     }
+    .center1 {
+    text-align: center;
+    margin: 2rem 0 2rem 8rem;
+}
+
 }

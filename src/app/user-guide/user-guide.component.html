@@ -1,62 +1,111 @@
 <div class="container-fluid  guide">
-    <div>
-      <p class="heading">Social Distancing User Manual</p> <hr>
+    <div *ngIf="language=='english'">
+      <p class="heading" >Social Distancing User manual</p> <hr>
     </div>
-    <div>
+    <div *ngIf="language=='japanese'">
+      <p class="heading" >ソーシャル・ディスタンシング ユーザーガイド</p> <hr>
+    </div>
+    <div *ngIf="language=='english'">
       <p>1. <u><b><span>LOGIN PAGE</span></b></u></p>
-      <div class="center"> <img src="./assets/image/loginpage.PNG" alt=""></div>
+      <div class="center"> <img src="./assets/images-en/login.PNG" alt="" ></div>
       <ul>
         <li>Open a browser and search for <a  routerLink="/login" target="_blank">https://sdctb.sensegiz.com/login</a>. The user will be directed to the
           login page where the user has to enter the credentials provided to them. </li>
       </ul>
 
     </div>
-
-    <div>
+    <!--Japanese -->  
+      <div *ngIf="language=='japanese'">
+      <p>1. <u><b><span>ログインページ</span></b></u></p>
+      <div class="center"> <img src="./assets/images-jp/login.PNG" alt=""></div>
+        <ul>
+        <li>ブラウザを開き、<a  routerLink="/login" target="_blank">https://sdctb.sensegiz.com/login</a>を検索します。ユーザーはログインページに移動し、ID及びパスワードを入力する必要があります。</li>
+        </ul>
+      </div>
+      <!-- end of login  -->
+        <!-- Home Page-->
+    <div *ngIf="language=='english'">
       <p><span><b>2. <u>HOME PAGE</u></b></span></p>
-      <div class="center"><img src="./assets/image/homepage.PNG" alt=""></div>
+       <ul> <li>Once the user has logged in the landing page which appears is the home page. The homepage displays an overall statistical data of all registered users. 
+            </li>
+            <ol>
+              <li> Registered users list – left pane</li>
+              <li> There are 4 donuts shows number of Active, Registered, Offline and Infected Users.
+              </li>
+              <li> Trend of ‘number of contacts made over last 10 days’</li>
+              <li>  Proximity and violation alert settings</li>
+              <li> Frequent violators of the day</li>
+              <li>Cumulative time</li>
+            </ol>
+         </ul>
+          
+      <div class="center"><img src="./assets/images-en/Homepage.png" alt="">
+      <img src="./assets/images-en/homepage1.png" alt=""></div>
       <ul>
-        <li><span>The homepage displays an overall statistical data of all registered users and among
-          them how many are active currently and how many have been marked as infected. </span>  </li>
-
-        <li><span>On clicking <b>Active users</b>, the admin can get the list of currently registered users and
-          the admin can click on <b>Infected Users </b> to get a list of all the users who have been
-          marked infected. </span></li>
-
-        <li> <span>In <b>Registered users</b>, the admin can get a report of any particular user by selecting the
-          name of the user that is available in the registered users list. </span></li>
-        <li><span>Color coding for Registered users section is
+        <li>Registered users show the total number of registered users on the portal. Active users show number of devices which are sending data from last 24 hours. Offline users are the users which are registered but not active since last 24hours. Infected users are the users among registered users who have marked as infected.</li>
+        <li>In registered user left pane, the admin gets the report of any particular user by selecting the name of the user that is available in the list.</li>
+        <li>Color coding in the registered users’ left pane is as follows
           <ol>
-            <li><span>Green: The last sync is less than a day.</span></li>
-            <li><span>Yellow: The last sync is within 1-2 days.</span></li>
-            <li><span>Orange or Red: The last sync is more than 2 days.</span></li>
+            <li><span style="color: green">Green</span>: The last sync is less than aday.</li>
+            <li><span style="color: yellow">Yellow</span>:Thelast sync is within 1-2 days.</li>
+            <li><span style="color: orange">Orange</span> or<span style="color: red">Red</span>:The last sync is more than 2 days</li>
           </ol>
-        </span>
-      </li>
-        <li> <span>The User can also view the present configurations set for <b>Minimum Social Distance</b>
-          and <b>Automatic alert</b> that the admin has set to receive as soon as a user violates social
-          distancing more than the set amount of times.</span></li>
-        <li><span>The <b>Frequent violators</b> section displays the user with the maximum number of
-          interactions they had with other users on that particular day. If a user crosses the
-          maximum limit set in the <b>Automatic alert</b>, the admin will get an immediate alert.
-          Additionally, a provision has been given to the admin to send a warning to the
-          individual user if they click on the send warning button.
-          </span> </li>
-        <li> <span>The <b>Number of contacts</b> Graph will display the day-wise graphical data which
-          represents the total number of social distancing violations that happened for the past
-          10 days. The admin can also take a print out of the report or can save it as a JPEG or
-          PNG. </span></li>
-          <li><span>The users who violate Social Distancing for a maximum duration with other users
-            even after getting an alert are displayed under <b>Maximum contact time</b>. </span></li>
+        </li>
+        <li>The admin can also see the <b>proximity</b> selected by for them. The admin can also see the <b>violation alert</b> i.e. the selected threshold allowed for the maximum violation per person per day.</li>
+        <li>The <b>Frequent violators</b> section displays the user with the maximum number of interactions they had with other users on that particular day.If a user crosses the maximum limit set in the <b>Automatic alert</b>,the admin will get an immediatealert. Additionally, a provision has been given to the admin to send a warning to the individual user if they click on the sendwarning button.
+        </li>
+        <li>The <b>Number of contacts</b> Graph will display the day-wise graphical data which represents the total number of social distancing violations that happened for the past 10 days. The admin can also take a print out of the report or can save it as a JPEG orPNG.</li>
+          <li>The users who violate Social Distancing for a maximum duration with other users even after getting an alert are displayed under <b>Maximum contact time</b>.</li>
+
+      </ul>
+     
+    </div>
+
+    <!-- japanese Home page  -->
+    <div *ngIf="language=='japanese'">
+      <p><span><b>2. <u>ホームページ</u></b></span></p>
+      
+      <ul> <li>ユーザーがログインするとホームページに移動します。ホームページには、登録されているすべてのユーザーの全体的な統計データが表示されます。 
+            </li>
+            <ol>
+              <li>登録ユーザーリスト–左サイド</li>
+              <li> 4つの円グラフがあり、アクティブ、登録済み、オフライン、および感染したユーザー数を示しています。
+              </li>
+              <li> 「過去10日間の接触機会の回数」</li>
+              <li>接触距離（ソーシャルディスタンス）および接近警告の設定</li>
+              <li>その日に頻繁に接触を繰り返した人のリスト</li>
+              <li>各ユーザーの接触累積時間</li>
+            </ol>
+         </ul>
+          
+      <div class="center"><img src="./assets/images-jp/Homepage-jp.png" alt=""></div>
+      <ul>
+        <li>登録ユーザーとはポータルに登録されているユーザー総数です。アクティブユーザーとは過去24時間内にデータを送信しているデバイス数です。オフラインユーザーとは登録されているが過去24時間以上アクティブではないユーザー数です。感染ユーザーとはイベント後登録ユーザーの中でコロナ感染が判明されたユーザーです。</li>
+        <li>管理者は左サイドにある登録ユーザーリストから個人ユーザーの名前を選択することにより、特定個人ユーザーのレポートを取得できます。</li>
+        <li>左サイドにある登録者リストの色分けは次のとおりです。
+          <ol>
+            <li><span style="color: green">緑</span>: 最新のアップデートされたデータが1日未満の方です。</li>
+            <li><span style="color: yellow">黄色</span>：最新のアップデートされたデータが1〜2日以内の方です。</li>
+            <li><span style="color: orange">オレンジま</span>たは<span style="color: red">赤</span>：最新のアップデートされたデータが2日以上の方です。</li>
+          </ol>
+        </li>
+        <li>管理者は選択した許容接触距離（ソーシャルディスタンス制限）のしきい値情報を確認できます。また、管理者は違反アラート、すなわち、各ユーザーの一日当たりの最大接触回数のしきい値も確認することができます。</li>
+        <li>「頻繁な違反者」の欄には、指定された日の各個人の接触回数が多い人がリストされます。設定された最大接触回数制限値を超えると、E-mailにて管理者にアラートが送信されます。さらに、管理者は[警告送信]ボタンをクリックすることにより、頻繁に接触するユーザーに対し接触回数が多いことをしらせる警告を発報することが出来ます。
+        </li>
+        <li>「接触した回数」のグラフには、過去10日間に発生した一日当たりの接触合計回数をデイリーごとに表示しています。管理者は、レポートを印刷したり、JPEGまたはPNGとして保存したりすることもできます。</li>
+          <li>アラートを受け取った後でも、他のユーザーとの最大期間で社会距離拡大に違反したユーザーは、各ユーザーの接触累積時間で表示されます。</li>
+
       </ul>
 
     </div>
-
-    <div>
+    <!-- end of home page -->
+    <!-- Manage People-en -->
+    <div *ngIf="language=='english'">
       <p><span><b>3. <u>MANAGE PEOPLE</u></b></span> </p>
-      <div class="center"><img src="./assets/image/mangefinds.PNG" alt=""></div>
+      <div class="center"><img src="./assets/images-en/Managepeople.png" alt=""></div>
       <div>
-        <ol>● In Manage people tab there are three sections
+
+        <ol> <h3> In Manage people tab there are three sections</h3>
           <li><b>Manage Finds</b>
             <ul>
               <li><span>
@@ -65,30 +114,23 @@
 
               </li>
               <li>
-                <span>Most importantly, the admin will be able to mark a user as infected if he/she is
+                <span>Most importantly, the admin will be able to <b>mark a user as infected</b> if he/she is
                   found to be infected after a few days.</span>
 
               </li>
-              <li><span>The admin can also reuse the same <b>FIND</b> for a different person by selecting the
-                edit option and <b>update</b> the details of the user. </span></li>
-                <li><span>The admin can update the shift details of a particular user by selecting the <b>Shift</b>
-                  dropdown box.</span>
-                  <div class="center"><img src="./assets/image/shifts.PNG" alt=""></div>
-
-                </li>
-               <li><span>Using the <b>Add FINDs</b> option, the admin will be able to add a new <b>FIND</b> to the
-                existing system and assign it to a user. </span></li>
-                <li><span>The admin can use the search option to view, edit or delete any particular user. </span></li>
-                <li><span>The admin can also view the FIND battery status of each user. </span></li>
-                <li><span>Color coding for battery status is
+              <li>The admin can also <b>reuse/reassign</b> the same FIND for a different person by selecting the edit option and update the details of the user. Admin can reassign the devices one at a time.</li>
+              <li>The admin can update <b>the shift details of</b> a particular user by selecting the <b>‘shift dropdown’</b> box.</li>
+              <li>The admin can edit the existing information associated with the FIND like device ID, device name, employee ID, Shift, email ID and mobile number.</li>
+                <li>Using the <b>Add FINDs</b> option, the admin will be able to add a new <b>FIND</b> to the existing system and assign it to a user.</li>
+                <li>Moreover, to assign FIND tags to multiple people, admin can fill up out standard template format and upload it using <b>‘upload file’</b> option at left top corner.</li>
+                <li>The admin can use the search option to view,edit or delete any particular user.</li>
+                <li>The admin can also view the FIND battery status of each user.Color coding for battery status is
                   <ol>
-                    <li><span>Green: High.</span></li>
-                    <li><span>Yellow: Medium.</span></li>
-                    <li><span>Red: Low.</span></li>
+                    <li><span style="color: green">Green</span>:High</li>
+                    <li><span style="color: yellow">Yellow</span>:Medium</li>
+                    <li> <span style="color: red">Red</span>:Low</li>
                   </ol>
-                </span>
-              </li>
-
+                </li>
              </ul>
           </li>
           <li>
@@ -97,22 +139,88 @@
               <li><span>The admin can view the registered Gateways, edit them and can also add new
                 Gateway using the <b>Add Gateways</b> option.
                 </span></li>
-                <li><span>The <b>search option </b> can be used to find details of any particular Gateway. </span>
+                <li>The admin can see multiple Gateways with their firmware version. Moreover, we are soon going to add the BLE version section for each gateway.
+                 </li>
+                 <li><b>The search option</b> can be used to find details of any particular Gateway.
                  </li>
 
             </ul>
 
           </li>
-          <div class="center"><img src="./assets/image/gateway.PNG" alt=""></div>
+          <div class="center"><img src="./assets/images-en/Manage-gateway.png" alt=""></div>
           <li>
             <b>Manage Users.</b>
             <ul>
-              <li><span>The admin can view or edit the details of the Authorized people who will
-                receive social distancing violators and inactivity alerts</span></li>
-                <li><span>The admin can also add new users to receive the alert using the <b>Add Users</b>
-                  option.  </span>
-                  <div class="center"><img src="./assets/image/users.PNG" alt=""></div>
+              <li>The admin can view or edit the details of the Authorized people who will receive social distancing violators and inactivity alerts.
+              </li>
+              <li> The admin can also add new users to receive the alert using the <b>Add Users</b> option. For example, if the admin does not wish to receive all the email alerts then the person who is added in the manage user tab will receive all the alerts.</li>
+
+
+                  <div class="center"><img src="./assets/images-en/Manage-users.png" alt=""></div>
+               
+            </ul>
+          </li>
+
+
+        </ol>
+      </div>
+    </div>
+    <!-- Japanese Manage people -->
+       <div *ngIf="language=='japanese'">
+      <p><span><b>3. <u>管理画面</u></b></span> </p>
+      <div class="center"><img src="./assets/images-jp/managefinds-jp.png" alt=""></div>
+      <div>
+
+        <ol> <h3>管理画面タブには、3つのセクションがあります。</h3>
+          <li><b>タグデバイス（FINDS）の登録・管理</b>
+            <ul>
+              <li><span>
+              管理者は、登録されているすべてのユーザー情報と、ユーザーに割り当てられているタグデバイス(FIND)IDを確認できます。 </span>
+
+              </li>
+              <li>
+                <span>最も重要なことは、あるユーザーが数日後にウイルス感染していることが判明した場合、管理者はその登録ユーザーリストからCOVID-19感染者として特定マーク出来ることです。</span>
+
+              </li>
+              <li>管理者はタグデバイスのユーザー情報を書き換えることにより、同じタグデバイスでも他のユーザーに再利用することも可能です。</li>
+              <li>管理者は、ユーザーが使用するタグデバイスの時間帯（シフト）をドロップボックスから変更することができます。</li>
+              <li>管理者は、デバイスID、デバイス名、従業員ID、シフト、電子メールアドレス、携帯電話番号などを編集できます。</li>
+                <li>タグデバイスの追加オプションを使うことで、管理者は新しいタグデバイスFINDを既存のシステムに追加することができます。</li>
+                <li>さらに、複数のタグデバイスを登録するためには、管理者は標準テンプレートに登録情報入力し、画面左上の[ファイルのアップロード]オプションをクリックしてアップロードすることできます。</li>
+                <li>管理者は、検索オプションを使用して、特定のユーザーを表示、編集、または削除できます。</li>
+                <li>管理者は、各ユーザーのタグデバイス（FIND）のバッテリー残量を確認することもできます。バッテリー残量の色分けは；
+                  <ol>
+                    <li><span style="color: green">緑</span>:高</li>
+                    <li><span style="color: yellow">.黄色</span>:中</li>
+                    <li> <span style="color: red">赤</span>:低</li>
+                  </ol>
                 </li>
+             </ul>
+          </li>
+          <li>
+            <b>ゲートウエイの登録・管理</b>
+            <ul>
+              <li><span>管理者は、登録済みのゲートウェイを表示、編集したり、[ゲートウェイの追加]オプションを使用して新しいゲートウェイを追加したりできます。
+                </span></li>
+                <li>管理者は、ファームウェアバージョンとともに複数のゲートウェイを表示できます。さらに、ゲートウェイごとにBLEバージョンセクションをまもなく追加する予定です。
+                 </li>
+                 <li>検索オプションを使用して、特定のゲートウェイの詳細を見つけることができます。
+                 </li>
+
+            </ul>
+
+          </li>
+          <div class="center"><img src="./assets/images-jp/Manage-gateway-jp.PNG" alt=""></div>
+          <li>
+            <b>ユーザーの登録・管理</b>
+            <ul>
+              <li>管理者はソーシャルディスタンス内に接近した違反者の詳細情報入手、または編集ができます。
+              </li>
+              <li> 管理者は、[ユーザーの追加]オプションを使用して、アラートを受信する新しいユーザーを追加することもできます。たとえば、管理者がすべての電子メールアラートを受信したくない場合は、[ユーザーの管理]タブに追加された人がすべてのアラートを受信することもできます。</li>
+
+
+                  <div class="center"><img src="./assets/images-jp/Manage-user-jp.PNG" alt=""></div>
+               
             </ul>
           </li>
 
@@ -121,57 +229,182 @@
       </div>
     </div>
 
-    <div>
+    <!-- End of Manage People-jp -->
+
+    <!-- Social Distancing -->
+    <div *ngIf="language=='english'">
     <p><b>4. <u>SOCIAL DISTANCING</u></b></p>
-    <div class="center"><img src="./assets/image/liveData.PNG" alt=""></div>
+    
     <ul>
-      <li><span>The admin can get the details of users who have violated social distancing for that
-        particular day along with the exact time of contact in the <b>Live data</b> tab.</span></li>
-        <li><span>The admin can also view the previous day data by clicking the button at the top left</span></li>
+      <li>In social distancing tab admin can see the live data with the name of base person, contact person, violation start time, violation end time and total time. Violation start time and end time column has DDMMYY HHMMSS format of 12 hours. This time is visible according to the country’s standard time. In India this time is visible in IST.</li>
+      <li>Admin can select how many data should be visible in this display using the pagination option in the dropdown. </li>
+      <div class="center"><img src="./assets/images-en/livedata.png" alt=""></div>
+      <li>In the live data, there will be two different violations if the base person and contact person has interchanged. Whereas, multiple violation with the exact same base person and contact person within the 5mins duration will get merged.</li>
     </ul>
     </div>
-    <div>
-      <p><b>5. <u>HISTORY</u></b></p>
-      <div class="center"><img src="./assets/image/historypage.PNG" alt=""></div>
+    <div *ngIf="language=='japanese'">
+    <p><b>4. <u>ソーシャル・ディスタンシング</u></b></p>
+    
+     <ul>
+      <li>ソーシャルディスタンスタブでは、管理者はベースパーソン、コンタクトパーソン、接触（違反）開始時間、接触（違反）終了時間、接触合計時間のライブデータを見ることが出来ます。違反の開始時刻と終了時刻の表示方法は各国の標準時間に変更可能です。今回は日本標準時間で表示されています。</li>
+      <li>管理者は、ページのドロップダウンを使用して表示されるすべてのデータを見ることが出来ます。 </li>
+      <div class="center"><img src="./assets/images-jp/livedata-jp.png" alt=""></div>
+      <!--<li>In the live data, there will be two different violations if the base person and contact person has interchanged. Whereas, multiple violation with the exact same base person and contact person within the 5mins duration will get merged.</li>-->
+    </ul>
+
+    </div>
+    <!-- End of Sd-jp -->
+    <div *ngIf="language=='english'">
+      <p><b>5. <u>Report</u></b></p>
+    
       <ul>
-        <li><span>The admin can get reports of social distance violations by all the users for a
-          particular day or a week or month or whichever time frame that the admin wants the
-          report using the <b>Report based on Date</b> tab.</span>
-          <div class="center"><img src="./assets/image/history.PNG" alt=""></div></li>
-          <li><span>The admin can also get a report for a selected user between two different dates using
-            the <b>Report based on the User Name</b> tab.</span>
-            <div class="center"><img src="./assets/image/usernameRep.PNG" alt=""></div>
-          </li>
-          <li><span>The admin can get a summary report for selected Infected Users</span>
-            <div class="center"><img src="./assets/image/summary1.PNG" alt=""></div>
-          </li>
-      </ul>
+        <li>Report tab allows admin to view and download reports. There are four different reports available for SDCT option B,</li>
+        <li>Admin can view and download the reports from last week or two weeks just by selecting the radio button. Moreover, if you want to view or download the last month report or for any duration then please do select the date range. </li>
+            <div class="center"><img src="./assets/images-en/Report.png" alt=""></div>
+            <ol>
+              <li><b>Generic Report</b></li>
+              <ul><li>The generic report shows violation details such as base person and contact person name with violation start time and end time with the total time in 12 hours format w.r.to the country time.</li></ul>
+        
+              <div class="center2"><img src="./assets/images-en/generic.png" alt=""></div>
+              <li><b>Cumulative Report</b></li>
+              <ul>
+                <li>Cumulative report is specifically for the top management professionals, when CxO wants to see the crisp report of all the registered users with their total number of violations and violation duration. </li>
+                <li>Following report shows total number of violations and respective total time for all the 51 registered users.</li>
+                   <div class="center2"><img src="./assets/images-en/cumulative.png" alt=""></div>
+              </ul>
+              <li><b>Social Distancing Violator’sReport based on Username</b></li>
+              <ul><li>This report gives the detailed data for a particular violator and his primary contacts with the contact time as well as total time for each violations the violator has made.</li></ul>
+                  <div class="center2"><img src="./assets/images-en/violators.png" alt=""></div>
+                  <li><b>SummaryReport of an Infected User</b></li>
+                  <ul>
+                    <li>This report shows the summary of primary contacts for the selected infected person and for selected duration. Once admin marks someone as covid-19 infected then this report gives idea that to whom all he met post marking as infected. </li>
+                    <li>With our upcoming feature of isolation and send warning, an automatic warning will be sent via email ‘To’ all the primary contacts keeping admin in the ‘CC’. Moreover, the admin can mark these primary contacts as isolated and accordingly take the precautionary measures.</li>
+                        <div class="center2"><img src="./assets/images-en/summary.png" alt=""></div>
+                  </ul>
+                  </ol>
+         </ul>
     </div>
 
+    <!-- Report japanese -->
 
-    <div>
-      <p><b>5. <u>SETTINGS</u> </b></p>
-      <div class="center"><img src="./assets/image/settings.PNG" alt=""></div>
+     <div *ngIf="language=='japanese'">
+      <p><b>5. <u>レポート</u></b></p>
+    
       <ul>
-        <li><span>The admin can define Shift timings of a company using the <b>Define Working Shifts</b>
-          tab. </span></li>
-        <li><span>The admin can also change the minimum distance after which the device should start
-          beeping or should be considered as social distancing is violated using the <b>Define
-            minimum distance</b> tab. </span></li>
-        <li><span>The minimum distance can be changed between 1, 2 or 3meters and the admin can
-          contact the <b>SenseGiz</b> team for customized distance. </span></li>
-          <li><span>The admin can <b>Define maximum contact threshold</b>, beyond which the admin will
-            receive an alert if anyone is frequently violating social distancing.
-            </span></li>
-          <li><span>The admin can change the range of <b>FIND</b> by making use of the transmission power
-            option.
-            </span> <br>
-          <span style="color:'red'">Note: Before changing the transmission power please contact the SenseGiz team. </span></li>
-          <li><span>The admin can receive an alert if any user is inactive for a set time by enabling the
-            <b>Define Inactivity</b> option and entering the inactivity time.
-            </span></li>
-          <li><span>The admin can set a minimum threshold after which the data will be synced to the
-            cloud. </span></li>
+        <li>[レポート]タブでは、管理者はレポートの表示、およびダウンロードができます。4種類のレポートがあります。</li>
+        <li>管理者は選択ボタンから前週1週間分、または2週間分のレポートを表示、もしくはダウンロードできます。さらに、過去のデータに関しては、日付範囲を選択することにより任意の期間のレポートを表示またはダウンロードすることが可能です。</li>
+            <div class="center"><img src="./assets/images-jp/Report-jp.png" alt=""></div>
+            <ol>
+              <li><b>全体の接触機会レポート</b></li>
+              <ul><li>全体の接触機会レポートは、ベースパーソンとソーシャルディスタンス内に接触した人の名前、接近開始時刻と終了時刻、及びその接触累積時間が表示されます。</li></ul>
+        
+              <div class="center"><img src="./assets/images-jp/generic-jp.PNG" alt=""></div>
+              <li><b>累積された接触機会レポート</b></li>
+              <ul>
+                <li>累積された接触機会レポートは、管理者が指定した期間内でのすべての登録ユーザーに対する接触した合計数と、接触累積トータル時間を確認するためのものです。 </li>
+                <li>次のレポートは、51人の登録ユーザーすべての接触回数と接触累積時間を示しています。</li>
+                   <div class="center"><img src="./assets/images-jp/cumulative-jp.PNG" alt=""></div>
+              </ul>
+              <li><b>特定された人のソーシャルディスタンス内接触者リスト</b></li>
+              <ul><li>このレポートは、特定した人がソーシャルディスタンス内に接触した人の名前と、その接触開始時間、及び接触合計時間を示したものです。</li></ul>
+                  <div class="center"><img src="./assets/images-jp/violators-jp.PNG" alt=""></div>
+                  <li><b>感染者による濃厚接触者リスト</b></li>
+                  <ul>
+                    <li>このレポートは、イベントが行われた後、COVID-19感染が判明した人から感染の連絡を受け、対象感染者がイベント期間中にソーシャルディスタンス内に近づいたすべての接触候補者をリスト化したものです</li>
+                    <li>管理者は、感染者と十分な接触があった候補者に対して、「イベント期間中に感染者と濃厚接触があった可能性がある」旨の警告メールを接触候補者に送信することにより、感染有・無の早期検査の実施、及び感染拡大を防ぐ対処方法が可能となります。</li>
+                        <div class="center"><img src="./assets/images-jp/summary-jp.PNG" alt=""></div>
+                  </ul>
+                  </ol>
+         </ul>
+    </div>
+        <!-- Settings -->
+
+         <div *ngIf="language=='english'">
+      <p><b>5. <u>SETTINGS</u> </b></p>
+      <ul>
+        <li>Settings tab allows admin to set and/or edit the various parameters as follows,</li>
+        <ol>
+          <li> Violation limit</li>
+          <li>  Two step authentication</li>
+          <li>Alert configuration</li>
+          <li>Proximity distance and wearable type</li>
+          <li> Upload company logo</li>
+        </ol>
+        <li>Apart from above there are two parameter which admin can not select without informing to the SenseGiz support team and they are as follows,</li>
+        <ol>
+          <li>Define Buffer</li>
+          <li>Shift time</li>
+        </ol>
       </ul>
+      <div class="center"><img src="./assets/images-en/Settings.png" alt=""></div>
+      <ul>
+        <li><b>Define Buffer:</b>  This is the threshold which admin can set for all the FINDs registered. Once FIND will store these many data packets only after that the data will get send to the Gateway. This option helps to increase the FIND battery back-up but, it is not recommended as it can cause the data delay. That is why we have kept this setting access with super-admin.</li>
+        <li><b>Define Violation Limit:</b> Using this option the admin can set the proximity threshold in meters. This will be applicable for all the FINDs which are registered. The admin can select the proximity among 1m, 2m and 3m. For setting the customized proximity admin has to contact the SenseGiz team</li>
+        <li><b>Two step Authentication:</b>This setting allows an admin to opt for two step authentication and avail more safety to the account. If any other person apart from admin tries to log in then the admin will get an OTP to the registered mobile number and email address. Only after sharing this OTP the portal will accept and allow the login.</li>
+        <li><b>Alert Configuration:</b> This setting allows an admin to set the alert type. There are 4 different types of alert, once you have selected the alert accordingly FIND devices will indicate when the violation happens.</li>
+      
+    <div class="center1"><img src="./assets/images-en/alertconfig.png" alt=""></div>
+       <ul style="border: 1px solid #29252554"><li><b>Buzzer followed by LED for every new person:</b> On the violation buzzer will beep for initial 10 seconds followed by LED blinking for rest of the time till violation ends. This alert will work only once if the same pair is violating again and again.</li>
+        <li><b>Only LED:</b> LED on the FIND devices will blink for entire violation time.</li>
+        <li><b>Only Buzzer:</b> Buzzer on the FIND devices will beep for entire violation time.</li>
+        <li><b>Buzzer followed by LED blinking for every new violation:</b> On the violation buzzer will beep for initial 10 seconds followed by LED blinking for rest of the time till violation ends. This alert will work I every time even if the same pair is violating again and again.</li>
+        <li><b>Buzzer followed by LED after set periodic interval:</b> On the violation buzzer will beep for initial 10 seconds followed by LED blinking for 50 seconds and the cycle repeat after the set periodic interval.</li>
+       </ul><br> 
+            <li><b>Define Proximity and Select the wearable type:</b> Using this option admin can select the proximity threshold in meters as well as there is an option to select which FIND version you are using; a wrist band or the pendant.</li>
+            <li><b>Define Shift Time:</b>This option is for setting the shifts. As of now only super-admin that means SenseGiz support team can set the threshold for the admin. Admin can select, 
+                  <ul>
+                    <li>24 hours if they are working in all 3 shifts</li>
+                    <li> 16 hours for 2 shifts </li>
+                    <li>8 hours for 1shift </li>
+                  </ul>
+            Moreover, the hours window is customizable. This will save the FIND battery life tremendously. Lower the shift time more the FIND battery lasts. In future one company can also operate in multiple shifts and this feature will get ready soon.</li>
+            <li><b>Upload Logo:</b>Using this option admin can upload their company logo in place of the SenseGiz logo.</li>
+       </ul>
+
+     </div>
+   
+
+    <div *ngIf="language=='japanese'">
+        <p><b>5. <u>設定</u> </b></p>
+      <ul>
+        <li>[設定]タブでは、管理者は次のようにさまざまなパラメータを設定および/または編集できます。</li>
+        <ol>
+          <li>一日当たりの最大接触制限回数</li>
+          <li>二段階認証</li>
+          <li>アラートの構成</li>
+          <li>ソーシャルディスタンス距離の設定とタグデバイスの種類</li>
+          <li>会社のロゴをアップロード出来ます</li>
+        </ol>
+        <li>上記とは別に、インディゴサポートチームに通知せずに管理者が選択できない2つのパラメーターがあります。それらは次のとおりです</li>
+        <ol>
+          <li>タグデバイス内に保存される接触データ量</li>
+          <li>シフト時間</li>
+        </ol>
+      </ul>
+      <div class="center"><img src="./assets/images-jp/Settings-jp.png" alt=""></div>
+      <ul>
+        <li><b>タグデバイス内に保存される接触データ量：</b>これは、管理者が登録するすべてのタグデバイスに対して設定できるデータ保存量です。タグデバイスが多くのデータパケットを保存した後にゲートウェイに転送されます。この場合タグデバイスのバッテリー消費を節約するのに役立ちますが、サーバーへのデータ転送遅延を引き起こす可能性があるためお勧めしません。そのため、IndyGo社がこの設定へのアクセスを管理しています。</li>
+        <li><b>最大接触制限回数：</b>このオプションでは、管理者はソーシャルディスタンス制限値をメートル単位で設定できます。これは、登録されているすべてのタグデバイスに適用されます。管理者は、1m、2m、3mの中から選択できます。ソーシャルディスタンス制限値をカスタマイズしたい場合はインディゴチームに連絡する必要があります。</li>
+        <li><b>二段階認証：</b>二段階認証を選択することによりアカウントの安全性を高めることができます。管理者は登録された電子メールアドレスへOne Time Password（OTP）が送られてきます。もし、管理者以外の誰かが本ポータルにログインした場合、管理者の電子メールアドレスにOTPが送られてくるため不正ログインを拒むことが出来ます。</li>
+        <li><b>アラートの構成：</b>管理者はアラートタイプを設定できます。アラートには4つの異なるアラート方法があります。各種アラートを選択することにより、それに応じたタグデバイスの接触違反表示方法が設定されます。</li>
+      
+    <div class="center1"><img src="./assets/images-jp/alertconfig-jp.PNG" alt=""></div>
+       <ul style="border: 1px solid #29252554"><li><b>タグデバイスを持っている人に初めて設定距離範囲内に接近した時の警告：</b>初めて接触する人にはブザー警告音が鳴り、そのあとLEDが点滅します。：ブザーは10秒間ビープ音を鳴らし、その後、設定距離内（違反）から離れるまでLEDは点滅し続けます。このアラートは、同じペアで初めて設定距離内に接近（違反）した時のみ機能します。</li>
+        <li><b>LEDのみ警告：</b>タグデバイスFINDのLEDは、設定距離以内（違反）時間全体にわたって点滅します。</li>
+        <li><b>ブザーのみ警告：</b>タグデバイスFINDのブザーは設定距離以内（違反）時間全体にわたってビープ音を鳴らします。</li>
+        <li><b>タグデバイスを持っている人に設定距離範囲内に接近した時の警告：</b>初めての接触のみとは関係なく、同じペアで何度も接触する場合，毎回ブザー警告音が鳴り、そのあとLEDが点滅します。ブザーは10秒間ビープ音を鳴らし、その後、設定距離内（違反）から離れるまでLEDは点滅し続けます</li>
+        <li><b>設定された時間間隔でブザーとLEDで警告：</b>設定距離内（違反）に接近した場合、ブザーが最初の10秒間ビープ音を鳴らし、続いてLEDが50秒間点滅します。設定された時間間隔の後、繰り返し同じ警告内容が行われます。
+</li>
+       </ul><br> 
+            <li><b>許容接近距離（ソーシャルディスタンス）とウェアラブルタイプの選択：</b>管理者はメートル単位で許容接近距離（ソーシャルディスタンス）を選択できます。また、使用するタグデバイスFINDの種類を選択するオプションもあります。タグデバイスの種類はリストバンドタイプ、もしくはペンダントタイプです。</li>
+            <li><b>接触監視機能の時間設定：</b>このオプションは基本的には勤務時間シフトの情報を使うもので、勤務時間帯のみ監視機能を駆動させることによりタグデバイスの電池消費等の節約を行うものです。現在のところ、インディゴサポートチームのみが本設定の管理を行っています。
+                  <ul>
+                    <li>3シフトすべてで働いている場合は24時間</li>
+                    <li>2シフトで16時間 </li>
+                    <li>1シフトで8時間 </li>
+                  </ul>
+          時間枠でカスタマイズ可能です。これにより、タグデバイスのバッテリー寿命が大幅に節約されます。将来的には、一つの会社内で複数のシフトを運営できる監視システムを持てるように、現在改善作業中です。</li>
+            <li><b>ロゴのアップロード：</b>このオプションを使用すると、管理者はIndyGoロゴの代わりに自社のロゴをアップロードできます。</li>
+       </ul>
     </div>
   </div>
