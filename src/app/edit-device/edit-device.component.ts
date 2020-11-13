@@ -54,7 +54,7 @@ export class EditDeviceComponent implements OnInit {
     this.gatewayform = this.fb.group({
       deviceName: ['', Validators.required],
       deviceId: [{value: '', disabled: true}, Validators.required],
-      type:[{value: '', disabled: true}, Validators.required],
+      // type:[{value: '', disabled: true}, Validators.required],
 
     });
 

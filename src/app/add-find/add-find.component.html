@@ -220,7 +220,7 @@
 
   <mat-horizontal-stepper  #stepper *ngIf="language=='english'"  >
     <form [formGroup]="gatewayform" >
-      <mat-step >
+      <!-- <mat-step>
         <ng-template matStepLabel class="stepper">Gateway Type</ng-template>
         <mat-form-field>
           <mat-label>Select Gateway Type</mat-label>
@@ -232,7 +232,7 @@
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
-    </mat-step>
+    </mat-step> -->
       <mat-step >
           <ng-template matStepLabel class="stepper">Gateway Nick Name</ng-template>
           <mat-form-field>
@@ -270,6 +270,19 @@
 <!-- japanese -->
 <mat-horizontal-stepper  #stepper *ngIf="language=='japanese'" >
     <form [formGroup]="gatewayform" >
+      <!-- <mat-step >
+        <ng-template matStepLabel class="stepper">Gateway Type</ng-template>
+        <mat-form-field>
+          <mat-label>Select Gateway Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option [value]="0">Ethernet Gateway</mat-option>
+            <mat-option [value]="1">Wifi Gateway</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step> -->
       <mat-step >
           <ng-template matStepLabel class="stepper">ゲートウェイのニックネームを入力してください</ng-template>
           <mat-form-field>

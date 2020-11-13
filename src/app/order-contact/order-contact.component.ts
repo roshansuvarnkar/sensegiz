@@ -65,6 +65,7 @@ export class OrderContactComponent implements OnInit {
       private api: ApiService,
       private login:LoginCheckService,
       private router:Router,
+      private general:GeneralMaterialsService,
       public dialogRef: MatDialogRef<OrderContactComponent>,
        @Inject(MAT_DIALOG_DATA)  data,
     ) {
@@ -89,6 +90,7 @@ export class OrderContactComponent implements OnInit {
     var data={
       userId:this.dataSet.userId,
       deviceName:this.dataSet.contactName,
+      zone:this.general.getZone(new Date()),
       fromDate:this.from,
       toDate:this.to,
     }
@@ -109,6 +111,7 @@ export class OrderContactComponent implements OnInit {
     var value={
       userId:this.dataSet.userId,
       deviceName:this.dataSet.contactName,
+      zone:this.general.getZone(new Date()),
       fromDate:this.from,
       toDate:this.to,
       limit:limit,
