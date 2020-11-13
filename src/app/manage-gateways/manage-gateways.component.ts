@@ -23,7 +23,7 @@ export class ManageGatewaysComponent implements OnInit {
   gatewayData:any=[]
   elementsTemp:any=[]
   dataSource: any = [];
-  displayedColumns = ['i','gatewayId','gatewayName','currentVersion','bleVersion','edit',	'delete'];
+  displayedColumns = ['i','gatewayId','gatewayName','gatewayType','currentVersion','bleVersion','edit',	'delete'];
   // ,'currentVersion'
   constructor(private dialog:MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
 
@@ -75,6 +75,7 @@ refreshGateway(){
               id: res.success[i].id,
               gatewayId: res.success[i].gatewayId,
               gatewayName: res.success[i].gatewayName,
+              gatewayType: res.success[i].gatewayType =='ethernet'?'Ethernet Gateway':'WiFi Gateway',
               currentVersion:res.success[i].currentVersion,
               bleVersion:res.success[i].bleVersion,
               edit:'edit',

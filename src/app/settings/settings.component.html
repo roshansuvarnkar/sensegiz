@@ -56,7 +56,7 @@
         </mat-error>
      
         <br><br><br>
-        <button class="btn-set-jp"  disabled mat-raised-button disabled color="primary">レポート作成</button>
+        <button class="btn-set-jp"  disabled mat-raised-button disabled color="primary">決定</button>
        
       </form>
     </mat-card-content>
@@ -98,7 +98,7 @@
           </mat-error>
         </mat-form-field>
         <br><br><br>
-        <button class="btn-set-jp" mat-raised-button [disabled]="!maxContactForm.valid" color="primary">レポート作成</button>
+        <button class="btn-set-jp" mat-raised-button [disabled]="!maxContactForm.valid" color="primary">決定</button>
       </form>
     </mat-card-content>
   </mat-card>
@@ -130,7 +130,7 @@
           <mat-slide-toggle class="toggle" color="primary" [checked]= "twoStepAuthStatus.status" (change)="twoStepAuthchange($event)" >{{twoStepAuthStatus.value}}</mat-slide-toggle>
 
         <br><br> <br>
-        <button class="btn-set-jp" mat-raised-button (click)="onSubmitTwoAuth(twoStepAuthStatus.status)" color="primary">レポート作成</button>
+        <button class="btn-set-jp" mat-raised-button (click)="onSubmitTwoAuth(twoStepAuthStatus.status)" color="primary">決定</button>
    
     </mat-card-content>
   </mat-card>
@@ -270,7 +270,7 @@
           </mat-form-field>
         </div>
         <br><br><br>
-        <button class="btn-set-jp" mat-raised-button [disabled]="!buzzerConfigForm.valid"   color="primary">レポート作成</button>
+        <button class="btn-set-jp" mat-raised-button [disabled]="!buzzerConfigForm.valid"   color="primary">決定</button>
       </form>
     </mat-card-content>
   </mat-card>
@@ -442,7 +442,7 @@
           </mat-error>
         </mat-form-field><br> <br> <br>
        <div class="btn-set-jp">
-        <button  mat-raised-button disabled color="primary">レポート作成</button> &nbsp;&nbsp;&nbsp;
+        <button  mat-raised-button disabled color="primary">決定</button> &nbsp;&nbsp;&nbsp;
         <button type="button" disabled mat-raised-button (click)="openDialog()" color="primary"> 情報</button>
        </div>
       </form>
@@ -599,7 +599,7 @@
      <br>
       <span *ngIf="loading" style="color:red">Please choose jpg/jpeg/png*</span>
       <br><br><br>  
-          <button class="btn-set-jp" mat-raised-button color="primary">レポート作成</button>
+          <button class="btn-set-jp" mat-raised-button color="primary">決定</button>
     </form>
   </mat-card-content>
 </mat-card>
