@@ -15,7 +15,7 @@
   <div class="content">
     <p class="center" *ngIf="language=='english'">REPORT</p>
     <p class="center" *ngIf="language=='japanese'">レポート</p>
-            <span  class="icon">
+          <span  class="icon">
               <mat-icon class="download2" (click)="getPages()">cloud_download</mat-icon>
             <button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
           </span>
@@ -94,16 +94,11 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header>追跡対象者名</th>
               <td mat-cell *matCellDef="let live"> {{live.baseName}} </td>
             </ng-container>
-<<<<<<< HEAD
-
-
-=======
 
             <ng-container matColumnDef="empId">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> 従業員ID</th>
               <td mat-cell *matCellDef="let live "> {{live.empId}} </td>
             </ng-container>
->>>>>>> c8a19bc21c0b87455070c17d0071954e32874d73
 
             <ng-container matColumnDef="contactName">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> 接触した相手名 </th>
@@ -229,7 +224,7 @@
 
   <p  mat-dialog-title *ngIf="language=='english'"> From {{from}} to {{to}} </p>
   <p  mat-dialog-title *ngIf="language=='japanese'"> から {{from1}} まで {{to1}} </p>
-  <form [formGroup]="selectMin">
+  <!-- <form [formGroup]="selectMin">
     <mat-form-field >
       <mat-select (selectionChange)="filterTotTime($event)" formControlName="minute" matNativeControl placeholder="Select total time">
         <mat-option [value]="0">none</mat-option>
@@ -241,7 +236,7 @@
     </mat-form-field>
 
 
-    </form> -->
+    </form>  -->
     <div class="mat-elevation-z8">
 
 
