@@ -235,6 +235,7 @@ basedOnFindName(limit,offset){
    
       // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         this.liveData=res.success
+        this.liveData.userId=this.loginData.userId
       this.dataSource = new MatTableDataSource(this.liveData);
       setTimeout(() => {
         this.dataSource.sort = this.sort;

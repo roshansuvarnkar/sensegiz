@@ -18,7 +18,8 @@ export class OrderContactComponent implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['i','baseName', 'contactName', 'updatedOn'];
-	order:any=0
+  order:any=0
+  loginData:any
   dataSource:any
 	dataSet:any=[]
 	from:Date
@@ -69,12 +70,14 @@ export class OrderContactComponent implements OnInit {
       public dialogRef: MatDialogRef<OrderContactComponent>,
        @Inject(MAT_DIALOG_DATA)  data,
     ) {
+      this.loginData = this.login.Getlogin()
+    this.loginData = JSON.parse(this.loginData)
       this.order=data.order
       this.dataSet=data.data
       this.from = data.fromDate
       this.to = data.toDate
       // console.log("data from===",data)
-      // console.log("data set===",this.dataSet)
+      console.log("data set===",this.dataSet)
       this.orderShow = this.orderType.filter(obj=>{
       	return obj.id==this.order
       })
@@ -83,6 +86,8 @@ export class OrderContactComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.loginData = this.login.Getlogin()
+    this.loginData = JSON.parse(this.loginData)
   }
 
 
@@ -117,7 +122,7 @@ export class OrderContactComponent implements OnInit {
       limit:limit,
       offset:offset
     }
-      // console.log("value data ======",value);
+      console.log("value data ======",value);
 
     this.api.getDeviceHistoryBasedOnDeviceName(value).then((res:any)=>{
       // console.log("order data ======",res);
