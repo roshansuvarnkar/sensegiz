@@ -70,14 +70,13 @@ export class OrderContactComponent implements OnInit {
       public dialogRef: MatDialogRef<OrderContactComponent>,
        @Inject(MAT_DIALOG_DATA)  data,
     ) {
-      this.loginData = this.login.Getlogin()
-    this.loginData = JSON.parse(this.loginData)
+      this.loginData = data.userId
       this.order=data.order
       this.dataSet=data.data
       this.from = data.fromDate
       this.to = data.toDate
       // console.log("data from===",data)
-      console.log("data set===",this.dataSet)
+      console.log("data set===",this.dataSet,this.loginData)
       this.orderShow = this.orderType.filter(obj=>{
       	return obj.id==this.order
       })
@@ -93,7 +92,7 @@ export class OrderContactComponent implements OnInit {
 
   getTotalLength(){
     var data={
-      userId:this.dataSet.userId,
+      userId:this.loginData,
       deviceName:this.dataSet.contactName,
       zone:this.general.getZone(new Date()),
       fromDate:this.from,
@@ -114,7 +113,7 @@ export class OrderContactComponent implements OnInit {
    onSubmitFindName(limit=10,offset=0){
     // console.log("data====",this.dataSet)
     var value={
-      userId:this.dataSet.userId,
+      userId:this.loginData,
       deviceName:this.dataSet.contactName,
       zone:this.general.getZone(new Date()),
       fromDate:this.from,
