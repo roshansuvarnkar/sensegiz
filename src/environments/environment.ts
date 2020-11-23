@@ -6,7 +6,7 @@ export const environment = {
   // apiHost:'http://sd1-api.sensegiz.com:3000',
   // apiHost:'http://65.0.120.36:3000',
   // apiHost:'https://testdba.sensegiz.com:3000',
-  apiHost:'http://3.6.205.70:3000',
+  apiHost:'http://65.0.56.151:3000',
   // apiHost:'http://3.6.176.216:3000',
     //  apiHost:'http://15.206.213.108:3000',
   // apiHost:'http://52.66.232.210/:3000',
