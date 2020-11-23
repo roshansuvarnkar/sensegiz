@@ -1,7 +1,12 @@
 <br>
-<button class="button" mat-flat-button color="primary" (click)="openDialog()">Add Gateways</button>
-<mat-form-field class="full-width-input search">
+<button *ngIf="language=='english'" class="button" mat-flat-button color="primary" (click)="openDialog()">Add Gateways</button>
+<button *ngIf="language=='japanese'" class="button" mat-flat-button color="primary" (click)="openDialog()">ゲートウエイを追加</button>
+<mat-form-field class="full-width-input search" *ngIf="language=='english'" >
   <input matInput placeholder="Search device" autocomplete="off" matInput (input)="search($event.target.value)">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+<mat-form-field class="full-width-input search" *ngIf="language=='japanese'" >
+  <input matInput placeholder="デバイス（タグ）を検索" autocomplete="off" matInput (input)="search($event.target.value)">
   <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>
 
@@ -30,36 +35,95 @@
 
 <div class="center">
 
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8" *ngIf="language=='english'">
     <table mat-table [dataSource]="dataSource" matSort >
         <ng-container matColumnDef="i"  >
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl No. </th>
             <td mat-cell *matCellDef="let i=index" > {{i+1}} </td>
           </ng-container>
 
+          <!-- <ng-container matColumnDef="gatewayType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Type </th>
+            <td mat-cell *matCellDef="let live "> {{live.gatewayType}} </td>
+          </ng-container> -->
+          
           <ng-container matColumnDef="gatewayName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Name </th>
             <td mat-cell *matCellDef="let live "> {{live.gatewayName}} </td>
           </ng-container>
 
+        
+
           <ng-container matColumnDef="gatewayId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> GateWay Id</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Id</th>
             <td mat-cell *matCellDef="let live"> {{live.gatewayId}} </td>
           </ng-container>
           
           <ng-container matColumnDef="currentVersion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> GateWay Version</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Version</th>
             <td mat-cell *matCellDef="let live"> {{live.currentVersion}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="bleVersion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> BLE Version</th>
+            <td mat-cell *matCellDef="let live"> {{live.bleVersion}} </td>
           </ng-container>
 
           <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
-            <td mat-cell *matCellDef="let live"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
+            <td mat-cell *matCellDef="let live" class="cursor"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
           </ng-container>
 
           <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
-            <td mat-cell *matCellDef="let live"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
+            <td mat-cell *matCellDef="let live" class="cursor"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
+          </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+      </table>
+  </div>
+
+  <div class="mat-elevation-z8" *ngIf="language=='japanese'">
+    <table mat-table [dataSource]="dataSource" matSort >
+        <ng-container matColumnDef="i"  >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> シリアル番号. </th>
+            <td mat-cell *matCellDef="let i=index" > {{i+1}} </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="gatewayType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ゲートウェイタイプ </th>
+            <td mat-cell *matCellDef="let live "> {{live.gatewayType}} </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="gatewayName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ゲートウエイ名 </th>
+            <td mat-cell *matCellDef="let live "> {{live.gatewayName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="gatewayId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ゲートウエイID</th>
+            <td mat-cell *matCellDef="let live"> {{live.gatewayId}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="currentVersion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ゲートウエイのバージョン</th>
+            <td mat-cell *matCellDef="let live"> {{live.currentVersion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="bleVersion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> BLEバージョン</th>
+            <td mat-cell *matCellDef="let live"> {{live.bleVersion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> 編集 </th>
+            <td mat-cell *matCellDef="let live" class="cursor"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> 削除 </th>
+            <td mat-cell *matCellDef="let live" class="cursor"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
           </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

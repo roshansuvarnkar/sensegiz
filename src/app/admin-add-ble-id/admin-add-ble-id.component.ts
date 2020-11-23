@@ -16,7 +16,7 @@ export class AdminAddBleIdComponent implements OnInit {
 	dataGet:any 
 	loginData:any 
 	bleIdForm:FormGroup;
-
+	language:any
     constructor(
 	    private fb: FormBuilder,
 	    public dialogRef: MatDialogRef<AdminAddBleIdComponent>,
@@ -31,6 +31,7 @@ export class AdminAddBleIdComponent implements OnInit {
   }
 
   ngOnInit(): void {
+	 this.language=this.dataGet.language
   		this.bleIdForm = this.fb.group({
 		  items:this.fb.array([])
 		});

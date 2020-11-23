@@ -18,7 +18,8 @@ export class OrderContactComponent implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['i','baseName', 'contactName', 'updatedOn'];
-	order:any=0
+  order:any=0
+  loginData:any
   dataSource:any
 	dataSet:any=[]
 	from:Date
@@ -29,35 +30,35 @@ export class OrderContactComponent implements OnInit {
   orderType:any=[
   		{
   			id:2,
-  			name:"Second lever order"
+  			name:"Second level order"
   		},
   		{
   			id:3,
-  			name:"Third lever order"
+  			name:"Third level order"
   		},
   		{
   			id:4,
-  			name:"Fourth lever order"
+  			name:"Fourth level order"
   		},
   		{
   			id:5,
-  			name:"Fifth lever order"
+  			name:"Fifth level order"
   		},
   		{
   			id:6,
-  			name:"Sixth lever order"
+  			name:"Sixth level order"
   		},
   		{
   			id:7,
-  			name:"Seventh lever order"
+  			name:"Seventh level order"
   		},
   		{
   			id:8,
-  			name:"Eighth lever order"
+  			name:"Eighth level order"
   		},
   		{
   			id:9,
-  			name:"Ninth lever order"
+  			name:"Ninth level order"
   		},
   	]
     constructor(
@@ -65,15 +66,17 @@ export class OrderContactComponent implements OnInit {
       private api: ApiService,
       private login:LoginCheckService,
       private router:Router,
+      private general:GeneralMaterialsService,
       public dialogRef: MatDialogRef<OrderContactComponent>,
        @Inject(MAT_DIALOG_DATA)  data,
     ) {
+      this.loginData = data.userId
       this.order=data.order
       this.dataSet=data.data
       this.from = data.fromDate
       this.to = data.toDate
       // console.log("data from===",data)
-      // console.log("data set===",this.dataSet)
+      console.log("data set===",this.dataSet,this.loginData)
       this.orderShow = this.orderType.filter(obj=>{
       	return obj.id==this.order
       })
@@ -82,13 +85,16 @@ export class OrderContactComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.loginData = this.login.Getlogin()
+    this.loginData = JSON.parse(this.loginData)
   }
 
 
   getTotalLength(){
     var data={
-      userId:this.dataSet.userId,
+      userId:this.loginData,
       deviceName:this.dataSet.contactName,
+      zone:this.general.getZone(new Date()),
       fromDate:this.from,
       toDate:this.to,
     }
@@ -107,14 +113,15 @@ export class OrderContactComponent implements OnInit {
    onSubmitFindName(limit=10,offset=0){
     // console.log("data====",this.dataSet)
     var value={
-      userId:this.dataSet.userId,
+      userId:this.loginData,
       deviceName:this.dataSet.contactName,
+      zone:this.general.getZone(new Date()),
       fromDate:this.from,
       toDate:this.to,
       limit:limit,
       offset:offset
     }
-      // console.log("value data ======",value);
+      console.log("value data ======",value);
 
     this.api.getDeviceHistoryBasedOnDeviceName(value).then((res:any)=>{
       // console.log("order data ======",res);

@@ -33,9 +33,14 @@
 </mat-card> -->
 
 
-<div class="center">
-  <h2> Details of  {{deviceData.deviceName}} </h2>
+<div class="center" *ngIf="language=='english'">
+  <h2 > Details of  {{deviceData.deviceName}} </h2>
     <p> Below are the data of Device Id {{deviceData.deviceId}}</p>
+    <hr>
+</div>
+<div class="center" *ngIf="language=='japanese'">
+  <h2 > の詳細　 {{deviceData.deviceName}} </h2>
+    <p> 以下はデバイスIDのデータです{{deviceData.deviceId}}</p>
     <hr>
 </div>
 
@@ -43,7 +48,7 @@
   <table  class="table table-hover" mat-table [dataSource]="dataSource" matSort >
 
 
-   <div >
+   <div *ngIf="language=='english'">
       <ng-container matColumnDef="i">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl No. </th>
           <td mat-cell *matCellDef="let live"> {{live.i}} </td>
@@ -63,6 +68,30 @@
 
         <ng-container matColumnDef="updatedOn">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+          <td mat-cell *matCellDef="let live"> {{live.updatedOn | date : 'medium' : 'IST'}} </td>
+        </ng-container>
+
+   </div>
+     <div *ngIf="language=='japanese'">
+      <ng-container matColumnDef="i">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> シリアル番号. </th>
+          <td mat-cell *matCellDef="let live"> {{live.i}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="deviceName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ベースデバイス名 </th>
+          <td mat-cell *matCellDef="let live"> {{live.deviceName}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="contactDeviceName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>接触者デバイス名   </th>
+          <td mat-cell *matCellDef="let live "> {{live.contactDeviceName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updatedOn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 時間 </th>
           <td mat-cell *matCellDef="let live"> {{live.updatedOn | date : 'medium' : 'IST'}} </td>
         </ng-container>
 

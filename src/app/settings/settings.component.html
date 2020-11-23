@@ -2,24 +2,27 @@
 <!-- <div >
   <p class=" marquee">Please contact SenseGiz Team before making any changes in Settings</p>
 </div>  -->
-<marquee class=" marquee" behavior="" direction="left">Please contact SenseGiz Team before making any changes in settings</marquee>
+<marquee class=" marquee" behavior="" direction="left" *ngIf="language=='english'"> Please contact SenseGiz Team before making any changes in settings</marquee>
+<marquee class=" marquee" behavior="" direction="left" *ngIf="language=='japanese'">  設定を変更する前に、インディゴチームに連絡してください</marquee>
+
 <div class="setting">
  
-  <mat-card (click)="contactTeam()">
-    <mat-card-title>
-       Define Buffer
-    </mat-card-title>
-    <mat-card-subtitle>
-      Enter buffer value for the wearable
-    </mat-card-subtitle><br> 
-    <mat-card-content>
+  <mat-card (click)="contactTeam()" *ngIf="language=='english'">
+      
+      <mat-card-title>
+         Define Buffer
+      </mat-card-title>
+        <mat-card-subtitle >
+           Enter buffer value for the wearable
+       </mat-card-subtitle><br> 
+      <mat-card-content>
       <form [formGroup]="bufferForm" (ngSubmit)="onSubmitBufferForm(bufferForm.value)">
         <mat-form-field>
           <input type='number' min="0" max="5" matInput placeholder="Buffer" formControlName="buffer" (input)="bufferval($event)" disbaled required>
-          <mat-error >
+          <mat-error>
             Please provide a valid buffer 
           </mat-error>
-         
+      
         </mat-form-field>
         <mat-error class="bufferError" *ngIf="bufferValue">
          Maximum value you can set is 5
@@ -27,11 +30,39 @@
      
         <br><br><br>
         <button class="btn-set"  disabled mat-raised-button disabled color="primary">Submit</button>
+       
+      </form>
+    </mat-card-content>
+  </mat-card>
+       <mat-card (click)="contactTeam()" *ngIf="language=='japanese'">
+      
+      <mat-card-title>
+         タグ内メモリーの接触データ保存数
+      </mat-card-title>
+        <mat-card-subtitle >
+         ゲートウエイへデータを送信するまでのタグ内メモリーの接触データ保存数
+       </mat-card-subtitle><br> 
+      <mat-card-content>
+      <form [formGroup]="bufferForm" (ngSubmit)="onSubmitBufferForm(bufferForm.value)">
+        <mat-form-field>
+          <input type='number' min="0" max="5" matInput placeholder="タグ内メモリーの接触データ保存数" formControlName="buffer" (input)="bufferval($event)" disbaled required>
+          <mat-error>
+            有効な保存量を提供してください 
+          </mat-error>
+      
+        </mat-form-field>
+        <mat-error class="bufferError" *ngIf="bufferValue">
+         Maximum value you can set is 5
+        </mat-error>
+     
+        <br><br><br>
+        <button class="btn-set-jp"  disabled mat-raised-button disabled color="primary">決定</button>
+       
       </form>
     </mat-card-content>
   </mat-card>
   
-  <mat-card>
+  <mat-card *ngIf="language=='english'">
     <mat-card-title>
       Define Violation Limit
     </mat-card-title>
@@ -51,8 +82,27 @@
       </form>
     </mat-card-content>
   </mat-card>
-
-  <mat-card>
+     <mat-card *ngIf="language=='japanese'">
+    <mat-card-title>
+      対象者へ警告発報するための一日当たりの最大接触制限回数
+    </mat-card-title>
+    <mat-card-subtitle>
+      最大接触制限数/日を入力
+    </mat-card-subtitle><br> 
+    <mat-card-content>
+      <form [formGroup]="maxContactForm" (ngSubmit)="onSubmitmaxContactForm(maxContactForm.value)">
+        <mat-form-field>
+          <input type='number' min="0" matInput placeholder="最大接触回数" formControlName="threshold"  required>
+          <mat-error>
+            有効なしきい値を入力してください
+          </mat-error>
+        </mat-form-field>
+        <br><br><br>
+        <button class="btn-set-jp" mat-raised-button [disabled]="!maxContactForm.valid" color="primary">決定</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="language=='english'">
     <mat-card-title>
      Two Step Authentication
     </mat-card-title>
@@ -68,7 +118,22 @@
    
     </mat-card-content>
   </mat-card>
-  
+    <mat-card *ngIf="language=='japanese'">
+    <mat-card-title>
+     段階認証
+    </mat-card-title>
+    <mat-card-subtitle>
+        二段階認証を有効または無効にする
+    </mat-card-subtitle><br> 
+    <mat-card-content>
+    
+          <mat-slide-toggle class="toggle" color="primary" [checked]= "twoStepAuthStatus.status" (change)="twoStepAuthchange($event)" >{{twoStepAuthStatus.value}}</mat-slide-toggle>
+
+        <br><br> <br>
+        <button class="btn-set-jp" mat-raised-button (click)="onSubmitTwoAuth(twoStepAuthStatus.status)" color="primary">決定</button>
+   
+    </mat-card-content>
+  </mat-card>
 
   <!-- <mat-card>
     <mat-card-title>
@@ -135,7 +200,7 @@
       </form>
     </mat-card-content>
   </mat-card> -->
-  <mat-card>
+  <mat-card *ngIf="language=='english'">
     <mat-card-title>
      Alert Configuration
     </mat-card-title>
@@ -172,9 +237,45 @@
       </form>
     </mat-card-content>
   </mat-card>
- 
+    <mat-card *ngIf="language=='japanese'">
+    <mat-card-title>
+     警報の構成
+    </mat-card-title>
+    <mat-card-subtitle>
+      警報の種類を選択し、期間を入力してください
+    </mat-card-subtitle><br>
+    <mat-card-content class="alertType">
+      <form [formGroup]="buzzerConfigForm" (ngSubmit)="onSubmitbuzzerConfigForm(buzzerConfigForm.value)" >
+        <mat-form-field  >
+          <mat-label>警報のタイプ</mat-label>
+          <mat-select class="select-panel" formControlName="buzzerConfig"  (selectionChange)="getBuzzerValue($event)" required >
+            <!-- <mat-option *ngFor="let a of buzzerValue"  [value]="a">{{a}}</mat-option> -->
+            <mat-option value="1">新しく接触した人のみにブザーに続いてLEDが点滅</mat-option>
+            <mat-option value="2">LEDのみ</mat-option>
+            <mat-option value="3">ブザーのみ</mat-option>
+            <mat-option value="4">毎回濃厚接触した人にブザーに続いてLEDが点滅</mat-option>
+            <mat-option value="5">一定時間を経過後、ブザーに続いてLED点滅が繰り返される</mat-option>
+          </mat-select>
+          <mat-error  >
+            Please enter value
+          </mat-error>
+      </mat-form-field>
+        <div *ngIf="buzzerConfigStatus" >
+          <mat-form-field >
+            <mat-label>5の倍数で秒を入力します</mat-label>
+              <input type='number' matInput formControlName="durationSec" required >
+              <mat-error  >
+                最小秒数は10秒です。
+              </mat-error>
+          </mat-form-field>
+        </div>
+        <br><br><br>
+        <button class="btn-set-jp" mat-raised-button [disabled]="!buzzerConfigForm.valid"   color="primary">決定</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
   
-  <mat-card>
+  <mat-card *ngIf="language=='english'" (click)="contactTeam()">
     <mat-card-title>
       Define Proximity and Select Wearable Type
     </mat-card-title>
@@ -215,13 +316,61 @@
           </mat-form-field>
         </div> -->
         <br><br>
-        <button class="btn-set" mat-raised-button [disabled]="!distanceForm.valid" color="primary">Submit</button>
+        <button class="btn-set" mat-raised-button  color="primary" disabled>Submit</button>
+
+        <!-- <button class="btn-set" mat-raised-button [disabled]="!distanceForm.valid" color="primary">Submit</button> -->
       </form>
     </mat-card-content>
   </mat-card>
+     <mat-card *ngIf="language=='japanese'" (click)="contactTeam()">
+    <mat-card-title>
+      タグの保持方法とソーシャルディスタンス距離を設定
+    </mat-card-title>
+    <mat-card-subtitle>
+      最小ソーシャルディスタンス距離を設定(メートル)
+    </mat-card-subtitle>
+    <mat-card-content>
+      <!-- <mat-slide-toggle color="primary" [checked]="statusCustomise" (change)="customise()">Customize</mat-slide-toggle> -->
+     <br>
+      <form [formGroup]="distanceForm" (ngSubmit)="onSubmitDistanceForm(distanceForm.value)">
+        <mat-radio-group  color="primary" formControlName="wearable"  class="wearable">
+          <mat-radio-button value="0" name="small" >ペンダント</mat-radio-button>
+          <mat-radio-button value="1" name="small" >腕バンド</mat-radio-button>
+        </mat-radio-group><br>
+        <mat-form-field>
+          <mat-label>距離を選択</mat-label>
 
+            <mat-select formControlName="distance"  required>
+              <mat-option value="1">
+                1メートル
+              </mat-option>
+              <mat-option value="2">
+                2メートル
+              </mat-option>
+              <mat-option value="3">
+                3 メートル
+              </mat-option>
+            </mat-select>
+
+
+        </mat-form-field><br>
+        <!-- <div *ngIf="statusCustomise">
+          <mat-form-field>
+            <input matInput placeholder="RSSI" formControlName="rssi"  disabled required>
+            <mat-error>
+              Please provide a valid RSSI
+            </mat-error>
+          </mat-form-field>
+        </div> -->
+        <br><br>
+        <button class="btn-set" mat-raised-button  color="primary" disabled>決定</button>
+
+        <!-- <button class="btn-set-jp" mat-raised-button [disabled]="!distanceForm.valid" color="primary">レポート作成</button> -->
+      </form>
+    </mat-card-content>
+  </mat-card>
   
-  <mat-card (click)="contactTeam()">
+  <mat-card (click)="contactTeam()" *ngIf="language=='english'">
     <mat-card-title>
       Define Shift Time
     </mat-card-title>
@@ -260,7 +409,45 @@
       </form>
     </mat-card-content>
   </mat-card>
-
+     <mat-card (click)="contactTeam()" *ngIf="language=='japanese'">
+    <mat-card-title>
+      追跡対象時間の設定
+    </mat-card-title>
+    <mat-card-subtitle>
+      各追跡対象時間を入力
+    </mat-card-subtitle>
+    <mat-card-content class="shift">
+      <mat-error *ngIf="multipleshift">
+        シフトクリック情報を更新するために、複数のシフトを持つことはできません
+      </mat-error>
+      <form [formGroup]="workingForm" (ngSubmit)="onSubmitWorkForm(workingForm.value)">
+        <mat-form-field>
+          <input matInput placeholder="追跡対象時間" formControlName="shift" disabled  required>
+          <mat-error>
+           有効なシフト名を入力してください
+          </mat-error> 
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input type='time' matInput placeholder="開始時間" formControlName="fromTime"  disabled required>
+          <mat-icon matPrefix >schedule</mat-icon>
+          <mat-error>
+            有効な開始時刻を入力してください
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input  type='time' matInput  placeholder="終了時間" formControlName="toTime" disabled required >
+          <mat-icon matPrefix >schedule</mat-icon>
+          <mat-error>
+            有効な時間を提供してください
+          </mat-error>
+        </mat-form-field><br> <br> <br>
+       <div class="btn-set-jp">
+        <button  mat-raised-button disabled color="primary">決定</button> &nbsp;&nbsp;&nbsp;
+        <button type="button" disabled mat-raised-button (click)="openDialog()" color="primary"> 情報</button>
+       </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
 <!--
   <mat-card>
@@ -376,7 +563,7 @@
 
 
 
-<mat-card>
+<mat-card *ngIf="language=='english'">
   <mat-card-title>
     Upload Logo
   </mat-card-title>
@@ -385,13 +572,87 @@
   </mat-card-subtitle><br>
   <mat-card-content>
     <form action="" [formGroup]="uploadForm" (ngSubmit)="formSubmit(uploadForm.value)">
-      <input class="input-file" type="file" #fileInput  (change)="fileChange($event.target.files);"/><br><br>
+      <!-- <label class="custom-file-input" for="Upload" > -->
+      
+      <input class="input-file" id="Upload" type="file" #fileInput  (change)="fileChange($event.target.files);"/>
+    <!-- </label> -->
+     <br>
       <span *ngIf="loading" style="color:red">Please choose jpg/jpeg/png*</span>
       <br><br><br>  
           <button class="btn-set" mat-raised-button color="primary">Submit</button>
     </form>
   </mat-card-content>
 </mat-card>
+  <mat-card *ngIf="language=='japanese'">
+  <mat-card-title>
+   ロゴをアップロード
+  </mat-card-title>
+  <mat-card-subtitle>
+   ロゴを選択
+  </mat-card-subtitle><br>
+  <mat-card-content>
+    <form action="" [formGroup]="uploadForm" (ngSubmit)="formSubmit(uploadForm.value)">
+      <!-- <mat-label class="custom-file-input" for="Upload" > Upload -->
+      
+     <input class="input-file" type="file" id="Upload"  #fileInput  (change)="fileChange($event.target.files);"   />
+    <!-- </mat-label> -->
+     <br>
+      <span *ngIf="loading" style="color:red">Please choose jpg/jpeg/png*</span>
+      <br><br><br>  
+          <button class="btn-set-jp" mat-raised-button color="primary">決定</button>
+    </form>
+  </mat-card-content>
+</mat-card>
 
+<!-- <mat-card *ngIf="language=='english'">
+  <mat-card-title>
+    Set Language
+  </mat-card-title>
+  <mat-card-subtitle>
+    Choose language
+  </mat-card-subtitle><br> 
+  <mat-card-content>
+    <form [formGroup]="languageForm" (ngSubmit)="onSubmitlanguageForm(languageForm.value)">
+      <mat-form-field>
+        <mat-label>Set language</mat-label>
+       <mat-select formControlName="language" required>
+         <mat-option value="english">English</mat-option>
+         <mat-option value="japanese">Japanese</mat-option>
+
+       </mat-select>
+        <mat-error>
+          Please choose language
+        </mat-error>
+      </mat-form-field>
+      <br><br><br>
+      <button class="btn-set" mat-raised-button [disabled]="!languageForm.valid" color="primary">Submit</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<mat-card *ngIf="language=='japanese'">
+  <mat-card-title>
+    言語を設定する
+  </mat-card-title>
+  <mat-card-subtitle>
+    言語を選択
+  </mat-card-subtitle><br> 
+  <mat-card-content>
+    <form [formGroup]="languageForm" (ngSubmit)="onSubmitlanguageForm(languageForm.value)">
+      <mat-form-field>
+        <mat-label>言語を設定する</mat-label>
+       <mat-select formControlName="language" required>
+         <mat-option value="english">English</mat-option>
+         <mat-option value="japanese">Japanese(日本語)</mat-option>
+
+       </mat-select>
+        <mat-error>
+          言語を選択してください
+        </mat-error>
+      </mat-form-field>
+      <br><br><br>
+      <button class="btn-set-jp" mat-raised-button [disabled]="!languageForm.valid" color="primary">レポート作成</button>
+    </form>
+  </mat-card-content>
+</mat-card> -->
 
 </div>

@@ -13,7 +13,17 @@ thead {
   border: 1px solid #8080800a;
   box-shadow: 1px 1px 1px 1px #8080802e;
 }
+.btn {
+  display: flex; 
+  justify-content: flex-end;
+  margin-right: -1rem;
+ 
+}
+.btn-color {
+  border: 1px solid #ef6c00;
+  color: #ef6c00;
 
+}
 ::ng-deep .mat-sort-header-container {
   display:flex;
   justify-content:center;

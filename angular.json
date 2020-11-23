@@ -20,17 +20,20 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
+              "src/assets/favicon-32x32.png",
               "src/assets",
               "src/manifest.webmanifest",
               {
-              "glob": "**/*",
-              "input": "node_modules/ngx-international-phone-number2/assets/images",
-              "output": "./assets/images"
-            }
+                "glob": "**/*",
+                "input": "node_modules/ngx-international-phone-number2/assets/images",
+                "output": "./assets/images"
+              }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/theme.scss",
               "src/styles.css"
             ],
@@ -99,6 +102,8 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],

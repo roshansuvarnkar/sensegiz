@@ -15,7 +15,7 @@
 }
 .rowhome {
     width: 48%;
-    margin: 0 1rem 0 1rem;
+    margin: 0 0 0 0;
 }
 /* .home {
     display: flex;
@@ -32,7 +32,7 @@
   margin: 1rem 0 0rem 0;
 }
 .four{
-    margin: 1.286rem 0 2rem 0;
+    margin: 1.29rem 0 2rem 0;
   }
 span.tab-emp {
     display: flex;
@@ -73,9 +73,9 @@ mat-progress-bar.mat-progress-bar.mat-primary {
     flex-wrap: wrap;
     justify-content: space-evenly;
     text-align: center;
-    font-size: 1rem;
+    /*font-size: 1rem;*/
     font-family: monospace;
-    font-weight: 600;
+    font-weight: 400;
     width: 100%;
 }
 .row.tot-head {
@@ -117,10 +117,28 @@ span.rec {
 mat-label.tab-set {
     margin-left: 3rem;
 }
+mat-label.tab-set-jp {
+    margin-left: 7rem;
+}
+::ng-deep svg.circle {
+    height: 100px !important;
+    width: 100px !important;
+
+}
+
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-
+.first-cont {
+    display: flex;
+    flex-wrap:nowrap;
+    justify-content: space-evenly;
+    text-align: center;
+    font-size: 1rem;
+    font-family: monospace;
+    font-weight: 400;
+    width: 100%;
+}
   .main-home {
       display: block;
       margin: 1rem;
@@ -131,7 +149,7 @@ mat-label.tab-set {
   }
   .rowhome {
       width: 100%;
-      margin: 0 1rem 0 1rem;
+      margin: 0 0 0 0;
   }
   .first{
     margin: 1rem 0 2rem 0;
@@ -154,6 +172,11 @@ mat-label.tab-set {
 }
 span.emp-pad{
     margin-left: 0rem;
+}
+::ng-deep svg.circle {
+    height: 84px !important;
+    width: 84px !important;
+
 }
 }
 /* mat-card.mat-card.mat-focus-indicator.card-1 {

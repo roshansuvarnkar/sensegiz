@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import{Observable, BehaviorSubject} from 'rxjs'
 import * as XLSX from 'xlsx';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 
@@ -9,8 +10,9 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 export class GeneralMaterialsService {
   _timezone: any = null;
   _timeZoneAbbr: any
+  public loadingFreez : BehaviorSubject<any> = new BehaviorSubject<any>([])
 
-  constructor(private _snackBar: MatSnackBar,private http:HttpClient) {}
+  constructor(private _snackBar: MatSnackBar, private http:HttpClient) {}
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -113,4 +115,47 @@ convertTime(a){
   }
   return date
 }
+
+startTime(data1,data2){
+  console.log(data1,data2)
+  var date=new Date(data2)
+  if(data1!="00:00:00" || data1!='-'){
+    var a=data1.split(':')
+    date.setHours(date.getHours() -a[0]);
+    date.setMinutes(date.getMinutes() - a[1]); 
+    date.setSeconds(date.getSeconds() - a[2]); 
+    // console.log("new date==",date)
+  }
+  if(data1=="00:00:00" || data1=='-'){
+    date.setSeconds(date.getSeconds() - 5); 
+  }
+ 
+
+  return date
+}
+  getZone(date){
+    var timezone=date.getTimezoneOffset()
+    console.log("time zone==",timezone)
+
+    let m = timezone % 60;
+    console.log("m==",m)
+    timezone = (timezone - m) / 60;
+    let h = timezone
+    console.log("h==",m)
+
+    let mm = m <= 9 && m >= 0 ? "0"+m : m;
+    let hh = h <= 9 && h >= 0 ? "0"+h : h;
+  
+    var timezones=-(timezone)
+    console.log("time zone==",timezone)
+
+    if(timezones<0 ){
+      var timeZone= '-'+((hh)+':'+(mm)).toString()
+    }
+    else{
+      timeZone= '+'+ ((-hh)+':'+ (-mm)).toString()
+    }
+
+    return timeZone
+  }
 }

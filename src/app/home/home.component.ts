@@ -34,6 +34,9 @@ totmin:any
 timeout:any
 pageIndex:any
 pageSize:any
+offlineCount:any
+onlineCount:any
+language:any
 dataPoints:any=[]
   constructor(private api: ApiService,
   private login:LoginCheckService,
@@ -45,6 +48,8 @@ dataPoints:any=[]
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
     // this.checkUrl = this.router.url
 
     this.refreshFinds()
@@ -54,7 +59,7 @@ dataPoints:any=[]
     this.repeatedContacts()
     this.numOfcontactPerDay()
 
-    this.timeout=setInterval(()=>{this.refresh()},60*1000)
+    this.timeout=setInterval(()=>{this.refresh()},30*1000)
 
 }
 ngOnDestroy() {
@@ -73,11 +78,13 @@ sendWarning(id,value){
   this.api.showWarning(data).then((res:any)=>{
     // console.log("warning ======",res);
     if(res.status){
-      var msg = 'Warning sent Successfully'
+     if(this.language=='english'){ var msg = 'Warning sent Successfully'}
+     else if(this.language=='japanese'){var msg = '警告が正常に送信されました'}
       this.general.openSnackBar(msg,'')
     }
     else{
-      var msg = 'EmailId or Mobile number is not registered'
+      if(this.language=='english'){var msg = 'EmailId or Mobile number is not registered'}
+      else if(this.language=='japanese'){var msg = 'メールIDまたは携帯電話番号が登録されていません'}
       this.general.openSnackBar(msg,'')
     }
   })
@@ -102,9 +109,28 @@ refreshFinds(){
   })
 }
 
+refreshOnlineDevice(){
+  console.log("total empp==",this.totalEmp)
+  var date=new Date()
+  var data={
+    userId:this.loginData.userId,
+    zone:this.general.getZone(date),
+    type:'onlineUserData'
+  }
 
+  this.api.getOnlineCount(data).then((res:any)=>{
+    console.log("online data ======",res);
+    if(res.status == true){
+      this.onlineCount=res.success.length
+      this.offlineCount=this.totalEmp-res.success.length
+      console.log("offlineCount empp==",this.offlineCount)
+    }else if(res.status == false){
+      this.offlineCount=this.totalEmp-0
+      console.log("offlineCount empp==",this.offlineCount)
 
-
+    }
+  })
+}
 
 activeUser(){
   // console.log("Active users===",this.activeEmp)
@@ -125,11 +151,47 @@ activeUser(){
 
 }
 
+offlineUser(){
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.height = '90vh';
+  dialogConfig.width = '75vw';
+  dialogConfig.data = {
+    type:"offlineUserData",
+   
+  }
+  const dialogRef = this.dialog.open(HomeCountViewComponent, dialogConfig);
 
+  dialogRef.afterClosed().subscribe(result => {
+    this.refreshFinds()
+    this.refreshOnlineDevice()
+
+  });
+
+}
+onlineUser(){
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.height = '90vh';
+  dialogConfig.width = '75vw';
+  dialogConfig.data = {
+    type:"onlineUserData",
+   
+  }
+  const dialogRef = this.dialog.open(HomeCountViewComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(result => {
+    this.refreshFinds()
+    this.refreshOnlineDevice()
+
+  });
+
+}
 
 
 infectedUser(){
- 
 
       // console.log("Infected users===",this.infectedEmp)
        const dialogConfig = new MatDialogConfig();
@@ -148,9 +210,6 @@ infectedUser(){
        });
 
 }
-
-
-
 
 
 normalUser(){
@@ -199,14 +258,16 @@ refreshCount(){
     userId:this.loginData.userId,
   }
   this.api.getCountData(data).then((res:any)=>{
-    // console.log("count data ======",res);
+    console.log("count data ======",res);
     if(res.status){
       this.totalEmp = res.success[0].totalEmp
       this.infectedEmp = res.success[1].inectedEmp
       this.normalEmp = res.success[2].normalEmp
       this.activeEmp = res.success[3].activeEmp
+      this.refreshOnlineDevice()
     }
   })
+ 
 }
 
 
@@ -225,9 +286,6 @@ refreshSetting(){
     }
   })
 }
-
-
-
 
 
 
@@ -284,7 +342,7 @@ numOfcontactPerDay(){
     userId:this.loginData.userId,
   }
   this.api.getPerDayCount(data).then((res:any)=>{
-    // console.log("repeated contacts data ======",res);
+    console.log("repeated contacts data ======",res);
     if(res.status){
       this.dataPoints=[]
       this.countPerday = res.success.reverse()
@@ -307,6 +365,7 @@ numOfcontactPerDay(){
 
      
 
+     if(this.language=='english'){
       var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
                     exportEnabled: true,
@@ -326,10 +385,32 @@ numOfcontactPerDay(){
                       dataPoints:this.dataPoints
                     }]
                   });
+}
+else if(this.language=='japanese'){
+ var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    exportEnabled: true,
+                    title: {
+                      text: "一日当たりのトータル接触回数",
+                      fontColor: "#ef6c00",
+                    },
+                    axisY:{
 
+                      gridThickness: 0
+                    },
+                    dataPointWidth: 30,
+
+                    data: [{
+                      type: "column",
+
+                      dataPoints:this.dataPoints
+                    }]
+                  });
+}
       chart.render();
       chart.destroy()
       chart=null;
+      if(this.language=='english'){
       chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         exportEnabled: true,
@@ -349,10 +430,32 @@ numOfcontactPerDay(){
           dataPoints:this.dataPoints
         }]
       });
+      }
+      else if(this.language=='japanese'){
+      chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        exportEnabled: true,
+        title: {
+          text: "一日当たりのトータル接触回数",
+          fontColor: "#ef6c00",
+        },
+        axisY:{
+
+          gridThickness: 0
+        },
+        dataPointWidth: 30,
+
+        data: [{
+          type: "column",
+
+          dataPoints:this.dataPoints
+        }]
+      });
+      }
+
       chart.render();
     }
 
   })
- 
-}
+ }
 }

@@ -92,10 +92,31 @@
 						Please provide a valid email address
 					  </mat-error>
 					</mat-form-field>
-					<div class="phone">
+					<!-- <div class="phone">
 						<international-phone-number2  class="phoneNum" placeholder="Mobile number" [defaultCountry]="'in'" formControlName="mobileNum" 
 						autocomplete="false" aria-autocomplete="false" [required]="true">
 						</international-phone-number2> <hr class="num">
+					</div> -->
+					<div class="wrapper">
+						<ngx-intl-tel-input [cssClass]="'custom'"
+							[preferredCountries]="preferredCountries"
+							[enableAutoCountrySelect]="true"
+							[enablePlaceholder]="true"
+							[searchCountryFlag]="true"
+							[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+							[selectFirstCountry]="true"
+							[selectedCountryISO]="CountryISO.India"
+							[maxLength]="15"
+							[tooltipField]="TooltipLabel.Name"
+							[phoneValidation]="true"
+							[separateDialCode]="false"
+							name="mobileNum"
+							formControlName="mobileNum">
+						</ngx-intl-tel-input>
+						<hr class="mob">
+						<mat-error *ngIf="adminAddUserform.get('mobileNum').status=='INVALID'  && adminAddUserform.get('mobileNum').touched==true" class="error" >
+						  Please provide valid mobile number
+						</mat-error> 
 					</div>
 					<mat-form-field class="full-width-input">
 					  <input matInput  placeholder="Portal Password" formControlName="portalPassword" matInput required >

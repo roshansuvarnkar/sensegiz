@@ -19,10 +19,11 @@ export class ManageGatewaysComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   loginData:any
+  language:any
   gatewayData:any=[]
   elementsTemp:any=[]
   dataSource: any = [];
-  displayedColumns = ['i','gatewayId','gatewayName','currentVersion','edit',	'delete'];
+  displayedColumns = ['i','gatewayId','gatewayName','currentVersion','bleVersion','edit',	'delete']; //,'gatewayType'
   // ,'currentVersion'
   constructor(private dialog:MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
 
@@ -49,6 +50,8 @@ export class ManageGatewaysComponent implements OnInit {
   ngOnInit() {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
     this.refreshGateway()
   }
 
@@ -67,11 +70,14 @@ refreshGateway(){
 
       for (let i = 0; i <res.success.length; i++) {
         this.gatewayData.push(
-          {   i:i+1,
+          { 
+              i:i+1,
               id: res.success[i].id,
               gatewayId: res.success[i].gatewayId,
               gatewayName: res.success[i].gatewayName,
+              // gatewayType: res.success[i].gatewayType =='ethernet'?'Ethernet Gateway':'WiFi Gateway',
               currentVersion:res.success[i].currentVersion,
+              bleVersion:res.success[i].bleVersion,
               edit:'edit',
               delete:'delete'
           });
@@ -109,6 +115,7 @@ edit(data){
 
 
 delete(a){
+if(this.language=='english'){
   if(confirm('Are you sure you want to delete the gateway')){
     // console.log("yes",a)
     var data = {
@@ -124,25 +131,50 @@ delete(a){
       }
     })
   }
+  }
+    else if(this.language=='japanese'){
+  if(confirm('ゲートウェイを削除してもよろしいですか')){
+    // console.log("yes",a)
+    var data = {
+      id:a.id,
+      tblName:'gatewayRegistration'
+    }
+    this.api.deletedeviceandUser(data).then((res:any)=>{
+      // console.log("gateway data ======",res);
+      if(res.status){
+        this.refreshGateway()
+        var msg = 'ゲートウェイが正常に削除されました'
+        this.general.openSnackBar(msg,'')
+      }
+    })
+  }
+  }
+
+
 }
 
 
 
 search(a){
-  if(a.length>0){
-    this.gatewayData = this.elementsTemp.filter(obj=>{
-      return ((obj.gatewayId.toString().toLowerCase().indexOf(a)>-1) || (obj.gatewayName.toString().toLowerCase().indexOf(a)>-1))
+//   if(a.length>0){
+//     this.gatewayData = this.elementsTemp.filter(obj=>{
+//       return ((obj.gatewayId.toString().toLowerCase().indexOf(a)>-1) || (obj.gatewayName.toString().toLowerCase().indexOf(a)>-1))
+//     })
+//   }
+//   else{
+//     this.gatewayData = this.elementsTemp
+//   }
+//   this.dataSource = new MatTableDataSource(this.gatewayData);
+//   setTimeout(() => {
+//     this.dataSource.sort = this.sort;
+//     this.dataSource.paginator = this.paginator;
+//   })
+
+    this.dataSource = new MatTableDataSource(this.gatewayData);
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.filter =a.trim().toLowerCase()
     })
   }
-  else{
-    this.gatewayData = this.elementsTemp
-  }
-  this.dataSource = new MatTableDataSource(this.gatewayData);
-  setTimeout(() => {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  })
-}
-
 
 }

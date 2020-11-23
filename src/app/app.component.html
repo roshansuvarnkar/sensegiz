@@ -1,10 +1,12 @@
-
+<div class="statusFreeze flexWrap" *ngIf = "statusFreeze">
+  <mat-spinner mode="indeterminate"></mat-spinner><span [innerHTML]="freezeMessage"></span>
+</div>
 
 <mat-toolbar>
   <div class="mobilemenu" >
    <div *ngIf="twoStepAuth?.status && twoStepAuth?.role=='user'">
      <button mat-button [matMenuTriggerFor]="belowMenu" class="menu"><mat-icon>menu</mat-icon></button>
-   <mat-menu #belowMenu="matMenu" yPosition="below">
+    <mat-menu #belowMenu="matMenu" yPosition="below">
      <div class=" title" *ngIf="loginStatus">
        <span>
          <mat-icon >person</mat-icon>
@@ -12,19 +14,31 @@
        <p >{{loginDataInfo.userName}}</p> 
       
      </div><hr>
-     <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>Home</button>
-     <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>Manage People</button>
-     <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>Social Distancing</button>
-     <!-- <button mat-menu-item routerLink="/location"> <mat-icon>place</mat-icon>Location</button> -->
- 
-     <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>Settings</button>
-     <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>Reports</button>
-     <button mat-menu-item  (click)="logout()" class="logout"><mat-icon >exit_to_app</mat-icon>Logout</button>
+    <div *ngIf="language=='english'">
+      <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>Home</button>
+      <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>Manage People</button>
+      <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>Social Distancing</button>
+      <!-- <button mat-menu-item routerLink="/location"> <mat-icon>place</mat-icon>Location</button> -->
+  
+      <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>Settings</button>
+      <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>Reports</button>
+      <button mat-menu-item  (click)="logout()" class="logout"><mat-icon >exit_to_app</mat-icon>Logout</button>
+    </div>
+    <div *ngIf="language=='japanese'">
+      <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>ホームページ</button>
+      <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>管理画面 </button>
+      <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>ソーシャル・ディスタンシング </button>
+      <!-- <button mat-menu-item routerLink="/location"> <mat-icon>place</mat-icon>Location</button> -->
+  
+      <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>設定</button>
+      <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>レポート</button>
+      <button mat-menu-item  (click)="logout()" class="logout"><mat-icon >exit_to_app</mat-icon>ログアウト</button>
+    </div>
  
  
      <!-- <button mat-raised-button class="guide"><span routerLink="/user-guide">User Guide</span></button> -->
  
-   </mat-menu>
+    </mat-menu>
  
    </div>
   </div>
@@ -43,6 +57,15 @@
            <mat-icon >exit_to_app</mat-icon>
          </span>
        </span>
+          <span class="flex title" *ngIf="loginStatus && twoStepAuth?.role=='admin' && (isMobile || isTablet)">
+          <span>
+            <mat-icon >person</mat-icon>
+          </span>
+          <p >{{loginDataInfo.userName}}</p>&emsp;&nbsp;&emsp;
+          <span  (click)="logout()" class="logout">
+            <mat-icon >exit_to_app</mat-icon>
+          </span>
+      </span>
      </span>
    </span><br>
    </mat-toolbar>
@@ -52,15 +75,26 @@
  
  <div *ngIf="twoStepAuth?.status && twoStepAuth?.role=='user'">
    <mat-toolbar color="primary" class="menubar">
-     <span routerLink="/home">Home</span>
-     <!-- <span routerLink="/exception">Exception</span> -->
+    <div class="toolbar" *ngIf="language=='english';else changelang">
+        <span routerLink="/home">Home</span>
+         <!-- <span routerLink="/exception">Exception</span> -->
 
-     <span routerLink="/dashboard">Manage People</span>
-     <span routerLink="/live-data">Social Distancing</span>
-      <span routerLink="/settings">Settings</span>
-      <span routerLink="/history">Reports</span>
- 
-    <span routerLink="/user-guide">User Guide</span>
+        <span routerLink="/dashboard">Manage People</span>
+        <span routerLink="/live-data">Social Distancing</span>
+        <span routerLink="/settings">Settings</span>
+        <span routerLink="/history">Reports</span>
+        <span routerLink="/user-guide">User Guide</span>
+    </div>
+   <ng-template #changelang >
+      <div class="toolbar">
+        <span routerLink="/home">ホームページ</span>
+        <span routerLink="/dashboard">管理画面</span>
+        <span routerLink="/live-data">ソーシャル・ディスタンシング</span>
+        <span routerLink="/settings">設定</span>
+        <span routerLink="/history">レポート</span>
+        <span routerLink="/user-guide">ユーザーガイド</span>
+    </div>
+   </ng-template>
  
  
    </mat-toolbar>

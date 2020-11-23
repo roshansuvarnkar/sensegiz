@@ -32,18 +32,28 @@ mat-radio-button {
 .text{
     margin-right: 4rem;
 }
+.radio{
+    margin-left: -2rem;
+    display: flex;
+    justify-content: space-evenly;
+}
 mat-radio-group.mat-radio-group.ng-untouched.ng-pristine.ng-valid {
     display: flex;
 }
 
 mat-radio-group.mat-radio-group {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary {
     position: absolute;
     bottom: 1rem;
     right: 7.5rem;
+  }
+  button.mat-focus-indicator.btn-set-jp.mat-raised-button.mat-button-base.mat-primary {
+    position: absolute;
+    bottom: 1rem;
+    right: 6.5rem;
   }
   .radio{
     margin-left: -2rem;
@@ -61,4 +71,7 @@ button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary
     /* .history{
         margin-left: 2rem;
     } */
+    ::ng-deep .mat-autocomplete-panel{
+        width:0 !important;
+    }
 }

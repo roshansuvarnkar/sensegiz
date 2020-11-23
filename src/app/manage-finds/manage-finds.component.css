@@ -17,13 +17,15 @@ table.mat-table {
   margin-top: 1rem;
   /* text-align: center; */
 }
-
+.mat-icon.mat-icon.notranslate.publish.material-icons.mat-icon-no-color{
+height:30px !important;
+}
 ::ng-deep .mat-sort-header-container {
 display:flex;
 justify-content:center;
 font-weight: 500;
 font-size: 0.9rem;
-color: #ef6c00;
+
 }
 .center {
 text-align: center;
@@ -34,13 +36,13 @@ font-weight: 500;
 .search{
 position: absolute;
   top: 2rem;
-  right: 1rem;
+  right: 1rem;color: #ef6c00;
 }
 .upload {
  position: absolute;
- top: 2.3rem;
-}
+ top: 3rem;
 
+}
 
 
 .batteryContainer {
@@ -74,25 +76,36 @@ border-radius: 2px;
 height: 18px;
 }
 
-
-
+.cursor{
+cursor: pointer;
+}
+.upload-btn{
+display: block;
+color: #ef6c00;
+ text-decoration: underline orange;
+}
 @media only screen and (max-width: 768px) {
   table.table thead th {
       font-weight: 600;
       cursor: pointer;
       font-size: smaller;
   }
+ .error{
+   display: none;
+ }
   .upload {
-    position: absolute;
-    top: 0.5rem;
+  position: absolute;
+  top: 0.5rem;
+  left:1rem;
 }
+
   .search{
       width: 120px;
-
   }
   button.mat-focus-indicator.button.mat-flat-button.mat-button-base.mat-primary {
       margin-left: 1.2rem;
 
   }
+
 
 }

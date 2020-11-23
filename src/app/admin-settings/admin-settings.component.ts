@@ -24,6 +24,7 @@ export class AdminSettingsComponent implements OnInit {
   min:any=[]
   sec:any=[]
   dataGet:any
+  languageForm:FormGroup
   statusCustomise:boolean=false
   selectedValue:boolean=false
   selectStatus1:boolean=false
@@ -47,7 +48,9 @@ export class AdminSettingsComponent implements OnInit {
     });
     this.distanceForm = this.fb.group({
       distance: ['', Validators.required],
-      rssi: ['', Validators.required],
+      rssi: ['',Validators.pattern(/^[A-Z][A-Z 0-9]{1}$/)],
+      wearable:['',Validators.required],
+      customize:['']
     });
     this.scanningForm=this.fb.group({
       seconds:['',[Validators.required,Validators.max(60), Validators.min(1)]],
@@ -63,7 +66,9 @@ export class AdminSettingsComponent implements OnInit {
       fromTime: ['', Validators.required],
       toTime: ['', Validators.required]
     });
-
+    this.languageForm = this.fb.group({
+      language: ['', Validators.required],
+    });
     this.route.queryParams.subscribe(params => {
       this.dataGet = JSON.parse(params.record) ;
       // console.log("data==",this.dataGet.userId)
@@ -86,7 +91,8 @@ export class AdminSettingsComponent implements OnInit {
 
         this.distanceForm.patchValue({
           distance: res.success[0].distance.toString(),
-          rssi: res.success[0].rssi
+          rssi: res.success[0].rssi,
+          wearable:res.success[0].type.toString()
         })
         this.bufferForm.patchValue({
           buffer: res.success[0].buffer,
@@ -112,6 +118,9 @@ export class AdminSettingsComponent implements OnInit {
         })
         this.scanningForm.patchValue({
           seconds:res.success[0].scanningInterval.toString()
+        })
+        this.languageForm.patchValue({
+          language:res.success[0].language.toString()
         })
 
       }
@@ -139,24 +148,78 @@ export class AdminSettingsComponent implements OnInit {
     }
   }
 
+  customizeoff(){
+    this.statusCustomise=false
+    this.distanceForm.patchValue({
+      customize:0,
+    })
+  }
+  // onSubmitDistanceForm(data) {
+  //   if (this.distanceForm.valid) {
+  //     try {
+  //       console.log("distance ===",data)
+  //       data.userId = this.dataGet.userId
+  //       this.api.addDistance(data).then((res:any)=>{
+  //         console.log("distance inserted or updated",res)
+  //         if(res.status){
+  //           this.refreshSetting()
+  //           var msg = 'Minimum distance updated Successfully'
+  //           this.general.openSnackBar(msg,'')
+  //         }
+  //       })
+  //     } catch (err) {
+  //     }
+  //   }
+  // }
 
   onSubmitDistanceForm(data) {
-    if (this.distanceForm.valid) {
-      try {
-        console.log("distance ===",data)
-        data.userId = this.dataGet.userId
-        this.api.addDistance(data).then((res:any)=>{
-          console.log("distance inserted or updated",res)
-          if(res.status){
-            this.refreshSetting()
-            var msg = 'Minimum distance updated Successfully'
-            this.general.openSnackBar(msg,'')
+    console.log("data=",data)
+
+     if (this.distanceForm.valid) {
+       try {
+         var value={}
+         data.customize=data.customize==''?0:data.customize
+        if(data.customize==1){
+          value={
+            userId:this.dataGet.userId,
+            type:data.wearable,
+            distance:data.distance,
+            customize:data.customize,
+            rssi:data.rssi
           }
+        }
+        else{
+          value={
+            userId:this.dataGet.userId,
+            type:data.wearable,
+            distance:data.distance,
+            customize:data.customize,
+           
+            }
+        }
+         console.log("distance ===",value,data)
+         this.api.setDeviceRssi(value).then((res:any)=>{
+           console.log("distance insrted or updated",res)
+           if(res.status){
+            var msg = 'Minimum distance and wearable type updated Successfully'
+            this.general.openSnackBar(msg,'')
+            this.refreshSetting()
+        //      this.api.updateWearableType(value).then((res:any)=>{
+        //      if(res.status){
+        //       console.log("type",res)
+        //       var msg = 'Minimum distance and wearable type updated Successfully'
+        //      this.general.openSnackBar(msg,'')
+        //      this.refreshSetting()
+        //      }
+
+             
+        //  })
+        }
         })
-      } catch (err) {
-      }
-    }
-  }
+       } catch (err) {
+       }
+     }
+   }
 
   
   onSubmittxPowerForm(data) {
@@ -178,8 +241,12 @@ export class AdminSettingsComponent implements OnInit {
   }
 
 
-  customise(){
+  customise(event){
+    console.log("event===",event)
     this.statusCustomise = this.statusCustomise == true ? false : true
+    this.distanceForm.patchValue({
+      customize:event.checked==true?1:0
+    })
   }
   onclick(event){
     this.distanceForm.reset()
@@ -317,6 +384,17 @@ export class AdminSettingsComponent implements OnInit {
    }
 
 
+   onSubmitlanguageForm(data){
+    console.log("language===",data)
+    data.userId=this.dataGet.userId
+    this.api.setLanguage(data).then((res:any)=>{
+      this.general.updateItem('sensegizlogin','language',data.language)
+     this.refreshSetting()
+    //  setTimeout(()=>{
+    //    window.location.reload()
+    //  },1000)
+    })
+  }
 
  
    onSubmitBufferForm(value){

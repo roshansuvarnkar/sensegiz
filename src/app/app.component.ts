@@ -3,6 +3,7 @@ import { LoginCheckService } from './login-check.service';
 import { Router , ActivatedRoute } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { environment } from '../environments/environment'
+import { GeneralMaterialsService } from './general-materials.service';
 
 @Component({
   selector: 'app-root',
@@ -24,14 +25,17 @@ export class AppComponent {
   isDesktopDevice:boolean
   deviceStatus:boolean
   twoStepAuth:any
-
+  statusFreeze:boolean=false
+  freezeMessage:String="Downloading"
   deviceInfo = null;
+  language:any
   host:any = environment.apiHost
 
   constructor(
     private login:LoginCheckService,
     private router:Router,
     private route:ActivatedRoute,
+    private general:GeneralMaterialsService,
     private deviceService: DeviceDetectorService){
     // this.loginData = this.login.loginStatus()
     this.loginDataInfo = this.login.loginData()
@@ -45,16 +49,20 @@ export class AppComponent {
       // this.twoStepAuth=res
 
       this.loginDataInfo = this.login.loginData()
+      this.language=this.loginDataInfo.language
+      console.log("this.language====",this.language)
     })
     this.loginDataInfo = this.login.loginData()
-  //  console.log("loginDataInfo===",this.loginDataInfo);
+   console.log("loginDataInfo===",this.loginDataInfo);
    console.log("loginData===",this.loginData);
 
   this.login.loginCheckStatus.subscribe(res=>{
     // console.log("login data1===",res)
     this.loginStatus = res
     this.loginDataInfo = this.login.loginData()
-    // console.log("heloooo",this.loginDataInfo)
+    this.language=this.loginDataInfo.language
+    console.log("this.language====",this.language)
+    console.log("heloooo",this.loginDataInfo)
     if(this.loginDataInfo.twoStepAuth=='N'){
       // this.twoStepAuth=true
       // console.log("im Noo")
@@ -66,6 +74,10 @@ export class AppComponent {
     this.twoStepAuth=this.login.authData()
   })
 
+  this.general.loadingFreez.subscribe((res:any)=>{
+    console.log("statusfreeze==",res)
+    this.statusFreeze = res.status
+  })
 
   }
 

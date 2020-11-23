@@ -19,7 +19,7 @@ export class EditSettingShiftComponent implements OnInit {
 	shifts:any
 	loginData:any
 	dataGet:any
-
+	language:any
     constructor(
 	    private fb: FormBuilder,
 	    public dialogRef: MatDialogRef<EditSettingShiftComponent>,
@@ -36,8 +36,10 @@ export class EditSettingShiftComponent implements OnInit {
   	}
 
 	ngOnInit(): void {
-	  this.loginData = this.login.Getlogin()
-	  this.loginData = JSON.parse(this.loginData)
+		this.loginData = this.login.Getlogin()
+		this.loginData = JSON.parse(this.loginData)
+		this.language=this.loginData.language
+		console.log("language==",this.language)
 
 	  this.route.queryParams.subscribe(params => {
 		this.dataGet = JSON.parse(params.record) ;
@@ -129,26 +131,32 @@ export class EditSettingShiftComponent implements OnInit {
 		this.api.editSettingShift(a).then((res:any)=>{
         // console.log("shift edit==",res)
         if(res.status){
-          var msg = 'Shift updated Successfully'
-          this.general.openSnackBar(msg,'')
+		 var msg = 'Shift updated Successfully'
+		 this.general.openSnackBar(msg,'')
         }
         this.refreshShift()
       })
 	}
 
-
+//Unable to convert
   delete(a){
     // console.log("delete===",a);
+    
+
     if(confirm("Are you sure you want to delete the shift")){
       this.api.deleteShift(a).then((res:any)=>{
-        // console.log("shift delete==",res)
+        console.log("shift delete==",res)
         if(res.status){
-          var msg = 'Shift deleted Successfully'
+       var msg = 'Shift deleted Successfully'
+		
           this.general.openSnackBar(msg,'')
         }
         this.refreshShift()
       })
-    }
+    }else{
+		this.refreshShift()
+	}
+    
   }
 
 }

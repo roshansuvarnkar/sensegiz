@@ -26,6 +26,7 @@ export class SettingsComponent implements OnInit {
   buzzerTimeForm:FormGroup
   buzzerConfigForm:FormGroup
   twoStepAuthForm:FormGroup
+  languageForm:FormGroup
   loginData:any
   setting:any
   duration:any
@@ -48,9 +49,10 @@ export class SettingsComponent implements OnInit {
   coin:any=[]
   min:any=[]
   sec:any=[]
+  language:any
   tempImagePath:any
   // buzzerValue:any=[1,2,3,4,5]
-  
+
   someValue:any=[]
   uploadForm: FormGroup;
     @ViewChild('fileInput') fileInput : ElementRef;
@@ -62,6 +64,8 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
+    console.log("language==",this.language)
     this.refreshSetting()
     this.maxThresholdMinsec()
 
@@ -126,14 +130,18 @@ export class SettingsComponent implements OnInit {
       fileData:null,
       type:'logo',
     });
+    // this.languageForm = this.fb.group({
+    //   language: ['', Validators.required],
+    // });
 
-     
+
 
   }
 
   contactTeam(){
-    alert("Please contact SenseGiz Team for this setting")
-  
+   if(this.language=='english') {alert("Please contact SenseGiz Team for this setting")}
+  else if(this.language=='japanese') {alert("この設定については、インディゴーチームにお問い合わせください ")}
+
     }
 
   refreshSetting(){
@@ -209,30 +217,69 @@ export class SettingsComponent implements OnInit {
           }
 
         if( res.success[0].inactivityStatus == 1){
+         if(this.language=='english'){
           this.inactivityStatusValue = {
             value:true,
             status:'Disable'
           }
-        }
-        else{
+
+         }
+         else{
           this.inactivityStatusValue = {
-            value:false,
-            status:'Enable'
+            value:true,
+            status:'無効にする'
           }
         }
-      
+        }
+        else{
+          if(this.language=='english'){
+            this.inactivityStatusValue = {
+              value:false,
+              status:'Enable'
+            }
+
+           }
+           else{
+            this.inactivityStatusValue = {
+              value:false,
+              status:'有効にする'
+            }
+          }
+
+        }
+
       if(res.success[0].twoStepAuth== "N"){
-        this.twoStepAuthStatus={
-          value:'Enable',
-          status:false
+        if(this.language=='english'){
+          this.twoStepAuthStatus={
+            value:'Enable',
+            status:false
+          }
+        }
+        else{
+          this.twoStepAuthStatus={
+            value:'有効にする',
+            status:false
+          }
         }
       }
       else{
-        this.twoStepAuthStatus={
-          value:'Disable',
-          status:true
+        if(this.language=='english'){
+          this.twoStepAuthStatus={
+            value:'Disable',
+            status:true
+          }
         }
+        else{
+          this.twoStepAuthStatus={
+            value:':無効にする',
+            status:true
+          }
+        }
+
       }
+      // this.languageForm.patchValue({
+      //   language:res.success[0].language.toString()
+      // })
     }
   })
 }
@@ -288,10 +335,11 @@ export class SettingsComponent implements OnInit {
            console.log("time insrted or updated",res)
            if(res.status){
             this.multipleshift=false
-         
-            var msg = 'Shift time update Successfully'
+
+            if(this.language=='english') {var msg = 'Shift time update Successfully'}
+            else if(this.language=='japanese'){var msg = 'シフトが正常に更新されました'}
             this.general.openSnackBar(msg,'')
-           
+
            }else{
             this.multipleshift=true
            }
@@ -309,14 +357,16 @@ export class SettingsComponent implements OnInit {
         }
         console.log("value===",value)
         this.api.twoStepAuth(value).then((res:any)=>{
-        
+
           if(res.status){
             this.refreshSetting()
             if(data==true){
-              var msg = 'Two step authentication enabled'
+            if(this.language=='english'){ var msg = 'Two step authentication enabled'}
+             else if(this.language=='japanese'){ var msg = '2段階認証が有効になりました'}
               this.general.openSnackBar(msg,'')
             }else{
-              var msg = 'Two step authentication disabled'
+              if(this.language=='english'){ var msg = 'Two step authentication disabled'}
+              else if(this.language=='japanese'){var msg = '2段階認証が無効になっています'}
               this.general.openSnackBar(msg,'')
             }
           }
@@ -326,16 +376,34 @@ export class SettingsComponent implements OnInit {
    twoStepAuthchange(event){
      console.log(event)
      if(event.checked==true){
-       this.twoStepAuthStatus={
-         value:'Disable',
-         status:true
-       }
-     }  
-     else{
-      this.twoStepAuthStatus={
-        value:'Enable',
-        status:false
+      if(this.language=='english'){
+        this.twoStepAuthStatus={
+          value:'Disable',
+          status:true
+        }
       }
+      else{
+        this.twoStepAuthStatus={
+          value:'無効にする',
+          status:true
+        }
+      }
+
+     }
+     else{
+      if(this.language=='english'){
+        this.twoStepAuthStatus={
+          value:'Enable',
+          status:false
+        }
+      }
+      else{
+        this.twoStepAuthStatus={
+          value:'有効にする',
+          status:false
+        }
+      }
+
      }
    }
    onSubmitDistanceForm(data) {
@@ -373,7 +441,8 @@ export class SettingsComponent implements OnInit {
            if(res.status){
              this.refreshSetting()
              this.api.updateWearableType(data).then((res:any)=>{
-             var msg = 'Minimum distance and wearable type updated Successfully'
+             if(this.language=='english'){var msg = 'Minimum distance and wearable type updated Successfully'}
+             if(this.language=='japanese'){var msg = '最小距離とウェアラブルタイプが正常に更新されました'}
              this.general.openSnackBar(msg,'')
          })
         }
@@ -394,7 +463,8 @@ export class SettingsComponent implements OnInit {
           //  console.log("contact threshold insrted or updated",res)
            if(res.status){
              this.refreshSetting()
-             var msg = 'Max contact threshold updated Successfully'
+            if(this.language=='english'){ var msg = 'Max contact threshold updated Successfully'}
+             else if(this.language=='japanese'){ var msg = '最大連絡先しきい値が正常に更新されました'}
              this.general.openSnackBar(msg,'')
            }
          })
@@ -414,7 +484,8 @@ export class SettingsComponent implements OnInit {
           //  console.log("tx power updated",res)
            if(res.status){
              this.refreshSetting()
-             var msg = 'Transmission power updated Successfully'
+              if(this.language=='english'){var msg = 'Transmission power updated Successfully'}
+               else if(this.language=='japanese'){var msg = '無線電波の出力は正常に更新されました'}
              this.general.openSnackBar(msg,'')
            }
          })
@@ -439,7 +510,8 @@ export class SettingsComponent implements OnInit {
           // console.log("Inactivity response===",res)
           if(res.status){
             this.refreshSetting()
-            var msg = 'Inactivity updated Successfully'
+           if(this.language=='english'){ var msg = 'Inactivity updated Successfully'}
+           else if(this.language=='english'){ var msg = '非アクティブが正常に更新されました'}
             this.general.openSnackBar(msg,'')
           }
         })
@@ -451,7 +523,7 @@ export class SettingsComponent implements OnInit {
    }
 
 
- 
+
    onSubmitBufferForm(value){
 
     if (this.bufferForm.valid) {
@@ -463,27 +535,28 @@ export class SettingsComponent implements OnInit {
 
         }
 
-     
+
         this.api.getBufferDeviceSetting(data).then((res:any)=>{
           // console.log("Buffer response===",res)
           if(res.status){
             this.refreshSetting()
-            var msg = 'Buffer updated Successfully'
+            if(this.language=='english'){var msg = 'Buffer updated Successfully'}
+            else if(this.language=='japanese'){var msg = '保存量が正常に更新されました'}
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
           // console.log("err===",err);
         })
-    
+
       } catch (err) {
       }
     }
    }
    bufferval(event){
      console.log(event.target.value)
-    
+
       this.bufferValue=event.target.value>5?true:false
-    
+
    }
 
 
@@ -500,7 +573,8 @@ export class SettingsComponent implements OnInit {
   //     //  console.log("duration==",res)
   //     if(res.status){
   //       this.refreshSetting()
-  //       var msg = 'Minimum duration threshold updated Successfully'
+  //      if(this.language=='english'){ var msg = 'Minimum duration threshold updated Successfully'}
+   //      else if(this.language=='japanese'){ var msg = '最小接触時間のしきい値は正常に更新されました'}
   //       this.general.openSnackBar(msg,'')
   //     }
   //   })
@@ -545,7 +619,8 @@ export class SettingsComponent implements OnInit {
           // console.log("wearable type===",res)
           if(res.status){
             this.refreshSetting()
-            var msg='Wearable type updated Successfully'
+           if(this.language=='english'){ var msg='Wearable type updated Successfully'}
+           else if(this.language=='japanese'){ var msg='ウェアラブルタイプが正常に更新されました'}
             this.general.openSnackBar(msg,'')
             this.refreshSetting()
           }
@@ -570,7 +645,8 @@ export class SettingsComponent implements OnInit {
           // console.log("buzzer congig===",res)
           if(res.status){
             this.refreshSetting()
-            var msg='Buzzer configured Successfully'
+             if(this.language=='english'){ var msg='Alert configured Successfully'}
+             else if(this.language=='japanese'){ var msg='アラートが正常に構成されました'}
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
@@ -590,7 +666,8 @@ export class SettingsComponent implements OnInit {
           // console.log("Scanning Interval===",res)
           if(res.status){
             this.refreshSetting()
-            var msg='Interval second Successfully'
+            if(this.language=='english'){var msg='Interval second Successfully'}
+            else if(this.language=='japanese'){var msg='インターバル秒が正常に'}
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
@@ -704,6 +781,18 @@ export class SettingsComponent implements OnInit {
 
    }
 
+  //  onSubmitlanguageForm(data){
+  //    console.log("language===",data)
+  //    data.userId=this.loginData.userId
+  //    this.api.setLanguage(data).then((res:any)=>{
+  //      this.general.updateItem('sensegizlogin','language',data.language)
+  //     this.refreshSetting()
+  //     setTimeout(()=>{
+  //       window.location.reload()
+  //     },1000)
+  //    })
+  //  }
+
    inactivityChange(event){
      var checked = event.checked == true ? 1 : 2
 
@@ -715,7 +804,8 @@ export class SettingsComponent implements OnInit {
      this.api.updateInactivityStatus(data).then((res:any)=>{
        if(res.status){
          this.refreshSetting()
-         var msg = 'Inactivity updated Successfully'
+        if(this.language=='english'){ var msg = 'Inactivity updated Successfully'}
+          if(this.language=='japanese'){ var msg = '非アクティブが正常に更新されましたs'}
          this.general.openSnackBar(msg,'')
        }
      }).catch(err=>{

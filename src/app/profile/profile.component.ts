@@ -5,6 +5,7 @@ import { LoginCheckService } from '../login-check.service';
 import { ApiService } from '../api.service';
 import { GeneralMaterialsService } from '../general-materials.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,10 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  
+  SearchCountryField = SearchCountryField;
+  TooltipLabel = TooltipLabel;
+  CountryISO = CountryISO;
+  preferredCountries: CountryISO[] = [CountryISO.India];
   subAddUserform:FormGroup
   subUser:any
   loginData:any
