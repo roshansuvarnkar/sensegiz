@@ -141,7 +141,7 @@ export class HistoryReportComponent implements OnInit {
       this.basedOnDate(limit=limit,offset=offset)
     }
     if(this.type == 'cummulative'){
-      this.cummulativeReport()
+      this.cummulativeReport(limit=limit,offset=offset)
     }
     if(this.type == 'basedOnFindName'){
       this.basedOnFindName(limit=limit,offset=offset)
@@ -381,13 +381,15 @@ callUpdatedon(date){
   // console.log("aaa==",a)
   return a
 }
-cummulativeReport(){
+cummulativeReport(limit,offset){
   var date=new Date()
 
   var data={
     userId:this.loginData.userId,
     fromDate: this.from,
     toDate:this.to,
+    limit:limit,
+    offset:offset,
     zone:this.general.getZone(date)
 
   }
