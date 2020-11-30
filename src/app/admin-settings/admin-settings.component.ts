@@ -20,6 +20,7 @@ export class AdminSettingsComponent implements OnInit {
   timeForm:FormGroup
   bufferForm:FormGroup
   workingForm:FormGroup
+  sendDataForm:FormGroup
   setting:any=[]
   min:any=[]
   sec:any=[]
@@ -69,6 +70,10 @@ export class AdminSettingsComponent implements OnInit {
     this.languageForm = this.fb.group({
       language: ['', Validators.required],
     });
+    this.sendDataForm = this.fb.group({
+      rate:['',[Validators.required,Validators.max(255), Validators.min(1)]],
+    });
+
     this.route.queryParams.subscribe(params => {
       this.dataGet = JSON.parse(params.record) ;
       // console.log("data==",this.dataGet.userId)
@@ -121,6 +126,9 @@ export class AdminSettingsComponent implements OnInit {
         })
         this.languageForm.patchValue({
           language:res.success[0].language.toString()
+        })
+        this.sendDataForm.patchValue({
+          rate:res.success[0].gatewayDataRate.toString()
         })
 
       }
@@ -221,7 +229,24 @@ export class AdminSettingsComponent implements OnInit {
      }
    }
 
-  
+   onSubmitSendDataForm(data){
+    if (this.scanningForm.valid) {
+      try {
+        data.userId=this.dataGet.userId
+        this.api.setGatewayDataRate(data).then((res:any)=>{
+          console.log("setGatewayDataRate ===",res)
+          if(res.status){
+            this.refreshSetting()
+            var msg='  Gateway data rate updated successfully'
+            this.general.openSnackBar(msg,'')
+          }
+        }).catch(err=>{
+          console.log("err===",err);
+        })
+      } catch (err) {
+      }
+    }
+   }
   onSubmittxPowerForm(data) {
     if (this.txPowerForm.valid) {
       try {
@@ -389,10 +414,11 @@ export class AdminSettingsComponent implements OnInit {
     data.userId=this.dataGet.userId
     this.api.setLanguage(data).then((res:any)=>{
       this.general.updateItem('sensegizlogin','language',data.language)
-     this.refreshSetting()
-    //  setTimeout(()=>{
-    //    window.location.reload()
-    //  },1000)
+      if(res.status){
+        this.refreshSetting()
+        var msg = 'Language updated Successfully'
+        this.general.openSnackBar(msg,'')
+      }
     })
   }
 

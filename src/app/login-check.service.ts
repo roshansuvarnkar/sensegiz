@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs'
+import { Subject, interval } from 'rxjs'
 import { Router , ActivatedRoute } from '@angular/router';
-
-
+import { BnNgIdleService } from 'bn-ng-idle';
+import * as moment from 'moment';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,11 +11,20 @@ export class LoginCheckService {
   public loginCheckStatus = new Subject<any>()
   public pageCheck = new Subject<any>()
   public authCheck = new Subject<any>()
-
-
-  constructor(private router:Router) {
+  
+  check:boolean=true
+  constructor(private router:Router,private bnIdle: BnNgIdleService) {
+    this.bnIdle.startWatching(600).subscribe((isTimedOut: boolean) => {
+      console.log('session expired',isTimedOut);
+      if (isTimedOut) {
+        localStorage.clear();
+        this.router.navigate(['/login']);
+      }
+    });
       // this.loginStatus()
       // this.authData()
+    //  this.logout()
+ 
    }
 
 
@@ -116,7 +125,6 @@ export class LoginCheckService {
 
 
 
-
   Getlogin(){
     var status = localStorage.getItem('sensegizlogin')
     if(status  && status!='undefined'){
@@ -132,10 +140,29 @@ export class LoginCheckService {
     localStorage.setItem('sensegizlogin',data)
     return true
   }
+  // logout(){
+  
+  //     var status = JSON.parse(localStorage.getItem('sensegizlogin'))
+  //     console.log("logout function called")
 
-  logout(){
-    localStorage.clear()
-    return true
-  }
+  //     if(status){
+  //       var timeLeft=moment().endOf('day').diff(moment(status.endDay))
+  //       console.log("leffttt===",timeLeft)
+  //       console.log("logout==",status.endDay== moment('2020-11-25 03:54:01').toString())
+
+  //       if(status.endDay== moment('2020-11-25 03:54:01').toString()){
+  //         console.log("logout==",moment().toString()== moment('2020-11-24 05:27:01').toString())
+  //         localStorage.clear()
+  //         this.loginCheckStatus.next(false)
+  //         this.loginCred.next(false)
+  //         this.authCheck.next(false)
+  //         this.router.navigate(['/login'])
+  //       }
+  //       else{
+  //         interval(2000 * 60).subscribe(x => { this.logout(); })
+  //       }
+  //     }
+    
+  // }
 
 }

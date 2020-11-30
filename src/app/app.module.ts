@@ -42,6 +42,9 @@ import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
 import { TwoStepAuthComponent } from './two-step-auth/two-step-auth.component';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthenticationInterceptor } from './authentication.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 
 @NgModule({
@@ -89,7 +92,9 @@ import { ProfileComponent } from './profile/profile.component';
     DeviceDetectorModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,BnNgIdleService,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor,multi:true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
     if (this.Loginform.valid) {
       try {
         data.system='portal'
+      
         this.api.send(data).then((res:any)=>{
           console.log("logged in==",res)
            var passwordExpiry=res.hasOwnProperty('alreadyExisted')

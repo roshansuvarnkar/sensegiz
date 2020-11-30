@@ -16,6 +16,7 @@ export class AdminLoginComponent implements OnInit {
    public loginInvalid: boolean;
    passwordType: string = 'password';
    passwordIcon: string = 'visibility_off';
+   sendDataForm:FormGroup
 
    constructor(
       private fb: FormBuilder,
