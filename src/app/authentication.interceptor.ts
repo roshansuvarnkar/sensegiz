@@ -26,7 +26,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
     if(this.loginData ){
       this.loginData = JSON.parse(this.loginData)
       console.log("in interceptor===",this.loginData)
-      console.log("moment ==",moment(this.loginData.expiryDate).format('YYYY-MM-DD hh:mm:ss'),"today date> ",moment().format('YYYY-MM-DD hh:mm:ss'))
+      // console.log("moment ==",moment(this.loginData.expiryDate).format('YYYY-MM-DD hh:mm:ss'),"today date> ",moment().format('YYYY-MM-DD hh:mm:ss'))
       if(this.loginData.role=='user' && moment(this.loginData.expiryDate).format('YYYY-MM-DD hh:mm:ss') <= moment().format('YYYY-MM-DD hh:mm:ss')){
         localStorage.clear()
         this.login.loginCheckStatus.next(false)
@@ -41,11 +41,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
       }
     }
     else{
-      // console.log("outing")
-      // localStorage.clear()
-      // this.login.loginCheckStatus.next(false)
-      // this.login.loginCred.next(false)
-      // this.login.authCheck.next(false)
+   
       return next.handle(request);
     }
       
