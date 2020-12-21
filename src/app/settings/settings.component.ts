@@ -140,9 +140,8 @@ export class SettingsComponent implements OnInit {
 
   contactTeam(){
    if(this.language=='english') {alert("Please contact SenseGiz Team for this setting")}
-  else if(this.language=='japanese') {alert("この設定については、インディゴーチームにお問い合わせください ")}
-
-    }
+   else if(this.language=='japanese') {alert("この設定については、インディゴーチームにお問い合わせください ")}
+  }
 
   refreshSetting(){
     var data={
@@ -371,7 +370,6 @@ export class SettingsComponent implements OnInit {
             }
           }
         })
-
    }
    twoStepAuthchange(event){
      console.log(event)
@@ -494,16 +492,14 @@ export class SettingsComponent implements OnInit {
      }
    }
 
-
    onSubmitInactivityForm(value){
 
-    if (this.inactivityForm.valid) {
+    if (this.inactivityForm.valid){
       try {
         // console.log("inactivity data==",value)
         var data={
         userId : this.loginData.userId,
         inactivity : value.inactivity
-
         }
 
         this.api.getInactivityDeviceSetting(data).then((res:any)=>{
@@ -518,11 +514,7 @@ export class SettingsComponent implements OnInit {
       } catch (err) {
       }
     }
-
-
    }
-
-
 
    onSubmitBufferForm(value){
 
@@ -532,9 +524,7 @@ export class SettingsComponent implements OnInit {
         var data={
         userId : this.loginData.userId,
         buffer : value.buffer
-
         }
-
 
         this.api.getBufferDeviceSetting(data).then((res:any)=>{
           // console.log("Buffer response===",res)
@@ -552,11 +542,10 @@ export class SettingsComponent implements OnInit {
       }
     }
    }
+
    bufferval(event){
      console.log(event.target.value)
-
-      this.bufferValue=event.target.value>5?true:false
-
+     this.bufferValue=event.target.value>5?true:false
    }
 
 
@@ -610,9 +599,7 @@ export class SettingsComponent implements OnInit {
             data.rssi='A5'
           }
         }
-
-
-          data.userId=this.loginData.userId,
+        data.userId=this.loginData.userId,
 
         // console.log("data=====",data)
         this.api.updateWearableType(data).then((res:any)=>{
@@ -630,9 +617,21 @@ export class SettingsComponent implements OnInit {
       } catch (err) {
       }
     }
+  }
 
-   }
-
+  option(data){
+    console.log("option===",data.target.value)
+    if(data.target.value == '' || data.target.value == 'undefined' || data.target.value == null){
+      this.buzzerConfigForm.patchValue({
+        durationSec:10
+      })
+    }
+    else{
+      this.buzzerConfigForm.patchValue({
+        durationSec:data.target.value
+      })
+    }
+  }
   onSubmitbuzzerConfigForm(data){
     // console.log("data==",data)
     data.durationSec=data.buzzerConfig>0 && data.buzzerConfig<=4?0:data.durationSec

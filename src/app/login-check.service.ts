@@ -54,16 +54,7 @@ export class LoginCheckService {
 
   authData(){
     var status = JSON.parse(localStorage.getItem('sensegizlogin'))
-    // var auth=JSON.parse(status)==null?'N':JSON.parse(status)
-    // console.log("inside auth==",JSON.parse(status))
-    // if( auth.twoStepAuth=="N" || auth.twoStepAuth=="Y" ){
-    //   this.authCheck.next(true)
-    //   return true
-    // }
-    // else{
-    //   this.authCheck.next(false)
-    //   return false
-    // }
+  
     console.log("status of authdata==",status)
 
     if(status && status != 'undefined'){
@@ -140,29 +131,6 @@ export class LoginCheckService {
     localStorage.setItem('sensegizlogin',data)
     return true
   }
-  // logout(){
-  
-  //     var status = JSON.parse(localStorage.getItem('sensegizlogin'))
-  //     console.log("logout function called")
 
-  //     if(status){
-  //       var timeLeft=moment().endOf('day').diff(moment(status.endDay))
-  //       console.log("leffttt===",timeLeft)
-  //       console.log("logout==",status.endDay== moment('2020-11-25 03:54:01').toString())
-
-  //       if(status.endDay== moment('2020-11-25 03:54:01').toString()){
-  //         console.log("logout==",moment().toString()== moment('2020-11-24 05:27:01').toString())
-  //         localStorage.clear()
-  //         this.loginCheckStatus.next(false)
-  //         this.loginCred.next(false)
-  //         this.authCheck.next(false)
-  //         this.router.navigate(['/login'])
-  //       }
-  //       else{
-  //         interval(2000 * 60).subscribe(x => { this.logout(); })
-  //       }
-  //     }
-    
-  // }
 
 }

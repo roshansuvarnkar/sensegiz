@@ -356,7 +356,7 @@ summaryReport(){
 
 dataDateReduce(data){
   return data.reduce((group,obj)=>{
-    const name = obj.contactDeviceName == this.deviceName?obj.baseDeviceName: obj.contactDeviceName
+    const name = obj.contactDeviceName.toLowerCase().trim() == this.deviceName.toLowerCase().trim()?obj.baseDeviceName: obj.contactDeviceName
     // console.log("name---",name,"this.deviceName====",this.deviceName)
   if(name!=this.deviceName){
       if(!group[name]){
