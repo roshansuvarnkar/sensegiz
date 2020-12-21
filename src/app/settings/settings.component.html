@@ -226,7 +226,7 @@
         <div *ngIf="buzzerConfigStatus" >
           <mat-form-field >
             <mat-label>Enter seconds in multiple of 5</mat-label>
-              <input type='number' matInput formControlName="durationSec" required >
+              <input type='number' matInput formControlName="durationSec" required (change)="option($event)" >
               <mat-error  >
                 Please enter minimum seconds is 10
               </mat-error>

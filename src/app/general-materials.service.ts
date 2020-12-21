@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Router , ActivatedRoute } from '@angular/router';
+
 import{Observable, BehaviorSubject} from 'rxjs'
 import * as XLSX from 'xlsx';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-
+import * as moment from 'moment';
 @Injectable({
   providedIn: 'root'
 })
 export class GeneralMaterialsService {
   _timezone: any = null;
   _timeZoneAbbr: any
+  check:boolean=true
   public loadingFreez : BehaviorSubject<any> = new BehaviorSubject<any>([])
 
-  constructor(private _snackBar: MatSnackBar, private http:HttpClient) {}
+  constructor(private _snackBar: MatSnackBar, private http:HttpClient,private router:Router) {
+    // this.logout()
+  }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -158,4 +163,8 @@ startTime(data1,data2){
 
     return timeZone
   }
+
+
+  
+  
 }

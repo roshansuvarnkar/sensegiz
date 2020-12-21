@@ -481,7 +481,7 @@ fileSubmit(data){
 
     this.loading=false
     if(data.header[0].toLowerCase()=='name' && data.header[2].toLowerCase()=='deviceid'|| data.header[1].toLowerCase()=="employeeid" ||
-    data.header[3]=="mobilenumber".toLowerCase() || data.header[4]=="emailid".toLowerCase()){
+    data.header[3].toLowerCase() =="mobilenumber"|| data.header[4].toLowerCase()=="emailid"){
       this.format=false
       if(this.language=='english'){var msg = 'Please wait..! It takes few minutes to upload'}
       else if(this.language=='japanese'){var msg = 'お待ちください..！アップロードには数分かかります'}

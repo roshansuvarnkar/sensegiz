@@ -98,5 +98,9 @@ mat-card.mat-card.mat-focus-indicator.sub {
     color: #ef6c00eb;
     margin-left: auto !important;
 }
+.wrapper1{
+    margin-left: 2.5rem !important;
+    color: black;
+}
 
-  }
+}

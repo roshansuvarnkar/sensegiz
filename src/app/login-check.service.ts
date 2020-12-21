@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs'
+import { Subject, interval } from 'rxjs'
 import { Router , ActivatedRoute } from '@angular/router';
-
-
+import { BnNgIdleService } from 'bn-ng-idle';
+import * as moment from 'moment';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,11 +11,20 @@ export class LoginCheckService {
   public loginCheckStatus = new Subject<any>()
   public pageCheck = new Subject<any>()
   public authCheck = new Subject<any>()
-
-
-  constructor(private router:Router) {
+  
+  check:boolean=true
+  constructor(private router:Router,private bnIdle: BnNgIdleService) {
+    this.bnIdle.startWatching(600).subscribe((isTimedOut: boolean) => {
+      console.log('session expired',isTimedOut);
+      if (isTimedOut) {
+        localStorage.clear();
+        this.router.navigate(['/login']);
+      }
+    });
       // this.loginStatus()
       // this.authData()
+    //  this.logout()
+ 
    }
 
 
@@ -45,16 +54,7 @@ export class LoginCheckService {
 
   authData(){
     var status = JSON.parse(localStorage.getItem('sensegizlogin'))
-    // var auth=JSON.parse(status)==null?'N':JSON.parse(status)
-    // console.log("inside auth==",JSON.parse(status))
-    // if( auth.twoStepAuth=="N" || auth.twoStepAuth=="Y" ){
-    //   this.authCheck.next(true)
-    //   return true
-    // }
-    // else{
-    //   this.authCheck.next(false)
-    //   return false
-    // }
+  
     console.log("status of authdata==",status)
 
     if(status && status != 'undefined'){
@@ -116,7 +116,6 @@ export class LoginCheckService {
 
 
 
-
   Getlogin(){
     var status = localStorage.getItem('sensegizlogin')
     if(status  && status!='undefined'){
@@ -133,9 +132,5 @@ export class LoginCheckService {
     return true
   }
 
-  logout(){
-    localStorage.clear()
-    return true
-  }
 
 }

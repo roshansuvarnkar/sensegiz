@@ -31,7 +31,8 @@ currentPageLength:number = 10;
 currentPageSize:number = 10;
 limit:any
 offset:any
-pageSet:any
+pageSet:any=10
+pageIndex:any=0
 language:any
 displayedColumns: string[] = ['i','baseName','contactName','startTime', 'updatedOn','totalTime'];
 selectMin:FormGroup
@@ -55,38 +56,47 @@ totTime:any=[]
     this.refreshData(this.count)
     this.getTotalCount(0)
     // console.log("count",this.count)
-    this.timeout=setInterval(()=>{ this.refreshData(this.count,this.pageSet)},30*1000)
+    this.timeout=setInterval(()=>{ this.refresh()},30*1000)
   }
   ngOnDestroy() {
     clearInterval(this.timeout)
   }
 
-  prevDayData(){
-    // var limit=this.paginator.pageSize
-    // var offset=this.paginator.pageIndex*this.paginator.pageSize
-    this.liveData=[]
-    this.paginator.pageIndex=0
+  refresh(){
+    console.log("pagination==",this.pageSet,this.pageIndex)
+    this.refreshData(this.count,this.pageSet,this.pageIndex)
+    this.getTotalCount(this.count)
+  }
+    prevDayData(){
+      // var limit=this.paginator.pageSize
+      // var offset=this.paginator.pageIndex*this.paginator.pageSize
+      this.liveData=[]
+      this.paginator.pageIndex=0
+      this.paginator.pageSize=10
+      this.pageSet=10
+      this.pageIndex=0
+      this.count = this.count + 1;
+      // console.log("count==",this.count);
   
-    this.count = this.count + 1;
-    // console.log("count==",this.count);
-
-    this.getTotalCount(this.count)
-    this.refreshData(this.count)
-  }
-
-  nextDayData(){
-    this.liveData=[]
-    this.paginator.pageIndex=0
-    
-
-    // var limit=this.pagi=nator.pageSize
-    // var offset=this.paginator.pageIndex*this.paginator.pageSize
-    this.count = this.count - 1;
-    // console.log("count==",this.count);
-
-    this.getTotalCount(this.count)
-    this.refreshData(this.count)
-  }
+      this.getTotalCount(this.count)
+      this.refreshData(this.count)
+    }
+  
+    nextDayData(){
+      this.liveData=[]
+      this.paginator.pageIndex=0
+  
+      this.paginator.pageSize=10
+      this.pageSet=10
+      this.pageIndex=0
+      // var limit=this.pagi=nator.pageSize
+      // var offset=this.paginator.pageIndex*this.paginator.pageSize
+      this.count = this.count - 1;
+      // console.log("count==",this.count);
+  
+      this.getTotalCount(this.count)
+      this.refreshData(this.count)
+    }
 
 getTotalCount(val){
   var date=new Date()
@@ -210,14 +220,17 @@ getTotalCount(val){
 //   return date
 // }
 
-  getUpdate(event) {
-      console.log("paginator event",event);
-      // console.log("paginator event length", this.currentPageLength);
-     this.limit = event.pageSize
-      this.offset = event.pageIndex*event.pageSize
-      this.pageSet=event.pageSize
-      this.refreshData(this.count,this.limit,this.offset)
-  }
+getUpdate(event) {
+  console.log("paginator event",event);
+  // console.log("paginator event length", this.currentPageLength);
+ this.limit = event.pageSize
+  this.offset = event.pageIndex*event.pageSize
+  this.pageSet=event.pageSize
+  this.pageIndex=event.pageIndex*event.pageSize
+  // console.log("this.pageSet===",this.pageSet, "   this.pageSet===",this.pageIndex)
+  this.refreshData(this.count,this.limit,this.offset)
+  this.getTotalCount(this.count)
+}
 
   filterTotTime(event){
       console.log("event value===",event,"  tot===", this.totTime)
