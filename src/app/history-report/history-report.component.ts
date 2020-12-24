@@ -56,7 +56,7 @@ export class HistoryReportComponent implements OnInit {
   limit:any
   offset:any
   deviceIdData:any
-
+  status:any
     constructor(
       public dialog: MatDialog,
       private api: ApiService,
@@ -78,6 +78,7 @@ export class HistoryReportComponent implements OnInit {
       this.date=data.date
       this.selectedValue=data.valueSelected
       this.deviceName=data.deviceName
+      this.status=data.status
      }
 
   ngOnInit(): void {
@@ -310,24 +311,28 @@ basedOnFindName(limit,offset){
 // },{})
 // }
 summaryReport(){
-
+  var date=new Date()
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     deviceName:this.deviceName,
-    fromDate: this.from,
-    toDate:this.to,
-    zone:this.general.getZone(this.date)
+    // fromDate: this.from,
+    // toDate:this.to,
+    type:this.status,
+    zone:this.general.getZone(date)
 
   }
+  console.log("Sumaary data==",data)
   this.api.getSummaryReport(data).then((res:any)=>{
     console.log("summary report======",res);
 
     this.liveData=[]
+ 
     this.deviceIdData=[]
-    if(res.status){
 
-      var groupUser = this.dataDateReduce(res.success)
+    if(res.status){
       this.deviceIdData=this.deviceId(res.success)
+      var groupUser = this.dataDateReduce(res.success)
 
       this.liveData = Object.keys(groupUser).map((data)=>{
 
@@ -336,7 +341,7 @@ summaryReport(){
           data : data
         }
       })
-      console.log("live==",this.liveData)
+      // console.log("live==",this.liveData)
 
       // for(let i=0;i<this.liveData.length;i++){
 

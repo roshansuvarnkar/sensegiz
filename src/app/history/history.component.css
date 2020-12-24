@@ -24,7 +24,9 @@ mat-card-title{
     display: flex;
     justify-content: center;
 }
-
+.infect{
+    display: contents !important;
+}
 mat-radio-button {
     display: inline !important;
     margin-left: 2.6rem;

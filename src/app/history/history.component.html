@@ -339,7 +339,7 @@
   </mat-card>
   <!-- summary from -->
 
-  <mat-card *ngIf="language=='english'">
+  <!-- <mat-card >
     <span class="card-head">
       <mat-card-title color="primary">
         Summary Report of Infected User
@@ -361,7 +361,6 @@
       <form [formGroup]="summaryReportForm" (ngSubmit)="onSubmitSummaryReport(summaryReportForm.value)">
 
         <mat-form-field class="full-width-input">
-          <mat-label>User Name</mat-label>
           <input type='text' matInput placeholder="User Name" formControlName="deviceName" [matAutocomplete]="auto" (keyup)="infectedSuggestion($event)" required>
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let user of username" [value]="user">
@@ -372,20 +371,14 @@
             Please provide a valid user name
           </mat-error>
         </mat-form-field>
-<!-- 
-        <mat-form-field class="full-width-input">
-          <mat-label>Time in minutes</mat-label>
-          <input type='number' matInput placeholder="in minutes" formControlName="minutes" >
-          <mat-error>
-            Please provide minutes
-          </mat-error>
-        </mat-form-field> -->
+
+
 
         <mat-form-field>
           <mat-label>From date</mat-label>
-          <input matInput [matDatepicker]="myDatepicker7" formControlName="fromDate"  required>
-          <mat-datepicker-toggle matSuffix [for]="myDatepicker7"></mat-datepicker-toggle>
-          <mat-datepicker #myDatepicker7></mat-datepicker>
+          <input matInput [matDatepicker]="myDatepicker5" formControlName="fromDate"  required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker5"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker5></mat-datepicker>
           <mat-error>
             Please provide a valid from date
           </mat-error>
@@ -393,9 +386,9 @@
 
         <mat-form-field>
           <mat-label>To date</mat-label>
-          <input matInput [matDatepicker]="myDatepicker8" formControlName="toDate" required>
-          <mat-datepicker-toggle matSuffix [for]="myDatepicker8"></mat-datepicker-toggle>
-          <mat-datepicker #myDatepicker8></mat-datepicker>
+          <input matInput [matDatepicker]="myDatepicker6" formControlName="toDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker6"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker6></mat-datepicker>
           <mat-error>
             Please provide a valid to date
           </mat-error>
@@ -404,10 +397,85 @@
         <button class="btn-set" mat-raised-button [disabled]="!summaryReportForm.valid" color="primary">Submit</button>
       </form>
     </mat-card-content>
+  </mat-card> -->
+
+  <mat-card  *ngIf="language=='english'">
+    <span class="card-head">
+      <mat-card-title color="primary">
+        Summary Report of Infected User
+      </mat-card-title>
+      <mat-card-subtitle>
+        Enter infected person name and date range
+      </mat-card-subtitle>
+
+    </span>
+    <mat-card-content>
+     
+      <form [formGroup]="summaryReportForm" (ngSubmit)="onSubmitSummaryReport(summaryReportForm.value)">
+        
+          <mat-radio-group  color="primary" formControlName="status" class="infect" >
+            <mat-radio-button value="0" name="small" [checked]="true">Before marking Infected</mat-radio-button> 
+            <mat-radio-button value="1" name="small" >After marking Infected</mat-radio-button>
+          </mat-radio-group>
+        <br>
+        <mat-form-field class="full-width-input">
+          <input type='text' matInput placeholder="User Name" formControlName="deviceName" [matAutocomplete]="auto" 
+          (keyup)="infectedSuggestion($event)" required>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let user of username" [value]="user">
+              {{user}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error>
+            Please provide a valid user name
+          </mat-error>
+        </mat-form-field>
+
+        <br> <br><br>
+        <button class="btn-set" mat-raised-button [disabled]="!summaryReportForm.valid" color="primary">Submit</button>
+      </form>
+    </mat-card-content>
   </mat-card>
 
+  <mat-card *ngIf="language=='japanese'" >
+    <span class="card-head">
+      <mat-card-title color="primary">
+       感染した対象者のソーシャルディスタンス内に近づいた全接触者リスト
+      </mat-card-title>
+      <mat-card-subtitle>
+        感染者の名前と日付範囲を入力
+      </mat-card-subtitle>
+      <mat-error *ngIf="daysExceed">
+       15日未満の適切な日付範囲を選択してください。.
+      </mat-error>
+    </span>
+    <mat-card-content>
 
-    <mat-card *ngIf="language=='japanese'" >
+      <form [formGroup]="summaryReportForm" (ngSubmit)="onSubmitSummaryReport(summaryReportForm.value)">
+        <mat-radio-group  color="primary" formControlName="status" class="infect" >
+          <mat-radio-button value="0" name="small" [checked]="true">Before marking Infected</mat-radio-button> 
+          <mat-radio-button value="1" name="small" >After marking Infected</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="full-width-input">
+          <input type='text' matInput placeholder="ユーザー名  " formControlName="deviceName" [matAutocomplete]="auto" (keyup)="infectedSuggestion($event)" required>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let user of username" [value]="user">
+              {{user}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error>
+           正式なユーザー名を入力してください
+          </mat-error>
+        </mat-form-field>
+
+
+  <br> <br><br>
+        <button class="btn-set-jp" mat-raised-button [disabled]="!summaryReportForm.valid" color="primary">レポート作成</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+    <!-- <mat-card *ngIf="language=='japanese'" >
     <span class="card-head">
       <mat-card-title color="primary">
        感染した対象者のソーシャルディスタンス内に近づいた全接触者リスト
@@ -440,12 +508,6 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- <mat-form-field class="full-width-input">
-          <input type='number' matInput placeholder="Time in minutes" formControlName="minutes" >
-          <mat-error>
-            Please provide minutes
-          </mat-error>
-        </mat-form-field> -->
 
         <mat-form-field>
           <mat-label>日付から</mat-label>
@@ -470,6 +532,6 @@
         <button class="btn-set-jp" mat-raised-button [disabled]="!summaryReportForm.valid" color="primary">レポート作成</button>
       </form>
     </mat-card-content>
-  </mat-card>
+  </mat-card> -->
 
 </div>

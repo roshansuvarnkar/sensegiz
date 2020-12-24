@@ -604,11 +604,22 @@ getSummaryReport(data){
 }
 
 
+// getInactivityDeviceSetting(data){
+//   const httpOptions = {
+//     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+//   };
+//   let url = this.host+'/inactivityDeviceSetting';
+//   return new Promise((resolve,reject)=>{
+//     this.http.post(url,data,httpOptions).subscribe(res=>{
+//       resolve(res);
+//     })
+//   });
+// }
 getInactivityDeviceSetting(data){
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  let url = this.host+'/inactivityDeviceSetting';
+  let url = this.host+'/updateInactivity';
   return new Promise((resolve,reject)=>{
     this.http.post(url,data,httpOptions).subscribe(res=>{
       resolve(res);
@@ -929,5 +940,16 @@ downloadReport(data,fileName){
         resolve(res);
       })
     });
+  }
+
+  getCountryZone(){
+    return new Promise((resolve,reject)=>{
+      this.http.get('../../assets/zone.json').subscribe((res:any)=>{
+        resolve(res.zone)
+      },
+      err=>{
+        reject(err)
+      })
+    })
   }
 }

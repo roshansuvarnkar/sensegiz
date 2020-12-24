@@ -25,6 +25,39 @@
     </mat-card-content>
   </mat-card>
 
+  <!-- <mat-card>
+    <mat-card-title>
+       Define Inactivity
+    </mat-card-title>
+    <mat-card-subtitle>
+      Enter inactivity in minutes
+    </mat-card-subtitle>
+   
+    <mat-card-content>
+      <form [formGroup]="inactivityForm" (ngSubmit)="onSubmitInactivityForm(inactivityForm.value)">
+        <mat-slide-toggle color="primary" [checked]="inactivityStatusValue.value" formControlName="type" (change)="inactivityChange($event)" >{{inactivityStatusValue.status}}</mat-slide-toggle>
+        <br>
+        <mat-form-field *ngIf="inactivityStatusValue.value">
+          <mat-label>Set Inactivity</mat-label>
+          <mat-select formControlName="inactivity" [required]="inactivityStatusValue.value">
+            <mat-option value="1">10</mat-option>
+            <mat-option value="2">20</mat-option>
+            <mat-option value="3">30</mat-option>
+            <mat-option value="4">40</mat-option>
+            <mat-option value="5">50</mat-option>
+            <mat-option value="6">60</mat-option>
+          </mat-select>
+          <mat-error>
+            Please provide a valid inactivity in minutes
+          </mat-error>
+        </mat-form-field> <br>
+        
+        <br><br>
+        <button class="btn-set" mat-raised-button [disabled]="!inactivityForm.valid" color="primary">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card> -->
+
   <mat-card>
     <mat-card-title>
     Scanning Interval
@@ -319,6 +352,9 @@
         <mat-card-content class="shift">
           <mat-error *ngIf="multipleShift">
             You cannot have multiple shift, to update shift click info
+          </mat-error>
+          <mat-error *ngIf="timeExceed">
+            Time range cannot be greater than 09:00 hours.
           </mat-error>
           <form [formGroup]="workingForm" (ngSubmit)="onSubmitWorkForm(workingForm.value)">
             <mat-form-field>
