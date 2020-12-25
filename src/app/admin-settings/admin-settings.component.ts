@@ -429,13 +429,13 @@ export class AdminSettingsComponent implements OnInit {
 
    }
    onSubmitWorkForm(data) {
-    // console.log("time==",data)
-    // var times1=data.fromTime.split(':')
-    // var times2=data.toTime.split(':')
-    // var min=Math.abs(times2[1]-times1[1])
-    // var hour=Math.abs(times2[0]-times1[0])
-    // console.log("minhour",min,hour)
-    // if((hour < 9 && (min>=0 && min<=59)) || (hour == 9 && min == 0)){
+    console.log("time==",data)
+    var times1=data.fromTime.split(':')
+    var times2=data.toTime.split(':')
+    var min=Math.abs(times2[1]-times1[1])
+    var hour=Math.abs(times2[0]-times1[0])
+    console.log("minhour",min,hour)
+    if((hour < 9 && (min>=0 && min<=59)) || (hour == 9 && min == 0)){
       this.timeExceed=false
       var dateobj=new Date()
    
@@ -482,12 +482,11 @@ export class AdminSettingsComponent implements OnInit {
          } catch (err) {
          }
        }
-    // }
-    // else if(hour >=9 && min>0){
-    //     this.timeExceed=true
-    // }
+    }
+    else if(hour >=9 && min>0){
+        this.timeExceed=true
+    }
    }
-
 
    onSubmitlanguageForm(data){
     console.log("language===",data)
