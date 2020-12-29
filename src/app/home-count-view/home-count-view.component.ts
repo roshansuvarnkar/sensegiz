@@ -32,6 +32,7 @@ index:any
 pageIndex:any
 pagesize:any
 language:any
+
 displayedColumns: string[] = ['i', 'deviceId', 'deviceName'];
 
   constructor(private api: ApiService,
@@ -55,6 +56,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName'];
   loadData(){
     var date=new Date()
     var data={}
+ 
     if(this.type=='activeUserData'){
 
        data={
@@ -151,5 +153,33 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName'];
 
     }
   }
-
+  getPages(){
+    var dateObj=new Date()
+    var data={}
+    var fileName=''
+      if(this.type=='onlineUserData'){
+        data={
+        userId:this.loginData.userId,
+        zone:this.general.getZone(dateObj),
+        type:this.type
+        }
+        fileName="Active User"
+      }
+      if(this.type=='offlineUserData'){
+        data={
+        userId:this.loginData.userId,
+        zone:this.general.getZone(dateObj),
+        type:this.type
+      }
+      fileName="offline User- "+this.deviceName
+    }
+    
+      console.log("data to send ======",data);
+    
+      this.api.downloadReport(data,fileName).then((res:any)=>{
+    
+      console.log("report data recieved ======",res);
+      })
+    
+  }
 }

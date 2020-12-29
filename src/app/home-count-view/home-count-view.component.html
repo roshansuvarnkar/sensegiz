@@ -1,4 +1,5 @@
 <div>
+
     <div *ngIf="type =='activeUserData'">
 
 
@@ -170,7 +171,12 @@
 
       <div *ngIf="type =='onlineUserData'">
 
-
+        <div class="download1" >
+          <button mat-raised-button (click)="getPages()" color="primary"><mat-icon> cloud_download &nbsp;&nbsp;&nbsp;&nbsp;</mat-icon>
+             <span *ngIf="language=='english'">Download</span>
+             <span *ngIf="language=='japanese'">ダウンロード</span>
+            </button>
+        </div>
         <div class="content">
           <p class="center"*ngIf="language=='english'">Active users</p>
           <p class="center"*ngIf="language=='japanese'">アクティブユーザー数</p>
@@ -232,7 +238,12 @@
       
       <div *ngIf="type =='offlineUserData'">
 
-
+        <div class="download1" >
+          <button mat-raised-button (click)="getPages()" color="primary"><mat-icon> cloud_download &nbsp;&nbsp;&nbsp;&nbsp;</mat-icon>
+             <span *ngIf="language=='english'">Download</span>
+             <span *ngIf="language=='japanese'">ダウンロード</span>
+            </button>
+        </div>
         <div class="content">
           <p class="center" *ngIf="language=='english'">Offline users</p>
             <p class="center" *ngIf="language=='japanese'">オフラインユーザー</p>

@@ -116,12 +116,12 @@
         {
            "value": 0,
            "text": "(UTC) Dublin, Edinburgh, London, Lisbon",
-           "zone": "00:00"
+           "zone": "+00:00"
         },
         {
             "value": 0,
             "text": "(UTC) Monorvia, Reykjavik, Sao Tome",
-            "zone": "00:00"
+            "zone": "+00:00"
          },
         {
            "value": 1,

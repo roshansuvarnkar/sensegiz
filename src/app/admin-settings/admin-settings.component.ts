@@ -21,6 +21,7 @@ export class AdminSettingsComponent implements OnInit {
   bufferForm:FormGroup
   workingForm:FormGroup
   sendDataForm:FormGroup
+  scanCountForm:FormGroup
   setting:any=[]
   min:any=[]
   sec:any=[]
@@ -63,6 +64,10 @@ export class AdminSettingsComponent implements OnInit {
       seconds:['',[Validators.required,Validators.max(60), Validators.min(1)]],
 
     })
+    this.scanCountForm=this.fb.group({
+      count:['',[Validators.required,Validators.max(253), Validators.min(0)]],
+    })
+    
     this.timeForm=this.fb.group({
       minutes:[{value:'',disabled: false},Validators.required],
       seconds:[{value:'',disabled: false},Validators.required]
@@ -123,7 +128,9 @@ export class AdminSettingsComponent implements OnInit {
             minutes:res.success[0].durationThreshold/60,
           })
         }
-       
+        this.scanCountForm.patchValue({
+          count:res.success[0].scanCount.toString()
+        })
         this.txPowerForm.patchValue({
           txPower: res.success[0].txPower,
         })
@@ -142,12 +149,18 @@ export class AdminSettingsComponent implements OnInit {
             value:true,
             status:'Disable'
           }
+          this.inactivityForm.patchValue({
+           inactivity: res.success[0].inactivity
+        })
         }
         if( res.success[0].inactivityStatus == 2){
           this.inactivityStatusValue = {
             value:false,
             status:'Enable'
           }
+          this.inactivityForm.patchValue({
+            inactivity: res.success[0].inactivity
+         })
         }
       }
     })
@@ -331,7 +344,27 @@ export class AdminSettingsComponent implements OnInit {
     }
   }
 
+  //scan count == meeting count
 
+  onSubmitScanCountForm(data){
+    console.log("data==",data)
+    if (this.scanCountForm.valid) {
+      try {
+        data.userId=this.dataGet.userId
+        this.api.updateMeetingCount(data).then((res:any)=>{
+          console.log("Scanning Interval===",res)
+          if(res.status){
+            this.refreshSetting()
+            var msg='Scan count updated Successfully'
+            this.general.openSnackBar(msg,'')
+          }
+        }).catch(err=>{
+          console.log("err===",err);
+        })
+      } catch (err) {
+      }
+    }
+  }
   customise(event){
     console.log("event===",event)
     this.statusCustomise = this.statusCustomise == true ? false : true

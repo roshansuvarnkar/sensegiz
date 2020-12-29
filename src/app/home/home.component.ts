@@ -109,28 +109,28 @@ refreshFinds(){
   })
 }
 
-refreshOnlineDevice(){
-  console.log("total empp==",this.totalEmp)
-  var date=new Date()
-  var data={
-    userId:this.loginData.userId,
-    zone:this.general.getZone(date),
-    type:'onlineUserData'
-  }
+// refreshOnlineDevice(){
+//   console.log("total empp==",this.totalEmp)
+//   var date=new Date()
+//   var data={
+//     userId:this.loginData.userId,
+//     zone:this.general.getZone(date),
+//     type:'onlineUserData'
+//   }
 
-  this.api.getOnlineCount(data).then((res:any)=>{
-    console.log("online data ======",res);
-    if(res.status == true){
-      this.onlineCount=res.success.length
-      this.offlineCount=this.totalEmp-res.success.length
-      console.log("offlineCount empp==",this.offlineCount)
-    }else if(res.status == false){
-      this.offlineCount=this.totalEmp-0
-      console.log("offlineCount empp==",this.offlineCount)
+//   this.api.getOnlineCount(data).then((res:any)=>{
+//     console.log("online data ======",res);
+//     if(res.status == true){
+//       this.onlineCount=res.success.length
+//       this.offlineCount=this.totalEmp-res.success.length
+//       console.log("offlineCount empp==",this.offlineCount)
+//     }else if(res.status == false){
+//       this.offlineCount=this.totalEmp-0
+//       console.log("offlineCount empp==",this.offlineCount)
 
-    }
-  })
-}
+//     }
+//   })
+// }
 
 activeUser(){
   // console.log("Active users===",this.activeEmp)
@@ -165,7 +165,7 @@ offlineUser(){
 
   dialogRef.afterClosed().subscribe(result => {
     this.refreshFinds()
-    this.refreshOnlineDevice()
+    // this.refreshOnlineDevice()
 
   });
 
@@ -184,7 +184,7 @@ onlineUser(){
 
   dialogRef.afterClosed().subscribe(result => {
     this.refreshFinds()
-    this.refreshOnlineDevice()
+    // this.refreshOnlineDevice()
 
   });
 
@@ -256,18 +256,22 @@ refresh(){
 refreshCount(){
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
   }
   this.api.getCountData(data).then((res:any)=>{
     console.log("count data ======",res);
     if(res.status){
       this.totalEmp = res.success[0].totalEmp
       this.infectedEmp = res.success[1].inectedEmp
-      this.normalEmp = res.success[2].normalEmp
-      this.activeEmp = res.success[3].activeEmp
-      this.refreshOnlineDevice()
+      // this.normalEmp = res.success[2].normalEmp
+      this.onlineCount=res.success[2].activeEmp
+      this.offlineCount=res.success[3].offlineEmp
+      this.activeEmp = res.success[4].registedEmp
+    
+    //  this.refreshOnlineDevice()
     }
   })
- 
+
 }
 
 
