@@ -13,14 +13,29 @@ import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+  subAddUserform:FormGroup
+  subUser:any
+  loginData:any
+  registered:boolean=false;
   SearchCountryField = SearchCountryField;
   TooltipLabel = TooltipLabel;
   CountryISO = CountryISO;
   preferredCountries: CountryISO[] = [CountryISO.India];
-  subAddUserform:FormGroup
-  subUser:any
-  loginData:any
-  registered:boolean=false
+  userType:any=[
+    {
+      name:'Co. Admin',
+      value:2
+    },
+    {
+      name:'Normal User',
+      value:3
+    },
+    {
+      name:'Sub Admin',
+      value:4
+    },
+  ]
   constructor(
     public dialog: MatDialog,
     private fb: FormBuilder,
@@ -29,8 +44,8 @@ export class ProfileComponent implements OnInit {
     private login: LoginCheckService,
     private api: ApiService,
     private general: GeneralMaterialsService
-  ) { 
-    
+  ) {
+
   }
 
   ngOnInit(): void {
@@ -38,51 +53,90 @@ export class ProfileComponent implements OnInit {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.subAddUserform = this.fb.group({
+      type:['',Validators.required],
       subUserName: ['', Validators.email],
+      department: [''],
       mobileNum:['',Validators.required],
       portalPassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
-        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/)
       ]],
-     
+      mobilePassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/)
+      ]],
+      userPassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/)
+      ]]
+    },
+    {
+      validators: this.formValidator(),
+      updateOn: 'blur',
     });
 
     this.refreshSubUserData()
   }
 
+
+  formValidator(){
+    return (formGroup: FormGroup) => {
+      const type = formGroup.get('type');
+      const dept = formGroup.get('department');
+      console.log("formGroup==",formGroup)
+      if(type.value==4){
+        if(dept.value!=''){
+          dept.setErrors(null)
+          return
+        }
+        else{
+          dept.setErrors({
+            required:true
+          })
+          return
+        }
+      }
+      else{
+        dept.setErrors(null)
+        return null
+      }
+    }
+  }
+
   onSubmit(data) {
-    data.mobileNum=data.mobileNum.replace(/\s/g,'')
+    data.mobileNum=data.mobileNum!=null?data.mobileNum.e164Number:''
     data.userId=this.loginData.userId
     console.log("sub user register==",data)
- 
+
      if (this.subAddUserform.valid) {
        try {
          this.api.createSubUser(data).then((res:any)=>{
            console.log(" user created==",res)
-       if(res.status){
-         this.registered=false
-         var msg = "User Created successfully"
-         this.general.openSnackBar(msg,'')
-         this.subAddUserform.reset()
-         this.refreshSubUserData()
-       }else{
-         this.registered=true
-       }
-         })      	
+           if(res.status){
+             this.registered=false
+             var msg = "User Created successfully"
+             this.general.openSnackBar(msg,'')
+             this.subAddUserform.reset()
+             this.refreshSubUserData()
+           }else{
+             this.registered=true
+           }
+         })
        } catch (err) {
        }
      }
    }
-   
+
 refreshSubUserData(){
-  this.api.getSubUser().then((res:any)=>{
-    console.log("data===",res)
-  if(res.status){
-    this.subUser=res.success
+  let data = {
+    userId : this.loginData.userId
   }
+  this.api.getSubUser(data).then((res:any)=>{
+    console.log("data===",res)
+    if(res.status){
+      this.subUser=res.success
+    }
   })
 }
- 
- 
+
+
 
   delete(a){
     console.log("delete==",a)
@@ -90,7 +144,7 @@ refreshSubUserData(){
       subUserId : a.subUserId,
       isDeleted : a.isDeleted == 'Y' ? 'N' : 'Y'
     }
- 
+
     this.api.deleteSubUser(data).then((res:any)=>{
        console.log("data===",res)
      if(res.status){

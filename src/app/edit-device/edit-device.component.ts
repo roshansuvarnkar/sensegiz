@@ -103,6 +103,7 @@ export class EditDeviceComponent implements OnInit {
           data.tblName='deviceRegistration'
           data.id=this.deviceData.id
           data.userId=this.loginData.userId
+          data.subUserId=(this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0;
           data.deviceId=this.deviceData.deviceId
           data.mobileNum=data.mobileNum!=null ||data.mobileNum!=undefined  ?data.mobileNum.e164Number:''
         console.log("find edit===",data)
@@ -119,7 +120,7 @@ export class EditDeviceComponent implements OnInit {
              else if(this.language=='japanese'){ var msg = 'デバイス名はすでに存在します。別の名前を試してください'}
             this.general.openSnackBar(msg,'')
           }
-        
+
         })
       } catch (err) {
       }
@@ -133,6 +134,7 @@ export class EditDeviceComponent implements OnInit {
         data.tblName='gatewayRegistration'
         data.id=this.deviceData.id
         data.userId=this.loginData.userId
+        data.subUserId=(this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0;
         data.deviceId= this.deviceData.gatewayId
         console.log("gateway data==",data)
 
@@ -142,7 +144,7 @@ export class EditDeviceComponent implements OnInit {
             if(this.language=='english'){
               var msg = 'Gateway Updated Successfully'
             }
-            else if(this.language=='japanese'){ 
+            else if(this.language=='japanese'){
               var msg = 'ゲートウェイが正常に更新されました'
             this.general.openSnackBar(msg,'')
             }
@@ -164,6 +166,7 @@ export class EditDeviceComponent implements OnInit {
     if (this.userform.valid) {
       try {
         data.id=this.deviceData.id
+        data.subUserId=(this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0;
         data.mobileNum=data.mobileNum.e164Number
         data.userId=this.loginData.userId
 

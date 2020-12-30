@@ -53,7 +53,7 @@ daysExceed:boolean=false
       fromDate: ['', Validators.required],
       toDate: ['', Validators.required]
     });
-    
+
     this.cummulativeForm = this.fb.group({
       fromDate: ['', Validators.required],
       toDate: ['', Validators.required]
@@ -193,6 +193,7 @@ onclickSummaryReport(data){
   refreshFinds(){
     var data={
       userId:this.loginData.userId,
+      subUserId:(this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       tblName:'deviceRegistration'
     }
     this.api.getData(data).then((res:any)=>{
@@ -302,7 +303,7 @@ onclickSummaryReport(data){
   }
 
 
-  onSubmitcummulativeForm(data){  
+  onSubmitcummulativeForm(data){
     var date1=new Date(data.fromDate)
     var date2=new Date(data.toDate)
     var year = date1.getFullYear();
@@ -341,8 +342,8 @@ onclickSummaryReport(data){
         this.date1=new Date(data.fromDate)
         this.date2 =new Date(data.toDate)
         var diffTime = Math.abs(this.date2 - this.date1);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
         console.log(diffDays + " days");
       if(diffDays<15){
         this.daysExceed=false
@@ -382,10 +383,11 @@ onclickSummaryReport(data){
 
   userSuggestion(event){
     console.log("data=",event)
-   
+
     var data={
       value:event.target.value,
       userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       tblName:'deviceData'
 
     }
@@ -401,15 +403,16 @@ onclickSummaryReport(data){
 
       }
     })
-    
+
   }
 
   infectedSuggestion(event){
     console.log("data=",event)
-   
+
     var data={
       value:event.target.value.toString(),
       userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       tblName:'deviceRegistration'
 
     }

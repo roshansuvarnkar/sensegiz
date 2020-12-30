@@ -20,10 +20,11 @@ export class ManageGatewaysComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   loginData:any
   language:any
+  userType:any
   gatewayData:any=[]
   elementsTemp:any=[]
   dataSource: any = [];
-  displayedColumns = ['i','gatewayId','gatewayName','gatewayType','currentVersion','bleVersion','edit',	'delete']; 
+  displayedColumns = ['i','gatewayId','gatewayName','gatewayType','currentVersion','bleVersion','edit',	'delete'];
   // ,'currentVersion'
   constructor(private dialog:MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
 
@@ -50,6 +51,7 @@ export class ManageGatewaysComponent implements OnInit {
   ngOnInit() {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.userType=this.loginData.type
     this.language=this.loginData.language
     console.log("language==",this.language)
     this.refreshGateway()
@@ -60,6 +62,7 @@ export class ManageGatewaysComponent implements OnInit {
 refreshGateway(){
   var data={
       userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       tblName:'gatewayRegistration'
     }
 
@@ -70,7 +73,7 @@ refreshGateway(){
 
       for (let i = 0; i <res.success.length; i++) {
         this.gatewayData.push(
-          { 
+          {
               i:i+1,
               id: res.success[i].id,
               gatewayId: res.success[i].gatewayId,

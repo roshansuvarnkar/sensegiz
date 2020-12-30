@@ -72,7 +72,7 @@ sendWarning(id,value){
     userId:this.loginData.userId,
     id:id,
     totalCount:value,
-    
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
   }
 
   this.api.showWarning(data).then((res:any)=>{
@@ -98,6 +98,7 @@ sendWarning(id,value){
 refreshFinds(){
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
   }
 
   this.api.getAssignedDevices(data).then((res:any)=>{
@@ -114,6 +115,7 @@ refreshOnlineDevice(){
   var date=new Date()
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     zone:this.general.getZone(date),
     type:'onlineUserData'
   }
@@ -159,7 +161,7 @@ offlineUser(){
   dialogConfig.width = '75vw';
   dialogConfig.data = {
     type:"offlineUserData",
-   
+
   }
   const dialogRef = this.dialog.open(HomeCountViewComponent, dialogConfig);
 
@@ -178,7 +180,7 @@ onlineUser(){
   dialogConfig.width = '75vw';
   dialogConfig.data = {
     type:"onlineUserData",
-   
+
   }
   const dialogRef = this.dialog.open(HomeCountViewComponent, dialogConfig);
 
@@ -201,7 +203,7 @@ infectedUser(){
        dialogConfig.width = '75vw';
        dialogConfig.data = {
          type:"infectedUserData",
-        
+
        }
        const dialogRef = this.dialog.open(HomeCountViewComponent, dialogConfig);
 
@@ -215,6 +217,7 @@ infectedUser(){
 normalUser(){
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     type:'normal'
   }
   this.api.getHomeCountData(data).then((res:any)=>{
@@ -256,6 +259,7 @@ refresh(){
 refreshCount(){
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
   }
   this.api.getCountData(data).then((res:any)=>{
     console.log("count data ======",res);
@@ -267,7 +271,7 @@ refreshCount(){
       this.refreshOnlineDevice()
     }
   })
- 
+
 }
 
 
@@ -277,6 +281,7 @@ refreshCount(){
 refreshSetting(){
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     tblName:'deviceSetting'
   }
   this.api.getData(data).then((res:any)=>{
@@ -290,8 +295,11 @@ refreshSetting(){
 
 
 maximumContactTime(){
+  var date=new Date()
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+    zone:this.general.getZone(date)
   }
   this.api.getMaxTimeContact(data).then((res:any)=>{
     // console.log("max contact time ======",res);
@@ -321,8 +329,11 @@ maximumContactTime(){
 
 
 repeatedContacts(){
+  var date=new Date()
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+    zone:this.general.getZone(date)
   }
   this.api.getMaxContactDevice(data).then((res:any)=>{
     // console.log("max contact devices data ======",res);
@@ -338,8 +349,11 @@ repeatedContacts(){
 
 
 numOfcontactPerDay(){
+  var date=new Date()
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+    zone:this.general.getZone(date)
   }
   this.api.getPerDayCount(data).then((res:any)=>{
     console.log("repeated contacts data ======",res);
@@ -363,7 +377,7 @@ numOfcontactPerDay(){
 
       }
 
-     
+
 
      if(this.language=='english'){
       var chart = new CanvasJS.Chart("chartContainer", {

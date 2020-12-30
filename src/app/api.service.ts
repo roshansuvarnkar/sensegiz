@@ -774,12 +774,11 @@ createSubUser(data){
   });
 }
 
-getSubUser(){
+getSubUser(data){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-     var data=""
-  
+
     let url = this.host+'/getSubUser';
     return new Promise((resolve,reject)=>{
       this.http.post(url,data,httpOptions).subscribe(res=>{
@@ -892,25 +891,25 @@ downloadReport(data,fileName){
   });
 
 }
-  
+
   viewCTReport(data){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-  
+
     let url = this.host+'/viewCTReport';
     return new Promise((resolve,reject)=>{
       this.http.post(url,data,httpOptions).subscribe(res=>{
         resolve(res);
       })
     });
-  
+
   }
   editIsolation(data){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-  
+
     let url = this.host+'/makePersonIsolated';
     return new Promise((resolve,reject)=>{
       this.http.post(url,data,httpOptions).subscribe(res=>{

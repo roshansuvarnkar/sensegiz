@@ -9,9 +9,11 @@
       <form action="" [formGroup]="fileupload" *ngIf="language=='english'">
         <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
         <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
-        <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
-        <span id="button" *ngIf="language=='english'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
-        <span id="button" *ngIf="language=='japanese'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
+        <span *ngIf="userType!=3">
+          <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
+          <span id="button" *ngIf="language=='english'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
+          <span id="button" *ngIf="language=='japanese'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
+        </span>
         <!-- <div class="upload-mob-btn "><span (click)="onclick()" > <mat-icon id="button" >cloud_upload</mat-icon>  </span> </div><br> <br> -->
 
         <span  [ngStyle]="{'display':isDesktopDevice === true && loading===true ? 'block' : 'none','color': loading===true?'red':'red' }" >Please choose xlsx or xls file*</span>
@@ -21,9 +23,11 @@
       <form action="" [formGroup]="fileupload" *ngIf="language=='japanese'">
         <!-- <span> <input type="file" #fileInput (change)="fileChange($event.target.files)" >
         <button class="upload-btn" mat-flat-button color="primary" >Upload</button></span> <br> <br> -->
-        <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
-        <span id="button" *ngIf="language=='english'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
-        <span id="button" *ngIf="language=='japanese'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
+        <span *ngIf="userType!=3">
+          <input type="file" id="file" style="display:none;" #fileInput (change)="fileChange($event.target.files)">
+          <span id="button" *ngIf="language=='english'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>Upload File</span> </span>
+          <span id="button" *ngIf="language=='japanese'" class="upload-btn cursor" mat-flat-button color="primary"  (click)="onclick()"> <mat-icon class="publish">publish</mat-icon> <span>アップロード</span> </span>
+        </span>
         <!-- <div class="upload-mob-btn "><span (click)="onclick()" > <mat-icon id="button" >cloud_upload</mat-icon>  </span> </div><br> <br> -->
 
         <span  [ngStyle]="{'display':isDesktopDevice === true && loading===true ? 'block' : 'none','color': loading===true?'red':'red' }" >xlsxまたはxlsファイルを選択してください*</span>
@@ -33,8 +37,8 @@
      </div>  <br>
 
 
-   <button *ngIf="language=='english'" class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
-    <button *ngIf="language=='japanese'" class="button" mat-flat-button color="primary" (click)="openDialog()">追跡対象者の追加</button>
+   <button *ngIf="language=='english' && userType!=3" class="button" mat-flat-button color="primary" (click)="openDialog()">Add Finds</button>
+    <button *ngIf="language=='japanese' && userType!=3" class="button" mat-flat-button color="primary" (click)="openDialog()">追跡対象者の追加</button>
 
   <mat-form-field class="full-width-input search" *ngIf="language=='english'">
     <input matInput placeholder="Search device" autocomplete="off" matInput (input)="search($event.target.value)" >
@@ -46,7 +50,9 @@
   </mat-form-field>
 
 </div>
-
+<div *ngIf="userType==3">
+  <br><br>
+</div>
 <!--
 <div class="table">
   <table  mdbTable class="table table-hover z-depth-1" mdbTable >
@@ -131,7 +137,7 @@
           <td mat-cell *matCellDef="let live">
             <mat-form-field>
              <mat-label>Shift</mat-label>
-              <mat-select  [(value)]="live.shift" (selectionChange)="onShiftSelection(live)">
+              <mat-select  [(value)]="live.shift" (selectionChange)="onShiftSelection(live)" [disabled]="userType==3">
                 <mat-option *ngFor=" let b of shifts" [value]="b.shiftName">
                   {{b.shiftName}}
                 </mat-option>
@@ -146,10 +152,10 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Infected </th>
           <td mat-cell *matCellDef="let live">
              <span *ngIf="live.infected==0">
-            <mat-slide-toggle color="primary" [checked]="false" (change)="infected(live)"></mat-slide-toggle>
+            <mat-slide-toggle color="primary" [checked]="false" [disabled]="userType==3" (change)="infected(live)"></mat-slide-toggle>
           </span>
           <span *ngIf="live.infected==1">
-            <mat-slide-toggle color="primary" [checked]="true" (change)="infected(live)"></mat-slide-toggle>
+            <mat-slide-toggle color="primary" [checked]="true" [disabled]="userType==3" (change)="infected(live)"></mat-slide-toggle>
           </span></td>
         </ng-container>
 
@@ -157,10 +163,10 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Isolated </th>
           <td mat-cell *matCellDef="let live">
              <span *ngIf="live.isolated==0">
-            <mat-slide-toggle color="primary" [checked]="false" (change)="isolated(live)"></mat-slide-toggle>
+            <mat-slide-toggle color="primary" [checked]="false" [disabled]="userType==3" (change)="isolated(live)"></mat-slide-toggle>
           </span>
           <span *ngIf="live.isolated==1">
-            <mat-slide-toggle color="primary" [checked]="true" (change)="isolated(live)"></mat-slide-toggle>
+            <mat-slide-toggle color="primary" [checked]="true" [disabled]="userType==3" (change)="isolated(live)"></mat-slide-toggle>
           </span></td>
         </ng-container>
 
@@ -207,13 +213,13 @@
         </ng-container>
 
         <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
-          <td mat-cell *matCellDef="let live"  (click)="edit(live)" class="cursor"> <mat-icon>{{live.edit}}</mat-icon></td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="userType==3"> Edit </th>
+          <td mat-cell *matCellDef="let live"  (click)="edit(live)" class="cursor" [hidden]="userType==3"> <mat-icon>{{live.edit}}</mat-icon></td>
         </ng-container>
 
         <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
-          <td mat-cell *matCellDef="let live"  (click)="delete(live)" class="cursor"><mat-icon>{{live.delete}}</mat-icon> </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="userType==3"> Delete </th>
+          <td mat-cell *matCellDef="let live"  (click)="delete(live)" class="cursor" [hidden]="userType==3"><mat-icon>{{live.delete}}</mat-icon> </td>
         </ng-container>
 
    </div>
@@ -260,10 +266,10 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 感染状況のチェック欄 </th>
           <td mat-cell *matCellDef="let live">
              <span *ngIf="live.infected==0">
-            <mat-slide-toggle color="primary" [checked]="false" (change)="infected(live)"></mat-slide-toggle>
+            <mat-slide-toggle color="primary" [checked]="false" [disabled]="userType==3" (change)="infected(live)"></mat-slide-toggle>
           </span>
           <span *ngIf="live.infected==1">
-            <mat-slide-toggle color="primary" [checked]="true" (change)="infected(live)"></mat-slide-toggle>
+            <mat-slide-toggle color="primary" [checked]="true" [disabled]="userType==3" (change)="infected(live)"></mat-slide-toggle>
           </span></td>
         </ng-container>
 
@@ -271,10 +277,10 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 隔離</th>
           <td mat-cell *matCellDef="let live">
              <span *ngIf="live.isolated==0">
-            <mat-slide-toggle color="primary" [checked]="false" (change)="isolated(live)"></mat-slide-toggle>
+            <mat-slide-toggle color="primary" [checked]="false" [disabled]="userType==3" (change)="isolated(live)"></mat-slide-toggle>
           </span>
           <span *ngIf="live.isolated==1">
-            <mat-slide-toggle color="primary" [checked]="true" (change)="isolated(live)"></mat-slide-toggle>
+            <mat-slide-toggle color="primary" [checked]="true" [disabled]="userType==3" (change)="isolated(live)"></mat-slide-toggle>
           </span></td>
         </ng-container>
 
@@ -321,13 +327,13 @@
         </ng-container>
 
         <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> 編集 </th>
-          <td mat-cell *matCellDef="let live"  (click)="edit(live)" class="cursor"> <mat-icon>{{live.edit}}</mat-icon></td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header  [hidden]="userType==3"> 編集 </th>
+          <td mat-cell *matCellDef="let live"  (click)="edit(live)" class="cursor"  [hidden]="userType==3"> <mat-icon>{{live.edit}}</mat-icon></td>
         </ng-container>
 
         <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> 削除 </th>
-          <td mat-cell *matCellDef="let live"  (click)="delete(live)" class="cursor"><mat-icon>{{live.delete}}</mat-icon> </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header  [hidden]="userType==3"> 削除 </th>
+          <td mat-cell *matCellDef="let live"  (click)="delete(live)" class="cursor"  [hidden]="userType==3"><mat-icon>{{live.delete}}</mat-icon> </td>
         </ng-container>
 
    </div>

@@ -99,6 +99,7 @@ export class HistoryReportComponent implements OnInit {
     if(this.type=='basedOnDate'){
       var data={
         userId:this.loginData.userId,
+        subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
         fromDate: this.from,
         toDate:this.to,
         zone:this.general.getZone(this.date)
@@ -118,6 +119,7 @@ export class HistoryReportComponent implements OnInit {
   if(this.type=='basedOnFindName'){
     var data1={
       userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       deviceName:this.deviceName,
       fromDate: this.from,
       toDate:this.to,
@@ -150,12 +152,13 @@ export class HistoryReportComponent implements OnInit {
       this.summaryReport()
 
     }
-   
+
 }
 basedOnDate(limit,offset){
   console.log(limit,offset)
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     fromDate: this.from,
     toDate:this.to,
     limit:limit,
@@ -171,7 +174,7 @@ basedOnDate(limit,offset){
       this.totTime=res.success
 
       console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
-   
+
       // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
         for(var i=0;i<res.success.length;i++){
@@ -187,14 +190,14 @@ basedOnDate(limit,offset){
 
         })
         }
-  
+
       this.dataSource = new MatTableDataSource(this.liveData);
 
       setTimeout(() => {
         this.dataSource.sort = this.sort;
         // this.paginator.length = this.currentPageLength
       })
-    
+
       // }
       // else{
       //   this.totTime=res.success
@@ -202,9 +205,9 @@ basedOnDate(limit,offset){
 
       //   if(this.selectMin.get('minute').value!=''){
       //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
-          
+
       //     this.filterTotTime(this.selectMin.get('minute').value)
-      
+
       //   }
       // }
     }
@@ -215,6 +218,7 @@ basedOnDate(limit,offset){
 basedOnFindName(limit,offset){
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     deviceName:this.deviceName,
     fromDate: this.from,
     toDate:this.to,
@@ -229,10 +233,10 @@ basedOnFindName(limit,offset){
     console.log("find data based on name ======",res);
 
     if(res.status){
-   
-      
+
+
         this.totTime=res.success
-   
+
       // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         this.liveData=res.success
         // this.liveData.userId=this.loginData.userId
@@ -248,9 +252,9 @@ basedOnFindName(limit,offset){
 
       //   if(this.selectMin.get('minute').value!=''){
       //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
-          
+
       //     this.filterTotTime(this.selectMin.get('minute').value)
-      
+
       //   }
       // }
     }
@@ -313,6 +317,7 @@ summaryReport(){
 
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     deviceName:this.deviceName,
     fromDate: this.from,
     toDate:this.to,
@@ -366,7 +371,7 @@ dataDateReduce(data){
     }
     // console.log("group==",group)
     return group
- 
+
   },{})
 }
 callUpdatedon(date){
@@ -376,7 +381,7 @@ callUpdatedon(date){
      if(!a.includes(obj.updatedOn)){
        a.push(obj.updatedOn)
      }
-      
+
   })
   // console.log("aaa==",a)
   return a
@@ -386,6 +391,7 @@ cummulativeReport(limit,offset){
 
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     fromDate: this.from,
     toDate:this.to,
     limit:limit,
@@ -408,7 +414,7 @@ cummulativeReport(limit,offset){
             username:res.data[i].baseDeviceName,
             count:res.data[i].count,
             totTime:this.general.convertTime(res.data[i].totalTime)
-  
+
           });
         }
         this.dataSource = new MatTableDataSource(this.liveData);
@@ -416,7 +422,7 @@ cummulativeReport(limit,offset){
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator
            })
-    
+
       // }
       // else{
       //   this.totTime=res.success
@@ -424,9 +430,9 @@ cummulativeReport(limit,offset){
 
       //   if(this.selectMin.get('minute').value!=''){
       //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
-          
+
       //     this.filterTotTime(this.selectMin.get('minute').value)
-      
+
       //   }
       // }
 
@@ -479,6 +485,7 @@ if(this.type=='basedOnDate' || this.type=='basedOnFindName'){
   if(this.type=='basedOnDate'){
     data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     fromDate: this.from,
     toDate:this.to,
     zone:this.general.getZone(dateObj),
@@ -489,6 +496,7 @@ if(this.type=='basedOnDate' || this.type=='basedOnFindName'){
   if(this.type=='basedOnFindName'){
     data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     deviceName:this.deviceName,
     fromDate: this.from,
     toDate:this.to,
@@ -518,9 +526,10 @@ if(this.type=='summaryReport'){
 }
  if(this.type=='cummulative'){
   var fileName=''
-  
+
   data={
       userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       fromDate: this.from,
       toDate:this.to,
       zone:this.general.getZone(dateObj),
@@ -530,11 +539,11 @@ if(this.type=='summaryReport'){
     console.log("data to send ======",data);
 
     //apicall
-    
+
     this.api.downloadCummulative(data,fileName).then((res:any)=>{
 
       console.log("report data recieved ======",res);
-  
+
     })
   }
 }
@@ -550,6 +559,7 @@ if(this.type=='summaryReport'){
       data:a,
       order:2,
       userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       fromDate : this.from,
       toDate : this.to
     }
@@ -566,7 +576,7 @@ if(this.type=='summaryReport'){
     if(a!==''){
       timeArr=a.split(':')
     }
-    
+
     var date = ''
     if(timeArr[0]!='00'){
       date += timeArr[0] + ' hour '
@@ -586,30 +596,30 @@ if(this.type=='summaryReport'){
   filterTotTime(event){
     console.log("event value===",event,"  tot===", this.totTime)
     var arr=[]
-    
+
   if(event.value !="0" && this.selectMin.get('minute').value!=''){
     if(this.type == 'basedOnDate' ){
       console.log("tot===", this.totTime)
       this.totTime.filter((obj,index)=>{
-    
+
         if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
         arr.push({
-        
+
             baseName:obj.baseName,
             contactName:obj.contactName,
             empId:obj.empId==null ||obj.empId==''?'-':obj.empId,
             updatedOn:obj.updatedOn,
             startTime:this.general.startTime(obj.totalTime,obj.updatedOn),
             totalTime:this.general.convertTime(obj.totalTime)
-      
+
           })
           console.log("arrr==",arr)
           return arr
         }
-    
-      
+
+
       })
-      
+
 
       this.dataSource = new MatTableDataSource(arr);
       setTimeout(() => {
@@ -619,9 +629,9 @@ if(this.type=='summaryReport'){
 
     }
     if(this.type == 'basedOnFindName'  ){
-      
+
       this.totTime.filter((obj,index)=>{
-    
+
         if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
           arr.push(obj)
           console.log("arrr==",arr)
@@ -629,7 +639,7 @@ if(this.type=='summaryReport'){
         }
 
       })
-      
+
 
       this.dataSource = new MatTableDataSource(arr);
       setTimeout(() => {
@@ -639,9 +649,9 @@ if(this.type=='summaryReport'){
 
     }
     if(this.type == 'cummulative' ){
-      
+
       this.totTime.filter((obj,index)=>{
-    
+
         if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
           arr.push({
             username:obj.baseDeviceName,
@@ -651,8 +661,8 @@ if(this.type=='summaryReport'){
             console.log("arrr==",arr)
             return arr
           }
-      
-        
+
+
         })
 
         this.dataSource = new MatTableDataSource(arr);
@@ -662,7 +672,7 @@ if(this.type=='summaryReport'){
 
         })
     }
-  
+
   }
   else{
     this.loadData(this.limit,this.offset)
@@ -709,14 +719,15 @@ if(this.type=='summaryReport'){
         if(!a.includes(obj.contactDevice)){
           a.push(obj.contactDevice)
         }
-    
-        
+
+
     })
     return a
   }
   sendWarning(){
     var data={
       userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       deviceId:this.deviceIdData,
       infectedPersonName:this.deviceName,
       adminEmailId:this.loginData.userName

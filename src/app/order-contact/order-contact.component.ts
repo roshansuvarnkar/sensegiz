@@ -72,6 +72,7 @@ export class OrderContactComponent implements OnInit {
     ) {
       this.loginData = data.userId
       this.order=data.order
+      this.loginData.id = data.subUserId
       this.dataSet=data.data
       this.from = data.fromDate
       this.to = data.toDate
@@ -93,6 +94,7 @@ export class OrderContactComponent implements OnInit {
   getTotalLength(){
     var data={
       userId:this.loginData,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       deviceName:this.dataSet.contactName,
       zone:this.general.getZone(new Date()),
       fromDate:this.from,
@@ -114,6 +116,7 @@ export class OrderContactComponent implements OnInit {
     // console.log("data====",this.dataSet)
     var value={
       userId:this.loginData,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       deviceName:this.dataSet.contactName,
       zone:this.general.getZone(new Date()),
       fromDate:this.from,
@@ -145,6 +148,8 @@ export class OrderContactComponent implements OnInit {
     dialogConfig.width = '75vw';
     dialogConfig.data = {
       data:a,
+      userId:a.userId,
+      subUserId:a.subUserId,
       order:this.order,
       fromDate : this.from,
       toDate : this.to

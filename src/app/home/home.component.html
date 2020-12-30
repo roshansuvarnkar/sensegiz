@@ -20,7 +20,7 @@
               <mat-label *ngIf="language=='japanese'">ユーザー数の合計 :</mat-label>
               <mat-label>{{totalEmp}}</mat-label>
               <br>
-             
+
               <!-- <mat-label>Total Finds</mat-label> :
               <mat-label>{{totalEmp}}</mat-label> -->
             </span>
@@ -73,8 +73,8 @@
                 [responsive]="false"
               ></circle-progress>
 
-            </div> 
-          </div> 
+            </div>
+          </div>
           <div class="first-cont cursor">
            <div>
               <span *ngIf="language=='english'">Registered </span>
@@ -99,7 +99,7 @@
                 [startFromZero]="true"
                 [responsive]="false"
               ></circle-progress>
-                            
+
             </div>
 
             <div>
@@ -124,13 +124,13 @@
                 [startFromZero]="true"
                 [responsive]="false"
               ></circle-progress>
-                     
+
             </div>
           </div>
         </mat-card-content>
       </mat-card>
       <br>
-      <mat-card>
+      <mat-card *ngIf="loginData.type!==3 && loginData.type!==4">
         <mat-card-content>
           <mat-icon >settings</mat-icon><br>
 
@@ -185,16 +185,16 @@
                   </span>
 
                 </span>
-                <span class="tab-btn" *ngIf="language=='english'">
+                <span class="tab-btn" *ngIf="language=='english' && loginData.type!==3  && loginData.type!==4">
                   <button mat-raised-button class="btn" (click)="sendWarning(data.id,data.totalCount)">Send warning</button>
                 </span>
-                 <span class="tab-btn" *ngIf="language=='japanese'">
+                 <span class="tab-btn" *ngIf="language=='japanese' && loginData.type!==3  && loginData.type!==4">
                   <button mat-raised-button class="btn" (click)="sendWarning(data.id,data.totalCount)">警告を送信する</button>
                 </span>
               </div>
             </mat-card-content>
           </mat-card>
-        </mat-card-content> 
+        </mat-card-content>
         </mat-card>
     </div>
 
@@ -240,4 +240,3 @@
   </div>
 
   </div>
-  
