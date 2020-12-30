@@ -377,7 +377,7 @@
             You cannot have multiple shift, to update shift click info
           </mat-error>
           <mat-error *ngIf="timeExceed">
-            Time range cannot be greater than 09:00 hours.
+            Time range should be minimum 09 hours.
           </mat-error>
           <form [formGroup]="workingForm" (ngSubmit)="onSubmitWorkForm(workingForm.value)">
             <mat-form-field>

@@ -107,10 +107,10 @@ export class EditSettingShiftComponent implements OnInit {
 	submit(a){
 		var times1=a.fromTime.split(':')
 		var times2=a.toTime.split(':')
-		var min=Math.abs(times2[1]-times1[1])
+		var min=times2[1]-times1[1]
     	var hour=Math.abs(times2[0]-times1[0])
 		console.log("minhour",min,hour)
-		if((hour < 9 && (min>=0 && min<=59)) || (hour == 9 && min == 0)){
+		if((hour >= 9 && (min>=0 && min<=59))){
 			var dateobj=new Date()
 			var year = dateobj.getFullYear();
 			var month = dateobj.getMonth() + 1
@@ -144,8 +144,8 @@ export class EditSettingShiftComponent implements OnInit {
 			this.refreshShift()
 		})
 	}
-	else if(hour >=9 && min>0){
-        alert('Sorry! Time range cannot be greater than 09:00 hours.')
+	else if(hour <9 || min <0 ){
+        alert('Sorry! Time range should be minimum 09 hours')
     }
 }
 

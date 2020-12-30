@@ -234,9 +234,7 @@ export class AdminSettingsComponent implements OnInit {
       } catch (err) {
       }
     }
-
-
-   }
+  }
    inactivityChange(event){
   
       if(event.checked == true){
@@ -468,7 +466,7 @@ export class AdminSettingsComponent implements OnInit {
     var min=Math.abs(times2[1]-times1[1])
     var hour=Math.abs(times2[0]-times1[0])
     console.log("minhour",min,hour)
-    if((hour < 9 && (min>=0 && min<=59)) || (hour == 9 && min == 0)){
+		if((hour >= 9 && (min>=0 && min<=59))){
       this.timeExceed=false
       var dateobj=new Date()
    
@@ -516,7 +514,7 @@ export class AdminSettingsComponent implements OnInit {
          }
        }
     }
-    else if(hour >=9 && min>0){
+    else if(hour < 9 && min<0){
         this.timeExceed=true
     }
    }
