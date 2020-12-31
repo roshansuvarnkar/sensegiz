@@ -5,6 +5,7 @@ import { ApiService } from '../api.service';
 import { LoginCheckService } from '../login-check.service';
 import { GeneralMaterialsService } from '../general-materials.service';
 import { Router ,ActivatedRoute} from '@angular/router';
+import * as moment from 'moment'
 
 
 @Component({
@@ -105,12 +106,28 @@ export class EditSettingShiftComponent implements OnInit {
 
 
 	submit(a){
-		var times1=a.fromTime.split(':')
-		var times2=a.toTime.split(':')
-		var min=times2[1]-times1[1]
-    	var hour=Math.abs(times2[0]-times1[0])
-		console.log("minhour",min,hour)
-		if((hour >= 9 && min >= 0) || hour >9){
+		console.log(a)
+		var cdt1= moment(a.fromTime, 'HH:mm:ss')
+		var cdt2= moment(a.toTime, 'HH:mm:ss')
+		var times1=moment(cdt1).format("YYYY/MM/DD HH:mm:ss")
+		var times2=moment(cdt2).format("YYYY/MM/DD HH:mm:ss")
+		console.log("times22==",times1>times2)
+
+		if(times1>times2){
+			console.log("yes")
+				times2=moment(cdt2).add(1,'days').format("YYYY/MM/DD HH:mm:ss")		
+		
+		}
+		console.log("false")
+		var times=moment(times2,"YYYY/MM/DD HH:mm:ss").diff(moment(times1,"YYYY/MM/DD HH:mm:ss"))
+
+		console.log("times==",times1,times2,times)
+
+		var d = moment.duration(times)
+		console.log("dd==",d)
+		var minhour=(d.hours()+ ":" + d.minutes()).split(":")
+		console.log("minhour==",minhour[0],minhour[1])
+		if((parseInt(minhour[0]) >= 9 && (parseInt(minhour[1]) >= 0 && parseInt(minhour[1]) <=59)) ){
 			var dateobj=new Date()
 			var year = dateobj.getFullYear();
 			var month = dateobj.getMonth() + 1
@@ -144,7 +161,7 @@ export class EditSettingShiftComponent implements OnInit {
 			this.refreshShift()
 		})
 	}
-	else if((hour == 9 && min < 0 ) || hour < 9){
+	else if((parseInt(minhour[0]) == 9 && parseInt(minhour[1]) < 0 ) || parseInt(minhour[0]) < 9){
 		alert('Time range should be minimum of 09 hours.')
     }
 }
