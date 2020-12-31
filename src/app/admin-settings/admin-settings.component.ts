@@ -6,6 +6,7 @@ import { LoginCheckService } from '../login-check.service';
 import { GeneralMaterialsService } from '../general-materials.service';
 import { EditSettingShiftComponent } from '../edit-setting-shift/edit-setting-shift.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+import * as moment from 'moment'
 
 
 @Component({
@@ -234,9 +235,7 @@ export class AdminSettingsComponent implements OnInit {
       } catch (err) {
       }
     }
-
-
-   }
+  }
    inactivityChange(event){
   
       if(event.checked == true){
@@ -462,13 +461,29 @@ export class AdminSettingsComponent implements OnInit {
 
    }
    onSubmitWorkForm(data) {
-    console.log("time==",data)
-    var times1=data.fromTime.split(':')
-    var times2=data.toTime.split(':')
-    var min=Math.abs(times2[1]-times1[1])
-    var hour=Math.abs(times2[0]-times1[0])
-    console.log("minhour",min,hour)
-    if((hour < 9 && (min>=0 && min<=59)) || (hour == 9 && min == 0)){
+		var cdt1= moment(data.fromTime, 'HH:mm:ss')
+		var cdt2= moment(data.toTime, 'HH:mm:ss')
+		var times1=moment(cdt1).format("YYYY/MM/DD HH:mm:ss")
+		var times2=moment(cdt2).format("YYYY/MM/DD HH:mm:ss")
+		console.log("times22==",times1>times2)
+
+		if(times1>times2){
+			console.log("yes")
+				times2=moment(cdt2).add(1,'days').format("YYYY/MM/DD HH:mm:ss")		
+		
+		}
+		console.log("false")
+		var times=moment(times2,"YYYY/MM/DD HH:mm:ss").diff(moment(times1,"YYYY/MM/DD HH:mm:ss"))
+
+		console.log("times==",times1,times2,times)
+
+		var d = moment.duration(times)
+		console.log("dd==",d)
+
+		var minhour=(d.hours()+ ":" + d.minutes()).split(":")
+    console.log("minhour==",minhour[0],minhour[1])
+    
+		if((parseInt(minhour[0]) >= 9 && (parseInt(minhour[1]) >= 0 && parseInt(minhour[1]) <=59)) ){
       this.timeExceed=false
       var dateobj=new Date()
    
@@ -516,8 +531,8 @@ export class AdminSettingsComponent implements OnInit {
          }
        }
     }
-    else if(hour >=9 && min>0){
-        this.timeExceed=true
+    else if((parseInt(minhour[0]) == 9 && parseInt(minhour[1]) < 0 ) || parseInt(minhour[0]) < 9){
+      this.timeExceed=true
     }
    }
 
