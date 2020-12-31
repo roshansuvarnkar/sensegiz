@@ -604,11 +604,22 @@ getSummaryReport(data){
 }
 
 
+// getInactivityDeviceSetting(data){
+//   const httpOptions = {
+//     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+//   };
+//   let url = this.host+'/inactivityDeviceSetting';
+//   return new Promise((resolve,reject)=>{
+//     this.http.post(url,data,httpOptions).subscribe(res=>{
+//       resolve(res);
+//     })
+//   });
+// }
 getInactivityDeviceSetting(data){
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  let url = this.host+'/inactivityDeviceSetting';
+  let url = this.host+'/updateInactivity';
   return new Promise((resolve,reject)=>{
     this.http.post(url,data,httpOptions).subscribe(res=>{
       resolve(res);
@@ -674,7 +685,19 @@ getUsernameSuggestion(data){
 
 }
 
+updateMeetingCount(data){
 
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/setMeetingCount';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+}
 
 uploadLogo(data){
 
@@ -815,6 +838,24 @@ getOnlineCount(data){
   });
 
 }
+
+downloadActiveOfflineUsers(data,fileName){
+  this.general.loadingFreez.next({status:true})
+
+  let url = this.host+'/downloadActiveOfflineUsers';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,{ observe: 'response', responseType: 'blob' as 'json' }).subscribe(res=>{
+      if(res.status==200)
+      this.downloadFile(res,fileName)
+
+      resolve(true);
+    },
+    err=>{
+      console.log("err==",err)
+    })
+  });
+
+}
 setLanguage(data){
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -928,5 +969,16 @@ downloadReport(data,fileName){
         resolve(res);
       })
     });
+  }
+
+  getCountryZone(){
+    return new Promise((resolve,reject)=>{
+      this.http.get('../../assets/zone.json').subscribe((res:any)=>{
+        resolve(res.zone)
+      },
+      err=>{
+        reject(err)
+      })
+    })
   }
 }

@@ -25,6 +25,7 @@ export class AdminDashboardComponent implements OnInit {
   passwordIcon: string = 'visibility_off';
   adminData:any=[]
   language:any
+  zoneData:any=[]
    constructor(
    		public dialog: MatDialog,
       private fb: FormBuilder,
@@ -42,7 +43,7 @@ export class AdminDashboardComponent implements OnInit {
     this.adminAddUserform = this.fb.group({
       userName: ['', Validators.email],
       mobileNum:['',Validators.required],
-      zone:[''],
+      zone:['',Validators.required],
       portalPassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
         Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
       ]],
@@ -54,11 +55,12 @@ export class AdminDashboardComponent implements OnInit {
       ]]
     });
     this.refreshAdminData()
+    this.getZone()
   }
 
  onSubmit(data) {
   data.mobileNum=data.mobileNum!=null?data.mobileNum.e164Number:''
-  data.zone=data.zone.timeValue
+ 
      console.log("admin register==",data)
 
     if (this.adminAddUserform.valid) {
@@ -135,6 +137,15 @@ refreshAdminData(){
     })
  }
 
+ getZone(){
+  this.zoneData=[]
+  this.api.getCountryZone().then((res:any)=>{
+    console.log("data===",res)
+  if(res){
+    this.zoneData=res
+  }
+  })
+}
 
 
 }

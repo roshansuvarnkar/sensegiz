@@ -105,38 +105,49 @@ export class EditSettingShiftComponent implements OnInit {
 
 
 	submit(a){
-		// console.log("a===",a)
-		var dateobj=new Date()
-		var year = dateobj.getFullYear();
-		var month = dateobj.getMonth() + 1
-		var day = dateobj.getDate()
-		var date = month + '/' + day + '/'  + year
+		var times1=a.fromTime.split(':')
+		var times2=a.toTime.split(':')
+		var min=Math.abs(times2[1]-times1[1])
+    	var hour=Math.abs(times2[0]-times1[0])
+		console.log("minhour",min,hour)
+		if((hour < 9 && (min>=0 && min<=59)) || (hour == 9 && min == 0)){
+			var dateobj=new Date()
+			var year = dateobj.getFullYear();
+			var month = dateobj.getMonth() + 1
+			var day = dateobj.getDate()
+			var date = month + '/' + day + '/'  + year
+		
+			var time1=date+" "+a.fromTime
+			var time2=date+" "+a.toTime
+			time1=new Date(time1).toUTCString()
+			time2=new Date(time2).toUTCString()
+			var h=new Date(time1).getUTCHours()
+			var m=new Date(time1).getUTCMinutes()
+			var h1=new Date(time2).getUTCHours()
+			var m1=new Date(time2).getUTCMinutes()
+			var hh = h <= 9 && h >= 0 ? "0"+h : h;
+			var mm = m <= 9 && m >= 0 ? "0"+m : m;
+			var hh1 = h1 <= 9 && h1 >= 0 ? "0"+h1 : h1;
+			var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
 	
-		var time1=date+" "+a.fromTime
-		var time2=date+" "+a.toTime
-		time1=new Date(time1).toUTCString()
-		time2=new Date(time2).toUTCString()
-		var h=new Date(time1).getUTCHours()
-		var m=new Date(time1).getUTCMinutes()
-		var h1=new Date(time2).getUTCHours()
-		var m1=new Date(time2).getUTCMinutes()
-		var hh = h <= 9 && h >= 0 ? "0"+h : h;
-		var mm = m <= 9 && m >= 0 ? "0"+m : m;
-		var hh1 = h1 <= 9 && h1 >= 0 ? "0"+h1 : h1;
-		var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
-   
-		a.fromTime = hh + ':' + mm
-		a.toTime = hh1 + ':' + mm1 
-		console.log("a===",a)
-		this.api.editSettingShift(a).then((res:any)=>{
-        // console.log("shift edit==",res)
-        if(res.status){
-		 var msg = 'Shift updated Successfully'
-		 this.general.openSnackBar(msg,'')
-        }
-        this.refreshShift()
-      })
+			a.fromTime = hh + ':' + mm
+			a.toTime = hh1 + ':' + mm1  
+			console.log("a===",a)
+
+		
+			this.api.editSettingShift(a).then((res:any)=>{
+			// console.log("shift edit==",res)
+			if(res.status){
+			var msg = 'Shift updated Successfully'
+			this.general.openSnackBar(msg,'')
+			}
+			this.refreshShift()
+		})
 	}
+	else if(hour >=9 && min>0){
+        alert('Sorry! Time range cannot be greater than 09:00 hours.')
+    }
+}
 
 //Unable to convert
   delete(a){

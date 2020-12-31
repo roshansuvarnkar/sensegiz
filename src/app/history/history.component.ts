@@ -65,11 +65,16 @@ daysExceed:boolean=false
       toDate: ['', Validators.required]
     });
 
+  // this.summaryReportForm = this.fb.group({
+    //   deviceName: ['', Validators.required],
+    //   fromDate: ['', Validators.required],
+    //   toDate: ['', Validators.required],
+    //   // minutes:['']
+    // });
     this.summaryReportForm = this.fb.group({
       deviceName: ['', Validators.required],
-      fromDate: ['', Validators.required],
-      toDate: ['', Validators.required],
-      // minutes:['']
+      status: ['0'],
+
     });
 
     this.refreshFinds()
@@ -338,24 +343,24 @@ onclickSummaryReport(data){
     });
   }
   onSubmitSummaryReport(data){
-    // console.log("data====",data)
-        this.date1=new Date(data.fromDate)
-        this.date2 =new Date(data.toDate)
-        var diffTime = Math.abs(this.date2 - this.date1);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    console.log("data====",data)
+      //   this.date1=new Date(data.fromDate)
+      //   this.date2 =new Date(data.toDate)
+      //   var diffTime = Math.abs(this.date2 - this.date1);
+      //   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        console.log(diffDays + " days");
-      if(diffDays<15){
-        this.daysExceed=false
-        var year = this.date1.getFullYear();
-        var month = ("0" + (this.date1.getMonth() + 1)).slice(-2);
-        var day = ("0" + this.date1.getDate()).slice(-2);
-        var from = year + '-' + month + '-'  + day
+      //   console.log(diffDays + " days");
+      // if(diffDays<15){
+      //   this.daysExceed=false
+      //   var year = this.date1.getFullYear();
+      //   var month = ("0" + (this.date1.getMonth() + 1)).slice(-2);
+      //   var day = ("0" + this.date1.getDate()).slice(-2);
+      //   var from = year + '-' + month + '-'  + day
 
-        var year1 = this.date2.getFullYear();
-        var month1 = ("0" + (this.date2.getMonth() + 1)).slice(-2);
-        var day1 = ("0" + this.date2.getDate()).slice(-2);
-        var to = year1 + '-' + month1 + '-'  + day1
+      //   var year1 = this.date2.getFullYear();
+      //   var month1 = ("0" + (this.date2.getMonth() + 1)).slice(-2);
+      //   var day1 = ("0" + this.date2.getDate()).slice(-2);
+      //   var to = year1 + '-' + month1 + '-'  + day1
 
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
@@ -365,19 +370,20 @@ onclickSummaryReport(data){
         dialogConfig.data = {
           type:"summaryReport",
           deviceName:data.deviceName,
-          fromDate:from,
-          toDate:to,
-          date:this.date1
+          status:data.status
+          // fromDate:from,
+          // toDate:to,
+
         }
         const dialogRef = this.dialog.open(HistoryReportComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe(result => {
           this.refreshFinds()
         });
-      }
-      else{
-          this.daysExceed=true
-      }
+      // }
+      // else{
+      //     this.daysExceed=true
+      // }
 
   }
 

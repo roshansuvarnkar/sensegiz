@@ -1,0 +1,357 @@
+{
+    "zone":[
+        {
+           "value": -12,
+           "text": "(UTC -12:00) Eniwetok, Kwajalein , International Date Line West",
+           "zone": "-12:00"
+        },
+        {
+           "value": -11,
+           "text": "(UTC -11:00) Midway Island, Samoa, Coordinated Universal Time - 11",
+           "zone": "-11:00"
+        },
+        {
+           "value": -10,
+           "text": "(UTC -10:00) Hawaii , Aleutian Islands",
+           "zone": "-10:00"
+        },
+        {
+            "value": -9.5,
+            "text": "(UTC -9:00) Mrquesas Islands",
+            "zone": "-9:30"
+         },
+      
+        {
+           "value": -9,
+           "text": "(UTC -9:00) Alaska , Coordinated Universal Time - 09",
+           "zone": "-9:00"
+        },
+    
+        {
+           "value": -8,
+           "text": "(UTC -8:00) Baja California, Coordinated Universal Time - 08, Pacific Time (US & Canada)",
+           "zone": "-8:00"
+        },
+        {
+           "value": -7,
+           "text": "(UTC -7:00) Arizon, Chichuahua, La paz, Mazatlan, Mountain Time (US & Canada) ,Yukon",
+           "zone": "-7:00"
+        },
+        {
+           "value": -6,
+           "text": "(UTC -6:00) Central America, Central Time (US & Canada), Mexico City",
+           "zone": "-6:00"
+        },
+        {
+            "value": -6,
+            "text": "(UTC -6:00) Eastern Island, Guadalajara, Mexico City, Monterrey, Saskatchewan",
+            "zone": "-6:00"
+         },
+        {
+           "value": -5,
+           "text": "(UTC -5:00) Eastern Time (US & Canada), Bogota, , Quito, Rio Branco",
+           "zone": "-5:00"
+        },
+        {
+            "value": -5,
+            "text": "(UTC -5:00) Chetumal, Indiana (East)",
+            "zone": "-5:00"
+         },
+         {
+            "value": -5,
+            "text": "(UTC -5:00) Eastern Time (US & Canada)",
+            "zone": "-5:00"
+         },
+         {
+            "value": -5,
+            "text": "(UTC -5:00) Haiti, Havana, Turks and Caicos",
+            "zone": "-5:00"
+         },
+      
+        {
+           "value": -4,
+           "text": "(UTC -4:00) Asuncion,Atlantic Time (Canada), Cuiaba",
+           "zone": "-4:00"
+        },
+        {
+            "value": -4,
+            "text": "(UTC -4:00) Georgetown , La paz, Manaus, San Jaun, Santiago",
+            "zone": "-4:00"
+         },
+        {
+           "value": -3.5,
+           "text": "(UTC -3:30) Newfoundland",
+           "zone": "-3:30"
+        },
+        {
+           "value": -3,
+           "text": "(UTC -3:00) Arguaina, Brasilia, Cayenne, Fortaleza",
+           "zone": "-3:00"
+        },
+        {
+            "value": -3,
+            "text": "(UTC -3:00) City of Beunos Aires, Greenland",
+            "zone": "-3:00"
+         },
+         {
+            "value": -3,
+            "text": "(UTC -3:00) Mountevideo, Punta Arenas",
+            "zone": "-3:00"
+         },
+         {
+            "value": -3,
+            "text": "(UTC -3:00) Saint Pierre and Miquelon, Salvador",
+            "zone": "-3:00"
+         },
+        {
+           "value": -2,
+           "text": "(UTC -2:00)  Coordinated Universal Time - 02",
+           "zone": "-2:00"
+        },
+        {
+           "value": -1,
+           "text": "(UTC -1:00) Azores, Cabo Verde Islands",
+           "zone": "-1:00"
+        },
+        {
+           "value": 0,
+           "text": "(UTC) Dublin, Edinburgh, London, Lisbon",
+           "zone": "+00:00"
+        },
+        {
+            "value": 0,
+            "text": "(UTC) Monorvia, Reykjavik, Sao Tome",
+            "zone": "+00:00"
+         },
+        {
+           "value": 1,
+           "text": "(UTC +1:00) Amstredam, Berlin, Bern, Casablanca, Rome, Stockholm, Vienna",
+           "zone":"+1:00"
+        },
+        {
+            "value": 1,
+            "text": "(UTC +1:00) Belgrade, Bartislava, Budapest, Ljubljana, Prague",
+            "zone":"+1:00"
+         },
+         {
+            "value": 1,
+            "text": "(UTC +1:00) Brussels, Cophnhagen, Madrid, Paris",
+            "zone":"+1:00"
+         },
+         {
+            "value": 1,
+            "text": "(UTC +1:00) Sarajevo, Skopje, Warsaw, Zagreb",
+            "zone":"+1:00"
+         },
+         {
+            "value": 1,
+            "text": "(UTC +1:00) West Central Africa",
+            "zone":"+1:00"
+         },
+        {
+           "value": 2,
+           "text": "(UTC +2:00) Amman, Athens, Bucharest,Beirut, Cairo",
+           "zone":"+2:00"
+        },
+        {
+            "value": 2,
+            "text": "(UTC +2:00) Chisinau, Damascus, Gaza, Hebron, Harare",
+            "zone":"+2:00"
+         },
+         {
+            "value": 2,
+            "text": "(UTC +2:00) Pretoria, Kyiv, Riga, Sofia, Tallin, Vilnius",
+            "zone":"+2:00"
+         },
+         {
+            "value": 2,
+            "text": "(UTC +2:00) Jerusalem, Kaliningrad, Khartoum, Tripoli, Windhoek",
+            "zone":"+2:00"
+         },
+        {
+           "value": 3,
+           "text": "(UTC +3:00) Baghdad, Istanbul, Kuwait, Riyadh, Moscow, St. Petersburg",
+           "zone":"+3:00"
+        }, 
+        {
+            "value": 3,
+            "text": "(UTC +3:00) Minsk, Moscow,Nairobi, St. Petersburg",
+            "zone":"+3:00"
+         },
+        {
+           "value": 3.5,
+           "text": "(UTC +3:30) Tehran",
+           "zone":"+3:30"
+        },
+        {
+           "value": 4,
+           "text": "(UTC +4:00) Abu Dhabi, Astrakhan, Muscat, Baku",
+           "zone":"+4:00"
+        },
+        {
+            "value": 4,
+            "text": "(UTC +4:00) Izhevsk, Samara, Saratav, Port Louis, Ulyanovsk",
+            "zone":"+4:00"
+         },
+         {
+            "value": 4,
+            "text": "(UTC +4:00) Tbilisi, Volgograd, Yerevan",
+            "zone":"+4:00"
+         },
+        {
+           "value": 4.5,
+           "text": "(UTC +4:30) Kabul",
+           "zone":"+4:30"
+        },
+        {
+           "value": 5,
+           "text": "(UTC +5:00) Ashgabat,Ekaterinburg, Islamabad",
+           "zone":"+5:00"
+        },
+        {
+            "value": 5,
+            "text": "(UTC +5:00) Karachi, Qyzylorda Tashkent",
+            "zone":"+5:00"
+         },
+        {
+           "value": 5.5,
+           "text": "(UTC +5:30) Chennai, Kolkata, Mumbai, New Delhi",
+           "zone":"+5:30"
+        },
+        {
+           "value": 5.75,
+           "text": "(UTC +5:45) Kathmandu",
+           "zone":"+5:45"
+        },
+        {
+           "value": 6,
+           "text": "(UTC +6:00) Astana, Dhaka, Omsk",
+           "zone":"+6:00"
+        },
+        {
+            "value": 6.5,
+            "text": "(UTC +6:30) Yangon(Rangoon)",
+            "zone":"+6:30"
+         },
+        {
+           "value": 7,
+           "text": "(UTC +7:00) Bangkok, Hanoi, Jakarta",
+           "zone":"+7:00"
+        },
+        {
+            "value": 7,
+            "text": "(UTC +7:00) Barnaul, Gorno-Altaysk, Hovd",
+            "zone":"+7:00"
+         },
+         {
+            "value": 7,
+            "text": "(UTC +7:00) Krasnoyarsk, Novosibirsk, Tomsk",
+            "zone":"+7:00"
+         },
+        {
+           "value": 8,
+           "text": "(UTC +8:00) Beijing, Perth, Singapore, Hong Kong",
+           "zone":"+8:00"
+        },
+        {
+            "value": 8,
+            "text": "(UTC +8:00) Chongqing, Irkutsk, Perth, Urumqi",
+            "zone":"+8:00"
+         },
+         {
+            "value": 8,
+            "text": "(UTC +8:00) Kaula Lumpur, Taipei, Ulaanbaatar",
+            "zone":"+8:00"
+         },
+         {
+            "value": 8.75,
+            "text": "(UTC +8:45) Eucla",
+            "zone":"+8:45"
+         },
+        {
+           "value": 9,
+           "text": "(UTC +9:00) Tokyo, Seoul, Osaka",
+           "zone":"+9:00"
+        },
+        {
+            "value": 9,
+            "text": "(UTC +9:00) Pyongyang, Sapporo, Yakutsk",
+            "zone":"+9:00"
+         },
+        {
+           "value": 9.5,
+           "text": "(UTC +9:30) Adelaide, Darwin",
+           "zone":"+9:30"
+        },
+        {
+           "value": 10,
+           "text": "(UTC +10:00) Brisbane, Canberra, Melbourne. Sydney",
+           "zone":"+10:00"
+        },
+        {
+            "value": 10,
+            "text": "(UTC +10:00) Guam, Port Moresby, Hobart, Vladivostok",
+            "zone":"+10:00"
+         },
+         {
+            "value": 10.5,
+            "text": "(UTC +10:30) Lord Howe island",
+            "zone":"+10:30"
+         },
+         {
+            "value": 11,
+            "text": "(UTC +11:00) Bougainville Island, Choukurdak",
+            "zone":"+11:00"
+         },
+        {
+           "value": 11,
+           "text": "(UTC +11:00) Magadan, Norflok Island, Shakalin",
+           "zone":"+11:00"
+        },
+        {
+            "value": 11,
+            "text": "(UTC +11:00) Solomon Islands, New Caledonia",
+            "zone":"+11:00"
+         },
+        {
+           "value": 12,
+           "text": "(UTC +12:00) Auckland, Wellington, Fiji, Kamchatka",
+           "zone":"+12:00"
+        },
+        {
+            "value": 12,
+            "text": "(UTC +12:00) Andayr, ISland, Fiji",
+            "zone":"+12:00"
+         },
+         {
+            "value": 12,
+            "text": "(UTC +12:00) Auckland, Wellington, Kamchatka",
+            "zone":"+12:00"
+         },
+         {
+            "value": 12,
+            "text": "(UTC +12:00) Coordinated Universal Time +12",
+            "zone":"+12:00"
+         },
+         {
+            "value": 12.75,
+            "text": "(UTC +12:45) Chatham Islands",
+            "zone":"+12:45"
+         },
+         {
+            "value": 13,
+            "text": "(UTC +13:00) Coordinated Universal Time +13",
+            "zone":"+13:00"
+         },
+         {
+            "value": 13,
+            "text": "(UTC +13:00) Nuku Alofa, Samoa",
+            "zone":"+13:00"
+         },
+         {
+            "value": 14,
+            "text": "(UTC +14:00) Kiritimati Islands",
+            "zone":"+14:00"
+         }
+     ]
+}

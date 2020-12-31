@@ -35,10 +35,8 @@ import { OrderContactComponent } from './order-contact/order-contact.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { UserGuideComponent } from './user-guide/user-guide.component';
-
 import { InternationalPhoneNumber2Module  } from 'ngx-international-phone-number2';
-import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
-import { MomentTimezonePickerModule } from 'moment-timezone-picker';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { TwoStepAuthComponent } from './two-step-auth/two-step-auth.component';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -87,7 +85,6 @@ import { BnNgIdleService } from 'bn-ng-idle';
     HttpClientModule,
     InternationalPhoneNumber2Module,
     NgxIntlTelInputModule,
-    MomentTimezonePickerModule,
     NgCircleProgressModule.forRoot({}),
     MDBBootstrapModule.forRoot(),
     DeviceDetectorModule.forRoot(),

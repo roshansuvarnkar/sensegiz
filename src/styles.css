@@ -89,15 +89,16 @@ span.ng-option-label.ng-star-inserted {
 color: black !important;
 text-align: left !important;
 }
-
 .ng-dropdown-panel{
 position:  relative !important;
 cursor: pointer;
 }
 .wrapper1 {
-  margin-left: 3.5rem;
+  margin-left: 5.5rem;
   color: #3d3d3d;
   text-align: left;
+  overflow-x: auto;
+  width: 100%;
 }
 @media only screen and (max-width: 768px) {
   /* .container-fluid {

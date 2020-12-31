@@ -1,7 +1,12 @@
 mat-card.mat-card.mat-focus-indicator.sub {
-    max-width: 20rem;
+    max-width: 24rem;
+    height: fit-content;
     text-align: center;
     color: #ef6c00eb;
+    margin-left: 1rem;
+}
+mat-card.mat-card.mat-focus-indicator.tab {
+    margin-left: 2rem;
 }
 mat-card-content.mat-card-content.main {
     display: flex;

@@ -21,11 +21,14 @@ export class AdminSettingsComponent implements OnInit {
   bufferForm:FormGroup
   workingForm:FormGroup
   sendDataForm:FormGroup
+  scanCountForm:FormGroup
   setting:any=[]
   min:any=[]
   sec:any=[]
+  inactivityStatusValue:any=[]
   dataGet:any
   languageForm:FormGroup
+  inactivityForm:FormGroup
   statusCustomise:boolean=false
   selectedValue:boolean=false
   selectStatus1:boolean=false
@@ -37,13 +40,17 @@ export class AdminSettingsComponent implements OnInit {
   timeFormStatus:boolean=true
   bufferValue:boolean=false
   multipleShift:boolean=false
+  timeExceed:boolean=false
   constructor(private fb:FormBuilder,public dialog: MatDialog,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.bufferForm = this.fb.group({
       buffer: ['',[Validators.required, Validators.min(0)]]
     })
-
+    this.inactivityForm = this.fb.group({
+      inactivity: ['',Validators.required],
+      type:['']
+    });
     this.txPowerForm = this.fb.group({
       txPower: ['', Validators.required],
     });
@@ -57,6 +64,10 @@ export class AdminSettingsComponent implements OnInit {
       seconds:['',[Validators.required,Validators.max(60), Validators.min(1)]],
 
     })
+    this.scanCountForm=this.fb.group({
+      count:['',[Validators.required,Validators.max(253), Validators.min(0)]],
+    })
+    
     this.timeForm=this.fb.group({
       minutes:[{value:'',disabled: false},Validators.required],
       seconds:[{value:'',disabled: false},Validators.required]
@@ -117,7 +128,9 @@ export class AdminSettingsComponent implements OnInit {
             minutes:res.success[0].durationThreshold/60,
           })
         }
-       
+        this.scanCountForm.patchValue({
+          count:res.success[0].scanCount.toString()
+        })
         this.txPowerForm.patchValue({
           txPower: res.success[0].txPower,
         })
@@ -131,6 +144,24 @@ export class AdminSettingsComponent implements OnInit {
           rate:res.success[0].gatewayDataRate.toString()
         })
 
+        if( res.success[0].inactivityStatus == 1){
+          this.inactivityStatusValue = {
+            value:true,
+            status:'Disable'
+          }
+          this.inactivityForm.patchValue({
+           inactivity: res.success[0].inactivity
+        })
+        }
+        if( res.success[0].inactivityStatus == 2){
+          this.inactivityStatusValue = {
+            value:false,
+            status:'Enable'
+          }
+          this.inactivityForm.patchValue({
+            inactivity: res.success[0].inactivity
+         })
+        }
       }
     })
   }
@@ -179,6 +210,54 @@ export class AdminSettingsComponent implements OnInit {
   //     }
   //   }
   // }
+
+  onSubmitInactivityForm(value){
+
+    if (this.inactivityForm.valid) {
+      try {
+        // console.log("inactivity data==",value)
+        value.inactivity= value.type == '2'? 0 : value.inactivity
+        var data={
+          userId : this.dataGet.userId,
+          inactivity : value.inactivity,
+          type : value.type
+        }
+
+        this.api.getInactivityDeviceSetting(data).then((res:any)=>{
+          // console.log("Inactivity response===",res)
+          if(res.status){
+            this.refreshSetting()
+            var msg = 'Inactivity updated Successfully'
+            this.general.openSnackBar(msg,'')
+          }
+        })
+      } catch (err) {
+      }
+    }
+
+
+   }
+   inactivityChange(event){
+  
+      if(event.checked == true){
+        this.inactivityStatusValue = {
+          value:true,
+          status:'Disable'
+        }
+        this.inactivityForm.patchValue({
+          type:1
+        })
+      }
+      else if(event.checked == false){
+        this.inactivityStatusValue = {
+          value:false,
+          status:'Enable'
+        }
+        this.inactivityForm.patchValue({
+          type:2
+        })
+      }  
+  }
 
   onSubmitDistanceForm(data) {
     console.log("data=",data)
@@ -265,7 +344,27 @@ export class AdminSettingsComponent implements OnInit {
     }
   }
 
+  //scan count == meeting count
 
+  onSubmitScanCountForm(data){
+    console.log("data==",data)
+    if (this.scanCountForm.valid) {
+      try {
+        data.userId=this.dataGet.userId
+        this.api.updateMeetingCount(data).then((res:any)=>{
+          console.log("Scanning Interval===",res)
+          if(res.status){
+            this.refreshSetting()
+            var msg='Scan count updated Successfully'
+            this.general.openSnackBar(msg,'')
+          }
+        }).catch(err=>{
+          console.log("err===",err);
+        })
+      } catch (err) {
+      }
+    }
+  }
   customise(event){
     console.log("event===",event)
     this.statusCustomise = this.statusCustomise == true ? false : true
@@ -363,51 +462,64 @@ export class AdminSettingsComponent implements OnInit {
 
    }
    onSubmitWorkForm(data) {
-    // console.log("time==",data)
-    var dateobj=new Date()
-    var year = dateobj.getFullYear();
-    var month = dateobj.getMonth() + 1
-    var day = dateobj.getDate()
-    var date = month + '/' + day + '/'  + year
-
-    var time1=date+" "+data.fromTime
-    var time2=date+" "+data.toTime
-    time1=new Date(time1).toUTCString()
-    time2=new Date(time2).toUTCString()
-    var h=new Date(time1).getUTCHours()
-    var m=new Date(time1).getUTCMinutes()
-    var h1=new Date(time2).getUTCHours()
-    var m1=new Date(time2).getUTCMinutes()
-     var hh = h <= 9 && h >= 0 ? "0"+h : h;
-     var mm = m <= 9 && m >= 0 ? "0"+m : m;
-     var hh1 = h1 <= 9 && h1 >= 0 ? "0"+h1 : h1;
-     var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
-
-    data.fromTime = hh + ':' + mm
-    data.toTime = hh1 + ':' + mm1
-    // console.log("data====",data)
-
-
-     if (this.workingForm.valid) {
-       try {
-         console.log("time data===",data)
-         data.userId = this.dataGet.userId
-         this.api.setTime(data).then((res:any)=>{
-           console.log("time insrted or updated",res)
-          if(res.status){
-            this.multipleShift=false
-            var msg = 'Shift time update Successfully'
-            this.general.openSnackBar(msg,'')
-           
-           }else{
-            this.multipleShift=true
-           }
-         })
-       } catch (err) {
+    console.log("time==",data)
+    var times1=data.fromTime.split(':')
+    var times2=data.toTime.split(':')
+    var min=Math.abs(times2[1]-times1[1])
+    var hour=Math.abs(times2[0]-times1[0])
+    console.log("minhour",min,hour)
+    if((hour < 9 && (min>=0 && min<=59)) || (hour == 9 && min == 0)){
+      this.timeExceed=false
+      var dateobj=new Date()
+   
+      var year = dateobj.getFullYear();
+      var month = dateobj.getMonth() + 1
+      var day = dateobj.getDate()
+      var date = month + '/' + day + '/'  + year
+  
+      var time1=date+" "+data.fromTime
+      var time2=date+" "+data.toTime
+     
+      time1=new Date(time1).toUTCString()
+      time2=new Date(time2).toUTCString()
+      var h=new Date(time1).getUTCHours()
+      var m=new Date(time1).getUTCMinutes()
+      var h1=new Date(time2).getUTCHours()
+      var m1=new Date(time2).getUTCMinutes()
+      var hh = h <= 9 && h >= 0 ? "0"+h : h;
+      var mm = m <= 9 && m >= 0 ? "0"+m : m;
+      var hh1 = h1 <= 9 && h1 >= 0 ? "0"+h1 : h1;
+      var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
+  
+      data.fromTime = hh + ':' + mm
+      data.toTime = hh1 + ':' + mm1
+      // console.log("data====",data)
+  
+  
+       if (this.workingForm.valid) {
+         try {
+          //  console.log("time data===",data)
+           data.userId = this.dataGet.userId
+           this.api.setTime(data).then((res:any)=>{
+            //  console.log("time insrted or updated",res)
+            if(res.status){
+              this.multipleShift=false
+              var msg = 'Shift time update Successfully'
+              this.general.openSnackBar(msg,'')
+             }
+             else{
+              this.multipleShift=true
+             }
+           })
+  
+         } catch (err) {
+         }
        }
-     }
+    }
+    else if(hour >=9 && min>0){
+        this.timeExceed=true
+    }
    }
-
 
    onSubmitlanguageForm(data){
     console.log("language===",data)
