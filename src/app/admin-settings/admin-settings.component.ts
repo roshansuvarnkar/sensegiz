@@ -68,12 +68,12 @@ export class AdminSettingsComponent implements OnInit {
     this.scanCountForm=this.fb.group({
       count:['',[Validators.required,Validators.max(253), Validators.min(0)]],
     })
-    
+
     this.timeForm=this.fb.group({
       minutes:[{value:'',disabled: false},Validators.required],
       seconds:[{value:'',disabled: false},Validators.required]
     })
-    
+
     this.workingForm = this.fb.group({
       shift: ['', Validators.required],
       fromTime: ['', Validators.required],
@@ -237,7 +237,7 @@ export class AdminSettingsComponent implements OnInit {
     }
   }
    inactivityChange(event){
-  
+
       if(event.checked == true){
         this.inactivityStatusValue = {
           value:true,
@@ -255,7 +255,7 @@ export class AdminSettingsComponent implements OnInit {
         this.inactivityForm.patchValue({
           type:2
         })
-      }  
+      }
   }
 
   onSubmitDistanceForm(data) {
@@ -280,7 +280,7 @@ export class AdminSettingsComponent implements OnInit {
             type:data.wearable,
             distance:data.distance,
             customize:data.customize,
-           
+
             }
         }
          console.log("distance ===",value,data)
@@ -298,7 +298,7 @@ export class AdminSettingsComponent implements OnInit {
         //      this.refreshSetting()
         //      }
 
-             
+
         //  })
         }
         })
@@ -374,11 +374,11 @@ export class AdminSettingsComponent implements OnInit {
   onclick(event){
     this.distanceForm.reset()
     this.selectedValue=event.value==1?false:true
-     
+
   }
 
   changeDistance(event){
-    
+
     if(this.setting.type==0){
       if(event.value == 1 ){
         this.distanceForm.patchValue({
@@ -469,8 +469,8 @@ export class AdminSettingsComponent implements OnInit {
 
 		if(times1>times2){
 			console.log("yes")
-				times2=moment(cdt2).add(1,'days').format("YYYY/MM/DD HH:mm:ss")		
-		
+				times2=moment(cdt2).add(1,'days').format("YYYY/MM/DD HH:mm:ss")
+
 		}
 		console.log("false")
 		var times=moment(times2,"YYYY/MM/DD HH:mm:ss").diff(moment(times1,"YYYY/MM/DD HH:mm:ss"))
@@ -482,19 +482,19 @@ export class AdminSettingsComponent implements OnInit {
 
 		var minhour=(d.hours()+ ":" + d.minutes()).split(":")
     console.log("minhour==",minhour[0],minhour[1])
-    
+
 		if((parseInt(minhour[0]) >= 9 && (parseInt(minhour[1]) >= 0 && parseInt(minhour[1]) <=59)) ){
       this.timeExceed=false
       var dateobj=new Date()
-   
+
       var year = dateobj.getFullYear();
       var month = dateobj.getMonth() + 1
       var day = dateobj.getDate()
       var date = month + '/' + day + '/'  + year
-  
+
       var time1=date+" "+data.fromTime
       var time2=date+" "+data.toTime
-     
+
       time1=new Date(time1).toUTCString()
       time2=new Date(time2).toUTCString()
       var h=new Date(time1).getUTCHours()
@@ -505,12 +505,12 @@ export class AdminSettingsComponent implements OnInit {
       var mm = m <= 9 && m >= 0 ? "0"+m : m;
       var hh1 = h1 <= 9 && h1 >= 0 ? "0"+h1 : h1;
       var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
-  
+
       data.fromTime = hh + ':' + mm
       data.toTime = hh1 + ':' + mm1
       // console.log("data====",data)
-  
-  
+
+
        if (this.workingForm.valid) {
          try {
           //  console.log("time data===",data)
@@ -526,7 +526,7 @@ export class AdminSettingsComponent implements OnInit {
               this.multipleShift=true
              }
            })
-  
+
          } catch (err) {
          }
        }
@@ -549,7 +549,7 @@ export class AdminSettingsComponent implements OnInit {
     })
   }
 
- 
+
    onSubmitBufferForm(value){
 
     if (this.bufferForm.valid) {
@@ -561,7 +561,7 @@ export class AdminSettingsComponent implements OnInit {
 
         }
 
-     
+
         this.api.getBufferDeviceSetting(data).then((res:any)=>{
           // console.log("Buffer response===",res)
           if(res.status){
@@ -572,16 +572,16 @@ export class AdminSettingsComponent implements OnInit {
         }).catch(err=>{
           // console.log("err===",err);
         })
-    
+
       } catch (err) {
       }
     }
    }
    bufferval(event){
      console.log(event.target.value)
-    
+
       this.bufferValue=event.target.value>5?true:false
-    
+
    }
 
    getMin(event){
