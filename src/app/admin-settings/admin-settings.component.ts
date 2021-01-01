@@ -520,13 +520,13 @@ export class AdminSettingsComponent implements OnInit {
             if(res.status){
               this.multipleShift=false
               var msg = 'Shift time update Successfully'
+              this.workingForm.reset();
               this.general.openSnackBar(msg,'')
              }
              else{
               this.multipleShift=true
              }
            })
-
          } catch (err) {
          }
        }

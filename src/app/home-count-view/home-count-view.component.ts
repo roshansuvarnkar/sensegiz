@@ -182,7 +182,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName'];
 
       console.log("data to send ======",data);
 
-      this.api.downloadReport(data,fileName).then((res:any)=>{
+      this.api.downloadActiveOfflineUsers(data,fileName).then((res:any)=>{
 
       console.log("report data recieved ======",res);
       })
