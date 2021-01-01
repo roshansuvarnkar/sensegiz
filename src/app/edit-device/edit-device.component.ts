@@ -142,11 +142,12 @@ export class EditDeviceComponent implements OnInit {
           console.log("gateway submit==",res)
           if(res.status){
             if(this.language=='english'){
-              var msg = 'Gateway Updated Successfully'
+              var msg = 'Gateway Updated Successfully';
+              this.general.openSnackBar(msg,'');
             }
             else if(this.language=='japanese'){
-              var msg = 'ゲートウェイが正常に更新されました'
-            this.general.openSnackBar(msg,'')
+              var msg = 'ゲートウェイが正常に更新されました';
+              this.general.openSnackBar(msg,'');
             }
           }
           else if(!res.status && res.alreadyExisted){
