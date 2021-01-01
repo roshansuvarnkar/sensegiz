@@ -115,8 +115,8 @@ export class EditDeviceComponent implements OnInit {
             else if(this.language=='japanese'){ var msg = 'デバイスが正常に更新されました'}
             this.general.openSnackBar(msg,'')
           }
-          else if(!res.status && res.alreadyExisted){
-            if(this.language=='english'){ var msg = 'Device Name or EmployeeId Already exists, try different Name'}
+          else if(!res.status){
+            if(this.language=='english'){ var msg = 'Entered data Already exists, try with different data'}
              else if(this.language=='japanese'){ var msg = 'デバイス名はすでに存在します。別の名前を試してください'}
             this.general.openSnackBar(msg,'')
           }
