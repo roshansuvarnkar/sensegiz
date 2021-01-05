@@ -45,10 +45,10 @@
    </div>
   </div>
   <span class="flex logo">
-    <img *ngIf="!twoStepAuth?.status" src="./assets/logo.png" alt="Sensegiz">
     <img *ngIf="twoStepAuth?.status && twoStepAuth?.role=='admin'" src="./assets/logo.png" alt="Sensegiz">
 
     <img *ngIf="twoStepAuth?.status && twoStepAuth?.role=='user'" src="{{host}}/photo/{{loginDataInfo.logo}}" alt="Sensegiz">
+    <img *ngIf="!twoStepAuth?.status" src="./assets/logo.png" alt="Sensegiz">
      <span class="end">
        <span class="flex title" *ngIf="loginStatus && isDesktopDevice">
          <span>
