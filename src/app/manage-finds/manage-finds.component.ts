@@ -42,6 +42,7 @@ isMobile:boolean
 isTablet:boolean
 isDesktopDevice:boolean
 deviceInfo=null
+userType:any
 @ViewChild('fileInput') fileInput:ElementRef
 constructor(public dialog: MatDialog,
   private api: ApiService,
@@ -77,6 +78,7 @@ ngOnInit(): void {
   this.loginData = this.login.Getlogin()
   this.loginData = JSON.parse(this.loginData)
   this.language=this.loginData.language
+  this.userType=this.loginData.type
   this.fileupload = this.fb.group({
     fileData:null,
     type:'devices',
@@ -91,6 +93,7 @@ ngOnInit(): void {
 refreshFinds(){
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     tblName:'deviceRegistration'
   }
 
@@ -135,6 +138,7 @@ refreshFinds(){
 refreshShift(){
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     tblName:'deviceShift'
   }
 
@@ -213,6 +217,7 @@ infected(a){
         var data = {
           deviceId:a.deviceId,
           userId:this.loginData.userId,
+          subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
           infected:inf
         }
         this.api.editInfectedPerson(data).then((res:any)=>{
@@ -223,7 +228,7 @@ infected(a){
             this.general.openSnackBar(msg,'')
           }
         })
-  
+
     }
     else{
       this.refreshFinds()
@@ -233,7 +238,7 @@ infected(a){
     if(confirm('この操作を実行してもよろしいですか?')){
       console.log("yes",a)
       var inf = a.infected == 0 ? 1 :0
-      var data = {
+      let data = {
         deviceId:a.deviceId,
         userId:this.loginData.userId,
         infected:inf
@@ -259,15 +264,16 @@ isolated(a){
   var data={}
   var isolate = a.isolated == 0 ? 1 :0
   if(this.language=='english'){
-    
+
     if(confirm('Are you sure to do this operation?')){
       console.log("yes",a)
-      
+
       if(a.infected == 0 ){
-     
+
         data = {
           deviceId:a.deviceId,
           userId:this.loginData.userId,
+          subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
           isolated:isolate
         }
         console.log("isolate data===",data)
@@ -293,7 +299,7 @@ isolated(a){
   else{
     if(confirm('この操作を実行してもよろしいですか?')){
       console.log("yes",a)
-      
+
       if(a.infected == 0){
 
         data = {
@@ -328,6 +334,7 @@ onShiftSelection(a){
     var data = {
     shiftId:a.shift,
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     deviceId:a.deviceId
   }
   this.api.editShift(data).then((res:any)=>{
@@ -487,6 +494,7 @@ fileSubmit(data){
       else if(this.language=='japanese'){var msg = 'お待ちください..！アップロードには数分かかります'}
       this.general.openSnackBar(msg,'')
       data.userId =  this.loginData.userId
+      data.subUserId= (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0
       data.fileData.filename = this.loginData.userId.toString() + parseInt(this.randomNumber().toString()) + data.fileData.filename
         console.log("file===",data)
       this.api.uploadDeviceFile(data).then((res:any)=>{

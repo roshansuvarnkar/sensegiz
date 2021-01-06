@@ -1,134 +1,152 @@
-<!-- <div>
-	<mat-card class="main">
-		<mat-card-title class="main">Add Users</mat-card-title>
-		<hr class="main">
-		<mat-card-content class="main">
 
-			<mat-card class="sub">
-				<mat-card-title>Add Users Details</mat-card-title>
-				<mat-card-content>
-					 <form [formGroup]="adminAddUserform" (ngSubmit)="onSubmit(adminAddUserform.value)">
-				        <mat-form-field class="full-width-input">
-				          <input matInput placeholder="Email" formControlName="userName" required>
-				          <mat-error>
-				            Please provide a valid email address
-				          </mat-error>
-				        </mat-form-field>
-				        <mat-form-field class="full-width-input">
-				          <input matInput  placeholder="Portal Password" formControlName="portalPassword" matInput required >
-				          <mat-error>
-				            Please provide a valid portal  password
-				          </mat-error>
-				        </mat-form-field>
-				        <mat-form-field class="full-width-input">
-				          <input matInput  placeholder="Mobile Password" formControlName="mobilePassword" matInput required >
-				          <mat-error>
-				            Please provide a valid mobile password
-				          </mat-error>
-				        </mat-form-field>
-				        <mat-form-field class="full-width-input">
-				          <input matInput  placeholder="User Password" formControlName="userPassword" matInput required >
-				          <mat-error>
-				            Please provide a valid user password
-				          </mat-error>
-				        </mat-form-field><br>
-				        <button mat-raised-button [disabled]="!adminAddUserform.valid" color="primary">Add user</button>
-				      </form>
-				</mat-card-content>
-			</mat-card>
-
-			<mat-card>
-				<mat-card-content>
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th scope="col">Sl no.</th>
-								<th scope="col">User Name</th>
-								<th scope="col">Added on</th>
-								<th scope="col" >Add Ble</th>
-								<th scope="col" >Settings</th>
-								<th scope="col">isDelete</th>
-							</tr>
-						</thead>
-				
-						<tr *ngFor="let a of adminData;let i = index">
-							<td>{{i+1}}</td>
-							<td>{{a.userName}}</td>
-							<td>{{a.createdDate  | date : 'medium' : 'IST'}}</td>
-							<td><mat-icon matListIcon (click)="openDialog(a)">add</mat-icon></td>
-							<td><mat-icon matListIcon (click)="openSetting(a)">settings</mat-icon></td>
-							<span>
-								<td *ngIf="a.isDeleted=='N'"><mat-icon matListIcon (click)="delete(a)">done</mat-icon></td>
-        						<td *ngIf="a.isDeleted=='Y'"><mat-icon matListIcon (click)="delete(a)">clear</mat-icon></td>
-							</span>
-						</tr>
-					</table>
-				</mat-card-content>
-			</mat-card>
-
-		</mat-card-content>
-	</mat-card>
-</div> -->
 
 
 <div>
 
-	<h1 class="head">Add users</h1> 
+	<h1 class="head">
+		<span *ngIf="language=='english'">Add users</span>
+		<span *ngIf="language=='japanese'">ユーザーを追加する</span>
+	</h1>
 	<hr class="main">
-	
 
 	<div class="flex1">
 		<mat-card class="sub">
-			<mat-card-title>Add Users Details</mat-card-title>
+			<mat-card-title>
+				<span *ngIf="language=='english'">Add Users Details</span>
+				<span *ngIf="language=='japanese'">ユーザーの詳細を追加</span>
+			</mat-card-title> <br>
 			<mat-card-content>
 				<mat-error *ngIf="registered">
 					User already exist
+					<span *ngIf="language=='english'">User already exist</span>
+					<span *ngIf="language=='japanese'">ユーザーはすでに存在します</span>
 				</mat-error>
 
 				 <form [formGroup]="subAddUserform" (ngSubmit)="onSubmit(subAddUserform.value)">
-					<mat-form-field class="full-width-input">
-					  <input matInput placeholder="Email" formControlName="subUserName" required>
+					 <mat-form-field appearance="fill">
+						<mat-label>
+							<span *ngIf="language=='english'">User type</span>
+							<span *ngIf="language=='japanese'">ユーザータイプ</span>
+						</mat-label>
+						<mat-select  formControlName="type" required>
+							<mat-option *ngFor="let a of userType" [value]="a.value">
+								{{a.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="full-width-input" *ngIf="subAddUserform.get('type').value==4">
+						<mat-label>
+							<span *ngIf="language=='english'">Department</span>
+							<span *ngIf="language=='japanese'">部門</span>
+						</mat-label>
+					  <input matInput formControlName="department" required>
 					  <mat-error>
-						Please provide a valid email address
+						<span *ngIf="language=='english'">Please provide a valid department</span>
+						<span *ngIf="language=='japanese'">有効な部門を提供してください</span>
+						
 					  </mat-error>
 					</mat-form-field>
-					<!-- <div class="phone">
-						<international-phone-number2  class="phoneNum" placeholder="Mobile number" [defaultCountry]="'in'" formControlName="mobileNum" 
-						autocomplete="false" aria-autocomplete="false" [required]="true">
-						</international-phone-number2> <hr class="num">
-					</div> -->
-					<div class="wrapper">
-						<ngx-intl-tel-input [cssClass]="'custom'"
-							[preferredCountries]="preferredCountries"
-							[enableAutoCountrySelect]="true"
-							[enablePlaceholder]="true"
-							[searchCountryFlag]="true"
-							[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
-							[selectFirstCountry]="true"
-							[selectedCountryISO]="CountryISO.India"
-							[maxLength]="15"
-							[tooltipField]="TooltipLabel.Name"
-							[phoneValidation]="true"
-							[separateDialCode]="false"
-							name="mobileNum"
-							formControlName="mobileNum">
-						</ngx-intl-tel-input>
-						<hr class="mob">
-						<mat-error *ngIf="subAddUserform.get('mobileNum').status=='INVALID'" class="error" >
-						  Please provide valid mobile number
-						 </mat-error> 
-					</div>
+
+
 					<mat-form-field class="full-width-input">
-					  <input matInput  placeholder="Portal Password" formControlName="portalPassword" matInput required >
+						<mat-label>
+							<span *ngIf="language=='english'">Email</span>
+							<span *ngIf="language=='japanese'">E-mail連絡先</span>
+						</mat-label>
+					  <input matInput formControlName="subUserName" required>
+					  <mat-error>
+						<span *ngIf="language=='english'">Please provide a valid email address</span>
+						<span *ngIf="language=='japanese'">有効なメールIDを入力してください.</span>
+						
+					  </mat-error>
+					</mat-form-field>
+
+					<div class="phone">
+						<!-- <international-phone-number2  class="phoneNum" placeholder="Mobile number" [defaultCountry]="'in'" formControlName="mobileNum"
+						autocomplete="false" aria-autocomplete="false" [required]="true">
+						</international-phone-number2> <hr class="num"> -->
+						<div class="wrapper intl-phone">
+						 <ngx-intl-tel-input [cssClass]="'custom'"
+							 [preferredCountries]="preferredCountries"
+							 [enableAutoCountrySelect]="true"
+							 [enablePlaceholder]="true"
+							 [searchCountryFlag]="true"
+							 [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+							 [selectFirstCountry]="true"
+							 [selectedCountryISO]="CountryISO.India"
+							 [maxLength]="15"
+							 [tooltipField]="TooltipLabel.Name"
+							 [phoneValidation]="true"
+							 [separateDialCode]="false"
+							 name="mobileNum"
+							 formControlName="mobileNum">
+						 </ngx-intl-tel-input>
+						 <hr class="mob">
+						 <mat-error *ngIf="subAddUserform.get('mobileNum').status=='INVALID'  && subAddUserform.get('mobileNum').touched==true" class="error" >
+							 
+							 <span *ngIf="language=='english'">Please provide valid mobile number</span>
+							<span *ngIf="language=='japanese'">有効な携帯電話番号を入力してください</span>
+							</mat-error>
+					 </div>
+					</div>
+
+					<mat-form-field class="full-width-input">
+						<mat-label>
+							<span *ngIf="language=='english'">Portal Password</span>
+							<span *ngIf="language=='japanese'">ポータルパスワード</span>
+						</mat-label>
+					  <input matInput   formControlName="portalPassword" matInput required >
 					  <mat-error>
 						<p 	matTooltip="Password must contain at least one lowercase letter, one uppercase letter, one number and special character,
 						should be minimum of 8 characters and maximum 20 characters are allowed"
-                        [matTooltipPosition]="'after'">Password Policy</p>
-					
+						[matTooltipPosition]="'after'">
+						<span *ngIf="language=='english'">Password Policy</span>
+						<span *ngIf="language=='japanese'">パスワードポリシー</span>
+						</p>
+
 					  </mat-error>
-				
 					</mat-form-field> <br>
-					<button mat-raised-button [disabled]="!subAddUserform.valid" color="primary">Add user</button>
+
+					<mat-form-field class="full-width-input">
+						<mat-label>
+							<span *ngIf="language=='english'">Mobile Password</span>
+							<span *ngIf="language=='japanese'">モバイルパスワード</span>
+						</mat-label>
+						<input matInput  formControlName="mobilePassword" matInput required >
+						<mat-error>
+						<p 	matTooltip="Password must contain at least one lowercase letter, one uppercase letter, one number and special character,
+						should be minimum of 8 characters and maximum 20 characters are allowed"
+												[matTooltipPosition]="'after'">
+							<span *ngIf="language=='english'">Password Policy</span>
+							<span *ngIf="language=='japanese'">パスワードポリシー</span>
+						</p>
+
+						</mat-error>
+					</mat-form-field>
+
+
+					<mat-form-field class="full-width-input">
+						<mat-label>
+							<span *ngIf="language=='english'">User Password</span>
+							<span *ngIf="language=='japanese'">ユーザーのパスワード</span>
+						</mat-label>
+						<input matInput  formControlName="userPassword" matInput required >
+						<mat-error>
+						<p 	matTooltip="Password must contain at least one lowercase letter, one uppercase letter, one number and special character,
+						should be minimum of 8 characters and maximum 20 characters are allowed"
+												[matTooltipPosition]="'after'">
+							<span *ngIf="language=='english'">Password Policy</span>
+							<span *ngIf="language=='japanese'">パスワードポリシー</span>
+						</p>
+
+						</mat-error>
+					</mat-form-field><br>
+
+					<button mat-raised-button [disabled]="!subAddUserform.valid" color="primary">
+						<span *ngIf="language=='english'">Add user</span>
+						<span *ngIf="language=='japanese'">ユーザーを追加する</span>
+					</button>
 				  </form>
 			</mat-card-content>
 		</mat-card>
@@ -136,33 +154,43 @@
 		<mat-card class="tab">
 			<mat-card-content>
 				<table class="table table-hover">
-					<thead>
+					<thead *ngIf="language=='english'">
 						<tr>
 							<th scope="col">Sl no.</th>
-                            <th scope="col">User Name</th>
-                            <th scope="col">Mobile number</th>
-							<th scope="col">Added on</th>							
+							<th scope="col">User Name</th>
+							<th scope="col">Type</th>
+							<th scope="col">Department</th>
+							<th scope="col">Mobile number</th>
+							<th scope="col">Added on</th>
 							<th scope="col">isDelete</th>
 						</tr>
 					</thead>
-			
+					<thead *ngIf="language=='japanese'">
+						<tr>
+							<th scope="col">シリアル 番号.</th>
+							<th scope="col">ユーザー名</th>
+							<th scope="col">タイプ</th>
+							<th scope="col">部門</th>
+							<th scope="col">携帯電話番号</th>
+							<th scope="col">追加された</th>
+							<th scope="col">作る</th>
+						</tr>
+					</thead>
+
 					<tr *ngFor="let a of subUser;let i = index">
 						<td>{{i+1}}</td>
-						<td>{{a.subUserName}}</td>
-                        <td>{{a.createdDate  | date : 'medium' : 'IST'}}</td>
-                        <td>{{a.mobileNum}}</td>
-
-						
-						<span>
-							<td *ngIf="a.isDeleted=='N'"><mat-icon matListIcon (click)="delete(a)">done</mat-icon></td>
-							<td *ngIf="a.isDeleted=='Y'"><mat-icon matListIcon (click)="delete(a)">clear</mat-icon></td>
-						</span>
+						<td>{{a.userName}}</td>
+						<td *ngIf="a.type==2">Co. Admin</td>
+						<td *ngIf="a.type==3">Normal User</td>
+						<td *ngIf="a.type==4">Sub Admin</td>
+						<td>{{a.department}}</td>
+						<td>{{a.mobileNum}}</td>
+          				<td>{{a.createdDate  | date : 'medium' : 'IST'}}</td>
+						<td *ngIf="a.isDeleted=='N'"><mat-icon matListIcon (click)="delete(a)">done</mat-icon></td>
+						<td *ngIf="a.isDeleted=='Y'"><mat-icon matListIcon (click)="delete(a)">clear</mat-icon></td>
 					</tr>
 				</table>
 			</mat-card-content>
 		</mat-card>
 	</div>
-
-
-
 </div>

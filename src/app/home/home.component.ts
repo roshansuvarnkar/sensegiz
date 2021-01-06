@@ -73,7 +73,6 @@ sendWarning(id,value){
     id:id,
     totalCount:value,
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
-
   }
 
   this.api.showWarning(data).then((res:any)=>{
@@ -100,7 +99,6 @@ refreshFinds(){
   var data={
     userId:this.loginData.userId,
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
-
   }
 
   this.api.getAssignedDevices(data).then((res:any)=>{
@@ -162,7 +160,7 @@ offlineUser(){
   dialogConfig.width = '75vw';
   dialogConfig.data = {
     type:"offlineUserData",
-   
+
   }
   const dialogRef = this.dialog.open(HomeCountViewComponent, dialogConfig);
 
@@ -181,7 +179,7 @@ onlineUser(){
   dialogConfig.width = '75vw';
   dialogConfig.data = {
     type:"onlineUserData",
-   
+
   }
   const dialogRef = this.dialog.open(HomeCountViewComponent, dialogConfig);
 
@@ -204,7 +202,7 @@ infectedUser(){
        dialogConfig.width = '75vw';
        dialogConfig.data = {
          type:"infectedUserData",
-        
+
        }
        const dialogRef = this.dialog.open(HomeCountViewComponent, dialogConfig);
 
@@ -218,6 +216,7 @@ infectedUser(){
 normalUser(){
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     type:'normal'
   }
   this.api.getHomeCountData(data).then((res:any)=>{
@@ -270,7 +269,7 @@ refreshCount(){
       this.onlineCount=res.success[2].activeEmp
       this.offlineCount=res.success[3].offlineEmp
       this.activeEmp = res.success[4].registedEmp
-    
+
     //  this.refreshOnlineDevice()
     }
   })
@@ -304,7 +303,6 @@ maximumContactTime(){
     userId:this.loginData.userId,
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     zone:this.general.getZone(date)
-
   }
   this.api.getMaxTimeContact(data).then((res:any)=>{
     // console.log("max contact time ======",res);
@@ -385,7 +383,7 @@ numOfcontactPerDay(){
 
       }
 
-     
+
 
      if(this.language=='english'){
       var chart = new CanvasJS.Chart("chartContainer", {

@@ -82,6 +82,9 @@ Findsubmit(data){
   if (this.Findform.valid) {
     try {
       data.tblName ='deviceRegistration'
+      if(this.loginData.hasOwnProperty('id') && this.loginData.id!=0 && this.loginData.type==4){
+        data.subUserId=this.loginData.id
+      }
       data.userId=this.loginData.userId
       data.mobileNum=data.mobileNum!=null?data.mobileNum.e164Number:''
       console.log("data of finds====",data)
@@ -110,7 +113,10 @@ Findsubmit(data){
 Gatewaysubmit(data){
   if (this.gatewayform.valid) {
     try {
-      data.tblName='gatewayRegistration'
+      data.tblName='gatewayRegistration';
+      if(this.loginData.hasOwnProperty('id') && this.loginData.id!=0 && this.loginData.type==4){
+        data.subUserId=this.loginData.id
+      }
       data.userId=this.loginData.userId
       data.gatewayType=data.type == '0'?'ethernet':'wifi'
 
@@ -139,6 +145,9 @@ Usersubmit(data){
 
   if (this.userform.valid) {
     try {
+      if(this.loginData.hasOwnProperty('id') && this.loginData.id!=0 && this.loginData.type==4){
+        data.subUserId=this.loginData.id
+      }
       data.userId=this.loginData.userId
       data.mobileNum=data.mobileNum.e164Number
       this.api.UserRegister(data).then((res:any)=>{

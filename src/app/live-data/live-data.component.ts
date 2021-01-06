@@ -77,15 +77,15 @@ totTime:any=[]
       this.pageIndex=0
       this.count = this.count + 1;
       // console.log("count==",this.count);
-  
+
       this.getTotalCount(this.count)
       this.refreshData(this.count)
     }
-  
+
     nextDayData(){
       this.liveData=[]
       this.paginator.pageIndex=0
-  
+
       this.paginator.pageSize=10
       this.pageSet=10
       this.pageIndex=0
@@ -93,7 +93,7 @@ totTime:any=[]
       // var offset=this.paginator.pageIndex*this.paginator.pageSize
       this.count = this.count - 1;
       // console.log("count==",this.count);
-  
+
       this.getTotalCount(this.count)
       this.refreshData(this.count)
     }
@@ -102,17 +102,18 @@ getTotalCount(val){
   var date=new Date()
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     tblName:'deviceData',
     count:val,
     zone:this.general.getZone(date)
   }
- 
+
   this.api.getLiveDataTotalCount(data).then((res:any)=>{
     // console.log("live data ======",res);
     if(res.status){
       console.log('\nTotal response: ',res.success[0].count);
       this.currentPageSize= parseInt(res.success[0].count);
-     
+
 
     }
   })
@@ -124,16 +125,17 @@ getTotalCount(val){
     var date=new Date()
     var data={
       userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       tblName:'deviceData',
       count:value,
       zone:this.general.getZone(date),
       offset:offset,
       limit:limit
     }
-   
+
 
     this.api.getLiveData(data).then((res:any)=>{
-    
+
       console.log("live data ======",res);
       if(res.status){
         this.liveData=[]
@@ -161,12 +163,12 @@ getTotalCount(val){
         // else{
         //   this.totTime=res.success
         //   console.log("this.tottttttt===",this.totTime)
-      
+
         //   if(this.selectMin.get('minute').value!=''){
         //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
-            
+
         //     this.filterTotTime(this.selectMin.get('minute').value)
-        
+
         //   }
         // }
       }
@@ -209,12 +211,12 @@ getTotalCount(val){
 //   if(data1!="00:00:00" || data1!='-'){
 //     var a=data1.split(':')
 //     date.setHours(date.getHours() -a[0]);
-//     date.setMinutes(date.getMinutes() - a[1]); 
-//     date.setSeconds(date.getSeconds() - a[2]); 
+//     date.setMinutes(date.getMinutes() - a[1]);
+//     date.setSeconds(date.getSeconds() - a[2]);
 //     console.log("new date==",date)
 //   }
 //   if(data1=="00:00:00" || data1=='-'){
-//     date.setSeconds(date.getSeconds() - 5); 
+//     date.setSeconds(date.getSeconds() - 5);
 //   }
 
 //   return date
@@ -235,38 +237,38 @@ getUpdate(event) {
   filterTotTime(event){
       console.log("event value===",event,"  tot===", this.totTime)
       var arr=[]
-      
+
     if(event.value !="0" && this.selectMin.get('minute').value!=''){
-  
+
         console.log("tot===", this.totTime)
         this.totTime.filter((obj,index)=>{
-      
+
           if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
           arr.push({
-          
+
               baseName:obj.baseName,
               contactName:obj.contactName,
               updatedOn:obj.updatedOn,
               startTime:this.general.startTime(obj.totalTime,obj.updatedOn),
               totalTime:obj.totalTime
-        
+
             })
             console.log("arrr==",arr)
             return arr
           }
       })
-        
-  
+
+
         this.dataSource = new MatTableDataSource(arr);
         setTimeout(() => {
           this.dataSource.sort = this.sort;
-  
+
         })
       }
     else{
       this.refreshData(this.count,this.limit,this.offset)
     }
-  
-    
+
+
   }
 }

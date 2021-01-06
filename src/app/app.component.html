@@ -10,17 +10,18 @@
      <div class=" title" *ngIf="loginStatus">
        <span>
          <mat-icon >person</mat-icon>
-       </span> <br>  
-       <p >{{loginDataInfo.userName}}</p> 
-      
+       </span> <br>
+       <p >{{loginDataInfo.userName}}</p>
+
      </div><hr>
     <div *ngIf="language=='english'">
       <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>Home</button>
       <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>Manage People</button>
       <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>Social Distancing</button>
       <!-- <button mat-menu-item routerLink="/location"> <mat-icon>place</mat-icon>Location</button> -->
-  
-      <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>Settings</button>
+
+      <button mat-menu-item routerLink="/settings" *ngIf="loginDataInfo.type!==3 && loginDataInfo.type!==4"> <mat-icon>settings</mat-icon>Settings</button>
+      <button mat-menu-item routerLink="/profile" *ngIf="loginDataInfo.type!==3 && loginDataInfo.type!==4"> <mat-icon>perm_identity</mat-icon>Create Profile</button>
       <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>Reports</button>
       <button mat-menu-item  (click)="logout()" class="logout"><mat-icon >exit_to_app</mat-icon>Logout</button>
     </div>
@@ -29,24 +30,26 @@
       <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>管理画面 </button>
       <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>ソーシャル・ディスタンシング </button>
       <!-- <button mat-menu-item routerLink="/location"> <mat-icon>place</mat-icon>Location</button> -->
-  
-      <button mat-menu-item routerLink="/settings"> <mat-icon>settings</mat-icon>設定</button>
+
+      <button mat-menu-item routerLink="/settings" *ngIf="loginDataInfo.type!==3 && loginDataInfo.type!==4"> <mat-icon>settings</mat-icon>設定</button>
+      <button mat-menu-item routerLink="/profile" *ngIf="loginDataInfo.type!==3 && loginDataInfo.type!==4"> <mat-icon>perm_identity</mat-icon>
+        プロフィール作成</button>
       <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>レポート</button>
       <button mat-menu-item  (click)="logout()" class="logout"><mat-icon >exit_to_app</mat-icon>ログアウト</button>
     </div>
- 
- 
+
+
      <!-- <button mat-raised-button class="guide"><span routerLink="/user-guide">User Guide</span></button> -->
- 
+
     </mat-menu>
- 
+
    </div>
   </div>
   <span class="flex logo">
-    <img *ngIf="!twoStepAuth?.status" src="./assets/logo.png" alt="Sensegiz">
     <img *ngIf="twoStepAuth?.status && twoStepAuth?.role=='admin'" src="./assets/logo.png" alt="Sensegiz">
- 
+
     <img *ngIf="twoStepAuth?.status && twoStepAuth?.role=='user'" src="{{host}}/photo/{{loginDataInfo.logo}}" alt="Sensegiz">
+    <img *ngIf="!twoStepAuth?.status" src="./assets/logo.png" alt="Sensegiz">
      <span class="end">
        <span class="flex title" *ngIf="loginStatus && isDesktopDevice">
          <span>
@@ -69,10 +72,10 @@
      </span>
    </span><br>
    </mat-toolbar>
- 
- 
- 
- 
+
+
+
+
  <div *ngIf="twoStepAuth?.status && twoStepAuth?.role=='user'">
    <mat-toolbar color="primary" class="menubar">
     <div class="toolbar" *ngIf="language=='english';else changelang">
@@ -81,7 +84,8 @@
 
         <span routerLink="/dashboard">Manage People</span>
         <span routerLink="/live-data">Social Distancing</span>
-        <span routerLink="/settings">Settings</span>
+        <span routerLink="/settings" *ngIf="loginDataInfo.type!==3 && loginDataInfo.type!==4">Settings</span>
+        <span routerLink="/profile" *ngIf="loginDataInfo.type!==3 && loginDataInfo.type!==4">Create Profile</span>
         <span routerLink="/history">Reports</span>
         <span routerLink="/user-guide">User Guide</span>
     </div>
@@ -90,57 +94,57 @@
         <span routerLink="/home">ホームページ</span>
         <span routerLink="/dashboard">管理画面</span>
         <span routerLink="/live-data">ソーシャル・ディスタンシング</span>
-        <span routerLink="/settings">設定</span>
+        <span routerLink="/settings" *ngIf="loginDataInfo.type!==3 && loginDataInfo.type!==4">設定</span>
+        <span routerLink="/profile" *ngIf="loginDataInfo.type!==3 && loginDataInfo.type!==4">プロフィール作成</span>
         <span routerLink="/history">レポート</span>
         <span routerLink="/user-guide">ユーザーガイド</span>
     </div>
    </ng-template>
- 
- 
+
+
    </mat-toolbar>
- 
+
    <div *ngIf="isDesktopDevice">
- 
+
      <div class="container-fluid">
- 
- 
+
+
        <div class="row">
          <div class="col-2">
            <app-side-bar></app-side-bar>
          </div>
- 
- 
+
+
          <div class="col-10">
            <!-- <button mat-raised-button color="primary" class="guide"><span routerLink="/user-guide">User Guide</span></button> -->
            <router-outlet></router-outlet>
          </div>
        </div>
- 
+
        </div>
    </div>
- 
+
    <div *ngIf="isMobile || isTablet" >
      <mat-sidenav-container class="example-container">
-       
+
        <mat-sidenav #sidenav mode="over"  >
         <app-side-bar></app-side-bar>
        </mat-sidenav>
- 
+
        <mat-sidenav-content >
          <button mat-raised-button color="primary" class="guide"><span routerLink="/user-guide">User Guide</span></button>
          <p class="content" (click)="sidenav.toggle()">&nbsp;&nbsp;  Devices list <mat-icon color="primary">keyboard_arrow_right</mat-icon></p>
          <router-outlet></router-outlet>
        </mat-sidenav-content>
      </mat-sidenav-container>
- 
+
    </div >
  </div>
- 
+
  <div *ngIf="!twoStepAuth?.status">
    <router-outlet></router-outlet>
  </div>
- 
+
  <div *ngIf="twoStepAuth?.status && twoStepAuth?.role=='admin'">
    <router-outlet></router-outlet>
  </div>
- 

@@ -51,21 +51,23 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
     console.log("language==",this.language)
     this.loadData()
   }
- 
+
 
   loadData(){
     var date=new Date()
     var data={}
- 
+
     if(this.type=='activeUserData'){
 
        data={
         userId:this.loginData.userId,
+        subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
         type:'active',
       }
       console.log("data===",data)
 
       this.api.getHomeCountData(data).then((res:any)=>{
+        console.log("res==",res)
         if(res.status){
           this.activeData=res.success
           this.dataSource = new MatTableDataSource(this.activeData);
@@ -84,11 +86,14 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
     if(this.type == 'infectedUserData'){
      data={
         userId:this.loginData.userId,
+        subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
         type:'infected',
       }
       console.log("data===",data)
 
       this.api.getHomeCountData(data).then((res:any)=>{
+        console.log("res==",res)
+
         if(res.status){
           this.infectedData=res.success
           this.dataSource = new MatTableDataSource(this.infectedData);
@@ -106,6 +111,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
     if(this.type == 'onlineUserData'){
      data={
         userId:this.loginData.userId,
+        subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
         type:'onlineUserData',
         zone:this.general.getZone(date)
 
@@ -131,6 +137,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
     if(this.type == 'offlineUserData'){
      data={
         userId:this.loginData.userId,
+        subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
         type:'offlineUserData',
         zone:this.general.getZone(date)
       }
@@ -160,6 +167,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
       if(this.type=='onlineUserData'){
         data={
         userId:this.loginData.userId,
+        subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
         zone:this.general.getZone(dateObj),
         type:this.type
         }
@@ -168,18 +176,19 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
       if(this.type=='offlineUserData'){
         data={
         userId:this.loginData.userId,
+        subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
         zone:this.general.getZone(dateObj),
         type:this.type
       }
       fileName="offline User- "+this.deviceName
     }
-    
+
       console.log("data to send ======",data);
-    
-      this.api.downloadReport(data,fileName).then((res:any)=>{
-    
+
+      this.api.downloadActiveOfflineUsers(data,fileName).then((res:any)=>{
+
       console.log("report data recieved ======",res);
       })
-    
+
   }
 }

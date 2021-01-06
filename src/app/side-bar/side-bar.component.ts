@@ -47,7 +47,7 @@ export class SideBarComponent implements OnInit {
 
     var data={
       userId:this.loginData.userId,
-
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     }
 
     this.api.getAssignedDevices(data).then((res:any)=>{

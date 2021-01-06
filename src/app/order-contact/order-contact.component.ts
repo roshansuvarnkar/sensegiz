@@ -19,48 +19,63 @@ export class OrderContactComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['i','baseName', 'contactName', 'updatedOn'];
   order:any=0
-  loginData:any
+  loginData:any={}
   dataSource:any
 	dataSet:any=[]
 	from:Date
   to:Date
   orderShow:any
+  language:any
   currentPageLength:any=10
   currentPageSize:any=10
+
   orderType:any=[
-  		{
-  			id:2,
-  			name:"Second level order"
-  		},
-  		{
-  			id:3,
-  			name:"Third level order"
-  		},
-  		{
-  			id:4,
-  			name:"Fourth level order"
-  		},
-  		{
-  			id:5,
-  			name:"Fifth level order"
-  		},
-  		{
-  			id:6,
-  			name:"Sixth level order"
-  		},
-  		{
-  			id:7,
-  			name:"Seventh level order"
-  		},
-  		{
-  			id:8,
-  			name:"Eighth level order"
-  		},
-  		{
-  			id:9,
-  			name:"Ninth level order"
-  		},
-  	]
+    {
+      id:2,
+      name:"Second level order",
+      jp_name:"2番目レベルの順序"
+    },
+    {
+      id:3,
+      name:"Third level order",
+      jp_name:"3番目のレベルの順序"
+    },
+    {
+      id:4,
+      name:"Fourth level order",
+      jp_name:"第4レベルの順序"
+    },
+    {
+      id:5,
+      name:"Fifth level order",
+      jp_name:"5番目レベルの順序"
+
+    },
+    {
+      id:6,
+      name:"Sixth level order",
+      jp_name:"6番目レベルの順序"
+
+    },
+    {
+      id:7,
+      name:"Seventh level order",
+      jp_name:"7番目レベルの順序"
+
+    },
+    {
+      id:8,
+      name:"Eighth level order",
+      jp_name:"8番目レベルの順序"
+
+    },
+    {
+      id:9,
+      name:"Ninth level order",
+      jp_name:"9番目レベルの順序"
+
+    },
+  ]
     constructor(
       public dialog: MatDialog,
       private api: ApiService,
@@ -70,12 +85,13 @@ export class OrderContactComponent implements OnInit {
       public dialogRef: MatDialogRef<OrderContactComponent>,
        @Inject(MAT_DIALOG_DATA)  data,
     ) {
-      this.loginData = data.userId
+      console.log("data from===",data)
+      this.loginData.userId = data.userId
+      this.loginData.id = data.subUserId
       this.order=data.order
       this.dataSet=data.data
       this.from = data.fromDate
       this.to = data.toDate
-      // console.log("data from===",data)
       console.log("data set===",this.dataSet,this.loginData)
       this.orderShow = this.orderType.filter(obj=>{
       	return obj.id==this.order
@@ -87,12 +103,14 @@ export class OrderContactComponent implements OnInit {
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
+    this.language=this.loginData.language
   }
 
 
   getTotalLength(){
     var data={
-      userId:this.loginData,
+      userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       deviceName:this.dataSet.contactName,
       zone:this.general.getZone(new Date()),
       fromDate:this.from,
@@ -113,7 +131,8 @@ export class OrderContactComponent implements OnInit {
    onSubmitFindName(limit=10,offset=0){
     // console.log("data====",this.dataSet)
     var value={
-      userId:this.loginData,
+      userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       deviceName:this.dataSet.contactName,
       zone:this.general.getZone(new Date()),
       fromDate:this.from,
@@ -145,6 +164,8 @@ export class OrderContactComponent implements OnInit {
     dialogConfig.width = '75vw';
     dialogConfig.data = {
       data:a,
+      userId:a.userId,
+      subUserId:a.subUserId,
       order:this.order,
       fromDate : this.from,
       toDate : this.to
@@ -155,7 +176,7 @@ export class OrderContactComponent implements OnInit {
     });
   }
 
-
+ 
   getUpdate(event) {
     // console.log("paginator event",event);
     // console.log("paginator event length", this.currentPageLength);

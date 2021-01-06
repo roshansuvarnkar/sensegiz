@@ -54,7 +54,7 @@ daysExceed:boolean=false
       fromDate: ['', Validators.required],
       toDate: ['', Validators.required]
     });
-    
+
     this.cummulativeForm = this.fb.group({
       fromDate: ['', Validators.required],
       toDate: ['', Validators.required]
@@ -75,7 +75,7 @@ daysExceed:boolean=false
     this.summaryReportForm = this.fb.group({
       deviceName: ['', Validators.required],
       status: ['0'],
- 
+
     });
 
     this.customReport= this.fb.group({
@@ -204,6 +204,7 @@ onclickSummaryReport(data){
   refreshFinds(){
     var data={
       userId:this.loginData.userId,
+      subUserId:(this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       tblName:'deviceRegistration'
     }
     this.api.getData(data).then((res:any)=>{
@@ -313,7 +314,7 @@ onclickSummaryReport(data){
   }
 
 
-  onSubmitcummulativeForm(data){  
+  onSubmitcummulativeForm(data){
     var date1=new Date(data.fromDate)
     var date2=new Date(data.toDate)
     var year = date1.getFullYear();
@@ -353,7 +354,7 @@ onclickSummaryReport(data){
       //   this.date2 =new Date(data.toDate)
       //   var diffTime = Math.abs(this.date2 - this.date1);
       //   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
+
       //   console.log(diffDays + " days");
       // if(diffDays<15){
       //   this.daysExceed=false
@@ -361,12 +362,12 @@ onclickSummaryReport(data){
       //   var month = ("0" + (this.date1.getMonth() + 1)).slice(-2);
       //   var day = ("0" + this.date1.getDate()).slice(-2);
       //   var from = year + '-' + month + '-'  + day
-  
+
       //   var year1 = this.date2.getFullYear();
       //   var month1 = ("0" + (this.date2.getMonth() + 1)).slice(-2);
       //   var day1 = ("0" + this.date2.getDate()).slice(-2);
       //   var to = year1 + '-' + month1 + '-'  + day1
-  
+
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -377,11 +378,11 @@ onclickSummaryReport(data){
           deviceName:data.deviceName,
           status:data.status
           // fromDate:from,
-          // toDate:to, 
-       
+          // toDate:to,
+
         }
         const dialogRef = this.dialog.open(HistoryReportComponent, dialogConfig);
-  
+
         dialogRef.afterClosed().subscribe(result => {
           this.refreshFinds()
         });
@@ -389,15 +390,16 @@ onclickSummaryReport(data){
       // else{
       //     this.daysExceed=true
       // }
-  
+
   }
 
   userSuggestion(event){
     console.log("data=",event)
-   
+
     var data={
       value:event.target.value,
       userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       tblName:'deviceData'
 
     }
@@ -413,15 +415,16 @@ onclickSummaryReport(data){
 
       }
     })
-    
+
   }
 
   infectedSuggestion(event){
     console.log("data=",event)
-   
+
     var data={
       value:event.target.value.toString(),
       userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       tblName:'deviceRegistration'
 
     }
