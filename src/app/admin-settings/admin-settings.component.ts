@@ -460,14 +460,15 @@ export class AdminSettingsComponent implements OnInit {
     })
 
    }
+ 
    onSubmitWorkForm(data) {
 		var cdt1= moment(data.fromTime, 'HH:mm:ss')
 		var cdt2= moment(data.toTime, 'HH:mm:ss')
 		var times1=moment(cdt1).format("YYYY/MM/DD HH:mm:ss")
 		var times2=moment(cdt2).format("YYYY/MM/DD HH:mm:ss")
 		console.log("times22==",times1>times2)
-
-		if(times1>times2){
+   
+		if(times1>times2 || (data.fromTime == "00:00" &&  data.toTime == "00:00")){
 			console.log("yes")
 				times2=moment(cdt2).add(1,'days').format("YYYY/MM/DD HH:mm:ss")
 
@@ -518,21 +519,25 @@ export class AdminSettingsComponent implements OnInit {
            this.api.setTime(data).then((res:any)=>{
             //  console.log("time insrted or updated",res)
             if(res.status){
+              this.timeExceed=false
               this.multipleShift=false
               var msg = 'Shift time update Successfully'
-              this.workingForm.reset();
               this.general.openSnackBar(msg,'')
+              this.workingForm.reset();
              }
              else{
+              this.timeExceed=false
               this.multipleShift=true
              }
            })
+
          } catch (err) {
          }
        }
     }
     else if((parseInt(minhour[0]) == 9 && parseInt(minhour[1]) < 0 ) || parseInt(minhour[0]) < 9){
       this.timeExceed=true
+      this.multipleShift=false
     }
    }
 

@@ -50,58 +50,61 @@ export class EditSettingShiftComponent implements OnInit {
 	}
 
 	refreshShift(){
-	  var data={
-	    userId:this.dataGet.userId,
-	    tblName:'deviceShift'
-	  }
-	  console.log("data==",data)
-	  this.api.getData(data).then((res:any)=>{
-	    console.log("shift  data ======",res);
-	    if(res.status){
-	      this.shifts=res.success
-		  for(let i=0;i<res.success.length;i++){
-			var dateobj=new Date()
-			var year = dateobj.getFullYear();
-			var month = dateobj.getMonth() + 1
-			var day = dateobj.getDate()
-			var date = month + '/' + day + '/'  + year
+		var data={
+		  userId:this.dataGet.userId,
+		  tblName:'deviceShift'
+		}
+  
+		this.api.getData(data).then((res:any)=>{
+		  console.log("shift  data ======",res);
+		  if(res.status){
+			this.shifts=res.success
+			
+			for(let i=0;i<res.success.length;i++){
+			  var dateobj=new Date()
+			  var year = dateobj.getFullYear();
+			  var month = dateobj.getMonth() + 1
+			  var day = dateobj.getDate()
+			  var date = month + '/' + day + '/'  + year
+			
+			  var time1=date+" "+this.shifts[i].fromTime+':00 UTC'
+			  var time2=date+" "+this.shifts[i].toTime+':00 UTC'
+			  time1=new Date(time1).toString()
+			  time2=new Date(time2).toString()
+			  
 		  
-			var time1=date+" "+this.shifts[i].fromTime+':00 UTC'
-			var time2=date+" "+this.shifts[i].toTime+':00 UTC'
-			time1=new Date(time1).toString()
-			time2=new Date(time2).toString()
-			
+			  var h=new Date(time1).getHours()
+			  var m=new Date(time1).getMinutes()
+			  var h1=new Date(time2).getHours()
+			  var m1=new Date(time2).getMinutes()
+			  var hh = h <= 9 && h >= 0 ? "0"+h : h;
+			  var mm = m <= 9 && m >= 0 ? "0"+m : m;
+			  var hh1 = h1 <= 9 && h1 >= 0 ? "0"+h1 : h1;
+			  var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
+			  
 		
-			var h=new Date(time1).getHours()
-			var m=new Date(time1).getMinutes()
-			var h1=new Date(time2).getHours()
-			var m1=new Date(time2).getMinutes()
-			var hh = h <= 9 && h >= 0 ? "0"+h : h;
-			var mm = m <= 9 && m >= 0 ? "0"+m : m;
-			var hh1 = h1 <= 9 && h1 >= 0 ? "0"+h1 : h1;
-			var mm1 = m1 <= 9 && m1 >= 0 ? "0"+m1 : m1;
-			
-	  
-			this.shifts[i].fromTime=hh+':'+mm
-			this.shifts[i].toTime=hh1+':'+mm1
+			this.shifts[i].fromTime=(hh+':'+mm)
+			this.shifts[i].toTime=(hh1+':'+mm1)
+		}
+		  
+  
+				const control = <FormArray>this.shiftForm.controls.items;
+			  control.controls = [];
+			  for(var i=0;i<this.shifts.length;i++){
+				  control.push(this.fb.group(
+					{
+					  id:[this.shifts[i].id],
+					  userId:[this.shifts[i].userId],
+					  shiftName:[this.shifts[i].shiftName],
+					  fromTime:[this.shifts[i].fromTime],
+					  toTime:[this.shifts[i].toTime],
+					}
+				  ))
+			  }
+			//   console.log("controls=",control)
+		  }
+		})
 	  }
-  		    const control = <FormArray>this.shiftForm.controls.items;
-			control.controls = [];
-			for(var i=0;i<this.shifts.length;i++){
-				control.push(this.fb.group(
-				  {
-				    id:[this.shifts[i].id],
-				    userId:[this.shifts[i].userId],
-				    shiftName:[this.shifts[i].shiftName],
-				    fromTime:[this.shifts[i].fromTime],
-				    toTime:[this.shifts[i].toTime],
-				  }
-				))
-			}
-  		//   console.log("controls=",control)
-	    }
-	  })
-	}
 
 
 
@@ -166,7 +169,6 @@ export class EditSettingShiftComponent implements OnInit {
     }
 }
 
-//Unable to convert
   delete(a){
     // console.log("delete===",a);
     
