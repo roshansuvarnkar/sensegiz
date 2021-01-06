@@ -34,7 +34,7 @@ offset:any
 pageSet:any=10
 pageIndex:any=0
 language:any
-displayedColumns: string[] = ['i','baseName','contactName','startTime', 'updatedOn','totalTime'];
+displayedColumns: string[] = ['i','baseName','contactName','department','startTime', 'updatedOn','totalTime'];
 selectMin:FormGroup
 totTime:any=[]
   constructor(

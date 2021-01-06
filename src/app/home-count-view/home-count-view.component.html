@@ -31,6 +31,13 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Name </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
+                  <ng-container matColumnDef="lastSync">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last sync time </th>
+                    <td mat-cell *matCellDef="let data">
+                      <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
+                      <span *ngIf="data.dataReceivedTime == '0000-00-00 00:00:00'">-</span>
+                    </td>
+                  </ng-container>
 
              </div>
                <div *ngIf="language=='japanese'">
@@ -47,6 +54,13 @@
                   <ng-container matColumnDef="deviceName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 追跡対象者の氏名 </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="lastSync">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 最終同期時間 </th>
+                    <td mat-cell *matCellDef="let data">
+                      <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
+                      <span *ngIf="data.dataReceivedTime == '0000-00-00 00:00:00'">-</span>
+                    </td>
                   </ng-container>
 
              </div>
@@ -92,6 +106,13 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Name </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
+                  <ng-container matColumnDef="lastSync">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last sync time </th>
+                    <td mat-cell *matCellDef="let data">
+                      <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
+                      <span *ngIf="data.dataReceivedTime == '0000-00-00 00:00:00'">-</span>
+                    </td>
+                  </ng-container>
 
              </div>
               <div *ngIf="language=='japanese'">
@@ -108,6 +129,13 @@
                   <ng-container matColumnDef="deviceName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 追跡対象者の氏名 </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="lastSync">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 最終同期時間 </th>
+                    <td mat-cell *matCellDef="let data">
+                      <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
+                      <span *ngIf="data.dataReceivedTime == '0000-00-00 00:00:00'">-</span>
+                    </td>
                   </ng-container>
 
              </div>
@@ -205,6 +233,13 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Name </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
+                  <ng-container matColumnDef="lastSync">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last sync time </th>
+                    <td mat-cell *matCellDef="let data">
+                      <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
+                      <span *ngIf="data.dataReceivedTime == '0000-00-00 00:00:00'">-</span>
+                    </td>
+                  </ng-container>
 
              </div>
               <div *ngIf="language=='japanese'">
@@ -221,6 +256,13 @@
                   <ng-container matColumnDef="deviceName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 追跡対象者の氏名 </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="lastSync">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 最終同期時間 </th>
+                    <td mat-cell *matCellDef="let data">
+                      <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
+                      <span *ngIf="data.dataReceivedTime == '0000-00-00 00:00:00'">-</span>
+                    </td>
                   </ng-container>
 
              </div>
@@ -272,6 +314,13 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Name </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
+                  <ng-container matColumnDef="lastSync">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last sync time </th>
+                    <td mat-cell *matCellDef="let data">
+                      <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
+                      <span *ngIf="data.dataReceivedTime == '0000-00-00 00:00:00'">-</span>
+                    </td>
+                  </ng-container>
 
              </div>
 
@@ -289,6 +338,13 @@
                   <ng-container matColumnDef="deviceName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 追跡対象者の氏名 </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="lastSync">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 最終同期時間 </th>
+                    <td mat-cell *matCellDef="let data">
+                      <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
+                      <span *ngIf="data.dataReceivedTime == '0000-00-00 00:00:00'">-</span>
+                    </td>
                   </ng-container>
 
              </div>

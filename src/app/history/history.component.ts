@@ -19,6 +19,7 @@ findNameForm:FormGroup
 summaryReportForm:FormGroup
 cummulativeForm:FormGroup
 dateForm:FormGroup
+customReport:FormGroup
 finds:any=[]
 prevDate:any
 username:any
@@ -76,6 +77,11 @@ daysExceed:boolean=false
       status: ['0'],
  
     });
+
+    this.customReport= this.fb.group({
+      type:['',Validators.required]
+    })
+
 
     this.refreshFinds()
 
@@ -432,7 +438,22 @@ onclickSummaryReport(data){
     })
 
   }
+  onSubmitCustomReport(data){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '90vh';
+    dialogConfig.width = '75vw';
+    dialogConfig.data = {
+      type:"custom",
+      data:data,
+    }
+    const dialogRef = this.dialog.open(HistoryReportComponent, dialogConfig);
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.refreshFinds()
+    });
+  }
 
 
 }

@@ -44,7 +44,15 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
           <td mat-cell *matCellDef="let live "> {{live.contactName}} </td>
         </ng-container>
-        
+
+        <ng-container matColumnDef="department">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+          <td mat-cell *matCellDef="let live">
+            <span *ngIf="live.department == null">-</span>
+            <span *ngIf="live.department != null"> {{live.department}} </span>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="startTime">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Time </th>
           <td mat-cell *matCellDef="let live"> {{live.startTime | date : 'medium' }} </td>
@@ -67,16 +75,22 @@
           <td mat-cell *matCellDef="let i=index" > {{i+1}} </td>
         </ng-container>
 
-
         <ng-container matColumnDef="baseName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="live-jp"> 追跡対象者名</th>
           <td mat-cell *matCellDef="let live"> {{live.baseName}} </td>
         </ng-container>
 
-
         <ng-container matColumnDef="contactName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="live-jp"> 接触した相手名 </th>
           <td mat-cell *matCellDef="let live "> {{live.contactName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="department">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 部門 </th>
+          <td mat-cell *matCellDef="let live">
+            <span *ngIf="live.department == null">-</span>
+            <span *ngIf="live.department != null"> {{live.department}} </span>
+          </td>
         </ng-container>
         
         <ng-container matColumnDef="startTime">

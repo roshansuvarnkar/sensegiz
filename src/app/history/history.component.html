@@ -533,5 +533,52 @@
       </form>
     </mat-card-content>
   </mat-card> -->
+  <mat-card *ngIf="language== 'english'">
+    <span class="card-head">
+      <mat-card-title color="primary">
+        Custom Report
+      </mat-card-title>
+      <mat-card-subtitle>
+        Select Report Type
+      </mat-card-subtitle>
+    </span>
+    <mat-card-content>
+      <form [formGroup]="customReport" (ngSubmit)="onSubmitCustomReport(customReport.value)">
+        <mat-form-field>
+          <mat-label>Select type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="1"> Within 24 Hours</mat-option>
+            <mat-option value="2"> Between 24 Hours and 48 Hours</mat-option>
+            <mat-option value="3"> More than 48 Hours</mat-option>
+          </mat-select>
+        </mat-form-field> <br> <br> <br>
+        <button class="btn-set" color="primary" mat-raised-button [disabled]="!customReport.valid">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  
 
+  <mat-card *ngIf="language== 'japanese'">
+    <span class="card-head">
+      <mat-card-title color="primary">
+        カスタムレポート
+      </mat-card-title>
+      <mat-card-subtitle>
+        レポートタイプを選択します
+      </mat-card-subtitle>
+    </span>
+    <mat-card-content>
+      <form [formGroup]="customReport" (ngSubmit)="onSubmitCustomReport(customReport.value)">
+        <mat-form-field>
+          <mat-label>タイプを選択</mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="1"> 24時間以内に</mat-option>
+            <mat-option value="2"> 24時間から48時間の間</mat-option>
+            <mat-option value="3"> 48時間以上</mat-option>
+          </mat-select>
+        </mat-form-field> <br> <br> <br>
+        <button class="btn-set" color="primary" mat-raised-button [disabled]="!customReport.valid">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

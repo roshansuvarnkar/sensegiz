@@ -37,11 +37,11 @@
     <button *ngIf="language=='japanese'" class="button" mat-flat-button color="primary" (click)="openDialog()">追跡対象者の追加</button>
 
   <mat-form-field class="full-width-input search" *ngIf="language=='english'">
-    <input matInput placeholder="Search device" autocomplete="off" matInput (input)="search($event.target.value)" >
+    <input matInput placeholder="Search device" autocomplete="off"  (input)="search($event.target.value)" >
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
    <mat-form-field class="full-width-input search" *ngIf="language=='japanese'">
-    <input matInput placeholder="デバイス（タグ）を検索" autocomplete="off" matInput (input)="search($event.target.value)" >
+    <input matInput placeholder="デバイス（タグ）を検索" autocomplete="off"  (input)="search($event.target.value)" >
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 

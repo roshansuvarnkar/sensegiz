@@ -33,7 +33,7 @@ pageIndex:any
 pagesize:any
 language:any
 
-displayedColumns: string[] = ['i', 'deviceId', 'deviceName'];
+displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
 
   constructor(private api: ApiService,
     private login:LoginCheckService,

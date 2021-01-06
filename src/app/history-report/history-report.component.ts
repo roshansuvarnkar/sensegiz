@@ -39,13 +39,16 @@ export class HistoryReportComponent implements OnInit {
   index:any
   selectedValue:any
   deviceName:any
+  customData:any
   currentPageLength:any=10
   currentPageSize:any=10
-  displayedColumns: string[] = ['i','baseName','contactName','empId','startTime','updatedOn', 'totaltime'];
-  displayedColumns1: string[] = ['i','contactName','updatedOn', 'totaltime'];
-  displayedColumns2: string[] = ['contactDeviceName','updatedOn'];
-  displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
-  displayedColumns5: string[] = ['i','username','count','totTime'];
+  displayedColumns: string[] = ['i','baseName','contactName','empId','department','startTime','updatedOn', 'totaltime'];
+  displayedColumns1: string[] = ['i','contactName','department','updatedOn', 'totaltime'];
+  // displayedColumns2: string[] = ['contactDeviceName','updatedOn'];
+  // displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
+  displayedColumns5: string[] = ['i','username','department','count','totTime'];
+  displayedColumns6: string[] = ['i','deviceId','deviceName','department','dataReceivedTime'];
+
   date:any
   fileName:any
   showSpinner:boolean=false
@@ -151,6 +154,10 @@ export class HistoryReportComponent implements OnInit {
       this.summaryReport()
 
     }
+    if(this.type == 'custom'){
+      this.customReport()
+  
+    }
    
 }
 basedOnDate(limit,offset){
@@ -181,7 +188,8 @@ basedOnDate(limit,offset){
           i:i+1,
           baseName:res.success[i].baseName,
           contactName:res.success[i].contactName,
-          empId:res.success[i].empId==null || res.success[i].empId==null?'-':res.success[i].empId,
+          empId:res.success[i].empId==null || res.success[i].empId==''?'-':res.success[i].empId,
+          department:res.success[i].department,
           updatedOn:this.general.updatedOnDate(res.success[i].updatedOn),
           startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn),
           totalTime:this.general.convertTime(res.success[i].totalTime)
@@ -386,6 +394,22 @@ callUpdatedon(date){
   // console.log("aaa==",a)
   return a
 }
+
+
+departments(date){
+  var a=[]
+  var data=date.filter((obj,index)=>{
+    //  console.log(obj.updatedOn)
+    if(obj.department!= null){
+      if(!a.includes(obj.department)){
+      
+        a.push(obj.department)   
+     }
+    }
+  })
+  // console.log("aaa dept==",a)
+  return a
+}
 cummulativeReport(limit,offset){
   var date=new Date()
 
@@ -411,6 +435,7 @@ cummulativeReport(limit,offset){
           this.liveData.push({
             i:i+1,
             username:res.data[i].baseDeviceName,
+            department:res.data[i].department,
             count:res.data[i].count,
             totTime:this.general.convertTime(res.data[i].totalTime)
   
@@ -540,6 +565,25 @@ if(this.type=='summaryReport'){
 
       console.log("report data recieved ======",res);
   
+    })
+  }
+
+  if(this.type=='custom'){
+    data={
+      userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+      zone:this.general.getZone(dateObj),
+      type:this.liveData.type
+    }
+    fileName="CustomReport"
+    console.log("data to send ======",data);
+
+    //apicall
+
+    this.api.downloadCustomReport(data,fileName).then((res:any)=>{
+
+      console.log("report data recieved ======",res);
+
     })
   }
 }
@@ -734,6 +778,25 @@ if(this.type=='summaryReport'){
 
 
 
-
-
+  customReport(){
+    var data={
+      userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+      type:this.liveData.type
+    }
+    console.log(" custom data======",data)
+    this.api.getCustomReport(data).then((res:any)=>{
+      console.log("Custom Report res==",res)
+      this.customData=[]
+      if(res.status){
+        this.customData=res.success
+        this.dataSource = new MatTableDataSource(this.customData);
+        setTimeout(() => {
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator
+        })
+      }
+    })
+  
+  }
 }

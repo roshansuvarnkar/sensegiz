@@ -72,7 +72,8 @@ sendWarning(id,value){
     userId:this.loginData.userId,
     id:id,
     totalCount:value,
-    
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+
   }
 
   this.api.showWarning(data).then((res:any)=>{
@@ -98,6 +99,8 @@ sendWarning(id,value){
 refreshFinds(){
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+
   }
 
   this.api.getAssignedDevices(data).then((res:any)=>{
@@ -281,7 +284,9 @@ refreshCount(){
 refreshSetting(){
   var data={
     userId:this.loginData.userId,
-    tblName:'deviceSetting'
+    tblName:'deviceSetting',
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+
   }
   this.api.getData(data).then((res:any)=>{
     // console.log("setting data ======",res);
@@ -294,8 +299,12 @@ refreshSetting(){
 
 
 maximumContactTime(){
+  var date = new Date()
   var data={
     userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+    zone:this.general.getZone(date)
+
   }
   this.api.getMaxTimeContact(data).then((res:any)=>{
     // console.log("max contact time ======",res);
@@ -325,8 +334,13 @@ maximumContactTime(){
 
 
 repeatedContacts(){
+  var date = new Date()
   var data={
     userId:this.loginData.userId,
+    zone:this.general.getZone(date),
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+
+
   }
   this.api.getMaxContactDevice(data).then((res:any)=>{
     // console.log("max contact devices data ======",res);
@@ -342,8 +356,12 @@ repeatedContacts(){
 
 
 numOfcontactPerDay(){
+  var date = new Date()
   var data={
     userId:this.loginData.userId,
+    zone:this.general.getZone(date),
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+
   }
   this.api.getPerDayCount(data).then((res:any)=>{
     console.log("repeated contacts data ======",res);

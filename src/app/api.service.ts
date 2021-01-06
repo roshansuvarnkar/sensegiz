@@ -903,7 +903,19 @@ downloadCummulative(data,fileName){
 
 }
 
+getCustomReport(data){
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
+  let url = this.host+'/getOnlineOfflineReport';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+
+}
 downloadFile(response,fileName){
   let body = response.body
   let dataType = body.type;
@@ -943,6 +955,25 @@ downloadReport(data,fileName){
     return new Promise((resolve,reject)=>{
       this.http.post(url,data,httpOptions).subscribe(res=>{
         resolve(res);
+      })
+    });
+  
+  }
+
+  downloadCustomReport(data,fileName){
+    this.general.loadingFreez.next({status:true})
+  
+    let url = this.host+'/downloadOnlineOfflineReport';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,data,{ observe: 'response', responseType: 'blob' as 'json' }).subscribe(res=>{
+        // console.log("nam--",res)
+        if(res.status==200)
+        this.downloadFile(res,fileName)
+  
+        resolve(true);
+      },
+      err=>{
+        console.log("err==",err)
       })
     });
   
