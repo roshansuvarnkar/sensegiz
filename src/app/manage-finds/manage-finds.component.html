@@ -148,6 +148,20 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="department">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+          <td mat-cell *matCellDef="let live">
+            <mat-form-field>
+             <mat-label>Department</mat-label>
+              <mat-select  [(value)]="live.department"  [disabled]="userType==3">
+                <mat-option *ngFor=" let dept of departments" [value]="dept.department" (click)="departmentSelect(dept,live)">
+                  {{dept.department}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="infected">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Infected </th>
           <td mat-cell *matCellDef="let live">
@@ -259,6 +273,20 @@
             </mat-form-field>
             <!-- {{live.shift}} -->
 
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="department">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 部門 </th>
+          <td mat-cell *matCellDef="let live">
+            <mat-form-field>
+             <mat-label>部門</mat-label>
+              <mat-select  [(value)]="live.department"  [disabled]="userType==3">
+                <mat-option *ngFor=" let dept of departments" [value]="dept.department" (click)="departmentSelect(dept,live)">
+                  {{dept.department}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </td>
         </ng-container>
 

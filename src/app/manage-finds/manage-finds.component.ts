@@ -26,7 +26,7 @@ loginData:any
 findData:any=[]
 findDataTemp:any
 dataSource: any = [];
-displayedColumns = ['i','deviceId','deviceName','empId','shift','infected','isolated','batteryStatus','emailId','mobileNum',	'edit',	'delete'];
+displayedColumns = ['i','deviceId','deviceName','empId','shift','department','infected','isolated','batteryStatus','emailId','mobileNum',	'edit',	'delete'];
 shift = new FormControl('');
 shifts:any=[]
 elementsTemp:any=[]
@@ -43,6 +43,7 @@ isTablet:boolean
 isDesktopDevice:boolean
 deviceInfo=null
 userType:any
+departments:any
 @ViewChild('fileInput') fileInput:ElementRef
 constructor(public dialog: MatDialog,
   private api: ApiService,
@@ -86,6 +87,7 @@ ngOnInit(): void {
   })
   this.refreshFinds()
   this.refreshShift()
+  this.departmentList()
 }
 
 
@@ -111,6 +113,7 @@ refreshFinds(){
               shift: res.success[i].shiftName ,
               infected: res.success[i].infected,
               isolated: res.success[i].isolated,
+              department: res.success[i].department,
               batteryUpdatedOn:res.success[i].batteryUpdatedOn,
               edit:'edit',
               delete:'delete',
@@ -341,8 +344,12 @@ onShiftSelection(a){
     // console.log("shift update data ======",res);
     if(res.status){
       this.refreshFinds()
-       if(this.language=='english'){ var msg = 'Employee Shift updated Successfully'}
-       else if(this.language=='japanese'){var msg = '従業員シフトが正常に更新されました'}
+       if(this.language=='english'){ 
+         var msg = 'Employee Shift updated Successfully'
+        }
+       else if(this.language=='japanese'){
+         var msg = '従業員シフトが正常に更新されました'
+        }
       this.general.openSnackBar(msg,'')
     }
   })
@@ -532,6 +539,42 @@ fileSubmit(data){
     }
 
  }
+ departmentList(){
+  var data = {
+    
+    userId:this.loginData.userId,
+   
+  }
+  this.api.getAllDepartment(data).then((res:any)=>{
+    this.departments=[]
+    console.log("department list======",res);
+    if(res.status){
+        this.departments=res.success
+    }
+  })
+}
+departmentSelect(a,b){
 
+  console.log("aa=",a,b)
+  var data = {
+    subUserId:a.id,
+    id:b.id,
+    userId:this.loginData.userId,
+   
+  }
+  this.api.setDeviceDepartment(data).then((res:any)=>{
+    console.log("department list======",res);
+    if(res.status){
+      this.refreshFinds()
+      if(this.language=='english'){ 
+        var msg = 'Employee Shift updated Successfully'
+       }
+      else if(this.language=='japanese'){
+        var msg = '従業員シフトが正常に更新されました'
+       }
+     this.general.openSnackBar(msg,'')
+    }
+  })
+}
 
 }
