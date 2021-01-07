@@ -567,7 +567,7 @@ departmentSelect(a,b){
     if(res.status){
       this.refreshFinds()
       if(this.language=='english'){ 
-        var msg = 'Employee Shift updated Successfully'
+        var msg = 'Employee department updated Successfully'
        }
       else if(this.language=='japanese'){
         var msg = '従業員シフトが正常に更新されました'
