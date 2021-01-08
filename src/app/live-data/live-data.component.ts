@@ -147,6 +147,7 @@ getTotalCount(val){
               i:i+1,
               baseName:res.success[i].baseName,
               contactName:res.success[i].contactName,
+              department:res.success[i].department,
               updatedOn:res.success[i].updatedOn,
               totalTime:res.success[i].totalTime,
               startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn)
