@@ -17,7 +17,6 @@
 			</mat-card-title> <br>
 			<mat-card-content>
 				<mat-error *ngIf="registered">
-					User already exist
 					<span *ngIf="language=='english'">User already exist</span>
 					<span *ngIf="language=='japanese'">ユーザーはすでに存在します</span>
 				</mat-error>
@@ -44,7 +43,7 @@
 					  <mat-error>
 						<span *ngIf="language=='english'">Please provide a valid department</span>
 						<span *ngIf="language=='japanese'">有効な部門を提供してください</span>
-						
+
 					  </mat-error>
 					</mat-form-field>
 
@@ -58,7 +57,7 @@
 					  <mat-error>
 						<span *ngIf="language=='english'">Please provide a valid email address</span>
 						<span *ngIf="language=='japanese'">有効なメールIDを入力してください.</span>
-						
+
 					  </mat-error>
 					</mat-form-field>
 
@@ -84,7 +83,7 @@
 						 </ngx-intl-tel-input>
 						 <hr class="mob">
 						 <mat-error *ngIf="subAddUserform.get('mobileNum').status=='INVALID'  && subAddUserform.get('mobileNum').touched==true" class="error" >
-							 
+
 							 <span *ngIf="language=='english'">Please provide valid mobile number</span>
 							<span *ngIf="language=='japanese'">有効な携帯電話番号を入力してください</span>
 							</mat-error>
