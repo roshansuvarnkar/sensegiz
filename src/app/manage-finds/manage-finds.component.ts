@@ -88,6 +88,9 @@ ngOnInit(): void {
   this.refreshFinds()
   this.refreshShift()
   this.departmentList()
+
+
+
 }
 
 
@@ -115,6 +118,7 @@ refreshFinds(){
               isolated: res.success[i].isolated,
               department: res.success[i].department,
               batteryUpdatedOn:res.success[i].batteryUpdatedOn,
+              deallocated:res.success[i].deallocated,
               edit:'edit',
               delete:'delete',
               batteryStatus:res.success[i].batteryStatus,
@@ -308,7 +312,9 @@ isolated(a){
         data = {
           deviceId:a.deviceId,
           userId:this.loginData.userId,
-          isolated:isolate
+          isolated:isolate,
+          subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+
         }
         console.log("isolate data===",data)
         this.api.editIsolation(data).then((res:any)=>{
@@ -344,7 +350,7 @@ onShiftSelection(a){
     // console.log("shift update data ======",res);
     if(res.status){
       this.refreshFinds()
-       if(this.language=='english'){ 
+       if(this.language=='english'){
          var msg = 'Employee Shift updated Successfully'
         }
        else if(this.language=='japanese'){
@@ -541,15 +547,16 @@ fileSubmit(data){
  }
  departmentList(){
   var data = {
-    
+
     userId:this.loginData.userId,
-   
+
   }
   this.api.getAllDepartment(data).then((res:any)=>{
     this.departments=[]
     console.log("department list======",res);
     if(res.status){
         this.departments=res.success
+        this.departments.push({"id":0,"department":"None"})
     }
   })
 }
@@ -560,13 +567,13 @@ departmentSelect(a,b){
     subUserId:a.id,
     id:b.id,
     userId:this.loginData.userId,
-   
+
   }
   this.api.setDeviceDepartment(data).then((res:any)=>{
     console.log("department list======",res);
     if(res.status){
       this.refreshFinds()
-      if(this.language=='english'){ 
+      if(this.language=='english'){
         var msg = 'Employee department updated Successfully'
        }
       else if(this.language=='japanese'){

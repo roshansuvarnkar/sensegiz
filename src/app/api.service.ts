@@ -183,7 +183,6 @@ export class ApiService {
   }
 
 
-
   editInfectedPerson(data){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -197,6 +196,7 @@ export class ApiService {
     });
   }
 
+  
 
 updateWearableType(data){
   const httpOptions = {
@@ -961,21 +961,21 @@ downloadReport(data,fileName){
 
   downloadCustomReport(data,fileName){
     this.general.loadingFreez.next({status:true})
-  
+
     let url = this.host+'/downloadOnlineOfflineReport';
     return new Promise((resolve,reject)=>{
       this.http.post(url,data,{ observe: 'response', responseType: 'blob' as 'json' }).subscribe(res=>{
         // console.log("nam--",res)
         if(res.status==200)
         this.downloadFile(res,fileName)
-  
+
         resolve(true);
       },
       err=>{
         console.log("err==",err)
       })
     });
-  
+
   }
   editIsolation(data){
     const httpOptions = {
@@ -1017,7 +1017,7 @@ downloadReport(data,fileName){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-  
+
     let url = this.host+'/getAllDepartment';
     return new Promise((resolve,reject)=>{
       this.http.post(url,data,httpOptions).subscribe(res=>{
@@ -1025,12 +1025,12 @@ downloadReport(data,fileName){
       })
     });
   }
-  
+
   setDeviceDepartment(data){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-  
+
     let url = this.host+'/setDeviceDepartment';
     return new Promise((resolve,reject)=>{
       this.http.post(url,data,httpOptions).subscribe(res=>{

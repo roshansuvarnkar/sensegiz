@@ -44,7 +44,7 @@
     <button class="btn-set" mat-raised-button [disabled]="!dateForm.valid" color="primary" >Submit</button>
   </form>
 
-</div> 
+</div>
    </mat-card-content>
   </mat-card>
 
@@ -83,7 +83,7 @@
       <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
       <mat-datepicker #myDatepicker2></mat-datepicker>
       <mat-error>
-         有効な日付を入力してください 
+         有効な日付を入力してください
       </mat-error>
     </mat-form-field>
 <br>
@@ -91,7 +91,7 @@
     <button class="btn-set-jp" mat-raised-button [disabled]="!dateForm.valid" color="primary" >レポート作成</button>
   </form>
 
-</div> 
+</div>
    </mat-card-content>
   </mat-card>
 
@@ -155,8 +155,8 @@
         <mat-radio-button [value]="1" name="small" (click)="onclickDate1(7)">Last week</mat-radio-button>
         <mat-radio-button [value]="2" name="small" (click)="onclickDate1(14)">Last two weeks</mat-radio-button>
       </mat-radio-group>
-    </div> <br> 
-  
+    </div> <br>
+
       <form [formGroup]="cummulativeForm" (ngSubmit)="onSubmitcummulativeForm(cummulativeForm.value)">
 
         <mat-form-field>
@@ -192,7 +192,7 @@
       <mat-card-subtitle>
         日付範囲を入力してください
       </mat-card-subtitle>
-    </span> 
+    </span>
     <mat-card-content>
     <div >
       <mat-radio-group  color="primary" class="radio radio1">
@@ -200,7 +200,7 @@
         <mat-radio-button [value]="2" name="small" (click)="onclickDate1(14)">過去2週間</mat-radio-button>
       </mat-radio-group>
     </div>
-  
+
       <form [formGroup]="cummulativeForm" (ngSubmit)="onSubmitcummulativeForm(cummulativeForm.value)">
 
         <mat-form-field>
@@ -410,16 +410,16 @@
 
     </span>
     <mat-card-content>
-     
+
       <form [formGroup]="summaryReportForm" (ngSubmit)="onSubmitSummaryReport(summaryReportForm.value)">
-        
+
           <mat-radio-group  color="primary" formControlName="status" class="infect" >
-            <mat-radio-button value="0" name="small" [checked]="true">Before marking Infected</mat-radio-button> 
+            <mat-radio-button value="0" name="small" [checked]="true">Before marking Infected</mat-radio-button>
             <mat-radio-button value="1" name="small" >After marking Infected</mat-radio-button>
           </mat-radio-group>
         <br>
         <mat-form-field class="full-width-input">
-          <input type='text' matInput placeholder="User Name" formControlName="deviceName" [matAutocomplete]="auto" 
+          <input type='text' matInput placeholder="User Name" formControlName="deviceName" [matAutocomplete]="auto"
           (keyup)="infectedSuggestion($event)" required>
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let user of username" [value]="user">
@@ -453,7 +453,7 @@
 
       <form [formGroup]="summaryReportForm" (ngSubmit)="onSubmitSummaryReport(summaryReportForm.value)">
         <mat-radio-group  color="primary" formControlName="status" class="infect" >
-          <mat-radio-button value="0" name="small" [checked]="true">Before marking Infected</mat-radio-button> 
+          <mat-radio-button value="0" name="small" [checked]="true">Before marking Infected</mat-radio-button>
           <mat-radio-button value="1" name="small" >After marking Infected</mat-radio-button>
         </mat-radio-group>
         <mat-form-field class="full-width-input">
@@ -556,7 +556,7 @@
       </form>
     </mat-card-content>
   </mat-card>
-  
+
 
   <mat-card *ngIf="language== 'japanese'">
     <span class="card-head">
