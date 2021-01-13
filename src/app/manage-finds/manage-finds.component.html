@@ -154,7 +154,6 @@
             <mat-form-field>
              <mat-label>Department</mat-label>
               <mat-select  [(value)]="live.department"  [disabled]="userType==3 || userType==4">
-                <mat-option value="0" (click)="departmentSelect(0,live)">None</mat-option>
                 <mat-option *ngFor=" let dept of departments" [value]="dept.department" (click)="departmentSelect(dept,live)">
                   {{dept.department}}
                 </mat-option>
