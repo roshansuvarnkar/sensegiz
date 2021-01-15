@@ -196,7 +196,7 @@ export class ApiService {
     });
   }
 
-  
+
 
 updateWearableType(data){
   const httpOptions = {
@@ -989,6 +989,18 @@ downloadReport(data,fileName){
       })
     });
   }
+  deallocateDevice(data){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    let url = this.host+'/deallocateDevice';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,data,httpOptions).subscribe(res=>{
+        resolve(res);
+      })
+    });
+  }
+  
   setDeviceRssi(data){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
