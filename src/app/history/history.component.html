@@ -601,18 +601,13 @@
     </div>
    <br>
       <form [formGroup]="departmentcummulativeForm" (ngSubmit)="onSubmitdeptcummulativeForm(departmentcummulativeForm.value)">
-     <!--    <mat-form-field class="full-width-input">
-          <mat-label>Select Location Name</mat-label>
-          <mat-select  formControlName="coinSelect">
-            <mat-option *ngFor="let coin of departments" [value]="coin.coinId">{{coin.coinName}}</mat-option>
-          </mat-select>
-        </mat-form-field> -->
-        <!-- <mat-form-field>
+
+          <mat-form-field>
           <mat-label>Select Department Name</mat-label>
           <mat-select  formControlName="department">
             <mat-option *ngFor="let dept of departments" [value]="dept.department">{{dept.department}}</mat-option>
           </mat-select>
-        </mat-form-field> -->
+        </mat-form-field>
         <mat-form-field>
           <mat-label>From date</mat-label>
           <input matInput [matDatepicker]="myDatepicker13" formControlName="fromDate" required>

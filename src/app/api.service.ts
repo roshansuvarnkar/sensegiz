@@ -1000,7 +1000,7 @@ downloadReport(data,fileName){
       })
     });
   }
-  
+
   setDeviceRssi(data){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -1044,6 +1044,19 @@ downloadReport(data,fileName){
     };
 
     let url = this.host+'/setDeviceDepartment';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,data,httpOptions).subscribe(res=>{
+        resolve(res);
+      })
+    });
+  }
+
+  getDepartmentreport(data){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    let url = this.host+'/departmentCTReport';
     return new Promise((resolve,reject)=>{
       this.http.post(url,data,httpOptions).subscribe(res=>{
         resolve(res);

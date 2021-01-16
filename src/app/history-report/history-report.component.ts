@@ -49,7 +49,7 @@ export class HistoryReportComponent implements OnInit {
   // displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
   displayedColumns5: string[] = ['i','username','department','count','totTime'];
   displayedColumns6: string[] = ['i','deviceId','deviceName','department','dataReceivedTime'];
-
+  displayedColumns7: string[] = ['i','username','department','count','totTime'];
   date:any
   fileName:any
   showSpinner:boolean=false
@@ -61,6 +61,7 @@ export class HistoryReportComponent implements OnInit {
   offset:any
   deviceIdData:any
   status:any
+  department:any=[]
     constructor(
       public dialog: MatDialog,
       private api: ApiService,
@@ -159,9 +160,11 @@ export class HistoryReportComponent implements OnInit {
     }
     if(this.type == 'custom'){
       this.customReport()
-  
+
     }
-   
+    if(this.type == 'deptcummulative'){
+      this.departmentReport(limit=limit,offset=offset)
+    }
 
 }
 basedOnDate(limit,offset){
@@ -341,7 +344,7 @@ summaryReport(){
     console.log("summary report======",res);
 
     this.liveData=[]
- 
+
     this.deviceIdData=[]
 
     if(res.status){
@@ -408,8 +411,8 @@ departments(date){
     //  console.log(obj.updatedOn)
     if(obj.department!= null){
       if(!a.includes(obj.department)){
-      
-        a.push(obj.department)   
+
+        a.push(obj.department)
      }
     }
   })
@@ -471,6 +474,59 @@ cummulativeReport(limit,offset){
   })
 
 }
+
+departmentReport(limit,offset){
+  var date=new Date()
+  var data={
+    userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+    fromDate: this.from,
+    toDate:this.to,
+    offset:offset,
+    limit:limit,
+    zone:this.general.getZone(date)
+  }
+  console.log("data3==",data)
+  this.api.getDepartmentreport(data).then((res:any)=>{
+    console.log("department history======",res);
+    this.liveData=[]
+    this.totTime=[]
+    if(res.status){
+      this.totTime=res.data
+     // console.log("location ====",this.totTime)
+      // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
+        for(let i=0;i<res.data.length;i++){
+          this.liveData.push({
+            i:i+1,
+            username:res.data[i].baseDeviceName,
+            count:res.data[i].count,
+            department:res.data[i].department,
+            totTime:this.general.convertTime(res.data[i].totalTime)
+          });
+        }
+
+    this.dataSource = new MatTableDataSource(this.liveData);
+    setTimeout(() => {
+      this.dataSource.sort = this.sort;
+      // this.dataSource.paginator = this.paginator
+      })
+    // }
+    // else{
+    //   this.totTime=res.success
+    //   console.log("this.tottttttt===",this.totTime)
+
+    //   if(this.selectMin.get('minute').value!=''){
+    //     console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+
+    //     this.filterTotTime(this.selectMin.get('minute').value)
+
+    //   }
+    // }
+
+   }
+})
+}
+
 
 
 
@@ -809,6 +865,6 @@ if(this.type=='summaryReport'){
         })
       }
     })
-  
+
   }
 }

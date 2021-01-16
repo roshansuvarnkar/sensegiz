@@ -27,6 +27,7 @@ username:any
 date1:any
 date2:any
 language:any
+departments:any=[]
 daysExceed:boolean=false
 
   constructor(public dialog: MatDialog,
@@ -264,6 +265,12 @@ onclickSummaryReport(data){
       // console.log("find data ======",res);
       if(res.status){
         this.finds=res.success
+      }
+    })
+    this.api.getAllDepartment(data).then((res:any)=>{
+      console.log("department data========",res);
+      if(res.status){
+        this.departments=res.success
       }
     })
   }
