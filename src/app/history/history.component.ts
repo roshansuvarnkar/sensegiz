@@ -20,6 +20,7 @@ summaryReportForm:FormGroup
 cummulativeForm:FormGroup
 dateForm:FormGroup
 customReport:FormGroup
+departmentcummulativeForm:FormGroup
 finds:any=[]
 prevDate:any
 username:any
@@ -81,7 +82,11 @@ daysExceed:boolean=false
     this.customReport= this.fb.group({
       type:['',Validators.required]
     })
-
+    this.departmentcummulativeForm = this.fb.group({
+      department:['',Validators.required],
+      fromDate: ['', Validators.required],
+      toDate: ['', Validators.required],
+    });
 
     this.refreshFinds()
 
@@ -131,6 +136,54 @@ daysExceed:boolean=false
       toDate:todayDate
     })
   }
+
+
+  departmentcummulate(data){
+    // console.log("data==",data)
+
+    var date = new Date();
+    var toDate = new Date();
+    var prevDate = date.setDate(date.getDate() - data);
+
+    var date = new Date(prevDate);
+    var year = date.getFullYear();
+    var month = ("0" + (date.getMonth() + 1)).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    var tot = year + '-' + month + '-'  + day
+
+    var todayDate = toDate.getFullYear() + '-' +  ("0" + (toDate.getMonth() + 1)).slice(-2) + '-'  + ("0" + toDate.getDate()).slice(-2)
+
+    this.departmentcummulativeForm.patchValue({
+      fromDate:tot,
+      toDate:todayDate
+    })
+  }
+// onclickFindId(data){
+//   // console.log("data==",data)
+
+//   var date = new Date();
+//   var toDate = new Date();
+//   var prevDate = date.setDate(date.getDate() - data);
+
+//   var date = new Date(prevDate);
+//   var year = date.getFullYear();
+//   var month = ("0" + (date.getMonth() + 1)).slice(-2);
+//   var day = ("0" + date.getDate()).slice(-2);
+
+//   var tot = year + '-' + month + '-'  + day
+
+//   var todayDate = toDate.getFullYear() + '-' +  ("0" + (toDate.getMonth() + 1)).slice(-2) + '-'  + ("0" + toDate.getDate()).slice(-2)
+
+//    this.findIdForm.patchValue({
+//       fromDate:tot,
+//       toDate:todayDate
+//     })
+//  }
+
+
+
+
 onclickFindId(data){
   // console.log("data==",data)
 
@@ -348,6 +401,71 @@ onclickSummaryReport(data){
       this.refreshFinds()
     });
   }
+
+
+  onSubmitdeptcummulativeForm(data){
+    console.log("hello deptcumilated report-------",data)
+    var date1=new Date(data.fromDate)
+    var date2=new Date(data.toDate)
+    var year = date1.getFullYear();
+    var month = ("0" + (date1.getMonth() + 1)).slice(-2);
+    var day = ("0" + date1.getDate()).slice(-2);
+    var from = year + '-' + month + '-'  + day
+    var from1 = day + '-' + month + '-'  + year
+
+
+    var year1 = date2.getFullYear();
+    var month1 = ("0" + (date2.getMonth() + 1)).slice(-2);
+    var day1 = ("0" + date2.getDate()).slice(-2);
+    var to = year1 + '-' + month1 + '-'  + day1
+    var to1 = day1 + '-' + month1 + '-'  + year1
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '90vh';
+    dialogConfig.width = '75vw';
+    dialogConfig.data = {
+      type:"deptcummulative",
+      fromDate:from,
+      toDate:to,
+      department:data.department,
+      fromDate1:from1,
+      toDate1:to1,
+
+    }
+    const dialogRef = this.dialog.open(HistoryReportComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.refreshFinds()
+    });
+  }
+  // onSubmitFindId(data){
+  //   console.log("data====",data)
+
+  //       const dialogConfig = new MatDialogConfig();
+  //       dialogConfig.disableClose = true;
+  //       dialogConfig.autoFocus = true;
+  //       dialogConfig.height = '90vh';
+  //       dialogConfig.width = '75vw';
+  //       dialogConfig.data = {
+  //         type:"basedOnFindId",
+  //         valueSelected:data.selectedValue,
+  //         fromDate:data.fromDate,
+  //         toDate:data.toDate,
+  //       }
+  //       const dialogRef = this.dialog.open(HistoryReportComponent, dialogConfig);
+
+  //       dialogRef.afterClosed().subscribe(result => {
+  //         this.refreshFinds()
+  //       });
+
+  // }
+
+
+
+
+
   onSubmitSummaryReport(data){
     console.log("data====",data)
       //   this.date1=new Date(data.fromDate)
@@ -392,6 +510,13 @@ onclickSummaryReport(data){
       // }
 
   }
+
+
+
+
+
+
+
 
   userSuggestion(event){
     console.log("data=",event)
