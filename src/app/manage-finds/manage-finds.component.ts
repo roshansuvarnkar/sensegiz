@@ -338,9 +338,7 @@ isolated(a){
 }
 
 deallocate(event,a){
-  console.log("event====",event)
-  console.log("deallocated findDevice====",a.id)
-
+  console.log("deallocated findDevice====",a)
   if(a.deviceId!= a.deviceName){
     if(confirm("By clicking Ok, This Specific User Details will be deleted expect the Department Assigned for the Find.")){
       var data={
@@ -349,6 +347,7 @@ deallocate(event,a){
         id:a.id,
         deviceId:a.deviceId
       }
+      console.log("deallocate passing value",data)
       this.api.deallocateDevice(data).then((res:any)=>{
         console.log("deallocate resp=======",res)
         if(res.status){

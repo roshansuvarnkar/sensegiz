@@ -593,7 +593,7 @@
       </mat-card-subtitle>
     </span> <br>
     <mat-card-content>
-    <div class="radio radio1">
+    <div class="radio">
       <mat-radio-group  color="primary" >
         <mat-radio-button [value]="1" name="small" (click)="departmentcummulate(7)">Last week</mat-radio-button>
         <mat-radio-button [value]="2" name="small" (click)="departmentcummulate(14)">Last two weeks</mat-radio-button>
@@ -627,7 +627,7 @@
           </mat-error>
         </mat-form-field>
   <br>
-  <br>
+  <br><br>
         <button class="btn-set" mat-raised-button [disabled]="!departmentcummulativeForm.valid" color="primary" >Submit</button>
       </form>
     </mat-card-content>
