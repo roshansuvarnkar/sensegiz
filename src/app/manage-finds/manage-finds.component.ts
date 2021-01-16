@@ -26,7 +26,7 @@ loginData:any
 findData:any=[]
 findDataTemp:any
 dataSource: any = [];
-displayedColumns = ['i','deviceId','deviceName','empId','shift','department','infected','isolated','batteryStatus','emailId','mobileNum',	'edit',	'deallocate'];
+displayedColumns = ['i','deviceId','deviceName','empId','shift','department','infected','isolated','batteryStatus','emailId','mobileNum',	'edit',	'deallocate','delete'];
 shift = new FormControl('');
 shifts:any=[]
 elementsTemp:any=[]
@@ -118,7 +118,6 @@ refreshFinds(){
               isolated: res.success[i].isolated,
               department: res.success[i].department,
               batteryUpdatedOn:res.success[i].batteryUpdatedOn,
-              deallocated:res.success[i].deallocated,
               check:res.success[i].deviceId== res.success[i].deviceName?true:false,
               edit:'edit',
               delete:'delete',
@@ -340,10 +339,10 @@ isolated(a){
 
 deallocate(event,a){
   console.log("event====",event)
-  console.log("deallocated findDevice====",a)
+  console.log("deallocated findDevice====",a.id)
 
   if(a.deviceId!= a.deviceName){
-    if(confirm("By clicking Ok, This Specific User Details will be deleted expect the Department Assigned for the Find.?")){
+    if(confirm("By clicking Ok, This Specific User Details will be deleted expect the Department Assigned for the Find.")){
       var data={
         userId:this.loginData.userId,
         subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
@@ -351,7 +350,7 @@ deallocate(event,a){
         deviceId:a.deviceId
       }
       this.api.deallocateDevice(data).then((res:any)=>{
-        console.log("deallocate resp",res)
+        console.log("deallocate resp=======",res)
         if(res.status){
           a.check=res.status
           this.refreshFinds()

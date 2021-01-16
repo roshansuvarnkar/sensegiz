@@ -75,7 +75,7 @@ export class HistoryReportComponent implements OnInit {
       this.type=data.type
       // console.log("type==",this.type)
       this.liveData = data.data
-
+      this.department=data.department
       this.from = data.fromDate
       this.to = data.toDate
       this.from1 = data.fromDate1
@@ -479,7 +479,7 @@ departmentReport(limit,offset){
   var date=new Date()
   var data={
     userId:this.loginData.userId,
-    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+    subUserId: this.department,
     fromDate: this.from,
     toDate:this.to,
     offset:offset,
@@ -633,7 +633,33 @@ if(this.type=='summaryReport'){
 
     })
   }
+/* ------------------------------- */
 
+if(this.type=='deptcummulative'){
+  var fileName=''
+
+  data={
+      userId:this.loginData.userId,
+      subUserId: this.department,
+      fromDate: this.from,
+      toDate:this.to,
+      zone:this.general.getZone(dateObj),
+      type:this.type
+    }
+    fileName="Department wise CummulativeReport"
+    console.log("data to send ======",data);
+
+    //apicall
+
+    this.api.downloadDeptCummulative(data,fileName).then((res:any)=>{
+
+      console.log("report data recieved ======",res);
+
+    })
+  }
+
+
+/* -------------------- */
   if(this.type=='custom'){
     data={
       userId:this.loginData.userId,
