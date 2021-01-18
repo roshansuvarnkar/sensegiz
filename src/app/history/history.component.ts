@@ -28,6 +28,7 @@ date1:any
 date2:any
 language:any
 departments:any=[]
+userType:any
 daysExceed:boolean=false
 
   constructor(public dialog: MatDialog,
@@ -41,6 +42,7 @@ daysExceed:boolean=false
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
+    this.userType=this.loginData.type
     console.log("language==",this.language)
 
 

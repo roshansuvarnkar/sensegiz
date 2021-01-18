@@ -45,13 +45,13 @@ export class LoginComponent implements OnInit {
     if (this.Loginform.valid) {
       try {
         data.system='portal'
-      
+
         this.api.send(data).then((res:any)=>{
           console.log("logged in==",res)
            var passwordExpiry=res.hasOwnProperty('alreadyExisted')
            console.log(passwordExpiry)
           if(res.status ){
-        
+
               // this.newPassword=false
               res.success.role='user'
               res.success.passwordExpiry=passwordExpiry
@@ -68,12 +68,11 @@ export class LoginComponent implements OnInit {
                 this.newPassword=false
                 this.forgetPwd="twoStepAuth"
                 this.login.authCheck.next(true)
-
-                this.router.navigate(['/two-step-auth'],{ queryParams: { type : JSON.stringify(this.forgetPwd) } })         
+                this.router.navigate(['/two-step-auth'],{ queryParams: { type : JSON.stringify(this.forgetPwd) } })
               }
 
 
-            } 
+            }
 
           else {
             this.loginInvalid = true;

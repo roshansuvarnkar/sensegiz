@@ -23,6 +23,8 @@ export class HistoryReportComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   @ViewChild('htmlData') htmlData:ElementRef;
+
+ 
   selectMin:FormGroup
   type:any
   dateBased:any
@@ -247,10 +249,7 @@ basedOnFindName(limit,offset){
     console.log("find data based on name ======",res);
 
     if(res.status){
-
-
         this.totTime=res.success
-
       // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
         this.liveData=res.success
         // this.liveData.userId=this.loginData.userId
@@ -592,11 +591,8 @@ if(this.type=='basedOnDate' || this.type=='basedOnFindName'){
   }
   fileName="Report-of-Find- "+this.deviceName
 }
-
   console.log("data to send ======",data);
-
   this.api.downloadReport(data,fileName).then((res:any)=>{
-
   console.log("report data recieved ======",res);
   })
 }
@@ -604,13 +600,13 @@ if(this.type=='summaryReport'){
   this.general.loadingFreez.next({status:true})
   console.log("hi")
   setTimeout(()=>{
-
     this.openExcel()
     this.general.loadingFreez.next({status:false})
 
   },6000);
 
 }
+
  if(this.type=='cummulative'){
   var fileName=''
 
@@ -771,12 +767,9 @@ if(this.type=='deptcummulative'){
         }
 
       })
-
-
       this.dataSource = new MatTableDataSource(arr);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
-
       })
 
     }
@@ -793,15 +786,36 @@ if(this.type=='deptcummulative'){
             console.log("arrr==",arr)
             return arr
           }
+        })
+        this.dataSource = new MatTableDataSource(arr);
+        setTimeout(() => {
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        })
+    }
+    if(this.type == 'deptcummulative' ){
+
+      this.totTime.filter((obj,index)=>{
+
+        if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
+          arr.push({
+            username:obj.baseDeviceName,
+            count:obj.count,
+            totTime:this.general.convertTime(obj.totalTime)
+
+            })
+            // console.log("arrr==",arr)
+            return arr
+          }
 
 
         })
+
 
         this.dataSource = new MatTableDataSource(arr);
         setTimeout(() => {
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
-
         })
     }
 
