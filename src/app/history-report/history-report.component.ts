@@ -24,7 +24,7 @@ export class HistoryReportComponent implements OnInit {
 
   @ViewChild('htmlData') htmlData:ElementRef;
 
- 
+
   selectMin:FormGroup
   type:any
   dateBased:any
@@ -447,7 +447,6 @@ cummulativeReport(limit,offset){
             department:res.data[i].department,
             count:res.data[i].count,
             totTime:this.general.convertTime(res.data[i].totalTime)
-
           });
         }
         this.dataSource = new MatTableDataSource(this.liveData);
