@@ -593,6 +593,12 @@
           </span>
   </div> <br>
   <p  mat-dialog-title> From {{from1}} to {{to1}} </p>
+
+  <mat-form-field class="full-width-input search">
+    <input matInput placeholder="Search device" autocomplete="off" matInput (keyup)="search($event.target.value)" >
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort >
      <div >
