@@ -454,7 +454,7 @@ getBatteryUpdatedOn(value){
 
 
 fileChange(files){
-  if(this.language=='english'){alert("Format should be: Name, employeeId, deviceId,emailId mobileNumber")}
+  if(this.language=='english'){alert("Format should be: Name, employeeId, deviceId,emailId,mobileNumber")}
   else if(this.language=='japanese'){alert("フォーマット： 名前*, 従業員ID, デバイスID番号*, メールID, 携帯番号 ")}
   this.loading=false
   this.format=false
