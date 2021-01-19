@@ -622,7 +622,6 @@ if(this.type=='summaryReport'){
   setTimeout(()=>{
     this.openExcel()
     this.general.loadingFreez.next({status:false})
-
   },6000);
 
 }
