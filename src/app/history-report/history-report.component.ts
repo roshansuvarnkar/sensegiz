@@ -144,6 +144,27 @@ export class HistoryReportComponent implements OnInit {
     })
 
   }
+  if(this.type=='deptcummulative'){
+    var date=new Date()
+    var data6={
+      userId:this.loginData.userId,
+      subUserId:this.department,
+      deviceName:this.deviceName,
+      fromDate: this.from,
+      toDate:this.to,
+      zone:this.general.getZone(date)
+    }
+      this.api.getDepartmentReportTotalCount(data6).then((res:any)=>{
+        console.log("length of deportment wise report on device name ======",res);
+        if(res.status){
+          this.currentPageLength=parseInt(res.count)
+        // console.log('\nTotal response: ',res.count);
+         // this.currentPageLength = parseInt(res.success[0].count);
+          // this.tempLen=this.currentPageLength
+        }
+      })
+
+    }
   }
   loadData(limit=10,offset=0){
 
@@ -814,7 +835,6 @@ if(this.type=='deptcummulative'){
         this.dataSource = new MatTableDataSource(arr);
         setTimeout(() => {
           this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
         })
     }
 
@@ -906,4 +926,5 @@ if(this.type=='deptcummulative'){
     })
 
   }
+  
 }
