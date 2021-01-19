@@ -62,10 +62,7 @@ mat-spinner.mat-spinner.mat-progress-spinner.mat-primary.mat-progress-spinner-in
 .download2{
   display: none;
 }
-.search{
-    top: 1rem;
-    left: 48rem;color: #ef6c00;
-}
+
 
 @media only screen and (max-width: 768px) {
   .main,.download2{
