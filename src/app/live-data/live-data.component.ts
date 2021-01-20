@@ -150,7 +150,8 @@ getTotalCount(val){
               department:res.success[i].department,
               updatedOn:res.success[i].updatedOn,
               totalTime:res.success[i].totalTime,
-              startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn)
+              totTime:res.success[i].totTime,
+              startTime:this.general.startTime(res.success[i].totalTime || res.success[i].totTime,res.success[i].updatedOn)
             })
           }
           // this.currentPageLength = res.success.length;

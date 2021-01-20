@@ -80,14 +80,14 @@ updateItem(key, property, value)
 }
 
 updatedOnDate(date){
-  
+
   var months=['Jan','Feb', 'Mar','Apr','May','Jun','Jul','Aug','sep','Oct','Nov','Dec']
 
   var dateObj=new Date(date)
   var year = dateObj.getFullYear();
   var month = months[dateObj.getMonth()];
   var day = ("0" + dateObj.getDate()).slice(-2);
-  var from = month  + ',' + day + ','  +year 
+  var from = month  + ',' + day + ','  +year
 
   var h=dateObj.getHours()
   var m=dateObj.getMinutes()
@@ -104,7 +104,7 @@ convertTime(a){
   // console.log(a)
 
   var timeArr = a.split(':')
-  
+
   var date = ''
   if(timeArr[0]!='00'){
     date += timeArr[0] + ' hour '
@@ -122,19 +122,19 @@ convertTime(a){
 }
 
 startTime(data1,data2){
-  console.log(data1,data2)
+  console.log("data1date2",data1,data2)
   var date=new Date(data2)
   if(data1!="00:00:00" || data1!='-'){
     var a=data1.split(':')
     date.setHours(date.getHours() -a[0]);
-    date.setMinutes(date.getMinutes() - a[1]); 
-    date.setSeconds(date.getSeconds() - a[2]); 
+    date.setMinutes(date.getMinutes() - a[1]);
+    date.setSeconds(date.getSeconds() - a[2]);
     // console.log("new date==",date)
   }
   if(data1=="00:00:00" || data1=='-'){
-    date.setSeconds(date.getSeconds() - 5); 
+    date.setSeconds(date.getSeconds() - 5);
   }
- 
+
 
   return date
 }
@@ -150,7 +150,7 @@ startTime(data1,data2){
 
     let mm = m <= 9 && m >= 0 ? "0"+m : m;
     let hh = h <= 9 && h >= 0 ? "0"+h : h;
-  
+
     var timezones=-(timezone)
     console.log("time zone==",timezone)
 
@@ -165,6 +165,6 @@ startTime(data1,data2){
   }
 
 
-  
-  
+
+
 }

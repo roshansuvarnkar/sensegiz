@@ -65,7 +65,7 @@
 
         <ng-container matColumnDef="totalTime">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Time </th>
-          <td mat-cell *matCellDef="let live"> {{convertDate(live.totalTime)}} </td>
+          <td mat-cell *matCellDef="let live"> {{convertDate(live.totalTime || live.totTime)}} </td>
         </ng-container>
 
    </div>
@@ -92,7 +92,7 @@
             <span *ngIf="live.department != null"> {{live.department}} </span>
           </td>
         </ng-container>
-        
+
         <ng-container matColumnDef="startTime">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="live-jp">接触開始時間 </th>
           <td mat-cell *matCellDef="let live"> {{live.startTime | date : 'medium' }} </td>
@@ -118,7 +118,7 @@
                   [length] = "currentPageSize"
                   [pageSize]="currentPageLength"
                   [pageSizeOptions] = "[5, 10, 25, 100]"
-                  showFirstLastButtons 
+                  showFirstLastButtons
                   >
     </mat-paginator>
 </div>
