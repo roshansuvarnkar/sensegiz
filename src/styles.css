@@ -67,9 +67,11 @@ tr {
 .cursor{
   cursor: pointer;
 }
+
 /* .select-panel {
   max-width: fit-content !important;
 } */
+
 .statusFreeze{
   position:absolute;
   z-index:10000;
