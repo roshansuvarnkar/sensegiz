@@ -28,6 +28,7 @@ onlineData:any
 offlineData:any
 deviceName:any
 dataSource:any
+deallocate:any
 index:any
 pageIndex:any
 pagesize:any
@@ -159,6 +160,29 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
       })
 
     }
+    if(this.type == 'deallocatedDevices'){
+      data={
+         userId:this.loginData.userId,
+         subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+         type:'deallocate',
+       }
+       console.log("data===********",data)
+
+       this.api.getDeallocatedDevice(data).then((res:any)=>{
+         if(res.status){
+           this.deallocate=res.data;
+           this.dataSource = new MatTableDataSource(this.deallocate);
+
+           setTimeout(() => {
+             this.dataSource.sort = this.sort;
+             this.dataSource.paginator = this.paginator;
+
+           })
+
+         }
+       })
+
+     }
   }
   getPages(){
     var dateObj=new Date()

@@ -126,7 +126,33 @@
               ></circle-progress>
 
             </div>
+            <div>
+              <span *ngIf="language=='english'">DeAllocate </span>
+              <span *ngIf="language=='japanese'">感染したユーザー数</span><br>
+              <circle-progress (click)="deAllocate()"
+                class="circle"
+                [percent]="deallocateEmp"
+                [maxPercent]="deallocateEmp"
+                [showUnits]="false"
+                [showBackground] = "true"
+                [backgroundColor]= "'#ef6c00'"
+                [outerStrokeColor] = "'#ffffff'"
+                [outerStrokeWidth] = 6
+                [showInnerStroke] = false
+                [radius] = 60
+                [titleColor] = "'#ffffff'"
+                [showSubtitle] = false
+                [backgroundPadding] = 5
+                [animation]="true"
+                [animationDuration]="500"
+                [startFromZero]="true"
+                [responsive]="false"
+              ></circle-progress>
+
+            </div>
           </div>
+
+
         </mat-card-content>
       </mat-card>
       <br>

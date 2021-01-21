@@ -390,7 +390,7 @@ updateBuzzerConfig(data){
   }
 
 
-/* ------------ */
+
 getDepartmentReportTotalCount(data){
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -402,7 +402,25 @@ getDepartmentReportTotalCount(data){
     })
   });
 }
-/* -------------- */
+
+
+getDeallocatedDevice(data){
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  let url = this.host+'/getDeallocatedDevice';
+  return new Promise((resolve,reject)=>{
+    this.http.post(url,data,httpOptions).subscribe(res=>{
+      resolve(res);
+    })
+  });
+}
+
+
+
+
+
 
    editShift(data){
     const httpOptions = {

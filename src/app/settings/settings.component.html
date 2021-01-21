@@ -6,69 +6,69 @@
 <marquee class=" marquee" behavior="" direction="left" *ngIf="language=='japanese'">  設定を変更する前に、インディゴチームに連絡してください</marquee>
 
 <div class="setting">
- 
+
   <mat-card (click)="contactTeam()" *ngIf="language=='english'">
-      
+
       <mat-card-title>
          Define Buffer
       </mat-card-title>
         <mat-card-subtitle >
            Enter buffer value for the wearable
-       </mat-card-subtitle><br> 
+       </mat-card-subtitle><br>
       <mat-card-content>
       <form [formGroup]="bufferForm" (ngSubmit)="onSubmitBufferForm(bufferForm.value)">
         <mat-form-field>
           <input type='number' min="0" max="5" matInput placeholder="Buffer" formControlName="buffer" (input)="bufferval($event)" disbaled required>
           <mat-error>
-            Please provide a valid buffer 
+            Please provide a valid buffer
           </mat-error>
-      
+
         </mat-form-field>
         <mat-error class="bufferError" *ngIf="bufferValue">
          Maximum value you can set is 5
         </mat-error>
-     
+
         <br><br><br>
         <button class="btn-set"  disabled mat-raised-button disabled color="primary">Submit</button>
-       
+
       </form>
     </mat-card-content>
   </mat-card>
        <mat-card (click)="contactTeam()" *ngIf="language=='japanese'">
-      
+
       <mat-card-title>
          タグ内メモリーの接触データ保存数
       </mat-card-title>
         <mat-card-subtitle >
          ゲートウエイへデータを送信するまでのタグ内メモリーの接触データ保存数
-       </mat-card-subtitle><br> 
+       </mat-card-subtitle><br>
       <mat-card-content>
       <form [formGroup]="bufferForm" (ngSubmit)="onSubmitBufferForm(bufferForm.value)">
         <mat-form-field>
           <input type='number' min="0" max="5" matInput placeholder="タグ内メモリーの接触データ保存数" formControlName="buffer" (input)="bufferval($event)" disbaled required>
           <mat-error>
-            有効な保存量を提供してください 
+            有効な保存量を提供してください
           </mat-error>
-      
+
         </mat-form-field>
         <mat-error class="bufferError" *ngIf="bufferValue">
          Maximum value you can set is 5
         </mat-error>
-     
+
         <br><br><br>
         <button class="btn-set-jp"  disabled mat-raised-button disabled color="primary">決定</button>
-       
+
       </form>
     </mat-card-content>
   </mat-card>
-  
+
   <mat-card *ngIf="language=='english'">
     <mat-card-title>
       Define Violation Limit
     </mat-card-title>
     <mat-card-subtitle>
       Enter violation limit/day
-    </mat-card-subtitle><br> 
+    </mat-card-subtitle><br>
     <mat-card-content>
       <form [formGroup]="maxContactForm" (ngSubmit)="onSubmitmaxContactForm(maxContactForm.value)">
         <mat-form-field>
@@ -88,7 +88,7 @@
     </mat-card-title>
     <mat-card-subtitle>
       最大接触制限数/日を入力
-    </mat-card-subtitle><br> 
+    </mat-card-subtitle><br>
     <mat-card-content>
       <form [formGroup]="maxContactForm" (ngSubmit)="onSubmitmaxContactForm(maxContactForm.value)">
         <mat-form-field>
@@ -108,14 +108,14 @@
     </mat-card-title>
     <mat-card-subtitle>
       Enable or Disable two step authentication
-    </mat-card-subtitle><br> 
+    </mat-card-subtitle><br>
     <mat-card-content>
-    
+
           <mat-slide-toggle class="toggle" color="primary" [checked]= "twoStepAuthStatus.status" (change)="twoStepAuthchange($event)" >{{twoStepAuthStatus.value}}</mat-slide-toggle>
 
         <br><br> <br>
         <button class="btn-set" mat-raised-button (click)="onSubmitTwoAuth(twoStepAuthStatus.status)" color="primary">Submit</button>
-   
+
     </mat-card-content>
   </mat-card>
     <mat-card *ngIf="language=='japanese'">
@@ -124,14 +124,14 @@
     </mat-card-title>
     <mat-card-subtitle>
         二段階認証を有効または無効にする
-    </mat-card-subtitle><br> 
+    </mat-card-subtitle><br>
     <mat-card-content>
-    
+
           <mat-slide-toggle class="toggle" color="primary" [checked]= "twoStepAuthStatus.status" (change)="twoStepAuthchange($event)" >{{twoStepAuthStatus.value}}</mat-slide-toggle>
 
         <br><br> <br>
         <button class="btn-set-jp" mat-raised-button (click)="onSubmitTwoAuth(twoStepAuthStatus.status)" color="primary">決定</button>
-   
+
     </mat-card-content>
   </mat-card>
 
@@ -158,7 +158,7 @@
     </mat-card-content>
   </mat-card> -->
 
-<!-- 
+<!--
   <mat-card>
     <mat-card-title>
      Define Response Time
@@ -183,7 +183,7 @@
         </mat-form-field>
       </div>
       <div class="secStatus">
-        <mat-form-field  > 
+        <mat-form-field  >
 
           <mat-label>Seconds</mat-label>
           <mat-select class="seconds" formControlName="seconds"  [disabled]="secStatus" (selectionChange)="getSec($event)" [required]="requiredStatus2" >
@@ -274,7 +274,7 @@
       </form>
     </mat-card-content>
   </mat-card>
-  
+
   <mat-card *ngIf="language=='english'" (click)="contactTeam()">
     <mat-card-title>
       Define Proximity and Select Wearable Type
@@ -369,7 +369,7 @@
       </form>
     </mat-card-content>
   </mat-card>
-  
+
   <mat-card (click)="contactTeam()" *ngIf="language=='english'">
     <mat-card-title>
       Define Shift Time
@@ -386,7 +386,7 @@
           <input matInput placeholder="Shift name" formControlName="shift" disabled  required>
           <mat-error>
             Please provide a valid shift name
-          </mat-error> 
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width-input">
           <input type='time' matInput placeholder="From time" formControlName="fromTime"  disabled required>
@@ -425,7 +425,7 @@
           <input matInput placeholder="追跡対象時間" formControlName="shift" disabled  required>
           <mat-error>
            有効なシフト名を入力してください
-          </mat-error> 
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width-input">
           <input type='time' matInput placeholder="開始時間" formControlName="fromTime"  disabled required>
@@ -573,12 +573,12 @@
   <mat-card-content>
     <form action="" [formGroup]="uploadForm" (ngSubmit)="formSubmit(uploadForm.value)">
       <!-- <label class="custom-file-input" for="Upload" > -->
-      
+
       <input class="input-file" id="Upload" type="file" #fileInput  (change)="fileChange($event.target.files);"/>
     <!-- </label> -->
      <br>
       <span *ngIf="loading" style="color:red">Please choose jpg/jpeg/png*</span>
-      <br><br><br>  
+      <br><br><br>
           <button class="btn-set" mat-raised-button color="primary">Submit</button>
     </form>
   </mat-card-content>
@@ -593,12 +593,12 @@
   <mat-card-content>
     <form action="" [formGroup]="uploadForm" (ngSubmit)="formSubmit(uploadForm.value)">
       <!-- <mat-label class="custom-file-input" for="Upload" > Upload -->
-      
+
      <input class="input-file" type="file" id="Upload"  #fileInput  (change)="fileChange($event.target.files);"   />
     <!-- </mat-label> -->
      <br>
       <span *ngIf="loading" style="color:red">Please choose jpg/jpeg/png*</span>
-      <br><br><br>  
+      <br><br><br>
           <button class="btn-set-jp" mat-raised-button color="primary">決定</button>
     </form>
   </mat-card-content>
@@ -610,7 +610,7 @@
   </mat-card-title>
   <mat-card-subtitle>
     Choose language
-  </mat-card-subtitle><br> 
+  </mat-card-subtitle><br>
   <mat-card-content>
     <form [formGroup]="languageForm" (ngSubmit)="onSubmitlanguageForm(languageForm.value)">
       <mat-form-field>
@@ -635,7 +635,7 @@
   </mat-card-title>
   <mat-card-subtitle>
     言語を選択
-  </mat-card-subtitle><br> 
+  </mat-card-subtitle><br>
   <mat-card-content>
     <form [formGroup]="languageForm" (ngSubmit)="onSubmitlanguageForm(languageForm.value)">
       <mat-form-field>
