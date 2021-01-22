@@ -195,7 +195,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
         zone:this.general.getZone(dateObj),
         type:this.type
         }
-        fileName="Active User"
+        fileName="Online User"
       }
       if(this.type=='offlineUserData'){
         data={
@@ -206,6 +206,15 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
       }
       fileName="offline User- "+this.deviceName
     }
+    if(this.type=='deallocatedDevices'){
+      data={
+      userId:this.loginData.userId,
+      zone:this.general.getZone(dateObj),
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+      type:this.type
+    }
+    fileName="Deallocate Users"
+  }
 
       console.log("data to send ======",data);
 
@@ -213,6 +222,9 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
 
       console.log("report data recieved ======",res);
       })
+      this.api.downloadDeallocatedDevice(data,fileName).then((res:any)=>{
+        console.log("deallocate data recieved ======",res);
+        })
 
   }
 }

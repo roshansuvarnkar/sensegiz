@@ -1114,4 +1114,20 @@ downloadReport(data,fileName){
       })
     });
   }
+  downloadDeallocatedDevice(data,fileName){
+    this.general.loadingFreez.next({status:true})
+
+    let url = this.host+'/downloadDeallocatedDevice';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,data,{ observe: 'response', responseType: 'blob' as 'json' }).subscribe(res=>{
+        if(res.status==200)
+        this.downloadFile(res,fileName)
+        resolve(true);
+      },
+      err=>{
+        console.log("err==",err)
+      })
+    });
+
+  }
 }
