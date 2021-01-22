@@ -92,9 +92,10 @@ export class OrderContactComponent implements OnInit {
       this.dataSet=data.data
       this.from = data.fromDate
       this.to = data.toDate
+      console.log("order========",this.order)
       console.log("data set===",this.dataSet,this.loginData)
       this.orderShow = this.orderType.filter(obj=>{
-      	return obj.id==this.order
+      	return  obj.id==this.order
       })
       this.getTotalLength()
       this.onSubmitFindName()
@@ -105,7 +106,6 @@ export class OrderContactComponent implements OnInit {
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
   }
-
 
   getTotalLength(){
     var data={
@@ -176,7 +176,7 @@ export class OrderContactComponent implements OnInit {
     });
   }
 
- 
+
   getUpdate(event) {
     // console.log("paginator event",event);
     // console.log("paginator event length", this.currentPageLength);

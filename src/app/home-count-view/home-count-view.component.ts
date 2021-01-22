@@ -124,13 +124,10 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
         if(res.status){
           this.onlineData=res.success
           this.dataSource = new MatTableDataSource(this.onlineData);
-
           setTimeout(() => {
             this.dataSource.sort = this.sort;
             this.dataSource.paginator = this.paginator;
-
           })
-
         }
       })
 
@@ -196,6 +193,12 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
         type:this.type
         }
         fileName="Online User"
+        console.log("data to send ======",data);
+
+        this.api.downloadActiveOfflineUsers(data,fileName).then((res:any)=>{
+
+        console.log("report data recieved ======",res);
+        })
       }
       if(this.type=='offlineUserData'){
         data={
@@ -205,7 +208,14 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
         type:this.type
       }
       fileName="offline User- "+this.deviceName
+      console.log("data to send ======",data);
+
+      this.api.downloadActiveOfflineUsers(data,fileName).then((res:any)=>{
+
+      console.log("report data recieved ======",res);
+      })
     }
+
     if(this.type=='deallocatedDevices'){
       data={
       userId:this.loginData.userId,
@@ -214,17 +224,14 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
       type:this.type
     }
     fileName="Deallocate Users"
+    
+    this.api.downloadDeallocatedDevice(data,fileName).then((res:any)=>{
+      console.log("deallocate data recieved ======",res);
+      })
   }
 
-      console.log("data to send ======",data);
 
-      this.api.downloadActiveOfflineUsers(data,fileName).then((res:any)=>{
 
-      console.log("report data recieved ======",res);
-      })
-      this.api.downloadDeallocatedDevice(data,fileName).then((res:any)=>{
-        console.log("deallocate data recieved ======",res);
-        })
 
   }
 }
