@@ -173,6 +173,22 @@ export class OrderContactComponent implements OnInit {
     const dialogRef = this.dialog.open(OrderContactComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
+      this.order = parseInt(this.order) - 1
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.height = '90vh';
+      dialogConfig.width = '75vw';
+      dialogConfig.data = {
+        data:a,
+        userId:a.userId,
+        subUserId:a.subUserId,
+        order:this.order,
+        fromDate : this.from,
+        toDate : this.to
+      }
+
+
     });
   }
 
