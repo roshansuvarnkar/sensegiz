@@ -23,9 +23,11 @@ export class AdminSettingsComponent implements OnInit {
   workingForm:FormGroup
   sendDataForm:FormGroup
   scanCountForm:FormGroup
+  multishiftingselect:FormGroup
   setting:any=[]
   min:any=[]
   sec:any=[]
+  shifts:any=[]
   inactivityStatusValue:any=[]
   dataGet:any
   languageForm:FormGroup
@@ -42,6 +44,7 @@ export class AdminSettingsComponent implements OnInit {
   bufferValue:boolean=false
   multipleShift:boolean=false
   timeExceed:boolean=false
+  selectfind:boolean=false
   constructor(private fb:FormBuilder,public dialog: MatDialog,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -85,6 +88,12 @@ export class AdminSettingsComponent implements OnInit {
     this.sendDataForm = this.fb.group({
       rate:['',[Validators.required,Validators.max(255), Validators.min(1)]],
     });
+    this.multishiftingselect=this.fb.group({
+      shiftName:[''],
+      deviceId:[''],
+      status:['',Validators.required],
+      type:[,Validators.required]
+    })
 
     this.route.queryParams.subscribe(params => {
       this.dataGet = JSON.parse(params.record) ;
@@ -92,7 +101,22 @@ export class AdminSettingsComponent implements OnInit {
   })
   this. refreshSetting()
   this.minThresholdMinsec()
+  this.refreshShift()
 
+  }
+  refreshShift(){
+    var data={
+      userId:this.dataGet.userId,
+      subUserId: (this.dataGet.hasOwnProperty('id') && this.dataGet.type==4 && this.dataGet.id!=0) ? this.dataGet.id : 0,
+      tblName:'deviceShift'
+    }
+
+    this.api.getData(data).then((res:any)=>{
+       console.log("shift  data ======",res);
+      if(res.status){
+        this.shifts=res.success
+      }
+    })
   }
 
   refreshSetting(){
@@ -460,14 +484,14 @@ export class AdminSettingsComponent implements OnInit {
     })
 
    }
- 
+
    onSubmitWorkForm(data) {
 		var cdt1= moment(data.fromTime, 'HH:mm:ss')
 		var cdt2= moment(data.toTime, 'HH:mm:ss')
 		var times1=moment(cdt1).format("YYYY/MM/DD HH:mm:ss")
 		var times2=moment(cdt2).format("YYYY/MM/DD HH:mm:ss")
 		console.log("times22==",times1>times2)
-   
+
 		if(times1>times2 || (data.fromTime == "00:00" &&  data.toTime == "00:00")){
 			console.log("yes")
 				times2=moment(cdt2).add(1,'days').format("YYYY/MM/DD HH:mm:ss")
@@ -582,6 +606,69 @@ export class AdminSettingsComponent implements OnInit {
       }
     }
    }
+
+
+
+   onMultiShiftselect(values){
+    if(this.multishiftingselect.valid){
+    try{
+      var data={
+        userId : this.dataGet.userId,
+        shiftId : values.shiftName.id,
+        shiftName : values.shiftName.shiftName,
+        deviceId : values.deviceId,
+        status: values.status,
+        type :values.type,
+        }
+          console.log(data)
+          this.api.setDeviceMultiShift(data).then((res:any)=>{
+            // console.log("Scanning Interval===",res)
+            if(res.status){
+              this.refreshSetting()
+              var msg='Multishift Select updated Successfully'
+              this.general.openSnackBar(msg,'')
+            }
+          }).catch(err=>{
+            console.log("err===",err);
+          })
+    }catch (err) {
+
+    }
+    }
+
+
+
+}
+
+username:any=[]
+  userSuggestion(event){
+    //console.log("data=",event)
+    var data={
+      value:event.target.value,
+      userId:this.dataGet.userId,
+      subUserId: (this.dataGet.hasOwnProperty('id') && this.dataGet.type==4 && this.dataGet.id!=0) ? this.dataGet.id : 0,
+      tblName:'deviceData'
+    }
+    console.log("data==",data)
+    this.api.getAssignedDevices(data).then((res:any)=>{
+    //  console.log("res==******",res)
+      if(res.status){
+        this.username=[]
+       for(let i=0;i<res.success.length;i++){
+        this.username.push(res.success[i])
+       }
+      }
+    })
+
+  }
+
+selectfinds(event){
+  this.selectfind=event.value='1' || '2'?false:true;
+  console.log(this.selectfind)
+
+}
+
+
    bufferval(event){
      console.log(event.target.value)
 

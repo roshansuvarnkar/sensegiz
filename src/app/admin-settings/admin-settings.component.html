@@ -5,20 +5,20 @@
     </mat-card-title>
     <mat-card-subtitle>
       Enter buffer value for the wearable
-    </mat-card-subtitle><br> 
+    </mat-card-subtitle><br>
     <mat-card-content>
       <form [formGroup]="bufferForm" (ngSubmit)="onSubmitBufferForm(bufferForm.value)">
         <mat-form-field>
           <input type='number' min="0" max="5" matInput placeholder="Buffer" formControlName="buffer" (input)="bufferval($event)"  required>
           <mat-error >
-            Please provide a valid buffer 
+            Please provide a valid buffer
           </mat-error>
-         
+
         </mat-form-field>
         <mat-error class="bufferError" *ngIf="bufferValue">
          Maximum value you can set is 5
         </mat-error>
-     
+
         <br><br><br>
         <button class="btn-set" mat-raised-button [disabled]="bufferValue" color="primary">Submit</button>
       </form>
@@ -32,7 +32,7 @@
     <mat-card-subtitle>
       Enter inactivity in minutes
     </mat-card-subtitle>
-   
+
     <mat-card-content>
       <form [formGroup]="inactivityForm" (ngSubmit)="onSubmitInactivityForm(inactivityForm.value)">
         <mat-slide-toggle color="primary" [checked]="inactivityStatusValue.value" formControlName="type" (change)="inactivityChange($event)" >{{inactivityStatusValue.status}}</mat-slide-toggle>
@@ -51,7 +51,7 @@
             Please provide a valid inactivity in minutes
           </mat-error>
         </mat-form-field> <br>
-        
+
         <br><br>
         <button class="btn-set" mat-raised-button [disabled]="!inactivityForm.valid" color="primary">Submit</button>
       </form>
@@ -66,7 +66,7 @@
      Enter interval
     </mat-card-subtitle><br>
     <mat-card-content>
-  
+
       <form [formGroup]="scanningForm" (ngSubmit)="onSubmitScanningForm(scanningForm.value)" >
         <mat-form-field  >
             <mat-label>Interval in seconds</mat-label>
@@ -89,7 +89,7 @@
      Enter gateway data rate
     </mat-card-subtitle><br>
     <mat-card-content>
-  
+
       <form [formGroup]="sendDataForm" (ngSubmit)="onSubmitSendDataForm(sendDataForm.value)" >
         <mat-form-field>
             <mat-label>Data rate per second</mat-label>
@@ -103,7 +103,7 @@
       </form>
     </mat-card-content>
   </mat-card>
-  
+
 
   <mat-card>
     <mat-card-title>
@@ -144,7 +144,7 @@
           <form [formGroup]="distanceForm" (ngSubmit)="onSubmitDistanceForm(distanceForm.value)">
             <mat-form-field>
               <mat-label>Select distance</mat-label>
-             
+
                <div >
                 <mat-select formControlName="distance" (selectionChange)="changeDistance($event)" required>
                   <mat-option value="1">
@@ -171,8 +171,8 @@
                   </mat-option>
                 </mat-select>
                </div>
-      
-        
+
+
             </mat-form-field><br>
             <div *ngIf="statusCustomise">
               <mat-form-field>
@@ -195,22 +195,22 @@
           Enter minimum distance for user (in meter)
         </mat-card-subtitle>
         <mat-card-content>
-        
+
           <form [formGroup]="distanceForm" (ngSubmit)="onSubmitDistanceForm(distanceForm.value)">
-            
+
             <mat-radio-group  color="primary" formControlName="wearable"  class="wearable" (change)="customizeoff()">
               <mat-radio-button value="0" name="small" >Pendant</mat-radio-button>
               <mat-radio-button value="1" name="small" >Band</mat-radio-button>
             </mat-radio-group><br>
-      <!-- 
+      <!--
             <mat-radio-group  color="primary"   class="wearable" (change)=measurement($event)>
               <mat-radio-button value="meter" name="small" >Meter</mat-radio-button>
               <mat-radio-button value="feet" name="small" >Feet</mat-radio-button>
             </mat-radio-group><br> -->
             <mat-slide-toggle color="primary" [checked]="statusCustomise" (change)="customise($event)" formControlName="customize">Customize</mat-slide-toggle>
             <br> <br>
-            <mat-form-field> 
-              
+            <mat-form-field>
+
               <mat-label>Select distance</mat-label>
               <mat-select formControlName="distance"  required >
 
@@ -225,7 +225,7 @@
                   3 meter
                 </mat-option>
               </mat-select>
-      <!-- 
+      <!--
                 <mat-select formControlName="distance" required *ngIf="!this.measureStatus">
                   <mat-option value="1">
                     1 meter
@@ -237,7 +237,7 @@
                     3 meter
                   </mat-option>
                 </mat-select>
-      
+
                 <mat-select formControlName="distance" required *ngIf="this.measureStatus">
                   <mat-option value="1">
                     3.28 feet
@@ -249,9 +249,9 @@
                     9.84 feet
                   </mat-option>
                 </mat-select> -->
-      
-      
-            </mat-form-field><br> 
+
+
+            </mat-form-field><br>
             <div *ngIf="statusCustomise">
               <mat-form-field>
                 <input matInput placeholder="RSSI" formControlName="rssi" >
@@ -266,7 +266,7 @@
         </mat-card-content>
       </mat-card>
 
-. 
+.
       <mat-card>
         <mat-card-title>
           Define transmission power
@@ -317,30 +317,30 @@
             </div><br><br>
             <button class="btn-set" mat-raised-button [disabled]="!txPowerForm.valid" color="primary">Submit</button>
           </form>
-    
-    
+
+
         </mat-card-content>
       </mat-card>
-   
-      
+
+
       <mat-card>
         <mat-card-title>
-          Define Response Time 
+          Define Response Time
         </mat-card-title>
         <mat-card-subtitle>
           Enter response time for the wearable
-        </mat-card-subtitle> <br> 
+        </mat-card-subtitle> <br>
           <mat-card-content>
-      
+
           <form [formGroup]="timeForm" (ngSubmit)="onSubmitTimeForm(timeForm.value)" >
             <!-- <div *ngIf="!minStatus"> -->
             <mat-form-field  >
-      
+
                 <mat-label>Minutes</mat-label>
                 <mat-select  formControlName="minutes" [disabled]="minStatus" (selectionChange)="getMin($event)" [required]="requiredStatus1">
                   <mat-option *ngFor="let a of min"  [value]="a">{{a}}</mat-option>
                 </mat-select>
-      
+
                <mat-error *ngIf="!minStatus">
                 Please select minimum minutes as 1
               </mat-error>
@@ -348,12 +348,12 @@
           <!-- </div> -->
           <!-- <div *ngIf="!secStatus"> -->
             <mat-form-field  >
-      
+
               <mat-label>Seconds</mat-label>
               <mat-select  formControlName="seconds"  [disabled]="secStatus" (selectionChange)="getSec($event)" [required]="requiredStatus2" >
                 <mat-option *ngFor="let b of sec" [value]="b">{{b}}</mat-option>
               </mat-select>
-      
+
              <mat-error *ngIf="!secStatus">
               Please select minimum second as 1
             </mat-error>
@@ -381,10 +381,17 @@
           </mat-error>
           <form [formGroup]="workingForm" (ngSubmit)="onSubmitWorkForm(workingForm.value)">
             <mat-form-field>
-              <input matInput placeholder="Shift name" formControlName="shift"  required>
+                <mat-label>Shift Name</mat-label>
+                <mat-select formControlName="shift" required>
+                  <mat-option value="general">General</mat-option>
+                  <mat-option value="morning">Morning</mat-option>
+                  <mat-option value="evening">Evening</mat-option>
+                  <mat-option value="night">Night</mat-option>
+                </mat-select>
+             <!--  <input matInput placeholder="Shift name" formControlName="shift"  required>
               <mat-error>
                 Please provide a valid shift name
-              </mat-error> 
+              </mat-error>  -->
             </mat-form-field>
             <mat-form-field class="full-width-input">
               <input type='time' matInput placeholder="From time" formControlName="fromTime" required>
@@ -408,13 +415,70 @@
         </mat-card-content>
       </mat-card>
 
+      <mat-card>
+        <mat-card-title>
+          Multishift Select
+        </mat-card-title>
+        <!-- <mat-card-subtitle>
+          Enter coin name and maximum limit
+        </mat-card-subtitle> -->
+         <br>
+        <mat-card-content>
+          <br>
+
+          <form [formGroup]="multishiftingselect" (ngSubmit)="onMultiShiftselect(multishiftingselect.value)" >
+            <mat-radio-group  color="primary" formControlName="status"  class="wearable">
+              <mat-radio-button value="1" name="small" >Enable</mat-radio-button>
+              <mat-radio-button value="0" name="small" >Disable</mat-radio-button>
+            </mat-radio-group><br>
+            <mat-radio-group  color="primary" formControlName="type"  class="wearable" >
+              <mat-radio-button value="1" name="small"  (change)="selectfinds($event)">All</mat-radio-button>
+              <mat-radio-button value="2" name="small" (change)="selectfinds($event)">Specific Finds</mat-radio-button>
+            </mat-radio-group><br>
+            <mat-form-field *ngIf="(multishiftingselect.get('status').value == 1)">
+              <mat-label>Shift Name</mat-label>
+              <mat-select  formControlName="shiftName" name="shiftName">
+                <mat-option *ngFor=" let b of shifts" [value]="b">
+                  {{b.shiftName}}
+                </mat-option>
+               <!--  <mat-option value="General">General</mat-option>
+                <mat-option value="Morning">Morning</mat-option>
+                <mat-option value="Evening">Evening</mat-option>
+                <mat-option value="Night">Night</mat-option> -->
+              </mat-select>
+
+          </mat-form-field>
+          <mat-form-field class="full-width-input" *ngIf="(multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 1 || multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 0)">
+            <input type='text' matInput placeholder="Device Id" formControlName="deviceId" [matAutocomplete]="auto"  (keyup)="userSuggestion($event)" >
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let user of username" [value]="user.deviceId">
+                {{user.deviceId}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error>
+              Please provide a valid user name
+            </mat-error>
+          </mat-form-field>
+            <div class="maxlimit">
+            </div>
+              <br><br> <br> <br>
+            <div class="btn-set-grp">
+              <button mat-raised-button [disabled]="!multishiftingselect.valid"  color="primary">Submit</button>&nbsp;&nbsp;&nbsp;
+              <button type="button" mat-raised-button (click)="openDialog()"  color="primary">Info</button>
+            </div>
+
+            </form>
+        </mat-card-content>
+
+      </mat-card>
+
       <mat-card >
         <mat-card-title>
           Set Language
         </mat-card-title>
         <mat-card-subtitle>
           Choose language
-        </mat-card-subtitle><br> 
+        </mat-card-subtitle><br>
         <mat-card-content>
           <form [formGroup]="languageForm" (ngSubmit)="onSubmitlanguageForm(languageForm.value)">
             <mat-form-field>
@@ -422,7 +486,7 @@
              <mat-select formControlName="language" required>
                <mat-option value="english">English</mat-option>
                <mat-option value="japanese">Japanese</mat-option>
-      
+
              </mat-select>
               <mat-error>
                 Please choose language
@@ -434,5 +498,5 @@
         </mat-card-content>
       </mat-card>
 
-      
+
 </div>

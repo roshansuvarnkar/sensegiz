@@ -187,8 +187,6 @@ export class OrderContactComponent implements OnInit {
         fromDate : this.from,
         toDate : this.to
       }
-
-
     });
   }
 
