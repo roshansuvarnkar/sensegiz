@@ -183,9 +183,9 @@ export class AdminSettingsComponent implements OnInit {
             value:false,
             status:'Enable'
           }
-          this.inactivityForm.patchValue({
+         /*  this.inactivityForm.patchValue({
             inactivity: res.success[0].inactivity
-         })
+         }) */
         }
       }
     })
@@ -622,7 +622,7 @@ export class AdminSettingsComponent implements OnInit {
         }
           console.log(data)
           this.api.setDeviceMultiShift(data).then((res:any)=>{
-            // console.log("Scanning Interval===",res)
+            console.log("multishift dara sent===",res)
             if(res.status){
               this.refreshSetting()
               var msg='Multishift Select updated Successfully'

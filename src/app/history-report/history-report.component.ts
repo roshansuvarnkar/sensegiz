@@ -751,7 +751,6 @@ if(this.type=='deptcummulative'){
 
         if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
         arr.push({
-
             baseName:obj.baseName,
             contactName:obj.contactName,
             empId:obj.empId==null ||obj.empId==''?'-':obj.empId,

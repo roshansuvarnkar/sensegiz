@@ -127,7 +127,7 @@ refreshFinds(){
               mobileNum:res.success[i].mobNum == '' ||res.success[i].mobNum == 'NULL' ||res.success[i].mobNum == 'undefined' ? '-' : res.success[i].mobNum,
               empId:res.success[i].empId == ''||res.success[i].empId == 'NULL' || res.success[i].empId == 'undefined' ? '-' : res.success[i].empId
           });
-          console.log("data find",this.findData)
+          //console.log("data find",this.findData)
       }
       this.dataSource = new MatTableDataSource(this.findData);
       setTimeout(() => {

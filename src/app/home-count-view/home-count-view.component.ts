@@ -34,7 +34,7 @@ pageIndex:any
 pagesize:any
 language:any
 
-displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
+displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
 
   constructor(private api: ApiService,
     private login:LoginCheckService,
@@ -69,9 +69,21 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
 
       this.api.getHomeCountData(data).then((res:any)=>{
         console.log("res==",res)
+
+        this.findData=[]
         if(res.status){
-          this.activeData=res.success
-          this.dataSource = new MatTableDataSource(this.activeData);
+          for (let i = 0; i <res.success.length; i++) {
+            this.findData.push(
+              {
+              i: i+1,
+              deviceId:res.success[i].deviceId,
+              deviceName:res.success[i].deviceName,
+              dataReceivedTime:res.success[i].dataReceivedTime,
+            })
+          }
+        /*   this.activeData=res.success */
+          this.dataSource = new MatTableDataSource(this.findData);
+        //  this.dataSource = new MatTableDataSource(this.activeData);
 
           setTimeout(() => {
             this.dataSource.sort = this.sort;
@@ -224,7 +236,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','lastSync'];
       type:this.type
     }
     fileName="Deallocate Users"
-    
+
     this.api.downloadDeallocatedDevice(data,fileName).then((res:any)=>{
       console.log("deallocate data recieved ======",res);
       })

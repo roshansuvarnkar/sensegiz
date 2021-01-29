@@ -31,7 +31,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Name </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
-                  <ng-container matColumnDef="lastSync">
+                  <ng-container matColumnDef="dataReceivedTime">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Last sync time </th>
                     <td mat-cell *matCellDef="let data">
                       <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
@@ -55,7 +55,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 追跡対象者の氏名 </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
-                  <ng-container matColumnDef="lastSync">
+                  <ng-container matColumnDef="dataReceivedTime">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 最終同期時間 </th>
                     <td mat-cell *matCellDef="let data">
                       <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
@@ -70,7 +70,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </div>
-        <mat-paginator pageSize=10 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="loadData()"></mat-paginator>
+        <mat-paginator pageSize=10 [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons (page)="loadData()"></mat-paginator>
 
       </div>
 
@@ -106,7 +106,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Name </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
-                  <ng-container matColumnDef="lastSync">
+                  <ng-container matColumnDef="dataReceivedTime">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Last sync time </th>
                     <td mat-cell *matCellDef="let data">
                       <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
@@ -130,7 +130,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 追跡対象者の氏名 </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
-                  <ng-container matColumnDef="lastSync">
+                  <ng-container matColumnDef="dataReceivedTime">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 最終同期時間 </th>
                     <td mat-cell *matCellDef="let data">
                       <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
@@ -146,7 +146,7 @@
           </table>
 
         </div>
-        <mat-paginator pageSize=10 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="loadData()"></mat-paginator>
+        <mat-paginator pageSize=10 [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons (page)="loadData()"></mat-paginator>
 
       </div>
 
@@ -191,7 +191,7 @@
           </table>
 
         </div>
-        <mat-paginator pageSize=10 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="loadData()" ></mat-paginator>
+        <mat-paginator pageSize=10 [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons (page)="loadData()" ></mat-paginator>
 
       </div>
 
@@ -233,7 +233,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Name </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
-                  <ng-container matColumnDef="lastSync">
+                  <ng-container matColumnDef="dataReceivedTime">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Last sync time </th>
                     <td mat-cell *matCellDef="let data">
                       <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
@@ -257,7 +257,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 追跡対象者の氏名 </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
-                  <ng-container matColumnDef="lastSync">
+                  <ng-container matColumnDef="dataReceivedTime">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 最終同期時間 </th>
                     <td mat-cell *matCellDef="let data">
                       <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
@@ -274,7 +274,7 @@
           </table>
 
         </div>
-        <mat-paginator pageSize=10 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="loadData()" ></mat-paginator>
+        <mat-paginator pageSize=10 [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons (page)="loadData()" ></mat-paginator>
 
       </div>
 
@@ -314,7 +314,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Name </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
-                  <ng-container matColumnDef="lastSync">
+                  <ng-container matColumnDef="dataReceivedTime">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Last sync time </th>
                     <td mat-cell *matCellDef="let data">
                       <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
@@ -339,7 +339,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 追跡対象者の氏名 </th>
                     <td mat-cell *matCellDef="let data"> {{data.deviceName}} </td>
                   </ng-container>
-                  <ng-container matColumnDef="lastSync">
+                  <ng-container matColumnDef="dataReceivedTime">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> 最終同期時間 </th>
                     <td mat-cell *matCellDef="let data">
                       <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
@@ -355,7 +355,7 @@
           </table>
 
         </div>
-        <mat-paginator pageSize=10 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="loadData()" ></mat-paginator>
+        <mat-paginator pageSize=10 [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons (page)="loadData()" ></mat-paginator>
 
       </div>
       <div *ngIf="type =='deallocatedDevices'">
@@ -399,7 +399,7 @@
                     </td>
                   </ng-container>
 
-                  <ng-container matColumnDef="lastSync">
+                  <ng-container matColumnDef="dataReceivedTime">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Last sync time </th>
                     <td mat-cell *matCellDef="let data">
                       <span *ngIf="data.dataReceivedTime != '0000-00-00 00:00:00'">{{data.dataReceivedTime  | date : 'medium'}}</span>
