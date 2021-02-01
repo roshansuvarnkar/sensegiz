@@ -89,8 +89,8 @@ export class AdminSettingsComponent implements OnInit {
       rate:['',[Validators.required,Validators.max(255), Validators.min(1)]],
     });
     this.multishiftingselect=this.fb.group({
-      shiftName:[{value:'',disabled: false}],
-      deviceId:[{value:'',disabled: false}],
+      shiftName:[''],
+      deviceId:[''],
       status:['',Validators.required],
       type:[,Validators.required]
     })
