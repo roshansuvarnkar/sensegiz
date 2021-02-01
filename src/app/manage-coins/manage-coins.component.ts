@@ -114,14 +114,14 @@ constructor(public dialog: MatDialog,
       }
       return a
     }
-    else if((value.batteryStatus == 6 ) || (value.batteryStatus == 2 )){
+    else if((value.batteryStatus == 6) || (value.batteryStatus == 2)){
       var a = {
         'background-color':'#ffc107',
         'width':'18px'
       }
       return a
     }
-    else if((value.batteryStatus == 7 ) || (value.batteryStatus == 3 )){
+    else if((value.batteryStatus == 7) || (value.batteryStatus == 3)){
       var a = {
         'background-color':'red',
         'width':'10px'
