@@ -45,6 +45,9 @@ td.mat-cell.cdk-cell.cdk-column-deviceName.mat-column-deviceName.ng-star-inserte
     letter-spacing: 1px;
     cursor: pointer;
 }
+mat-paginator{
+  margin-left:-30px;
+}
 
 @media only screen and (max-width: 768px) {
 

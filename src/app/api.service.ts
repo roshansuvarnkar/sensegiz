@@ -75,7 +75,19 @@ export class ApiService {
       })
     });
   }
+  
+  editCoinRegister(data){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
+    let url = this.host+'/setCoinList';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,data,httpOptions).subscribe(res=>{
+        resolve(res);
+      })
+    });
+  }
 
   UserRegister(data){
     const httpOptions = {
@@ -89,7 +101,18 @@ export class ApiService {
       })
     });
   }
+  coinRegister(data){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
+    let url = this.host+'/coinRegistration';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,data,httpOptions).subscribe(res=>{
+        resolve(res);
+      })
+    });
+  }
 
 
 

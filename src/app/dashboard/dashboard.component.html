@@ -4,6 +4,9 @@
   <mat-tab label="Manage Finds">
     <app-manage-finds></app-manage-finds>
   </mat-tab>
+  <mat-tab label="Manage Coins">
+    <app-manage-coins></app-manage-coins>
+  </mat-tab>
   <mat-tab label="Manage Gateways">
     <app-manage-gateways></app-manage-gateways>
   </mat-tab>
@@ -14,6 +17,9 @@
 <mat-tab-group mat-stretch-tabs *ngIf="language=='japanese'">
   <mat-tab label="追跡対象者の登録・管理">
     <app-manage-finds></app-manage-finds>
+  </mat-tab>
+  <mat-tab label="Manage Coins">
+    <app-manage-coins></app-manage-coins>
   </mat-tab>
   <mat-tab label="ゲートウエイの登録・管理">
     <app-manage-gateways></app-manage-gateways>

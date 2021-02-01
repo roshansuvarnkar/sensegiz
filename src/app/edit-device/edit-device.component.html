@@ -10,7 +10,7 @@
 
   <mat-horizontal-stepper  *ngIf="language=='english'"  #stepper >
     <form [formGroup]="Findform" >
-   
+
       <mat-step >
           <ng-template matStepLabel>Fill out your name</ng-template>
           <mat-form-field>
@@ -307,6 +307,79 @@
         <div>
           <button mat-button matStepperPrevious>戻る</button>
           <button mat-button [disabled]="!gatewayform.valid" (click)="Gatewaysubmit(gatewayform.value)" >完了</button>
+        </div>
+      </mat-step>
+    </form>
+  </mat-horizontal-stepper>
+
+</div>
+<div *ngIf="type=='coins'">
+  <div class="flexWrap space-between">
+    <h2 mat-dialog-title>Edit coin Details</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
+  </div>
+
+
+
+  <mat-horizontal-stepper  #stepper >
+    <form [formGroup]="coinform" >
+      <!-- <mat-step >
+        <ng-template matStepLabel class="stepper">Select coin Type</ng-template>
+        <mat-form-field>
+          <mat-label>Select Coin Type</mat-label>
+          <input type="text" formControlName="coinType" matInput disabled>
+        </mat-form-field>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step> -->
+      <mat-step >
+        <ng-template matStepLabel>Fill out coin Name</ng-template>
+        <mat-form-field>
+          <mat-label>Coin Name</mat-label>
+          <input matInput type='text' placeholder="Coin Name" formControlName="coinName" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step >
+          <ng-template matStepLabel>Fill out coin Id</ng-template>
+          <mat-form-field>
+            <mat-label> Coin Id</mat-label>
+            <input matInput  placeholder="coin Id" formControlName="coinId" disabled required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+      </mat-step>
+
+      <mat-step >
+        <ng-template matStepLabel>Fill out your Gateway Id</ng-template>
+
+
+          <mat-form-field>
+             <mat-label>Gateway Id</mat-label>
+             <mat-select   formControlName="gatewayId">
+               <mat-option *ngFor="let b of gateway" [(value)]="b.gatewayId">
+                 {{b.gatewayId}}
+               </mat-option>
+             </mat-select>
+           </mat-form-field>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+    </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button [disabled]="!coinform.valid" (click)="coinsubmit(coinform.value)" >Done</button>
         </div>
       </mat-step>
     </form>

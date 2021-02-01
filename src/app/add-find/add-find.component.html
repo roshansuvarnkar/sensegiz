@@ -84,11 +84,11 @@
         [separateDialCode]="false"
         name="mobileNum"
         formControlName="mobileNum">
-      </ngx-intl-tel-input> 
+      </ngx-intl-tel-input>
      <hr class="mob">
      <mat-error *ngIf="Findform.get('mobileNum').status=='INVALID'" class="error" >
       Please provide valid mobile number
-     </mat-error> 
+     </mat-error>
     </div><br> <br>
     <div>
       <button mat-button matStepperPrevious>Back</button>
@@ -187,7 +187,7 @@
      <hr class="mob">
      <mat-error *ngIf="Findform.get('mobileNum').status=='INVALID'" class="error" >
      有効な携帯電話番号を入力してください
-     </mat-error> 
+     </mat-error>
     </div>
     <div>
       <button mat-button matStepperPrevious>戻る</button>
@@ -319,6 +319,83 @@
   </mat-horizontal-stepper>
 
 </div>
+<!-- ------------- mansge Coins  -->
+<div *ngIf="type=='coins'">
+  <div class="flexWrap space-between">
+    <h2 mat-dialog-title>Add Coin Details</h2><button mat-button mat-dialog-close><mat-icon>clear</mat-icon></button>
+  </div>
+
+
+
+  <mat-horizontal-stepper  #stepper  >
+    <form [formGroup]="coinForm" >
+   <!--    <mat-step >
+        <ng-template matStepLabel class="stepper">Select coin Type</ng-template>
+        <mat-form-field>
+          <mat-label>Select Coin Type</mat-label>
+          <mat-select formControlName="coinType">
+         <mat-option value="LO">Location Coin</mat-option>
+            <mat-option value="AG">Aggregator Coin</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step> -->
+      <mat-step >
+          <ng-template matStepLabel class="stepper">Fill out your coin name</ng-template>
+          <mat-form-field>
+            <mat-label>Coin name</mat-label>
+            <input matInput placeholder="User Name" formControlName="coinName" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+      </mat-step>
+      <mat-step >
+          <ng-template matStepLabel>Fill out your Coin Id</ng-template>
+          <mat-form-field>
+            <mat-label>Coin Id</mat-label>
+            <input type="number" matInput formControlName="coinId" placeholder="Ex. 1" required>
+            <mat-error >Coin ID cannot be 0</mat-error>
+
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+      </mat-step>
+      <mat-step >
+        <ng-template matStepLabel>Fill out your Gateway Id</ng-template>
+
+
+          <mat-form-field>
+             <mat-label>Gateway Id</mat-label>
+             <mat-select  formControlName="gatewayId">
+              <mat-option *ngFor="let b of gateway" [(value)]="b.gatewayId">
+                 {{b.gatewayId}}
+               </mat-option>
+             </mat-select>
+           </mat-form-field>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+    </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button [disabled]="!coinForm.valid" (click)="coinSubmit(coinForm.value)" >Done</button>
+        </div>
+      </mat-step>
+    </form>
+  </mat-horizontal-stepper>
+</div>
 
 
 
@@ -359,12 +436,12 @@
 							[separateDialCode]="false"
 							name="mobileNum"
 							formControlName="mobileNum">
-            </ngx-intl-tel-input> 
+            </ngx-intl-tel-input>
             <hr class="mob">
             <mat-error *ngIf="userform.get('mobileNum').status=='INVALID'  && userform.get('mobileNum').touched==true" class="error" >
               Please provide valid mobile number
-             </mat-error> 
-					</div> <br> <br>  
+             </mat-error>
+					</div> <br> <br>
           <div>
             <button mat-button matStepperNext>Next</button>
           </div>
@@ -390,7 +467,7 @@
           <button mat-button [disabled]="!userform.valid" (click)="Usersubmit(userform.value)" >Done</button>
         </div>
       </mat-step>
-    </form> 
+    </form>
   </mat-horizontal-stepper>
 <!-- japanese -->
 <mat-horizontal-stepper  #stepper *ngIf="language=='japanese'" >
@@ -425,7 +502,7 @@
             <hr class="mob">
             <mat-error *ngIf="userform.get('mobileNum').status=='INVALID'" class="error" >
               有効な携帯電話番号を入力してください
-             </mat-error> 
+             </mat-error>
           </div>
           <div>
             <button mat-button matStepperNext> 次</button>

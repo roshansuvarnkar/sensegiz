@@ -43,8 +43,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthenticationInterceptor } from './authentication.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BnNgIdleService } from 'bn-ng-idle';
-
-
+import { ManageCoinsComponent } from './manage-coins/manage-coins.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +72,7 @@ import { BnNgIdleService } from 'bn-ng-idle';
     TwoStepAuthComponent,
     SetNewPasswordComponent,
     ProfileComponent,
+    ManageCoinsComponent,
   ],
   imports: [
     BrowserModule,

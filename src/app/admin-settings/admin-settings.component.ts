@@ -89,8 +89,8 @@ export class AdminSettingsComponent implements OnInit {
       rate:['',[Validators.required,Validators.max(255), Validators.min(1)]],
     });
     this.multishiftingselect=this.fb.group({
-      shiftName:[''],
-      deviceId:[''],
+      shiftName:[{value:'',disabled: false}],
+      deviceId:[{value:'',disabled: false}],
       status:['',Validators.required],
       type:[,Validators.required]
     })
@@ -129,12 +129,12 @@ export class AdminSettingsComponent implements OnInit {
       console.log("setting data page ======",res);
       if(res.status){
         this.setting = res.success[0]
-
         this.distanceForm.patchValue({
           distance: res.success[0].distance.toString(),
           rssi: res.success[0].rssi,
           wearable:res.success[0].type.toString()
         })
+
         this.bufferForm.patchValue({
           buffer: res.success[0].buffer,
         })
@@ -627,6 +627,7 @@ export class AdminSettingsComponent implements OnInit {
               this.refreshSetting()
               var msg='Multishift Select updated Successfully'
               this.general.openSnackBar(msg,'')
+
             }
           }).catch(err=>{
             console.log("err===",err);
@@ -651,7 +652,7 @@ username:any=[]
     }
     console.log("data==",data)
     this.api.getAssignedDevices(data).then((res:any)=>{
-    //  console.log("res==******",res)
+     console.log("res==******",res)
       if(res.status){
         this.username=[]
        for(let i=0;i<res.success.length;i++){

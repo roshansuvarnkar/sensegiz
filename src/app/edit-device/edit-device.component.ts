@@ -23,6 +23,8 @@ export class EditDeviceComponent implements OnInit {
   Findform:FormGroup
   gatewayform:FormGroup
   userform:FormGroup
+  coinform:FormGroup
+  gateway:any=[]
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<EditDeviceComponent>,
@@ -65,6 +67,12 @@ export class EditDeviceComponent implements OnInit {
       emailId: ['',[Validators.email]]
     });
 
+    this.coinform=this.fb.group({
+      coinId: [{value: '', disabled: true}, Validators.required],
+      coinName: ['', Validators.required],
+      gatewayId:['', Validators.required],
+      coinType:[{value:'',disabled: true}]
+    });
 
     if(this.type=='finds'){
       this.Findform.patchValue({
@@ -91,7 +99,14 @@ export class EditDeviceComponent implements OnInit {
         emailId: this.deviceData.emailId
       });
     }
-
+    else if(this.type=='coins'){
+      this.coinform.patchValue({
+        coinId: this.deviceData.coinId,
+        coinName: this.deviceData.coinName,
+        gatewayId:this.deviceData.gatewayId,
+      });
+    }
+    this.refreshGateway()
   }
 
 
@@ -188,6 +203,57 @@ export class EditDeviceComponent implements OnInit {
       }
     }
   }
+  coinsubmit(data){
+    if (this.coinform.valid) {
+      try {
+        data.id=this.deviceData.id
+        data.userId=this.loginData.userId
+        data.subUserId=(this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0;
+        data.coinId=this.deviceData.coinId,
+        data.coinName=data.coinName
+        console.log("coin send data==",data)
+       this.api.editCoinRegister(data).then((res:any)=>{
+          console.log("coin submit==",res)
+          if(res.status){
+
+            var msg = 'Coin Updated Successfully'
+            this.general.openSnackBar(msg,'')
+          }
+          else if(!res.status && res.alreadyExisted){
+            var msg = 'Coin Name Already exists, try different Coin'
+            this.general.openSnackBar(msg,'')
+          }
+        })
+      } catch (err) {
+      }
+    }
+
+  }
+  refreshGateway(){
+    var data={
+        userId:this.loginData.userId,
+        subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+        tblName:'gatewayRegistration'
+      }
+     this.api.getData(data).then((res:any)=>{
+      console.log("gateway data ====",res);
+      if(res.status){
+        this.gateway=res.success
+      }
+
+    })
+  }
+
+  // getNumber(event){
+  //   console.log(" get number event==",event)
+  // }
+  // telInputObject(event){
+  //   console.log(" tel obj event==",event)
+
+  // }
+  // onCountryChange(event){
+  //   console.log("country==",event)
+  // }
 
 
 

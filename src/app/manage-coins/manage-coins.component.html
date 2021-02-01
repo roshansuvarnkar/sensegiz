@@ -1,0 +1,104 @@
+
+<div class="">
+  <button class="button" mat-flat-button color="primary" (click)="openDialog()" *ngIf="userType!=3">Add Coins</button>
+  <mat-form-field class="full-width-input search">
+    <input matInput placeholder="Search device" autocomplete="off" matInput (keyup)="search($event.target.value)">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
+<div *ngIf="userType==3">
+  <br><br>
+</div>
+
+<div class="center">
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort >
+
+
+     <div>
+        <ng-container matColumnDef="i"  >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl No. </th>
+            <td mat-cell *matCellDef="let coin" > {{coin.i}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="coinId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Coin Id</th>
+            <td mat-cell *matCellDef="let coin"> {{coin.coinId}} </td>
+          </ng-container>
+
+          <!--   <ng-container matColumnDef="coinName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Coin Name  </th>
+            <td mat-cell *matCellDef="let coin "> {{coin.coinName}} </td>
+          </ng-container> -->
+        <ng-container matColumnDef="coinName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Coin Name </th>
+            <td mat-cell *matCellDef="let coin" class="cursor">
+              <span  *ngIf="coin.latestStatus!='0000-00-00 00:00:00'&& coin.coinStatus == 0" matTooltip="Coin Status : {{coin.latestStatus | date: 'medium'}} , Offline">
+                {{coin.coinName}}
+              </span>
+              <span  *ngIf="coin.latestStatus!='0000-00-00 00:00:00'&& coin.coinStatus == 1" matTooltip="Coin Status : {{coin.latestStatus | date: 'medium'}} , Online">
+                {{coin.coinName}}
+              </span>
+              <span  *ngIf="coin.latestStatus=='0000-00-00 00:00:00'" >
+                {{coin.coinName}}
+              </span>
+          </td>
+          </ng-container>
+
+        <!--   <ng-container matColumnDef="coinType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Coin Type </th>
+            <td mat-cell *matCellDef="let coin "> {{coin.coinType}} </td>
+          </ng-container> -->
+
+
+          <ng-container matColumnDef="gatewayId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Id</th>
+            <td mat-cell *matCellDef="let coin "> {{coin.gatewayId}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="batteryStatus">
+
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Battery</th>
+
+            <td mat-cell *matCellDef="let coin "  class="cursor">
+              <span  *ngIf="coin.battryStatusUpdatedTime!='0000-00-00 00:00:00' && coin.batteryStatus!='0'" matTooltip="Battery Status  : {{coin.battryStatusUpdatedTime | date: 'medium'}}">
+                <div class="batteryContainer" >
+                  <div class="batteryOuter"><div id="batteryLevel"  [ngStyle]="getBatteryStatus(coin)" > </div></div>
+                  <div class="batteryBump"></div>
+                  </div>
+                </span>
+
+
+              <div  *ngIf="coin.battryStatusUpdatedTime=='0000-00-00 00:00:00' || coin.batteryStatus=='0' " >
+                <div class="batteryContainer">
+                  <div class="batteryOuter"><div id="batteryLevel"  [ngStyle]="getBatteryStatus(coin)" > </div></div>
+                  <div class="batteryBump"></div>
+                </div>
+              </div>
+
+
+          </td>
+
+        </ng-container>
+
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="userType==3"> Edit </th>
+            <td mat-cell *matCellDef="let coin"  (click)="edit(coin)"  class="cursor" [hidden]="userType==3"> <mat-icon>{{coin.edit}}</mat-icon></td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="userType==3"> Delete </th>
+            <td mat-cell *matCellDef="let coin"  (click)="delete(coin)"  class="cursor" [hidden]="userType==3"><mat-icon>{{coin.delete}}</mat-icon> </td>
+          </ng-container>
+
+     </div>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+      </table>
+      <mat-paginator   pageSize="10" [pageSizeOptions] = "[5, 10, 25, 100]" showFirstLastButtons >
+      </mat-paginator>
+  </div>
+</div>

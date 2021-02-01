@@ -224,12 +224,9 @@ basedOnDate(limit,offset){
           updatedOn:this.general.updatedOnDate(res.success[i].updatedOn),
           startTime:this.general.startTime(res.success[i].totalTime,res.success[i].updatedOn),
           totalTime:this.general.convertTime(res.success[i].totalTime)
-
         })
         }
-
       this.dataSource = new MatTableDataSource(this.liveData);
-
       setTimeout(() => {
         this.dataSource.sort = this.sort;
         // this.paginator.length = this.currentPageLength
@@ -757,7 +754,6 @@ if(this.type=='deptcummulative'){
             updatedOn:obj.updatedOn,
             startTime:this.general.startTime(obj.totalTime,obj.updatedOn),
             totalTime:this.general.convertTime(obj.totalTime)
-
           })
           console.log("arrr==",arr)
           return arr

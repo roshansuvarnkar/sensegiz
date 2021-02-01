@@ -19,12 +19,14 @@ export class AddFindComponent implements OnInit {
   Findform:FormGroup
   gatewayform:FormGroup
   userform:FormGroup
+  coinForm:FormGroup
   type:any
   loginData:any
   language:any
   findStatus:boolean=false
   gatewayStatus:boolean=false
   userStatus:boolean=false
+  gateway:any=[]
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddFindComponent>,
@@ -66,9 +68,13 @@ export class AddFindComponent implements OnInit {
       mobileNum: ['',Validators.required],
       emailId: ['',[Validators.email,Validators.required]]
     });
+    this.coinForm =this.fb.group({
+      coinName: ['', Validators.required],
+      coinId: ['', [Validators.required,Validators.min(1)]],
+      gatewayId:['', Validators.required],
+    });
 
-
-
+    this.refreshGateway()
 
   }
 
@@ -169,5 +175,47 @@ Usersubmit(data){
 }
 
 
+coinSubmit(data){
+  console.log("data======",data)
+  if (this.coinForm.valid) {
+    try {
+      console.log("this.loginData",this.loginData);
+
+      if(this.loginData.hasOwnProperty('id') && this.loginData.id!=0 && this.loginData.type==4){
+        data.subUserId=this.loginData.id
+      }
+      data.userId=this.loginData.userId
+      console.log(" coin insert data======",data)
+       this.api.coinRegister(data).then((res:any)=>{
+        console.log("coin submit==",res)
+        if(res.status){
+          var msg = 'Coin Registered Successfully'
+          this.general.openSnackBar(msg,'')
+        }
+        else if(!res.status && res.alreadyExisted){
+          var msg = 'Coin Name or Coin Id Already exists, try different coin'
+          this.general.openSnackBar(msg,'')
+        }
+      })
+    } catch (err) {
+    }
+  }
+
+}
+refreshGateway(){
+  var data={
+      userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+      tblName:'gatewayRegistration'
+    }
+
+  this.api.getData(data).then((res:any)=>{
+    console.log("gateway data ======",res);
+    if(res.status){
+      this.gateway=res.success
+
+    }
+  })
+}
 
 }
