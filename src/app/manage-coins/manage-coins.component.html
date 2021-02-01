@@ -35,12 +35,12 @@
         <ng-container matColumnDef="coinName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Coin Name </th>
             <td mat-cell *matCellDef="let coin" class="cursor">
-              <span  *ngIf="coin.latestStatus!='0000-00-00 00:00:00'&& coin.coinStatus == 0" matTooltip="Coin Status : {{coin.latestStatus | date: 'medium'}} , Offline">
+              <span  *ngIf="coin.latestStatus!='0000-00-00 00:00:00'" matTooltip="Coin Online At : {{coin.latestStatus | date: 'medium'}}">
                 {{coin.coinName}}
               </span>
-              <span  *ngIf="coin.latestStatus!='0000-00-00 00:00:00'&& coin.coinStatus == 1" matTooltip="Coin Status : {{coin.latestStatus | date: 'medium'}} , Online">
+            <!--   <span  *ngIf="coin.latestStatus!='0000-00-00 00:00:00'&& coin.coinStatus == 1" matTooltip="Coin Status : {{coin.latestStatus | date: 'medium'}} , Online">
                 {{coin.coinName}}
-              </span>
+              </span> -->
               <span  *ngIf="coin.latestStatus=='0000-00-00 00:00:00'" >
                 {{coin.coinName}}
               </span>
