@@ -153,7 +153,7 @@ export class AdminSettingsComponent implements OnInit {
             minutes:res.success[0].durationThreshold/60,
           })
         }
-     
+
         this.scanCountForm.patchValue({
           count:res.success[0].scanCount.toString()
         })
@@ -640,6 +640,10 @@ export class AdminSettingsComponent implements OnInit {
 
 
 
+}
+refreshselsectmultiple(){
+  alert("oyudlykhugkjh")
+  this.multishiftingselect.reset()
 }
 
 username:any=[]

@@ -153,9 +153,7 @@ export class SettingsComponent implements OnInit {
       console.log("setting data page ======",res);
       if(res.status){
         this.setting = res.success[0]
-
         this.duration=res.success[0].durationThreshold
-
         this.distanceForm.patchValue({
           distance: res.success[0].distance.toString(),
           rssi: res.success[0].rssi,
@@ -885,5 +883,5 @@ export class SettingsComponent implements OnInit {
    }
 
   }
-  
+
 }

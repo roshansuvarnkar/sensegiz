@@ -107,21 +107,21 @@ constructor(public dialog: MatDialog,
 // }
   getBatteryStatus(value){
     // console.log("status===",value)
-    if((value.batteryStatus == 5 && value.coinType == 'Location Coin') || (value.batteryStatus == 1 && value.coinType == 'Aggregator Coin')){
+    if((value.batteryStatus == 5) || (value.batteryStatus == 1)){
       var a = {
         'background-color':'green',
         'width':'31px'
       }
       return a
     }
-    else if((value.batteryStatus == 6 && value.coinType == 'Location Coin') || (value.batteryStatus == 2 && value.coinType == 'Aggregator Coin')){
+    else if((value.batteryStatus == 6 ) || (value.batteryStatus == 2 )){
       var a = {
         'background-color':'#ffc107',
         'width':'18px'
       }
       return a
     }
-    else if((value.batteryStatus == 7 && value.coinType == 'Location Coin') || (value.batteryStatus == 3 && value.coinType == 'Aggregator Coin')){
+    else if((value.batteryStatus == 7 ) || (value.batteryStatus == 3 )){
       var a = {
         'background-color':'red',
         'width':'10px'
