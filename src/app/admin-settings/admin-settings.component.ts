@@ -119,6 +119,7 @@ export class AdminSettingsComponent implements OnInit {
     })
   }
 
+
   refreshSetting(){
     var data={
       userId:this.dataGet.userId,
@@ -154,9 +155,9 @@ export class AdminSettingsComponent implements OnInit {
           })
         }
 
-        this.scanCountForm.patchValue({
+      /*   this.scanCountForm.patchValue({
           count:res.success[0].scanCount.toString()
-        })
+        }) */
         this.txPowerForm.patchValue({
           txPower: res.success[0].txPower,
         })
@@ -379,6 +380,7 @@ export class AdminSettingsComponent implements OnInit {
           console.log("Scanning Interval===",res)
           if(res.status){
             this.refreshSetting()
+            this.scanCountForm.reset()
             var msg='Scan count updated Successfully'
             this.general.openSnackBar(msg,'')
           }
@@ -448,6 +450,7 @@ export class AdminSettingsComponent implements OnInit {
           // console.log("Scanning Interval===",res)
           if(res.status){
             this.refreshSetting()
+            this.meetingcount()
             var msg='Interval second Successfully'
             this.general.openSnackBar(msg,'')
           }
@@ -459,7 +462,19 @@ export class AdminSettingsComponent implements OnInit {
     }
   }
 
-
+  meetingcount(){
+    var data={
+      userId:this.dataGet.userId,
+      tblName:'deviceSetting'
+    }
+    this.api.getData(data).then((res:any)=>{
+      if(res.status){
+        this.scanCountForm.patchValue({
+          count:res.success[0].scanCount.toString()
+        })
+      }
+    })
+  }
   onSubmitTimeForm(data){
     //  console.log(" time data===",data);
 
@@ -626,9 +641,9 @@ export class AdminSettingsComponent implements OnInit {
             console.log("multishift dara sent===",res)
             if(res.status){
               this.refreshSetting()
+              this.multishiftingselect.reset()
               var msg='Multishift Select updated Successfully'
               this.general.openSnackBar(msg,'')
-
             }
           }).catch(err=>{
             console.log("err===",err);
@@ -642,7 +657,6 @@ export class AdminSettingsComponent implements OnInit {
 
 }
 refreshselsectmultiple(){
-  alert("oyudlykhugkjh")
   this.multishiftingselect.reset()
 }
 
@@ -657,7 +671,7 @@ username:any=[]
     }
     console.log("data==",data)
     this.api.getAssignedDevices(data).then((res:any)=>{
-     console.log("res==******",res)
+     console.log("res==",res)
       if(res.status){
         this.username=[]
        for(let i=0;i<res.success.length;i++){
@@ -677,9 +691,7 @@ selectfinds(event){
 
    bufferval(event){
      console.log(event.target.value)
-
       this.bufferValue=event.target.value>5?true:false
-
    }
 
    getMin(event){

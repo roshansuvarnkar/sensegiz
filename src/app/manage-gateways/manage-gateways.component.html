@@ -51,7 +51,14 @@
 
           <ng-container matColumnDef="gatewayName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Name </th>
-            <td mat-cell *matCellDef="let live "> {{live.gatewayName}} </td>
+            <td mat-cell *matCellDef="let live " class="cursor">
+         <span  *ngIf="live.pingAlertTime!='0000-00-00 00:00:00'" matTooltip="Gateway Online : {{live.pingAlertTime | date: 'medium'}}">
+               {{live.gatewayName}}
+              </span>
+              <span  *ngIf="live.pingAlertTime=='0000-00-00 00:00:00'" >
+                {{live.gatewayName}}
+              </span>
+              <!-- {{live.gatewayName}} --> </td>
           </ng-container>
 
 

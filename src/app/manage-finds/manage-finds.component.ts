@@ -579,13 +579,10 @@ fileSubmit(data){
 
       }
     }
-
  }
  departmentList(){
   var data = {
-
     userId:this.loginData.userId,
-
   }
   this.api.getAllDepartment(data).then((res:any)=>{
     this.departments=[]

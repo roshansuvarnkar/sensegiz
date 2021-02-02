@@ -45,13 +45,13 @@ export class AdminDashboardComponent implements OnInit {
       mobileNum:['',Validators.required],
       zone:['',Validators.required],
       portalPassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
-        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/)
       ]],
       mobilePassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
-        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/)
       ]],
       userPassword: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(20),
-        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) 	
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/)
       ]]
     });
     this.refreshAdminData()
@@ -60,9 +60,7 @@ export class AdminDashboardComponent implements OnInit {
 
  onSubmit(data) {
   data.mobileNum=data.mobileNum!=null?data.mobileNum.e164Number:''
- 
      console.log("admin register==",data)
-
     if (this.adminAddUserform.valid) {
       try {
         this.api.createUser(data).then((res:any)=>{
@@ -76,7 +74,7 @@ export class AdminDashboardComponent implements OnInit {
 			}else{
         this.registered=true
       }
-        })      	
+        })
       } catch (err) {
       }
     }
