@@ -893,7 +893,11 @@ if(this.type=='deptcummulative'){
     }
     console.log("sendwarning data=====",data)
     this.api.infectedContactalert(data).then((res:any)=>{
-      console.log("infectedContactalert res===",res)
+      if(res.status){
+        console.log("infectedContactalert res===",res)
+        var msg = 'Warning Sent Successfully'
+        this.general.openSnackBar(msg,'')
+      }
     })
   }
 
