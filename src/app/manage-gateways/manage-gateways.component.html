@@ -37,64 +37,109 @@
 
 <div class="center">
 
-  <div class="mat-elevation-z8" *ngIf="language=='english'">
+  <div class="mat-elevation-z8">
+
     <table mat-table [dataSource]="dataSource" matSort >
+      <div *ngIf="language=='english'">
         <ng-container matColumnDef="i"  >
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl No. </th>
-            <td mat-cell *matCellDef="let i=index" > {{i+1}} </td>
-          </ng-container>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl No. </th>
+          <td mat-cell *matCellDef="let i=index" > {{i+1}} </td>
+        </ng-container>
 
-          <ng-container matColumnDef="gatewayType">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Type </th>
-            <td mat-cell *matCellDef="let live "> {{live.gatewayType}} </td>
-          </ng-container>
+        <ng-container matColumnDef="gatewayType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Type </th>
+          <td mat-cell *matCellDef="let live "> {{live.gatewayType}} </td>
+        </ng-container>
 
-          <ng-container matColumnDef="gatewayName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Name </th>
-            <td mat-cell *matCellDef="let live " class="cursor">
-         <span  *ngIf="live.pingAlertTime!='0000-00-00 00:00:00'" matTooltip="Gateway Online : {{live.pingAlertTime | date: 'medium'}}">
-               {{live.gatewayName}}
-              </span>
-              <span  *ngIf="live.pingAlertTime=='0000-00-00 00:00:00'" >
-                {{live.gatewayName}}
-              </span>
-              <!-- {{live.gatewayName}} --> </td>
-          </ng-container>
+        <ng-container matColumnDef="gatewayName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Name </th>
+          <td mat-cell *matCellDef="let live " class="cursor">
+       <span  *ngIf="live.pingAlertTime!='0000-00-00 00:00:00'" matTooltip="Gateway Online : {{live.pingAlertTime | date: 'medium'}}">
+             {{live.gatewayName}}
+            </span>
+            <span  *ngIf="live.pingAlertTime=='0000-00-00 00:00:00'" >
+              {{live.gatewayName}}
+            </span>
+            <!-- {{live.gatewayName}} --> </td>
+        </ng-container>
 
 
 
-          <ng-container matColumnDef="gatewayId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Id</th>
-            <td mat-cell *matCellDef="let live"> {{live.gatewayId}} </td>
-          </ng-container>
+        <ng-container matColumnDef="gatewayId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Id</th>
+          <td mat-cell *matCellDef="let live"> {{live.gatewayId}} </td>
+        </ng-container>
 
-          <ng-container matColumnDef="currentVersion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Version</th>
-            <td mat-cell *matCellDef="let live"> {{live.currentVersion}} </td>
-          </ng-container>
+        <ng-container matColumnDef="currentVersion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Version</th>
+          <td mat-cell *matCellDef="let live"> {{live.currentVersion}} </td>
+        </ng-container>
 
-          <ng-container matColumnDef="bleVersion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> BLE Version</th>
-            <td mat-cell *matCellDef="let live"> {{live.bleVersion}} </td>
-          </ng-container>
+        <ng-container matColumnDef="bleVersion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> BLE Version</th>
+          <td mat-cell *matCellDef="let live"> {{live.bleVersion}} </td>
+        </ng-container>
 
-          <ng-container matColumnDef="edit">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="userType==3"> Edit </th>
-            <td mat-cell *matCellDef="let live" class="cursor" [hidden]="userType==3"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
-          </ng-container>
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="userType==3"> Edit </th>
+          <td mat-cell *matCellDef="let live" class="cursor" [hidden]="userType==3"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
+        </ng-container>
 
-          <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="userType==3"> Delete </th>
-            <td mat-cell *matCellDef="let live" class="cursor" [hidden]="userType==3"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
-          </ng-container>
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="userType==3"> Delete </th>
+          <td mat-cell *matCellDef="let live" class="cursor" [hidden]="userType==3"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
+        </ng-container>
+      </div>
+<div *ngIf="language=='japanese'">
+  <ng-container matColumnDef="i"  >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> シリアル番号. </th>
+    <td mat-cell *matCellDef="let i=index" > {{i+1}} </td>
+  </ng-container>
 
+  <ng-container matColumnDef="gatewayType">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ゲートウェイタイプ </th>
+    <td mat-cell *matCellDef="let live "> {{live.gatewayType}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="gatewayName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ゲートウエイ名 </th>
+    <td mat-cell *matCellDef="let live "> {{live.gatewayName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="gatewayId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ゲートウエイID</th>
+    <td mat-cell *matCellDef="let live"> {{live.gatewayId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="currentVersion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ゲートウエイのバージョン</th>
+    <td mat-cell *matCellDef="let live"> {{live.currentVersion}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="bleVersion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> BLEバージョン</th>
+    <td mat-cell *matCellDef="let live"> {{live.bleVersion}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="userType==3"> 編集 </th>
+    <td mat-cell *matCellDef="let live" class="cursor" [hidden]="userType==3"> <mat-icon (click)="edit(live)">{{live.edit}}</mat-icon></td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="userType==3"> 削除 </th>
+    <td mat-cell *matCellDef="let live" class="cursor" [hidden]="userType==3"><mat-icon (click)="delete(live)">{{live.delete}}</mat-icon> </td>
+  </ng-container>
+
+</div>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
       </table>
       <mat-paginator   pageSize="10" [pageSizeOptions] = "[5, 10, 25, 100]" showFirstLastButtons ></mat-paginator>
   </div>
+</div>
 
-  <div class="mat-elevation-z8" *ngIf="language=='japanese'">
+ <!--  <div class="mat-elevation-z8" *ngIf="language=='japanese'">
     <table mat-table [dataSource]="dataSource" matSort >
         <ng-container matColumnDef="i"  >
             <th mat-header-cell *matHeaderCellDef mat-sort-header> シリアル番号. </th>
@@ -142,4 +187,4 @@
       <mat-paginator   pageSize="10" [pageSizeOptions] = "[5, 10, 25, 100]" showFirstLastButtons ></mat-paginator>
   </div>
 
-</div>
+</div> -->
