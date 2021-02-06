@@ -55,10 +55,14 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Name </th>
           <td mat-cell *matCellDef="let live " class="cursor">
        <span  *ngIf="live.pingAlertTime!='0000-00-00 00:00:00'" matTooltip="Gateway Online : {{live.pingAlertTime | date: 'medium'}}">
-             {{live.gatewayName}}
+             {{live.gatewayName}}<span class="material-icons" [ngStyle]="GatewaypgiAlret(live.pingAlertStatus)">
+              fiber_manual_record
+              </span>
             </span>
             <span  *ngIf="live.pingAlertTime=='0000-00-00 00:00:00'" >
-              {{live.gatewayName}}
+              {{live.gatewayName}}<span class="material-icons"  style="color:yellow">
+                fiber_manual_record
+                </span>
             </span>
             <!-- {{live.gatewayName}} --> </td>
         </ng-container>

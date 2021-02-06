@@ -82,6 +82,7 @@ refreshGateway(){
               currentVersion:res.success[i].currentVersion,
               bleVersion:res.success[i].bleVersion,
               pingAlertTime:res.success[i].pingAlertTime,
+              pingAlertStatus:this.general.pingAlertStatus(res.success[i].pingAlertTime),
               edit:'edit',
               delete:'delete'
           });
@@ -180,5 +181,23 @@ search(a){
       this.dataSource.filter =a.trim().toLowerCase()
     })
   }
-
+  GatewaypgiAlret(value){
+    if(value < 10){
+      var a = {
+        'width':'31px',
+          'color':'green'
+      }
+      return a
+    }
+    else if(value > 10){
+      var a = {
+        'width':'18px',
+        'color':'blue',
+      }
+      return a
+    }
+    else{
+      return {}
+    }
+  }
 }

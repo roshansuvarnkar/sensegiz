@@ -137,6 +137,15 @@ startTime(data1,data2){
 
   return date
 }
+pingAlertStatus(inTime){
+  var pigTime=moment(inTime).format('YYYY-MM-DD hh:mm:ss')
+  var date=moment().format('YYYY-MM-DD hh:mm:ss')
+ var pigsplt=(moment(date).diff(moment(pigTime)))
+  var pigArt= moment.duration(pigsplt)
+var momemts=Math.floor(pigArt.asMinutes())
+  console.log(pigArt)
+  return momemts
+}
   getZone(date){
     var timezone=date.getTimezoneOffset()
     console.log("time zone==",timezone)
