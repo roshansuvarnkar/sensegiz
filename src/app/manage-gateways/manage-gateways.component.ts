@@ -192,7 +192,7 @@ search(a){
     else if(value > 10){
       var a = {
         'width':'18px',
-        'color':'blue',
+        'color':'red',
       }
       return a
     }
