@@ -87,6 +87,7 @@ refreshGateway(){
               delete:'delete'
           });
       }
+      console.log("gatewayspig",this.gatewayData)
       this.dataSource = new MatTableDataSource(this.gatewayData);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
@@ -185,7 +186,8 @@ search(a){
     if(value < 10){
       var a = {
         'width':'31px',
-          'color':'green'
+          'color':'green',
+          'position':'absolute'
       }
       return a
     }
@@ -193,6 +195,7 @@ search(a){
       var a = {
         'width':'18px',
         'color':'red',
+        'position':'absolute'
       }
       return a
     }
