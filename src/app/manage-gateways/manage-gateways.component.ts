@@ -188,7 +188,8 @@ search(a){
         'width':'31px',
           'color':'green',
           'position':'absolute',
-          'margin-left':'-33px'
+          'margin-left':'-33px',
+          'margin-top':'-2px',
       }
       return a
     }
@@ -197,7 +198,8 @@ search(a){
         'width':'18px',
         'color':'red',
         'position':'absolute',
-        'margin-left':'-30px'
+        'margin-left':'-30px',
+        'margin-top':'-2px',
       }
       return a
     }
