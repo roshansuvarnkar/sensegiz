@@ -7,7 +7,7 @@
     </div>
     <div *ngIf="language=='english'">
       <p>1. <u><b><span>LOGIN PAGE</span></b></u></p>
-      <div class="center"> <img src="./assets/images-en/login.PNG" alt="" ></div>
+      <div class="center"> <img src="./assets/images-en/login-r.png" alt="" ></div>
       <ul>
         <li>Open a browser and search for <a  routerLink="/login" target="_blank">https://sdctb.sensegiz.com/login</a>. The user will be directed to the
           login page where the user has to enter the credentials provided to them. </li>
@@ -39,8 +39,8 @@
             </ol>
          </ul>
           
-      <div class="center"><img src="./assets/images-en/Homepage.png" alt="">
-      <img src="./assets/images-en/homepage1.png" alt=""></div>
+      <div class="center"><img src="./assets/images-en/home-r.png" alt="">
+      <img src="./assets/images-en/home1-r.png" alt=""></div>
       <ul>
         <li>Registered users show the total number of registered users on the portal. Active users show number of devices which are sending data from last 24 hours. Offline users are the users which are registered but not active since last 24hours. Infected users are the users among registered users who have marked as infected.</li>
         <li>In registered user left pane, the admin gets the report of any particular user by selecting the name of the user that is available in the list.</li>
@@ -102,7 +102,7 @@
     <!-- Manage People-en -->
     <div *ngIf="language=='english'">
       <p><span><b>3. <u>MANAGE PEOPLE</u></b></span> </p>
-      <div class="center"><img src="./assets/images-en/Managepeople.png" alt=""></div>
+      <div class="center"><img src="./assets/images-en/managepeople-r.png" alt=""></div>
       <div>
 
         <ol> <h3> In Manage people tab there are three sections</h3>
@@ -147,7 +147,7 @@
             </ul>
 
           </li>
-          <div class="center"><img src="./assets/images-en/Manage-gateway.png" alt=""></div>
+          <div class="center"><img src="./assets/images-en/managegateway-r.png" alt=""></div>
           <li>
             <b>Manage Users.</b>
             <ul>
@@ -156,7 +156,7 @@
               <li> The admin can also add new users to receive the alert using the <b>Add Users</b> option. For example, if the admin does not wish to receive all the email alerts then the person who is added in the manage user tab will receive all the alerts.</li>
 
 
-                  <div class="center"><img src="./assets/images-en/Manage-users.png" alt=""></div>
+                  <div class="center"><img src="./assets/images-en/manageusers-r.png" alt=""></div>
                
             </ul>
           </li>
@@ -236,9 +236,9 @@
     <p><b>4. <u>SOCIAL DISTANCING</u></b></p>
     
     <ul>
-      <li>In social distancing tab admin can see the live data with the name of base person, contact person, violation start time, violation end time and total time. Violation start time and end time column has DDMMYY HHMMSS format of 12 hours. This time is visible according to the country’s standard time. In India this time is visible in IST.</li>
+      <li>In social distancing tab admin can see the live data with the name of base person, contact person, violation start time, violation end time and total time. Violation start time and end time column has DDMMYY HHMMSS format of 12 hours. This time is visible according to the country’s standard time. In India this time is visible in IST</li>
       <li>Admin can select how many data should be visible in this display using the pagination option in the dropdown. </li>
-      <div class="center"><img src="./assets/images-en/livedata.png" alt=""></div>
+      <div class="center"><img src="./assets/images-en/livedata-r.png" alt=""></div>
       <li>In the live data, there will be two different violations if the base person and contact person has interchanged. Whereas, multiple violation with the exact same base person and contact person within the 5mins duration will get merged.</li>
     </ul>
     </div>
@@ -274,18 +274,18 @@
           <li>Shift time</li>
         </ol>
       </ul>
-      <div class="center"><img src="./assets/images-en/Settings.png" alt=""></div>
+      <div class="center"><img src="./assets/images-en/settings-r.png" alt=""></div>
       <ul>
         <li><b>Define Buffer:</b>  This is the threshold which admin can set for all the FINDs registered. Once FIND will store these many data packets only after that the data will get send to the Gateway. This option helps to increase the FIND battery back-up but, it is not recommended as it can cause the data delay. That is why we have kept this setting access with super-admin.</li>
-        <li><b>Define Violation Limit:</b> Using this option the admin can set the proximity threshold in meters. This will be applicable for all the FINDs which are registered. The admin can select the proximity among 1m, 2m and 3m. For setting the customized proximity admin has to contact the SenseGiz team</li>
+        <li><b>Define Violation Limit:</b>Using this option, the admin can set the proximity threshold in meters. This will be applicable for all the FINDs which are registered. The admin can select the proximity among 1m, 2m and 3m. For setting the customized proximity admin has to contact the SenseGiz team.</li>
         <li><b>Two step Authentication:</b>This setting allows an admin to opt for two step authentication and avail more safety to the account. If any other person apart from admin tries to log in then the admin will get an OTP to the registered mobile number and email address. Only after sharing this OTP the portal will accept and allow the login.</li>
-        <li><b>Alert Configuration:</b> This setting allows an admin to set the alert type. There are 4 different types of alert, once you have selected the alert accordingly FIND devices will indicate when the violation happens.</li>
+        <li><b>Alert Configuration:</b>This setting allows an admin to set the alert type. There are 4 different types of alert, once you have selected the alert accordingly FIND devices will indicate when the violation happens.</li>
       
     <div class="center1"><img src="./assets/images-en/alertconfig.png" alt=""></div>
        <ul style="border: 1px solid #29252554"><li><b>Buzzer followed by LED for every new person:</b> On the violation buzzer will beep for initial 10 seconds followed by LED blinking for rest of the time till violation ends. This alert will work only once if the same pair is violating again and again.</li>
         <li><b>Only LED:</b> LED on the FIND devices will blink for entire violation time.</li>
         <li><b>Only Buzzer:</b> Buzzer on the FIND devices will beep for entire violation time.</li>
-        <li><b>Buzzer followed by LED blinking for every new violation:</b> On the violation buzzer will beep for initial 10 seconds followed by LED blinking for rest of the time till violation ends. This alert will work I every time even if the same pair is violating again and again.</li>
+        <li><b>Buzzer followed by LED blinking for every new violation:</b>On the violation buzzer will beep for initial 10 seconds followed by LED blinking for rest of the time till violation ends. This alert will work I every time even if the same pair is violating again and again.</li>
         <li><b>Buzzer followed by LED after set periodic interval:</b> On the violation buzzer will beep for initial 10 seconds followed by LED blinking for 50 seconds and the cycle repeat after the set periodic interval.</li>
        </ul><br> 
             <li><b>Define Proximity and Select the wearable type:</b> Using this option admin can select the proximity threshold in meters as well as there is an option to select which FIND version you are using; a wrist band or the pendant.</li>
@@ -295,7 +295,8 @@
                     <li> 16 hours for 2 shifts </li>
                     <li>8 hours for 1shift </li>
                   </ul>
-            Moreover, the hours window is customizable. This will save the FIND battery life tremendously. Lower the shift time more the FIND battery lasts. In future one company can also operate in multiple shifts and this feature will get ready soon.</li>
+            Moreover, the hours window is customizable. This will save the FIND battery life tremendously. Lower the shift time more the FIND battery lasts. 
+            In future one company can also operate in multiple shifts and this feature will get ready soon.</li>
             <li><b>Upload Logo:</b>Using this option admin can upload their company logo in place of the SenseGiz logo.</li>
        </ul>
 
@@ -353,27 +354,27 @@
     
       <ul>
         <li>Report tab allows admin to view and download reports. There are four different reports available for SDCT option B,</li>
-        <li>Admin can view and download the reports from last week or two weeks just by selecting the radio button. Moreover, if you want to view or download the last month report or for any duration then please do select the date range. </li>
-            <div class="center"><img src="./assets/images-en/Report.png" alt=""></div>
+        <li>Admin can view and download the reports from last week or two weeks just by selecting the radio button. Moreover, if you want to view or download the last month report or for any duration then please do select the date range.</li>
+            <div class="center"><img src="./assets/images-en/report-r.png" alt=""></div>
             <ol>
               <li><b>Generic Report</b></li>
-              <ul><li>The generic report shows violation details such as base person and contact person name with violation start time and end time with the total time in 12 hours format w.r.to the country time.</li></ul>
+              <ul><li>The generic report shows violation details such as base person and contact person name with violation start time and end time with the total time in 12 hours format w.r.to the country time</li></ul>
         
-              <div class="center2"><img src="./assets/images-en/generic.png" alt=""></div>
+              <div class="center2"><img src="./assets/images-en/genericreport-r.png" alt=""></div>
               <li><b>Cumulative Report</b></li>
               <ul>
-                <li>Cumulative report is specifically for the top management professionals, when CxO wants to see the crisp report of all the registered users with their total number of violations and violation duration. </li>
-                <li>Following report shows total number of violations and respective total time for all the 51 registered users.</li>
-                   <div class="center2"><img src="./assets/images-en/cumulative.png" alt=""></div>
+                <li>Cumulative report is specifically for the top management professionals, when CxO wants to see the crisp report of all the registered users with their total number of violations and violation duration.  </li>
+                <li>Following report shows total number of violations and respective total time for all the 51 registered users</li>
+                   <div class="center2"><img src="./assets/images-en/cumulativereport-r.png" alt=""></div>
               </ul>
-              <li><b>Social Distancing Violator’sReport based on Username</b></li>
+              <li><b>Social Distancing Violator’s Report based on Username</b></li>
               <ul><li>This report gives the detailed data for a particular violator and his primary contacts with the contact time as well as total time for each violations the violator has made.</li></ul>
-                  <div class="center2"><img src="./assets/images-en/violators.png" alt=""></div>
-                  <li><b>SummaryReport of an Infected User</b></li>
+                  <div class="center2"><img src="./assets/images-en/violatorsreport-r.png" alt=""></div>
+                  <li><b>Summary Report of an Infected User</b></li>
                   <ul>
-                    <li>This report shows the summary of primary contacts for the selected infected person and for selected duration. Once admin marks someone as covid-19 infected then this report gives idea that to whom all he met post marking as infected. </li>
+                    <li>This report shows the summary of primary contacts for the selected infected person and for selected duration. Once admin marks someone as covid-19 infected then this report gives idea that to whom all he met post marking as infected.  </li>
                     <li>With our upcoming feature of isolation and send warning, an automatic warning will be sent via email ‘To’ all the primary contacts keeping admin in the ‘CC’. Moreover, the admin can mark these primary contacts as isolated and accordingly take the precautionary measures.</li>
-                        <div class="center2"><img src="./assets/images-en/summary.png" alt=""></div>
+                        <div class="center2"><img src="./assets/images-en/summaryreport-r.png" alt=""></div>
                   </ul>
                   </ol>
          </ul>
