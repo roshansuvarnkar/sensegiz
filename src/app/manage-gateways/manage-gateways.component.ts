@@ -187,7 +187,8 @@ search(a){
       var a = {
         'width':'31px',
           'color':'green',
-          'position':'absolute'
+          'position':'absolute',
+          'margin-left':'-33px'
       }
       return a
     }
@@ -195,7 +196,8 @@ search(a){
       var a = {
         'width':'18px',
         'color':'red',
-        'position':'absolute'
+        'position':'absolute',
+        'margin-left':'-30px'
       }
       return a
     }
