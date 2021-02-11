@@ -138,8 +138,8 @@ startTime(data1,data2){
   return date
 }
 pingAlertStatus(inTime){
-  var pigTime=moment(inTime).format('YYYY-MM-DD hh:mm:ss')
-  var date=moment().format('YYYY-MM-DD hh:mm:ss')
+  var pigTime=moment(inTime)
+  var date=moment(new Date())
  var pigsplt=(moment(date).diff(moment(pigTime)))
   var pigArt= moment.duration(pigsplt)
 var momemts=Math.floor(pigArt.asMinutes())
