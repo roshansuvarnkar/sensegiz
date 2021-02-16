@@ -438,7 +438,7 @@
             <mat-form-field *ngIf="(multishiftingselect.get('status').value == 1)">
               <mat-label>Shift Name</mat-label>
               <mat-select  formControlName="shiftName" name="shiftName">
-                <mat-option *ngFor=" let b of shifts" [value]="b">
+                <mat-option *ngFor=" let b of multishift" [value]="b">
                   {{b.shiftName}}
                 </mat-option>
                <!--  <mat-option value="General">General</mat-option>

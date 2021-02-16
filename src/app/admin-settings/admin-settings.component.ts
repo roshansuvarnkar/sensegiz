@@ -28,6 +28,7 @@ export class AdminSettingsComponent implements OnInit {
   min:any=[]
   sec:any=[]
   shifts:any=[]
+  multishift:any=[]
   inactivityStatusValue:any=[]
   dataGet:any
   languageForm:FormGroup
@@ -115,8 +116,9 @@ export class AdminSettingsComponent implements OnInit {
        console.log("shift  data ======",res);
       if(res.status){
         this.shifts=res.success
+        this.multishift=res.success
         this.multishiftingselect.patchValue({
-          shiftName:this.shifts[0].shiftName
+          shiftName:this.multishift[0]
         })
       }
     })
