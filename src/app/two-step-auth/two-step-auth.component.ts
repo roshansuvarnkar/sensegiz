@@ -5,6 +5,7 @@ import { LoginComponent } from '../login/login.component';
 
 import { LoginCheckService } from '../login-check.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { WebsocketService } from '../websocket.service';
 
 @Component({
   selector: 'app-two-step-auth',
@@ -24,7 +25,8 @@ export class TwoStepAuthComponent implements OnInit {
   otpExpired:boolean=false
   type:boolean=false
 
-  constructor(private fb:FormBuilder,private login:LoginCheckService,private api:ApiService, private router: Router,private route: ActivatedRoute) { }
+  constructor(private fb:FormBuilder,private login:LoginCheckService,private api:ApiService,
+     private router:Router,private route: ActivatedRoute,private socket: WebsocketService) { }
 
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class TwoStepAuthComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.forgetPwd = JSON.parse(params.type) ;
       console.log("records=",this.forgetPwd )
-     
+
   })
 
 
@@ -49,7 +51,7 @@ export class TwoStepAuthComponent implements OnInit {
   }
 
 
-  
+
 getCodeBoxElement(index) {
   return document.getElementById('codeBox' + index);
 }
@@ -57,13 +59,13 @@ getCodeBoxElement(index) {
 
 onKeyUpEvent(index, event) {
   const eventCode = event.which || event.keyCode;
- 
+
    if (index !== 4) {
     this.getCodeBoxElement(index+ 1).focus();
    } else {
     this.getCodeBoxElement(index).blur();
    }
-  
+
   if (eventCode === 8 && index !== 1) {
    this.getCodeBoxElement(index - 1).focus();
   }
@@ -82,7 +84,7 @@ onKeyUpEvent(index, event) {
 
 sendOtp(value){
   this.sendOTP=false
-  
+
   console.log("value==",value)
     console.log("hey")
      var data={
@@ -91,7 +93,7 @@ sendOtp(value){
     }
     this.api.sendOtp(data).then((res:any)=>{
       console.log("send opt==",res)
-  
+
     if(res.status){
       this.invalidUser=false
 
@@ -101,7 +103,7 @@ sendOtp(value){
       this.invalidUser=true
     }
 
-    }) 
+    })
 
 
 }
@@ -115,34 +117,35 @@ submit(data){
     console.log("submit==",res)
     var otpExpiry=res.hasOwnProperty('failure')
       this.otpExpired=otpExpiry==true?true:false
-   
+
      if(res.status){
       this.invalidOTP=false
       localStorage.setItem('sensegizTwoStep','true')
       this.login.authCheck.next(true)
       if(this.forgetPwd == "twoStepAuth"){
-        
+        this.socket.joinRoom();
         this.router.navigate(['/home'])
-      } 
+      }
       else if(this.forgetPwd== "forgetPassword"){
-        this.router.navigate(['/set-new-password'],{queryParams:{user:JSON.stringify(data)}})
-      } 
-     }  
+        this.router.navigate(['/set-new-password'],
+        {queryParams:{user:JSON.stringify(data)}})
+      }
+     }
      else{
       this.invalidOTP=true
 
-     }  
-    
+     }
+
   })
-  
+
 }
   validate(event){
     const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i
     var email=expression.test(String(event.target.value).toLowerCase())
-    var phoneNum = /^\+?[0-9]{10,14}$/; 
+    var phoneNum = /^\+?[0-9]{10,14}$/;
     if(event.target.value==event.target.value.match(phoneNum)){
       this.type=true
-    
+
     }
     else{
       this.type=false

@@ -36,7 +36,7 @@ export class AppComponent {
     private router:Router,
     private route:ActivatedRoute,
     private general:GeneralMaterialsService,
-    
+
     private deviceService: DeviceDetectorService){
     // this.loginData = this.login.loginStatus()
     this.loginDataInfo = this.login.loginData()
@@ -52,7 +52,7 @@ export class AppComponent {
       this.loginDataInfo = this.login.loginData()
       this.language=this.loginDataInfo.language
       console.log("this.language====",this.language)
-     
+
     })
     this.loginDataInfo = this.login.loginData()
    console.log("loginDataInfo===",this.loginDataInfo);
@@ -80,7 +80,7 @@ export class AppComponent {
     console.log("statusfreeze==",res)
     this.statusFreeze = res.status
   })
-  
+
   }
 
   ngOnInit(){
@@ -97,7 +97,7 @@ export class AppComponent {
 
   status(){
     this.deviceStatus=this.deviceStatus==true?false:true
-   
+
   }
 
   logout(){

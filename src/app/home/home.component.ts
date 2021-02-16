@@ -107,6 +107,10 @@ refreshFinds(){
     if(res.status){
       this.findData=res.success
         this.findLen=this.findData.length
+    }else{
+      if(res.code == '403'){
+          this.login.logout()
+      }
     }
   })
 }

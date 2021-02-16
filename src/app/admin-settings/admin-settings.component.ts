@@ -115,6 +115,9 @@ export class AdminSettingsComponent implements OnInit {
        console.log("shift  data ======",res);
       if(res.status){
         this.shifts=res.success
+        this.multishiftingselect.patchValue({
+          shiftName:this.shifts[0].shiftName
+        })
       }
     })
   }
@@ -671,11 +674,13 @@ username:any=[]
     }
     console.log("data==",data)
     this.api.getAssignedDevices(data).then((res:any)=>{
+      this.refreshSetting()
      console.log("res==",res)
       if(res.status){
         this.username=[]
        for(let i=0;i<res.success.length;i++){
         this.username.push(res.success[i])
+        this.refreshSetting()
        }
       }
     })
@@ -750,4 +755,19 @@ selectfinds(event){
     });
   }
 
+  openDialog1(): void {
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '60vh';
+    dialogConfig.width = '70vw';
+    dialogConfig.data = {
+      type:"multishifts"
+    }
+    const dialogRef = this.dialog.open(EditSettingShiftComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 }

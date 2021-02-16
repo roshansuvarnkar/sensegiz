@@ -10,6 +10,8 @@ export const environment = {
   //apiHost:'http://3.6.176.216:3000',
   // apiHost:'http://3.6.7.251:3000',
  apiHost:'http://15.207.93.193:3000',
+ //apiHost:'http://35.154.8.192:3000',
+socketHost:'http://35.154.8.192:3000',
   production: false
 };
 

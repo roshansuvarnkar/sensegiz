@@ -7,6 +7,7 @@ import { GeneralMaterialsService } from '../general-materials.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { AdminAddBleIdComponent } from '../admin-add-ble-id/admin-add-ble-id.component';
 import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
+import { WebsocketService } from '../websocket.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -33,7 +34,8 @@ export class AdminDashboardComponent implements OnInit {
       private router: Router,
       private login: LoginCheckService,
       private api: ApiService,
-      private general: GeneralMaterialsService
+      private general: GeneralMaterialsService,
+      private socket: WebsocketService
     ) {
     }
 
@@ -130,6 +132,7 @@ refreshAdminData(){
 		if(res.status){
 			var msg = "User updated successfully"
 			this.general.openSnackBar(msg,'')
+      this.socket.leaveRoom(data);
 			this.refreshAdminData()
 		}
     })

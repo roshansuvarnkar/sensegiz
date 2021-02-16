@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoginCheckService } from '../login-check.service';
 import { ApiService } from '../api.service';
 import { GeneralMaterialsService } from '../general-materials.service';
-
+import { WebsocketService } from '../websocket.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit {
       private router: Router,
       private login: LoginCheckService,
       private api: ApiService,
-      private general: GeneralMaterialsService
+      private general: GeneralMaterialsService,
+      private socket: WebsocketService
     ) {
     }
 
@@ -48,15 +49,16 @@ export class LoginComponent implements OnInit {
 
         this.api.send(data).then((res:any)=>{
           console.log("logged in==",res)
+          localStorage.setItem("token",JSON.stringify(res.token))
            var passwordExpiry=res.hasOwnProperty('alreadyExisted')
            console.log(passwordExpiry)
-          if(res.status ){
-
+          if(res.status){
               // this.newPassword=false
               res.success.role='user'
               res.success.passwordExpiry=passwordExpiry
               if(this.login.login(JSON.stringify(res.success)) && res.success.twoStepAuth!='Y' && !passwordExpiry){
                 this.login.authCheck.next(true)
+                this.socket.joinRoom();
                 this.router.navigate(['/home'])
               }
               else if( this.login.login(JSON.stringify(res.success)) && passwordExpiry==true ){
@@ -75,6 +77,7 @@ export class LoginComponent implements OnInit {
             }
 
           else {
+            localStorage.clear()
             this.loginInvalid = true;
           }
         }).catch(err=>{

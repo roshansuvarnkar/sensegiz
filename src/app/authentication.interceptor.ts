@@ -23,27 +23,34 @@ export class AuthenticationInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.loginData = this.login.Getlogin()
-    if(this.loginData ){
-      this.loginData = JSON.parse(this.loginData)
-      console.log("in interceptor===",this.loginData)
-      // console.log("moment ==",moment(this.loginData.expiryDate).format('YYYY-MM-DD hh:mm:ss'),"today date> ",moment().format('YYYY-MM-DD hh:mm:ss'))
-      if(this.loginData.role=='user' && moment(this.loginData.expiryDate).format('YYYY-MM-DD hh:mm:ss') <= moment().format('YYYY-MM-DD hh:mm:ss')){
-        localStorage.clear()
-        this.login.loginCheckStatus.next(false)
-        this.login.loginCred.next(false)
-        this.login.authCheck.next(false)
-       
-        return EMPTY
-      }
-      else{
-        
-        return next.handle(request);
-      }
+    let token = JSON.parse(localStorage.getItem('token'));
+    console.log(token)
+    if (token) {
+      request=request.clone({
+      setHeaders: { Authorization: `${token}`}
+  })
+  if(this.loginData ){
+    this.loginData = JSON.parse(this.loginData)
+    console.log("in interceptor===",this.loginData)
+    console.log("moment ==",moment(this.loginData.expiryDate).format('YYYY-MM-DD hh:mm:ss'),"today date> ",moment().format('YYYY-MM-DD hh:mm:ss'))
+    if(this.loginData.role=='user' && moment(this.loginData.expiryDate).format('YYYY-MM-DD hh:mm:ss') <= moment().format('YYYY-MM-DD hh:mm:ss')){
+      localStorage.clear()
+      this.login.loginCheckStatus.next(false)
+      this.login.loginCred.next(false)
+      this.login.authCheck.next(false)
+      console.log(this.loginData)
+      return EMPTY
     }
     else{
-   
       return next.handle(request);
     }
-      
+  }
+  else{
+    return next.handle(request);
+  }
+}
+return next.handle(request);
+
+
   }
 }

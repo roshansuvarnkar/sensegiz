@@ -11,7 +11,7 @@ export class LoginCheckService {
   public loginCheckStatus = new Subject<any>()
   public pageCheck = new Subject<any>()
   public authCheck = new Subject<any>()
-  
+
   check:boolean=true
   constructor(private router:Router,private bnIdle: BnNgIdleService) {
     this.bnIdle.startWatching(600).subscribe((isTimedOut: boolean) => {
@@ -24,7 +24,7 @@ export class LoginCheckService {
       // this.loginStatus()
       // this.authData()
     //  this.logout()
- 
+
    }
 
 
@@ -54,7 +54,7 @@ export class LoginCheckService {
 
   authData(){
     var status = JSON.parse(localStorage.getItem('sensegizlogin'))
-  
+
     console.log("status of authdata==",status)
 
     if(status && status != 'undefined'){
@@ -83,7 +83,7 @@ export class LoginCheckService {
             var a = {status:true,role:'user'}
             return a
           }
-         
+
         }
       }
       else if(status.role=='admin'){
@@ -100,7 +100,7 @@ export class LoginCheckService {
       var a = {status:false,role:''}
       return a
     }
-    
+
   }
   loginStatusMenu(){
     var status = localStorage.getItem('sensegizlogin')
@@ -133,4 +133,11 @@ export class LoginCheckService {
   }
 
 
+  logout(){
+    localStorage.clear()
+    this.loginCheckStatus.next(false)
+    this.loginCred.next(false)
+    this.authCheck.next(false)
+    this.router.navigate(['/login'])
+  }
 }
