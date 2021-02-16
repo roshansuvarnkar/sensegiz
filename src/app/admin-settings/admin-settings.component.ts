@@ -641,7 +641,8 @@ export class AdminSettingsComponent implements OnInit {
         }
           console.log(data)
           this.api.setDeviceMultiShift(data).then((res:any)=>{
-            console.log("multishift dara sent===",res)
+            console.log("multishift data sent===",data)
+            console.log("multishift data sent===",res)
             if(res.status){
               this.refreshSetting()
               this.multishiftingselect.reset()
@@ -659,9 +660,7 @@ export class AdminSettingsComponent implements OnInit {
 
 
 }
-refreshselsectmultiple(){
-  this.multishiftingselect.reset()
-}
+
 
 username:any=[]
   userSuggestion(event){
