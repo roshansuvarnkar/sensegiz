@@ -101,10 +101,11 @@ export class AppComponent {
   }
 
   logout(){
-    localStorage.clear()
+   /*  localStorage.clear()
     this.login.loginCheckStatus.next(false)
     this.login.loginCred.next(false)
     this.login.authCheck.next(false)
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']) */
+    this.login.logout()
   }
 }

@@ -364,7 +364,6 @@ repeatedContacts(){
     // console.log("max contact devices data ======",res);
     if(res.status){
       this.contactDeviceMax = res.success
-
     }
   })
 
