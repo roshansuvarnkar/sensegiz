@@ -644,7 +644,7 @@ export class AdminSettingsComponent implements OnInit {
             console.log("multishift data sent===",data)
             console.log("multishift data sent===",res)
             if(res.status){
-              this.refreshSetting()
+              this.refreshShift()
               this.multishiftingselect.reset()
               var msg='Multishift Select updated Successfully'
               this.general.openSnackBar(msg,'')
@@ -673,7 +673,6 @@ username:any=[]
     }
     console.log("data==",data)
     this.api.getAssignedDevices(data).then((res:any)=>{
-      this.refreshSetting()
      console.log("res==",res)
       if(res.status){
         this.username=[]
