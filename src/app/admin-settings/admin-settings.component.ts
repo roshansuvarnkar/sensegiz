@@ -66,7 +66,7 @@ export class AdminSettingsComponent implements OnInit {
       customize:['']
     });
     this.scanningForm=this.fb.group({
-      seconds:['',[Validators.required,Validators.max(60), Validators.min(1)]],
+      seconds:['',[Validators.required,Validators.max(75), Validators.min(1)]],
 
     })
     this.scanCountForm=this.fb.group({

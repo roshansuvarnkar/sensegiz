@@ -70,9 +70,9 @@
       <form [formGroup]="scanningForm" (ngSubmit)="onSubmitScanningForm(scanningForm.value)" >
         <mat-form-field  >
             <mat-label>Interval in seconds</mat-label>
-            <input type='number' min="1" max="60" matInput formControlName="seconds" required>
+            <input type='number' min="1" max="75" matInput formControlName="seconds" required>
             <mat-error  >
-              Please enter value between 1-60
+              Please enter value between 1-75
             </mat-error>
         </mat-form-field>
         <br><br><br>

@@ -44,7 +44,7 @@ export class WebsocketService {
       console.log('\nleaveRoom==', data);
       let dataLogin = this.login.loginData();
       if(dataLogin.userId == data.userId && data.isDeleted == 'Y'){
-       // this.login.logout()
+        this.login.logout()
       }
       // if(data.userName == )
     });
