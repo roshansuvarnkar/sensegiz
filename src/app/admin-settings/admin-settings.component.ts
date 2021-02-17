@@ -628,8 +628,6 @@ export class AdminSettingsComponent implements OnInit {
     }
    }
 
-
-
    onMultiShiftselect(values){
     if(this.multishiftingselect.valid){
     try{
@@ -681,7 +679,6 @@ username:any=[]
         this.username=[]
        for(let i=0;i<res.success.length;i++){
         this.username.push(res.success[i])
-        this.refreshSetting()
        }
       }
     })
