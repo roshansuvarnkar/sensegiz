@@ -447,8 +447,8 @@ else if(this.language=='japanese'){
                     }]
                   });
 }
-      chart.render();
-      chart.destroy()
+    // chart.render();
+      //chart.destroy()
       chart=null;
       if(this.language=='english'){
       chart = new CanvasJS.Chart("chartContainer", {

@@ -24,7 +24,6 @@ export class AuthenticationInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.loginData = this.login.Getlogin()
     let token = JSON.parse(localStorage.getItem('token'));
-    console.log(token)
     if (token) {
       request=request.clone({
       setHeaders: { Authorization: `${token}`}

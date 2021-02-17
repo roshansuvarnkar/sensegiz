@@ -385,7 +385,7 @@
 
         <mat-form-field>
           <mat-label>Shift Name</mat-label>
-          <mat-select  placeholder="Shift name" formControlName="shift" disabled  required>
+          <mat-select  placeholder="Shift name" formControlName="shift" required>
             <mat-option value="general">General</mat-option>
             <mat-option value="morning">Morning</mat-option>
             <mat-option value="evening">Evening</mat-option>
@@ -399,14 +399,14 @@
           </mat-error>
         </mat-form-field> -->
         <mat-form-field class="full-width-input">
-          <input type='time' matInput placeholder="From time" formControlName="fromTime"  disabled required>
+          <input type='time' matInput placeholder="From time" formControlName="fromTime"  required>
           <mat-icon matPrefix >schedule</mat-icon>
           <mat-error>
             Please provide a valid from time
           </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input  type='time' matInput  placeholder="To time" formControlName="toTime" disabled required >
+          <input  type='time' matInput  placeholder="To time" formControlName="toTime" required >
           <mat-icon matPrefix >schedule</mat-icon>
           <mat-error>
             Please provide a valid to time
