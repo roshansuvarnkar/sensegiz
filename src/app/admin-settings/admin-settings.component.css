@@ -20,6 +20,9 @@ mat-card {
     border: 1px solid red;
     color: red;
   }
+  .note{
+    color: red;
+  }
   .wearable {
     display: flex;
     justify-content: space-evenly;
