@@ -68,7 +68,7 @@
     <mat-card-content>
 
       <form [formGroup]="scanningForm" (ngSubmit)="onSubmitScanningForm(scanningForm.value)" >
-         <mat-radio-group color="primary" class="wearable" formControl="sacnn">
+         <mat-radio-group color="primary" class="wearable">
           <mat-radio-button value="1" name="small"  (click)="scannIntravaleLimit(1)" checked>Standard</mat-radio-button>
           <mat-radio-button value="0" name="small" (click)="scannIntravaleLimit(2)">Custom</mat-radio-button>
         </mat-radio-group>
