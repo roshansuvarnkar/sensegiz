@@ -68,13 +68,50 @@
     <mat-card-content>
 
       <form [formGroup]="scanningForm" (ngSubmit)="onSubmitScanningForm(scanningForm.value)" >
-        <mat-form-field  >
+         <mat-radio-group color="primary" class="wearable" formControl="sacnn">
+          <mat-radio-button value="1" name="small"  (click)="scannIntravaleLimit(1)" checked>Standard</mat-radio-button>
+          <mat-radio-button value="0" name="small" (click)="scannIntravaleLimit(2)">Custom</mat-radio-button>
+        </mat-radio-group>
+       <!--  <mat-radio-group  color="primary" formControlName="scann"  class="wearable" >
+          <mat-radio-button value="1" name="small"  (change)="selectfinds($event)" [checked]="true">All</mat-radio-button>
+          <mat-radio-button value="2" name="small" (change)="selectfinds($event)">Specific Finds</mat-radio-button>
+        </mat-radio-group> -->
+        <div *ngIf="standered">
+          <mat-form-field>
             <mat-label>Interval in seconds</mat-label>
-            <input type='number' min="1" max="75" matInput formControlName="seconds" required>
-            <mat-error  >
+           <mat-select formControlName="seconds" required>
+              <mat-option value="5">5</mat-option>
+              <mat-option value="10">10</mat-option>
+              <mat-option value="15">15</mat-option>
+              <mat-option value="20">20</mat-option>
+              <mat-option value="55">25</mat-option>
+              <mat-option value="30">30</mat-option>
+              <mat-option value="35">35</mat-option>
+              <mat-option value="40">40</mat-option>
+              <mat-option value="45">45</mat-option>
+              <mat-option value="50">50</mat-option>
+              <mat-option value="55">55</mat-option>
+              <mat-option value="60">60</mat-option>
+              <mat-option value="65">65</mat-option>
+              <mat-option value="70">70</mat-option>
+              <mat-option value="75">75</mat-option>
+           </mat-select>
+            <mat-error>
               Please enter value between 1-75
             </mat-error>
         </mat-form-field>
+        </div>
+
+      <div *ngIf="custom">
+        <mat-form-field>
+          <mat-label>Interval in seconds</mat-label>
+          <input type='number' min="1" max="75" matInput formControlName="seconds" required>
+          <mat-error  >
+            Please enter value between 1-75
+          </mat-error>
+      </mat-form-field>
+      </div>
+
         <br><br><br>
         <button class="btn-set" mat-raised-button [disabled]="!scanningForm.valid"  color="primary">Submit</button>
       </form>

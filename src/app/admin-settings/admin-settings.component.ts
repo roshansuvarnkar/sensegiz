@@ -46,6 +46,8 @@ export class AdminSettingsComponent implements OnInit {
   multipleShift:boolean=false
   timeExceed:boolean=false
   selectfind:boolean=false
+  custom:boolean=false
+  standered:boolean=true
   constructor(private fb:FormBuilder,public dialog: MatDialog,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -452,7 +454,7 @@ export class AdminSettingsComponent implements OnInit {
       try {
         data.userId=this.dataGet.userId
         this.api.updateScanningInterval(data).then((res:any)=>{
-          // console.log("Scanning Interval===",res)
+           console.log("Scanning Interval===",res)
           if(res.status){
             this.refreshSetting()
             this.meetingcount()
@@ -766,5 +768,16 @@ selectfinds(event){
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+
+  scannIntravaleLimit(valees){
+    if(valees==1){
+      this.custom=false
+      this.standered=true
+    }else{
+      this.custom=true
+      this.standered=false
+    }
   }
 }
