@@ -455,16 +455,16 @@ cummulativeReport(limit,offset){
     this.totTime=[]
     console.log("cummulative report==",res)
     if(res.status){
-      this.totTime=res.data
+      this.totTime=res.success
       // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
-        console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
-        for(let i=0;i<res.data.length;i++){
+       // console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
+        for(let i=0;i<res.success.length;i++){
           this.liveData.push({
             i:i+1,
-            username:res.data[i].baseDeviceName,
-            department:res.data[i].department,
-            count:res.data[i].count,
-            totTime:this.general.convertTime(res.data[i].totalTime)
+            username:res.success[i].baseDeviceName,
+            department:res.success[i].department,
+            count:res.success[i].count,
+            totTime:this.general.convertTime(res.success[i].totalTime)
           });
         }
         this.dataSource = new MatTableDataSource(this.liveData);
@@ -508,16 +508,16 @@ departmentReport(limit,offset){
     this.liveData=[]
     this.totTime=[]
     if(res.status){
-      this.totTime=res.data
+      this.totTime=res.success
      // console.log("location ====",this.totTime)
       // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
-        for(let i=0;i<res.data.length;i++){
+        for(let i=0;i<res.success.length;i++){
           this.liveData.push({
             i:i+1,
-            username:res.data[i].baseDeviceName,
-            count:res.data[i].count,
-            department:res.data[i].department,
-            totTime:this.general.convertTime(res.data[i].totalTime)
+            username:res.success[i].baseDeviceName,
+            count:res.success[i].count,
+            department:res.success[i].department,
+            totTime:this.general.convertTime(res.success[i].totalTime)
           });
         }
 

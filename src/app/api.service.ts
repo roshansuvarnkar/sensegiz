@@ -1604,10 +1604,12 @@ updateBuzzerConfig(data){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-
+    let body={
+      data:data
+    }
     let url = this.host+'/maxContactDevice';
     return new Promise((resolve,reject)=>{
-      this.http.post(url,data,httpOptions).subscribe((res:any)=>{
+      this.http.post(url,body,httpOptions).subscribe((res:any)=>{
         resolve(res.data);
       })
     });
@@ -2245,7 +2247,7 @@ setLanguage(data){
   let body={
     data:data
   }
-  
+
   let url = this.host+'/setLanguage';
   return new Promise((resolve,reject)=>{
     this.http.post(url,body,httpOptions).subscribe((res:any)=>{
@@ -2363,6 +2365,7 @@ downloadReport(data,fileName){
     let url = this.host+'/viewCTReport';
     return new Promise((resolve,reject)=>{
       this.http.post(url,body,httpOptions).subscribe((res:any)=>{
+       // console.log(res.data)
         resolve(res.data);
       })
     });
