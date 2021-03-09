@@ -179,7 +179,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
 
        this.api.getDeallocatedDevice(data).then((res:any)=>{
          if(res.status){
-           this.deallocate=res.data;
+           this.deallocate=res.success;
            this.dataSource = new MatTableDataSource(this.deallocate);
 
            setTimeout(() => {
