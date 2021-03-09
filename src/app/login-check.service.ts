@@ -3,6 +3,7 @@ import { Subject, interval } from 'rxjs'
 import { Router , ActivatedRoute } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
 import * as moment from 'moment';
+import {GeneralMaterialsService} from '../app/general-materials.service'
 @Injectable({
   providedIn: 'root'
 })
@@ -13,9 +14,9 @@ export class LoginCheckService {
   public authCheck = new Subject<any>()
 
   check:boolean=true
-  constructor(private router:Router,private bnIdle: BnNgIdleService) {
+  constructor(private router:Router,private bnIdle: BnNgIdleService,private general:GeneralMaterialsService) {
     this.bnIdle.startWatching(600).subscribe((isTimedOut: boolean) => {
-      console.log('session expired',isTimedOut);
+     // console.log('session expired',isTimedOut);
       if (isTimedOut) {
         localStorage.clear();
         this.router.navigate(['/login']);
@@ -29,8 +30,9 @@ export class LoginCheckService {
 
 
   loginStatus(){
-    var status = localStorage.getItem('sensegizlogin')
-    var passwordExpiry=JSON.parse(status)
+   var status =this.general.decrypt(localStorage.getItem('sensegizlogin'))
+  // var status = localStorage.getItem('sensegizlogin')
+   var passwordExpiry=JSON.parse(status)
     if(status  && status!='undefined' || passwordExpiry.passwordExpiry==false){
       this.loginCheckStatus.next(true)
       return true
@@ -43,9 +45,10 @@ export class LoginCheckService {
 
 
   loginData(){
-    var status = localStorage.getItem('sensegizlogin')
-    if(status  && status!='undefined'){
-      return JSON.parse(status)
+    var status = this.general.decrypt(localStorage.getItem('sensegizlogin'))
+   //var status = localStorage.getItem('sensegizlogin')
+   if(status  && status!='undefined'){
+      return status
     }
     else{
       return false
@@ -53,9 +56,10 @@ export class LoginCheckService {
   }
 
   authData(){
-    var status = JSON.parse(localStorage.getItem('sensegizlogin'))
+    var status = this.general.decrypt(localStorage.getItem('sensegizlogin'))
+    //var status = JSON.parse(localStorage.getItem('sensegizlogin'))
 
-    console.log("status of authdata==",status)
+  //  console.log("status of authdata==",status)
 
     if(status && status != 'undefined'){
       if(status.role=='user' ){
@@ -103,8 +107,9 @@ export class LoginCheckService {
 
   }
   loginStatusMenu(){
-    var status = localStorage.getItem('sensegizlogin')
-    var route = window.location.pathname
+    var status = this.general.decrypt(localStorage.getItem('sensegizlogin'))
+  // var status = localStorage.getItem('sensegizlogin')
+   var route = window.location.pathname
     // console.log("route==",route)
     if(route !='/login' && route!='/admin-login' ){
       this.loginCred.next(true)
@@ -117,8 +122,9 @@ export class LoginCheckService {
 
 
   Getlogin(){
-    var status = localStorage.getItem('sensegizlogin')
-    if(status  && status!='undefined'){
+    var status = JSON.stringify(this.general.decrypt(localStorage.getItem('sensegizlogin')))
+   //var status = localStorage.getItem('sensegizlogin')
+   if(status  && status!='undefined'){
       return status
     }
     else{
@@ -128,7 +134,9 @@ export class LoginCheckService {
 
 
   login(data){
-    localStorage.setItem('sensegizlogin',data)
+     let storage = this.general.encrypt(data);
+    localStorage.setItem('sensegizlogin',storage);
+   // localStorage.setItem('sensegizlogin',data)
     return true
   }
 

@@ -1,5 +1,5 @@
 
- 
+
 <div>
   <mat-card class="login">
     <mat-card-title>Log In</mat-card-title>
@@ -11,23 +11,23 @@
           Invalid User Name or Password
         </mat-error>
         <mat-form-field class="full-width-input">
-          <input matInput placeholder="Email" formControlName="userName" required>
+          <input matInput placeholder="Email" formControlName="userName" autocomplete="off" required>
           <mat-error>
             Please provide a valid email address
           </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input matInput  [type]="passwordType" placeholder="Password" formControlName="password" matInput required >
+          <input matInput  [type]="passwordType" placeholder="Password" formControlName="password" autocomplete="off" matInput required >
           <mat-icon matSuffix (click)="hideShowPassword()">{{passwordIcon}}</mat-icon>
           <mat-error>
             Please provide a valid password
           </mat-error>
         </mat-form-field>
-      
+
         <button mat-raised-button  [disabled]="!Loginform.valid" color="primary" >Login</button> <br>
-      
+
       </form>
-      
+
       <div class="set-pwd">
         <span (click)="forgetPassword()"class="line" >Forget password</span> <br>
         <span *ngIf="newPassword" class="set-new">
@@ -38,6 +38,6 @@
     </mat-card-content>
   </mat-card>
 </div>
-  <div class="version"> 
+  <div class="version">
     <p>version 4.5.0</p>
   </div>

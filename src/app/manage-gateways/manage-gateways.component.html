@@ -44,10 +44,10 @@
         <ng-container matColumnDef="i"  >
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl No. </th>
           <td mat-cell *matCellDef="let i=index,let live" >
-           <span class="material-icons" id="dots" *ngIf="live.pingAlertTime!='0000-00-00 00:00:00'" [ngStyle]="GatewaypgiAlret(live.pingAlertStatus)" style="color:red;position: absolute;margin-left: -30px ;margin-top: -2px;">
+           <span class="material-icons" id="doutsred" *ngIf="live.pingAlertTime!='0000-00-00 00:00:00'" [ngStyle]="GatewaypgiAlret(live.pingAlertStatus)">
               fiber_manual_record
               </span>
-              <span class="material-icons" id="dots" *ngIf="live.pingAlertTime=='0000-00-00 00:00:00'" style="color:orange;position: absolute;margin-left: -30px ;margin-top: -2px;">
+              <span class="material-icons" id="doutsyellow"*ngIf="live.pingAlertTime=='0000-00-00 00:00:00'">
                  fiber_manual_record
              </span> {{i+1}}
 
@@ -62,7 +62,7 @@
         <ng-container matColumnDef="gatewayName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Gateway Name </th>
           <td mat-cell *matCellDef="let live " class="cursor">
-       <span  *ngIf="live.pingAlertTime!='0000-00-00 00:00:00'" matTooltip="Gateway Online : {{live.pingAlertTime | date: 'medium'}}">
+       <span  *ngIf="live.pingAlertTime!='0000-00-00 00:00:00'" matTooltip="Gateway Last Online At : {{live.pingAlertTime | date: 'medium'}}">
              {{live.gatewayName}}
              <!-- <span class="material-icons" [ngStyle]="GatewaypgiAlret(live.pingAlertStatus)">
               fiber_manual_record

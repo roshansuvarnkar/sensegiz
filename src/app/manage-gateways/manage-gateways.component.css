@@ -35,6 +35,19 @@ table.mat-table {
   margin: 1.2rem 0 2rem 0;
   font-weight: 500;
 }
+
+#doutsred{
+  color:red;
+  position: absolute;
+  margin-left: -30px ;
+  margin-top: -2px;
+}
+#doutsyellow{
+color:orange;
+position: absolute;
+margin-left: -30px ;
+margin-top: -2px;
+}
 @media only screen and (max-width: 768px) {
     table.table thead th {
         font-weight: 600;

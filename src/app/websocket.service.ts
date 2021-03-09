@@ -19,7 +19,6 @@ export class WebsocketService {
     this.setupSocketConnection()
    }
    setupSocketConnection(){
-
       var connectionOptions = {
       'force new connection': true,
       reconnectionAttempts: 'Infinity',

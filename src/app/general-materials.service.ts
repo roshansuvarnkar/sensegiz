@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import { Router , ActivatedRoute } from '@angular/router';
-
-import{Observable, BehaviorSubject} from 'rxjs'
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpErrorResponse,
+  HttpEventType,
+  HttpHeaders,
+} from '@angular/common/http';
+import { environment } from '../environments/environment';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import * as XLSX from 'xlsx';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
+import * as CryptoJS from 'crypto-js';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,11 +21,17 @@ export class GeneralMaterialsService {
   _timezone: any = null;
   _timeZoneAbbr: any
   check:boolean=true
+  SERVER_URL: string = environment.apiHost;
+
+  ENCRYPT_KEY: string = environment.ENCRYPTKEY;
   public loadingFreez : BehaviorSubject<any> = new BehaviorSubject<any>([])
 
-  constructor(private _snackBar: MatSnackBar, private http:HttpClient,private router:Router) {
+  constructor(private _snackBar: MatSnackBar, private http:HttpClient) {
     // this.logout()
-  }
+ /*     var deData = CryptoJS.AES.decrypt("U2FsdGVkX1+ud8O+9XUjw6zd5NWIKVhxOjmvO1t9zk4QbvIdSN…zRIAxp2YxPkwjw+6YxKlcVOsYeTh141FnAffiQhRv8iufooN2", this.ENCRYPT_KEY);
+
+ console.log(JSON.parse(deData.toString(CryptoJS.enc.Utf8))) */
+}
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -39,8 +53,8 @@ exportToExcel(table:any,excelFileName: string,header: string){
 
 
   XLSX.writeFile(wb, excelFileName);
-        console.log("ws===",ws)
-        console.log("wb===",wb)
+      //  console.log("ws===",ws)
+      //  console.log("wb===",wb)
 
 
 }
@@ -62,19 +76,22 @@ exportAsExcelFile(json: any[], excelFileName: string,header: string){
 
 
 setObject(key, obj) {
-    localStorage.setItem(key, JSON.stringify(obj));
-    console.log("get==",this.getObject('sensegizlogin'))
+  /* localStorage.setItem(key, JSON.stringify(obj));
+  console.log("get==",this.getObject('sensegizlogin')) */
+  localStorage.setItem(key, this.encrypt(obj));
+   // console.log("get==",this.getObject('sensegizlogin'))
 }
 
 getObject(key) {
-    return JSON.parse(localStorage.getItem(key));
+  //return JSON.parse(localStorage.getItem(key));
+    return this.decrypt(localStorage.getItem(key));
 }
 
 updateItem(key, property, value)
 {
     var obj = this.getObject(key);
     obj[property] = value;
-    console.log("obj===",obj)
+   // console.log("obj===",obj)
 
     this.setObject(key, obj);
 }
@@ -143,7 +160,7 @@ pingAlertStatus(inTime){
  var pigsplt=(moment(date).diff(moment(pigTime)))
   var pigArt= moment.duration(pigsplt)
 var momemts=Math.floor(pigArt.asMinutes())
-console.log("pingAlertStatus in mints",momemts)
+//console.log("pingAlertStatus in mints",momemts)
   return momemts
 }
 
@@ -153,16 +170,16 @@ console.log("pingAlertStatus in mints",momemts)
     console.log("time zone==",timezone)
 
     let m = timezone % 60;
-    console.log("m==",m)
+   // console.log("m==",m)
     timezone = (timezone - m) / 60;
     let h = timezone
-    console.log("h==",m)
+  //  console.log("h==",m)
 
     let mm = m <= 9 && m >= 0 ? "0"+m : m;
     let hh = h <= 9 && h >= 0 ? "0"+h : h;
 
     var timezones=-(timezone)
-    console.log("time zone==",timezone)
+  //  console.log("time zone==",timezone)
 
     if(timezones<0 ){
       var timeZone= '-'+((hh)+':'+(mm)).toString()
@@ -175,6 +192,24 @@ console.log("pingAlertStatus in mints",momemts)
   }
 
 
+decrt:string;
+  decrypt(data) {
+
+    if(data){
+var deData = CryptoJS.AES.decrypt(data,this.ENCRYPT_KEY);
+      return JSON.parse(deData.toString(CryptoJS.enc.Utf8))
+    }
+    else{
+      return null;
+    }
+  }
+  encrypt(data) {
+    return CryptoJS.AES.encrypt(JSON.stringify(data),this.ENCRYPT_KEY).toString();
+  }
+
+  getToken() {
+    return JSON.parse(localStorage.getItem('token'));
+  }
 
 
 }

@@ -39,6 +39,21 @@
     </div>
 
 
+    <!--
+      <div *ngIf="language=='newlanguage'">
+      <button mat-menu-item routerLink="/home"> <mat-icon>home</mat-icon>Home</button>
+      <button mat-menu-item routerLink="/dashboard"> <mat-icon>people</mat-icon>Manage People</button>
+      <button mat-menu-item routerLink="/live-data"> <mat-icon>person_pin_circle</mat-icon>Social Distancing</button>
+
+
+      <button mat-menu-item routerLink="/settings" *ngIf="loginDataInfo.type!==3 && loginDataInfo.type!==4"> <mat-icon>settings</mat-icon>Settings</button>
+      <button mat-menu-item routerLink="/profile" *ngIf="loginDataInfo.type!==3 && loginDataInfo.type!==4"> <mat-icon>perm_identity</mat-icon>Create Profile</button>
+      <button mat-menu-item routerLink="/history"> <mat-icon>menu_book</mat-icon>Reports</button>
+      <button mat-menu-item  (click)="logout()" class="logout"><mat-icon >exit_to_app</mat-icon>Logout</button>
+    </div>
+     -->
+
+
      <!-- <button mat-raised-button class="guide"><span routerLink="/user-guide">User Guide</span></button> -->
 
     </mat-menu>
@@ -111,7 +126,7 @@
          <div class="col-2">
            <app-side-bar></app-side-bar>
          </div>
-         
+
          <div class="col-10">
            <!-- <button mat-raised-button color="primary" class="guide"><span routerLink="/user-guide">User Guide</span></button> -->
            <router-outlet></router-outlet>

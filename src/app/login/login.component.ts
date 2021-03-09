@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
     localStorage.clear()
+
   }
 
  onSubmit(data) {
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
         data.system='portal'
 
         this.api.send(data).then((res:any)=>{
-          console.log("logged in==",res)
+          console.log("logged in=======",res)
           localStorage.setItem("token",JSON.stringify(res.token))
            var passwordExpiry=res.hasOwnProperty('alreadyExisted')
            console.log(passwordExpiry)
@@ -56,15 +57,16 @@ export class LoginComponent implements OnInit {
               // this.newPassword=false
               res.success.role='user'
               res.success.passwordExpiry=passwordExpiry
-              if(this.login.login(JSON.stringify(res.success)) && res.success.twoStepAuth!='Y' && !passwordExpiry){
-                this.login.authCheck.next(true)
+              if(this.login.login(res.success) && res.success.twoStepAuth!='Y' && !passwordExpiry){
+             // if(this.login.login(JSON.stringify(res.success)) && res.success.twoStepAuth!='Y' && !passwordExpiry){
+             this.login.authCheck.next(true)
                 this.socket.joinRoom();
                 this.router.navigate(['/home'])
               }
-              else if( this.login.login(JSON.stringify(res.success)) && passwordExpiry==true ){
+             // else if( this.login.login(JSON.stringify(res.success)) && passwordExpiry==true ){
+              else if( this.login.login(res.success) && passwordExpiry==true ){
                 console.log("expired")
                 this.newPassword=true
-
               }
               else{
                 this.newPassword=false
