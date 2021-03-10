@@ -59,7 +59,6 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
     var data={}
 
     if(this.type=='activeUserData'){
-
        data={
         userId:this.loginData.userId,
         subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
@@ -85,11 +84,11 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
           this.dataSource = new MatTableDataSource(this.findData);
         //  this.dataSource = new MatTableDataSource(this.activeData);
 
-          setTimeout(() => {
+         /*  setTimeout(() => { */
             this.dataSource.sort = this.sort;
             this.dataSource.paginator = this.paginator;
 
-          })
+         /*  }) */
 
         }
       })
@@ -111,11 +110,11 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
           this.infectedData=res.success
           this.dataSource = new MatTableDataSource(this.infectedData);
 
-          setTimeout(() => {
+          /* setTimeout(() => { */
             this.dataSource.sort = this.sort;
             this.dataSource.paginator = this.paginator;
 
-          })
+       /*    }) */
 
         }
       })
@@ -136,10 +135,10 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
         if(res.status){
           this.onlineData=res.success
           this.dataSource = new MatTableDataSource(this.onlineData);
-          setTimeout(() => {
+         /*  setTimeout(() => { */
             this.dataSource.sort = this.sort;
             this.dataSource.paginator = this.paginator;
-          })
+        /*   }) */
         }
       })
 
@@ -159,12 +158,11 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
           this.offlineData=res.success
           this.dataSource = new MatTableDataSource(this.offlineData);
 
-          setTimeout(() => {
+         /*  setTimeout(() => { */
             this.dataSource.sort = this.sort;
             this.dataSource.paginator = this.paginator;
 
-          })
-
+          /* }) */
         }
       })
 
@@ -182,11 +180,11 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
            this.deallocate=res.success;
            this.dataSource = new MatTableDataSource(this.deallocate);
 
-           setTimeout(() => {
+          /*  setTimeout(() => { */
              this.dataSource.sort = this.sort;
              this.dataSource.paginator = this.paginator;
 
-           })
+          /*  }) */
 
          }
        })
