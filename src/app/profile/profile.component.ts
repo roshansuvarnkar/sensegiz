@@ -82,7 +82,7 @@ export class ProfileComponent implements OnInit {
     return (formGroup: FormGroup) => {
       const type = formGroup.get('type');
       const dept = formGroup.get('department');
-    
+
       if(type.value==4){
         if(dept.value!=''){
           dept.setErrors(null)
@@ -105,12 +105,12 @@ export class ProfileComponent implements OnInit {
   onSubmit(data) {
     data.mobileNum=data.mobileNum!=null?data.mobileNum.e164Number:''
     data.userId=this.loginData.userId
-    console.log("sub user register==",data)
+   // console.log("sub user register==",data)
 
      if (this.subAddUserform.valid) {
        try {
          this.api.createSubUser(data).then((res:any)=>{
-           console.log(" user created==",res)
+       //    console.log(" user created==",res)
            if(res.status){
              this.registered=false
              var msg = "User Created successfully"
@@ -131,7 +131,7 @@ refreshSubUserData(){
     userId : this.loginData.userId
   }
   this.api.getSubUser(data).then((res:any)=>{
-    console.log("data===",res)
+   // console.log("data===",res)
     if(res.status){
       this.subUser=res.success
     }
@@ -141,14 +141,14 @@ refreshSubUserData(){
 
 
   delete(a){
-    console.log("delete==",a)
+    //console.log("delete==",a)
     var data={
       subUserId : a.subUserId,
       isDeleted : a.isDeleted == 'Y' ? 'N' : 'Y'
     }
 
     this.api.deleteSubUser(data).then((res:any)=>{
-       console.log("data===",res)
+      // console.log("data===",res)
      if(res.status){
        var msg = "User updated successfully"
        this.general.openSnackBar(msg,'')

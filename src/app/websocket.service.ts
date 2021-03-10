@@ -29,18 +29,18 @@ export class WebsocketService {
     };
     this.socket = io(this.host)
     this.socket.on('disconnect',()=>{
-      console.log('Disconnected');
+      //console.log('Disconnected');
     })
     this.socket.on('connect', () => {
-      console.log('\n\nReconnected');
+     // console.log('\n\nReconnected');
     });
 
     this.socket.on('joinRoom', (data) => {
-      console.log('\n\joinRoom==', data);
+     // console.log('\n\joinRoom==', data);
     });
 
     this.socket.on('leaveRoom', (data) => {
-      console.log('\nleaveRoom==', data);
+    //  console.log('\nleaveRoom==', data);
       let dataLogin = this.login.loginData();
       if(dataLogin.userId == data.userId && data.isDeleted == 'Y'){
         this.login.logout()
@@ -52,12 +52,12 @@ export class WebsocketService {
 
   joinRoom(){
     let data = this.login.loginData();
-    console.log("data login===",data);
+  //  console.log("data login===",data);
     this.socket.emit("joinRoom",data.userId);
   }
 
   leaveRoom(data){
-    console.log("leave room emit==",data);
+//console.log("leave room emit==",data);
 
     this.socket.emit("leaveRoom",data);
   }

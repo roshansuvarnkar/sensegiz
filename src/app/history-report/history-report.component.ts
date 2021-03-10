@@ -92,7 +92,7 @@ export class HistoryReportComponent implements OnInit {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
-    console.log("language==",this.language)
+    //console.log("language==",this.language)
     this.selectMin=this.fb.group({
       minute:['null']
     })
@@ -112,7 +112,7 @@ export class HistoryReportComponent implements OnInit {
         toDate:this.to,
         zone:this.general.getZone(this.date)
       }
-        console.log("count of report on date ======",data);
+        //console.log("count of report on date ======",data);
 
       this.api.getHistoryDateReportTotalCount(data).then((res:any)=>{
         // console.log("length of report on date ======",res);
@@ -155,7 +155,7 @@ export class HistoryReportComponent implements OnInit {
       zone:this.general.getZone(date)
     }
       this.api.getDepartmentReportTotalCount(data6).then((res:any)=>{
-        console.log("length of deportment wise report on device name ======",res);
+        //console.log("length of deportment wise report on device name ======",res);
         if(res.status){
           this.currentPageLength=parseInt(res.count)
         // console.log('\nTotal response: ',res.count);
@@ -191,7 +191,7 @@ export class HistoryReportComponent implements OnInit {
 
 }
 basedOnDate(limit,offset){
-  console.log(limit,offset)
+  //console.log(limit,offset)
   var data={
     userId:this.loginData.userId,
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
@@ -201,18 +201,18 @@ basedOnDate(limit,offset){
     offset:offset,
     zone:this.general.getZone(this.date)
   }
-  console.log("data==",data)
+ // console.log("data==",data)
   this.api.getDeviceHistoryBasedOnDate(data).then((res:any)=>{
-    console.log("find data based on date ======",res);
+    //console.log("find data based on date ======",res);
     this.liveData=[]
     this.totTime=[]
     if(res.status){
       this.totTime=res.success
 
-      console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
+      //console.log("this.selectMin.get('minute').value===",this.selectMin.get('minute').value)
 
       // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
-        console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
+       // console.log("this.selectMin.get('minute').value else===",this.selectMin.get('minute').value)
         for(var i=0;i<res.success.length;i++){
 
           this.liveData.push({
@@ -264,7 +264,7 @@ basedOnFindName(limit,offset){
   this.liveData=[]
   this.totTime=[]
   this.api.getDeviceHistoryBasedOnDeviceName(data).then((res:any)=>{
-    console.log("find data based on name ======",res);
+    //console.log("find data based on name ======",res);
 
     if(res.status){
         this.totTime=res.success
@@ -356,9 +356,9 @@ summaryReport(){
     zone:this.general.getZone(date)
 
   }
-  console.log("Sumaary data==",data)
+  //console.log("Sumaary data==",data)
   this.api.getSummaryReport(data).then((res:any)=>{
-    console.log("summary report======",res);
+   // console.log("summary report======",res);
 
     this.liveData=[]
 
@@ -449,11 +449,11 @@ cummulativeReport(limit,offset){
     zone:this.general.getZone(date)
 
   }
-  console.log("hvhs==",data)
+  //console.log("hvhs==",data)
   this.api.viewCTReport(data).then((res:any)=>{
     this.liveData=[]
     this.totTime=[]
-    console.log("cummulative report==",res)
+   // console.log("cummulative report==",res)
     if(res.status){
       this.totTime=res.success
       // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
@@ -502,9 +502,9 @@ departmentReport(limit,offset){
     limit:limit,
     zone:this.general.getZone(date)
   }
-  console.log("data3==",data)
+  //console.log("data3==",data)
   this.api.getDepartmentreport(data).then((res:any)=>{
-    console.log("department history======",res);
+    //console.log("department history======",res);
     this.liveData=[]
     this.totTime=[]
     if(res.status){
@@ -547,8 +547,8 @@ departmentReport(limit,offset){
 
 
 getUpdate(event) {
-  console.log("paginator event",event);
-  console.log("form value", this.selectMin);
+  //console.log("paginator event",event);
+ /// console.log("form value", this.selectMin);
   this.limit = event.pageSize
   this.offset = event.pageIndex*event.pageSize
   // console.log("limit==",limit,"offset==",offset)
@@ -608,14 +608,14 @@ if(this.type=='basedOnDate' || this.type=='basedOnFindName'){
   }
   fileName="Report-of-Find- "+this.deviceName
 }
-  console.log("data to send ======",data);
+  //console.log("data to send ======",data);
   this.api.downloadReport(data,fileName).then((res:any)=>{
-  console.log("report data recieved ======",res);
+  //console.log("report data recieved ======",res);
   })
 }
 if(this.type=='summaryReport'){
   this.general.loadingFreez.next({status:true})
-  console.log("hi")
+  //console.log("hi")
   setTimeout(()=>{
     this.openExcel()
     this.general.loadingFreez.next({status:false})
@@ -635,13 +635,13 @@ if(this.type=='summaryReport'){
       type:this.type
     }
     fileName="CummulativeReport"
-    console.log("data to send ======",data);
+   // console.log("data to send ======",data);
 
     //apicall
 
     this.api.downloadCummulative(data,fileName).then((res:any)=>{
 
-      console.log("report data recieved ======",res);
+     // console.log("report data recieved ======",res);
 
     })
   }
@@ -659,13 +659,13 @@ if(this.type=='deptcummulative'){
       type:this.type
     }
     fileName="Department wise CummulativeReport"
-    console.log("data to send ======",data);
+    //console.log("data to send ======",data);
 
     //apicall
 
     this.api.downloadDeptCummulative(data,fileName).then((res:any)=>{
 
-      console.log("report data recieved ======",res);
+      //console.log("report data recieved ======",res);
 
     })
   }
@@ -680,13 +680,13 @@ if(this.type=='deptcummulative'){
       type:this.liveData.type
     }
     fileName="CustomReport"
-    console.log("data to send ======",data);
+    //console.log("data to send ======",data);
 
     //apicall
 
     this.api.downloadCustomReport(data,fileName).then((res:any)=>{
 
-      console.log("report data recieved ======",res);
+      //console.log("report data recieved ======",res);
 
     })
   }
@@ -738,12 +738,12 @@ if(this.type=='deptcummulative'){
   }
 
   filterTotTime(event){
-    console.log("event value===",event,"  tot===", this.totTime)
+//console.log("event value===",event,"  tot===", this.totTime)
     var arr=[]
 
   if(event.value !="0" && this.selectMin.get('minute').value!=''){
     if(this.type == 'basedOnDate' ){
-      console.log("tot===", this.totTime)
+     // console.log("tot===", this.totTime)
       this.totTime.filter((obj,index)=>{
 
         if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
@@ -755,7 +755,7 @@ if(this.type=='deptcummulative'){
             startTime:this.general.startTime(obj.totalTime,obj.updatedOn),
             totalTime:this.general.convertTime(obj.totalTime)
           })
-          console.log("arrr==",arr)
+          //console.log("arrr==",arr)
           return arr
         }
 
@@ -776,7 +776,7 @@ if(this.type=='deptcummulative'){
 
         if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
           arr.push(obj)
-          console.log("arrr==",arr)
+         // console.log("arrr==",arr)
           return arr
         }
 
@@ -797,7 +797,7 @@ if(this.type=='deptcummulative'){
             count:obj.count,
             totTime:this.general.convertTime(obj.totalTime)
           })
-            console.log("arrr==",arr)
+           // console.log("arrr==",arr)
             return arr
           }
         })
@@ -891,10 +891,10 @@ if(this.type=='deptcummulative'){
       infectedPersonName:this.deviceName,
       adminEmailId:this.loginData.userName
     }
-    console.log("sendwarning data=====",data)
+    //console.log("sendwarning data=====",data)
     this.api.infectedContactalert(data).then((res:any)=>{
       if(res.status){
-        console.log("infectedContactalert res===",res)
+       // console.log("infectedContactalert res===",res)
         var msg = 'Warning Sent Successfully'
         this.general.openSnackBar(msg,'')
       }
@@ -909,9 +909,9 @@ if(this.type=='deptcummulative'){
       subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       type:this.liveData.type
     }
-    console.log(" custom data======",data)
+   // console.log(" custom data======",data)
     this.api.getCustomReport(data).then((res:any)=>{
-      console.log("Custom Report res==",res)
+     // console.log("Custom Report res==",res)
       this.customData=[]
       if(res.status){
         this.customData=res.success

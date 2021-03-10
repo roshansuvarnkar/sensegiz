@@ -49,7 +49,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
-    console.log("language==",this.language)
+   // console.log("language==",this.language)
     this.loadData()
   }
 
@@ -64,10 +64,10 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
         subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
         type:'active',
       }
-      console.log("data===",data)
+     // console.log("data===",data)
 
       this.api.getHomeCountData(data).then((res:any)=>{
-        console.log("res==",res)
+      //  console.log("res==",res)
 
         this.findData=[]
         if(res.status){
@@ -101,10 +101,10 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
         subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
         type:'infected',
       }
-      console.log("data===",data)
+      //console.log("data===",data)
 
       this.api.getHomeCountData(data).then((res:any)=>{
-        console.log("res==",res)
+        //console.log("res==",res)
 
         if(res.status){
           this.infectedData=res.success
@@ -128,10 +128,10 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
         zone:this.general.getZone(date)
 
       }
-      console.log("data===",data)
+      //console.log("data===",data)
 
       this.api.getOnlineCount(data).then((res:any)=>{
-        console.log("online==",res)
+       // console.log("online==",res)
         if(res.status){
           this.onlineData=res.success
           this.dataSource = new MatTableDataSource(this.onlineData);
@@ -150,10 +150,10 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
         type:'offlineUserData',
         zone:this.general.getZone(date)
       }
-      console.log("data===",data)
+      //console.log("data===",data)
 
       this.api.getOnlineCount(data).then((res:any)=>{
-        console.log("offline==",res)
+        //console.log("offline==",res)
         if(res.status){
           this.offlineData=res.success
           this.dataSource = new MatTableDataSource(this.offlineData);
@@ -173,7 +173,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
          subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
          type:'deallocate',
        }
-       console.log("data===********",data)
+       //console.log("data===********",data)
 
        this.api.getDeallocatedDevice(data).then((res:any)=>{
          if(res.status){
@@ -203,11 +203,11 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
         type:this.type
         }
         fileName="Online User"
-        console.log("data to send ======",data);
+        //console.log("data to send ======",data);
 
         this.api.downloadActiveOfflineUsers(data,fileName).then((res:any)=>{
 
-        console.log("report data recieved ======",res);
+        //console.log("report data recieved ======",res);
         })
       }
       if(this.type=='offlineUserData'){
@@ -218,11 +218,11 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
         type:this.type
       }
       fileName="offline User- "+this.deviceName
-      console.log("data to send ======",data);
+     // console.log("data to send ======",data);
 
       this.api.downloadActiveOfflineUsers(data,fileName).then((res:any)=>{
 
-      console.log("report data recieved ======",res);
+     // console.log("report data recieved ======",res);
       })
     }
 
@@ -236,7 +236,7 @@ displayedColumns: string[] = ['i', 'deviceId', 'deviceName','dataReceivedTime'];
     fileName="Deallocate Users"
 
     this.api.downloadDeallocatedDevice(data,fileName).then((res:any)=>{
-      console.log("deallocate data recieved ======",res);
+      ///console.log("deallocate data recieved ======",res);
       })
   }
 

@@ -65,7 +65,7 @@ export class SettingsComponent implements OnInit {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
-    console.log("language==",this.language)
+    //console.log("language==",this.language)
     this.refreshSetting()
     this.maxThresholdMinsec()
 
@@ -150,7 +150,7 @@ export class SettingsComponent implements OnInit {
       tblName:'deviceSetting'
     }
     this.api.getData(data).then((res:any)=>{
-      console.log("setting data page ======",res);
+    //  console.log("setting data page ======",res);
       if(res.status){
         this.setting = res.success[0]
         this.duration=res.success[0].durationThreshold
@@ -330,7 +330,7 @@ export class SettingsComponent implements OnInit {
         //  console.log("time data===",data)
          data.userId = this.loginData.userId
          this.api.setTime(data).then((res:any)=>{
-           console.log("time insrted or updated",res)
+           //console.log("time insrted or updated",res)
            if(res.status){
             this.multipleshift=false
 
@@ -348,12 +348,12 @@ export class SettingsComponent implements OnInit {
    }
 
    onSubmitTwoAuth(data){
-      console.log(" data===",data)
+     // console.log(" data===",data)
         var value={
           userId:this.loginData.userId,
           twoStepAuth:data==true?'Y':'N'
         }
-        console.log("value===",value)
+       // console.log("value===",value)
         this.api.twoStepAuth(value).then((res:any)=>{
 
           if(res.status){
@@ -371,7 +371,7 @@ export class SettingsComponent implements OnInit {
         })
    }
    twoStepAuthchange(event){
-     console.log(event)
+     //console.log(event)
      if(event.checked==true){
       if(this.language=='english'){
         this.twoStepAuthStatus={
@@ -432,7 +432,7 @@ export class SettingsComponent implements OnInit {
           }
         }
          data.userId = this.loginData.userId
-         console.log("distance ===",data)
+         //console.log("distance ===",data)
          this.api.addDistance(data).then((res:any)=>{
           //  console.log("distance insrted or updated",res)
            if(res.status){
@@ -543,7 +543,7 @@ export class SettingsComponent implements OnInit {
    }
 
    bufferval(event){
-     console.log(event.target.value)
+     //console.log(event.target.value)
      this.bufferValue=event.target.value>5?true:false
    }
 
@@ -611,7 +611,7 @@ export class SettingsComponent implements OnInit {
             this.refreshSetting()
           }
         }).catch(err=>{
-          console.log("err===",err);
+          //console.log("err===",err);
         })
       } catch (err) {
       }
@@ -619,7 +619,7 @@ export class SettingsComponent implements OnInit {
   }
 
   option(data){
-    console.log("option===",data.target.value)
+    //console.log("option===",data.target.value)
     if(data.target.value == '' || data.target.value == 'undefined' || data.target.value == null){
       this.buzzerConfigForm.patchValue({
         durationSec:10
@@ -634,7 +634,7 @@ export class SettingsComponent implements OnInit {
   onSubmitbuzzerConfigForm(data){
     // console.log("data==",data)
     data.durationSec=data.buzzerConfig>0 && data.buzzerConfig<=4?0:data.durationSec
-    console.log("data==",data)
+    //console.log("data==",data)
 
     if (this.buzzerConfigForm.valid) {
       try {
@@ -648,7 +648,7 @@ export class SettingsComponent implements OnInit {
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
-          console.log("err===",err);
+          //console.log("err===",err);
         })
       } catch (err) {
       }
@@ -669,7 +669,7 @@ export class SettingsComponent implements OnInit {
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
-          console.log("err===",err);
+          //console.log("err===",err);
         })
       } catch (err) {
       }
@@ -835,10 +835,10 @@ export class SettingsComponent implements OnInit {
 
       let file = files[0];
       reader.readAsDataURL(file);
-      console.log("file===",file)
+      //console.log("file===",file)
       reader.onload = ()=>{
         this.tempImagePath = reader.result;
-        console.log("\nReader result",reader.result);
+        //console.log("\nReader result",reader.result);
 
         this.uploadForm.get('fileData').setValue({
           filename: file.name ,
@@ -867,10 +867,10 @@ export class SettingsComponent implements OnInit {
   formSubmit(data){
     data.userId =  this.loginData.userId
     data.fileData.filename = this.loginData.userId.toString() + parseInt(this.randomNumber().toString()) + data.fileData.filename
-        console.log("file===",data)
+       // console.log("file===",data)
    if(data.fileData.filetype=='image/jpg'||data.fileData.filetype=='image/jpeg'||data.fileData.filetype=='image/png'){
     this.api.uploadLogo(data).then((res:any)=>{
-      console.log("res img===",res)
+    //  console.log("res img===",res)
       this.general.updateItem('sensegizlogin','logo',data.fileData.filename)
       this.clearFile()
       setTimeout(()=>{

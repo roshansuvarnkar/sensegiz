@@ -53,7 +53,7 @@ export class ManageGatewaysComponent implements OnInit {
     this.loginData = JSON.parse(this.loginData)
     this.userType=this.loginData.type
     this.language=this.loginData.language
-    console.log("language==",this.language)
+   // console.log("language==",this.language)
     this.refreshGateway()
   }
 
@@ -67,7 +67,7 @@ refreshGateway(){
     }
 
   this.api.getData(data).then((res:any)=>{
-    console.log("gateway data ======",res);
+    //console.log("gateway data ======",res);
     if(res.status){
       this.gatewayData=[]
 
@@ -87,7 +87,7 @@ refreshGateway(){
               delete:'delete'
           });
       }
-      console.log("gatewayspig",this.gatewayData)
+      //console.log("gatewayspig",this.gatewayData)
       this.dataSource = new MatTableDataSource(this.gatewayData);
       setTimeout(() => {
         this.dataSource.sort = this.sort;

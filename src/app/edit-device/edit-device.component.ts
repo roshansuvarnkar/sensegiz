@@ -33,7 +33,7 @@ export class EditDeviceComponent implements OnInit {
     private login:LoginCheckService,
     private general:GeneralMaterialsService
   ) {
-     console.log("data===",data)
+   //  console.log("data===",data)
     this.type=data.type
     this.deviceData=data.data
   }
@@ -42,7 +42,7 @@ export class EditDeviceComponent implements OnInit {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
-    console.log("language==",this.language)
+   // console.log("language==",this.language)
     this.Findform = this.fb.group({
       deviceName: ['', Validators.required],
       deviceId: [{value: '', disabled: true}, Validators.required],
@@ -121,10 +121,10 @@ export class EditDeviceComponent implements OnInit {
           data.subUserId=(this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0;
           data.deviceId=this.deviceData.deviceId
           data.mobileNum=data.mobileNum!=null ||data.mobileNum!=undefined  ?data.mobileNum.e164Number:''
-        console.log("find edit===",data)
+      //  console.log("find edit===",data)
 
         this.api.editDeviceRegister(data).then((res:any)=>{
-          console.log("find submit====",res);
+        //  console.log("find submit====",res);
           if(res.status){
             if(this.language=='english'){ var msg = 'Device Updated Successfully'}
             else if(this.language=='japanese'){ var msg = 'デバイスが正常に更新されました'}
@@ -151,10 +151,10 @@ export class EditDeviceComponent implements OnInit {
         data.userId=this.loginData.userId
         data.subUserId=(this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0;
         data.deviceId= this.deviceData.gatewayId
-        console.log("gateway data==",data)
+       // console.log("gateway data==",data)
 
         this.api.editDeviceRegister(data).then((res:any)=>{
-          console.log("gateway submit==",res)
+          //console.log("gateway submit==",res)
           if(res.status){
             if(this.language=='english'){
               var msg = 'Gateway Updated Successfully';
@@ -211,9 +211,9 @@ export class EditDeviceComponent implements OnInit {
         data.subUserId=(this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0;
         data.coinId=this.deviceData.coinId,
         data.coinName=data.coinName
-        console.log("coin send data==",data)
+        //console.log("coin send data==",data)
        this.api.editCoinRegister(data).then((res:any)=>{
-          console.log("coin submit==",res)
+          //console.log("coin submit==",res)
           if(res.status){
 
             var msg = 'Coin Updated Successfully'
@@ -236,7 +236,7 @@ export class EditDeviceComponent implements OnInit {
         tblName:'gatewayRegistration'
       }
      this.api.getData(data).then((res:any)=>{
-      console.log("gateway data ====",res);
+      //console.log("gateway data ====",res);
       if(res.status){
         this.gateway=res.success
       }

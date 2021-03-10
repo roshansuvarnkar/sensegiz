@@ -35,7 +35,7 @@ export class SideBarComponent implements OnInit {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
-    console.log("language==",this.language)
+   // console.log("language==",this.language)
     this.refreshFinds()
     //this.checkPage()
     setInterval(()=>{this.refreshFinds()},30*1000)
@@ -51,7 +51,7 @@ export class SideBarComponent implements OnInit {
     }
 
     this.api.getAssignedDevices(data).then((res:any)=>{
-      console.log("find data side bar ======",res);
+     // console.log("find data side bar ======",res);
       if(res.status){
         this.findData=[]
 
@@ -72,7 +72,7 @@ export class SideBarComponent implements OnInit {
 
 
   clickDevice(data){
-    console.log("data====",data)
+   // console.log("data====",data)
     this.router.navigate(['/device-history'], { queryParams: { record: JSON.stringify(data) } });
   }
 

@@ -49,7 +49,7 @@ export class ManageUsersComponent implements OnInit {
     this.loginData = JSON.parse(this.loginData)
     this.userType=this.loginData.type
     this.language=this.loginData.language
-    console.log("language==",this.language)
+   // console.log("language==",this.language)
     this.refreshUsers()
   }
 

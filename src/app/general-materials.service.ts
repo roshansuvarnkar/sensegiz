@@ -167,7 +167,7 @@ var momemts=Math.floor(pigArt.asMinutes())
 
   getZone(date){
     var timezone=date.getTimezoneOffset()
-    console.log("time zone==",timezone)
+   // console.log("time zone==",timezone)
 
     let m = timezone % 60;
    // console.log("m==",m)

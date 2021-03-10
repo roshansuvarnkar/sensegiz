@@ -85,14 +85,14 @@ export class OrderContactComponent implements OnInit {
       public dialogRef: MatDialogRef<OrderContactComponent>,
        @Inject(MAT_DIALOG_DATA)  data,
     ) {
-      console.log("data from===",data)
+     // console.log("data from===",data)
       this.loginData.userId = data.userId
       this.loginData.id = data.subUserId
       this.order=data.order
       this.dataSet=data.data
       this.from = data.fromDate
       this.to = data.toDate
-      console.log("data set===",this.dataSet,this.loginData)
+      //console.log("data set===",this.dataSet,this.loginData)
       this.orderShow = this.orderType.filter(obj=>{
       	return obj.id==this.order
       })
@@ -140,7 +140,7 @@ export class OrderContactComponent implements OnInit {
       limit:limit,
       offset:offset
     }
-      console.log("value data ======",value);
+     // console.log("value data ======",value);
 
     this.api.getDeviceHistoryBasedOnDeviceName(value).then((res:any)=>{
       // console.log("order data ======",res);

@@ -34,11 +34,11 @@ export class DeviceHistoryComponent implements OnInit {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
-    console.log("language==",this.language)
+  //  console.log("language==",this.language)
 
     this.route.queryParams.subscribe(params => {
         this.deviceData = JSON.parse(params.record) ;
-         console.log("records=",this.deviceData )
+      //   console.log("records=",this.deviceData )
         this.getTotalCount()
         this.refreshFinds()
     })
@@ -55,7 +55,7 @@ export class DeviceHistoryComponent implements OnInit {
       offset:offset
    }
     this.api.getDeviceData(data).then((res:any)=>{
-      console.log("find data ======",res);
+      //console.log("find data ======",res);
       this.findData=[]
 
       if(res.status){

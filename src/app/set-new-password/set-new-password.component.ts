@@ -25,7 +25,7 @@ export class SetNewPasswordComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(res =>{
       this.userData=JSON.parse(res.user)
-      console.log("user info==",this.userData)
+      //console.log("user info==",this.userData)
     })
 
     this.setPasswordForm=this.fb.group({
@@ -46,16 +46,16 @@ export class SetNewPasswordComponent implements OnInit {
     this.expiredPwd= false
   }
   submit(data){
-    console.log("data=",data)
+    //console.log("data=",data)
     data.username=this.userData.username
     data.system="portal"
     data.role='user'
     if(this.setPasswordForm.valid){
 
       this.api.updatePassword(data).then((res:any)=>{
-        console.log("set pwd==",res)
+       // console.log("set pwd==",res)
          var passwordExpiry=res.hasOwnProperty('alreadyExisted')
-             console.log(passwordExpiry)
+            // console.log(passwordExpiry)
              this.expiredPwd=passwordExpiry==true?true:false
         if( res.status){
 

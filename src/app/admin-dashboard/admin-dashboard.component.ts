@@ -62,11 +62,11 @@ export class AdminDashboardComponent implements OnInit {
 
  onSubmit(data) {
   data.mobileNum=data.mobileNum!=null?data.mobileNum.e164Number:''
-     console.log("admin register==",data)
+    // console.log("admin register==",data)
     if (this.adminAddUserform.valid) {
       try {
         this.api.createUser(data).then((res:any)=>{
-        	console.log("created==",res)
+        //	console.log("created==",res)
 			if(res.status){
         this.registered=false
 				var msg = "User Created successfully"
@@ -85,7 +85,7 @@ export class AdminDashboardComponent implements OnInit {
 
 refreshAdminData(){
     this.api.getAdminData().then((res:any)=>{
-    	console.log("data===",res)
+    //	console.log("data===",res)
 		if(res.status){
 			this.adminData=res.success
 		}
@@ -141,7 +141,7 @@ refreshAdminData(){
  getZone(){
   this.zoneData=[]
   this.api.getCountryZone().then((res:any)=>{
-    console.log("data===",res)
+    //console.log("data===",res)
   if(res){
     this.zoneData=res
   }

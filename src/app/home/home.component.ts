@@ -50,7 +50,7 @@ dataPoints:any=[]
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
-    console.log("language==",this.language)
+   // console.log("language==",this.language)
     // this.checkUrl = this.router.url
 
     this.refreshFinds()
@@ -281,7 +281,7 @@ refreshCount(){
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
   }
   this.api.getCountData(data).then((res:any)=>{
-    console.log("count data ======",res);
+    //console.log("count data ======",res);
     if(res.status){
       this.totalEmp = res.success[0].totalEmp
       this.infectedEmp = res.success[1].inectedEmp
@@ -381,7 +381,7 @@ numOfcontactPerDay(){
 
   }
   this.api.getPerDayCount(data).then((res:any)=>{
-    console.log("repeated contacts data ======",res);
+    //console.log("repeated contacts data ======",res);
     if(res.status){
       this.dataPoints=[]
       this.countPerday = res.success.reverse()

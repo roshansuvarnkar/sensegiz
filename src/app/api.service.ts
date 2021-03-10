@@ -1194,7 +1194,7 @@ export class ApiService {
       this.http.post(url,body,httpOptions).subscribe((res:any)=>{
         resolve(res.data);
       },err=>{
-        console.log("err==",err)
+       // console.log("err==",err)
         reject(err)
       })
     });
@@ -1677,11 +1677,11 @@ getDeallocatedDevice(data){
   let body={
     data:data
   }
-console.log(body)
+//console.log(body)
   let url = this.host+'/getDeallocatedDevice';
   return new Promise((resolve,reject)=>{
     this.http.post(url,body,httpOptions).subscribe((res:any)=>{
-    
+
       resolve(res.data);
     })
   });
@@ -2237,7 +2237,7 @@ downloadActiveOfflineUsers(data,fileName){
       resolve(true);
     },
     err=>{
-      console.log("err==",err)
+     // console.log("err==",err)
     })
   });
 
@@ -2303,7 +2303,7 @@ downloadCummulative(data,fileName){
       resolve(true);
     },
     err=>{
-      console.log("err==",err)
+      //console.log("err==",err)
     })
   });
 
@@ -2351,7 +2351,7 @@ downloadReport(data,fileName){
       resolve(true);
     },
     err=>{
-      console.log("err==",err)
+     // console.log("err==",err)
     })
   });
 
@@ -2389,7 +2389,7 @@ downloadReport(data,fileName){
         resolve(true);
       },
       err=>{
-        console.log("err==",err)
+        //console.log("err==",err)
       })
     });
 
@@ -2411,7 +2411,7 @@ downloadReport(data,fileName){
         resolve(true);
       },
       err=>{
-        console.log("err==",err)
+        //console.log("err==",err)
       })
     });
 
@@ -2530,7 +2530,7 @@ downloadReport(data,fileName){
         resolve(true);
       },
       err=>{
-        console.log("err==",err)
+        //console.log("err==",err)
       })
     });
 

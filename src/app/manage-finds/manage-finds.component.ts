@@ -103,7 +103,7 @@ refreshFinds(){
   }
 
   this.api.getData(data).then((res:any)=>{
-    console.log("find device data ======",res);
+   // console.log("find device data ======",res);
     if(res.status){
      this.findData=[]
       for (let i = 0; i <res.success.length; i++) {
@@ -221,7 +221,7 @@ delete(a){
 infected(a){
   if(this.language=='english'){
     if(confirm('Are you sure to do this operation?')){
-      console.log("yes",a)
+     // console.log("yes",a)
         var inf = a.infected == 0 ? 1 :0
         var data = {
           deviceId:a.deviceId,
@@ -230,7 +230,7 @@ infected(a){
           infected:inf
         }
         this.api.editInfectedPerson(data).then((res:any)=>{
-          console.log("infected data ======",res);
+         // console.log("infected data ======",res);
           if(res.status){
             this.refreshFinds()
             var msg = 'Employee updated Successfully'
@@ -245,7 +245,7 @@ infected(a){
   }
   else{
     if(confirm('この操作を実行してもよろしいですか?')){
-      console.log("yes",a)
+      //console.log("yes",a)
       var inf = a.infected == 0 ? 1 :0
       let data = {
         deviceId:a.deviceId,
@@ -275,7 +275,7 @@ isolated(a){
   if(this.language=='english'){
 
     if(confirm('Are you sure to do this operation?')){
-      console.log("yes",a)
+      //console.log("yes",a)
 
       if(a.infected == 0 ){
 
@@ -285,9 +285,9 @@ isolated(a){
           subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
           isolated:isolate
         }
-        console.log("isolate data===",data)
+       // console.log("isolate data===",data)
         this.api.editIsolation(data).then((res:any)=>{
-          console.log("isolated data ======",res);
+         // console.log("isolated data ======",res);
           if(res.status){
             this.refreshFinds()
             var msg = 'Employee updated Successfully'
@@ -307,7 +307,7 @@ isolated(a){
   }
   else{
     if(confirm('この操作を実行してもよろしいですか?')){
-      console.log("yes",a)
+      //console.log("yes",a)
 
       if(a.infected == 0){
 
@@ -318,9 +318,9 @@ isolated(a){
           subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
 
         }
-        console.log("isolate data===",data)
+       // console.log("isolate data===",data)
         this.api.editIsolation(data).then((res:any)=>{
-          console.log("isolated data ======",res);
+         // console.log("isolated data ======",res);
           if(res.status){
             this.refreshFinds()
             var msg = '従業員は正常に更新されました'
@@ -340,7 +340,7 @@ isolated(a){
 }
 
 deallocate(event,a){
-  console.log("deallocated findDevice====",a)
+  //console.log("deallocated findDevice====",a)
   if(a.deviceId!= a.deviceName){
     if(confirm("By clicking Ok, This Specific User Details will be deleted expect the Department Assigned for the Find.")){
       var data={
@@ -349,9 +349,9 @@ deallocate(event,a){
         id:a.id,
         deviceId:a.deviceId
       }
-      console.log("deallocate passing value",data)
+      //console.log("deallocate passing value",data)
       this.api.deallocateDevice(data).then((res:any)=>{
-        console.log("deallocate resp=======",res)
+       // console.log("deallocate resp=======",res)
         if(res.status){
           a.check=res.status
           this.refreshFinds()
@@ -467,7 +467,7 @@ fileChange(files){
 
    let file = files[0];
    reader.readAsDataURL(file);
-   console.log("file===",file)
+   //console.log("file===",file)
    reader.onload = ()=>{
      this.tempImagePath = reader.result;
     //  console.log("\nReader result",reader.result);
@@ -505,7 +505,7 @@ readExcel(file) {
 
   }
   readFile.readAsArrayBuffer(file);
-  console.log(this.fileupload)
+  //console.log(this.fileupload)
   if(this.language=='english'){ var msg = 'Uploading file'}
   else if(this.language=='japanese'){ var msg = 'ファイルをアップロードしています。'}
   this.general.openSnackBar(msg,'')
@@ -529,10 +529,10 @@ randomNumber(min=1, max=20) {
 
 
 fileSubmit(data){
-  console.log("file upload data",data)
+  //console.log("file upload data",data)
 
   var type=data.fileData.filename.split('.')
-  console.log("type==",type[type.length-1].toString())
+  //console.log("type==",type[type.length-1].toString())
   if(type[type.length-1]=='xlsx'.toString() || type[type.length-1]=='xls'){
 
     this.loading=false
@@ -545,10 +545,10 @@ fileSubmit(data){
       data.userId =  this.loginData.userId
       data.subUserId= (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0
       data.fileData.filename = this.loginData.userId.toString() + parseInt(this.randomNumber().toString()) + data.fileData.filename
-        console.log("file===",data)
+        //console.log("file===",data)
       this.api.uploadDeviceFile(data).then((res:any)=>{
         if(res.status){
-          console.log("res file ===",res)
+         // console.log("res file ===",res)
           this.clearFile()
            if(this.language=='english'){var msg = 'uploaded'}
            else if(this.language=='japanese'){var msg = 'アップロードしました。'}
@@ -586,7 +586,7 @@ fileSubmit(data){
   }
   this.api.getAllDepartment(data).then((res:any)=>{
     this.departments=[]
-    console.log("department list======",res);
+    //console.log("department list======",res);
     if(res.status){
         this.departments=res.success
         this.departments.push({"id":0,"department":"None"})
@@ -595,7 +595,7 @@ fileSubmit(data){
 }
 departmentSelect(a,b){
 
-  console.log("aa=",a,b)
+  //console.log("aa=",a,b)
   var data = {
     subUserId:a.id,
     id:b.id,
@@ -603,7 +603,7 @@ departmentSelect(a,b){
 
   }
   this.api.setDeviceDepartment(data).then((res:any)=>{
-    console.log("department list======",res);
+    //console.log("department list======",res);
     if(res.status){
       this.refreshFinds()
       if(this.language=='english'){

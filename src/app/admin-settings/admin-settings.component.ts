@@ -68,7 +68,7 @@ export class AdminSettingsComponent implements OnInit {
       customize:['']
     });
     this.scanningForm=this.fb.group({
-     
+
       seconds:['',[Validators.required,Validators.max(75), Validators.min(1)]],
 
     })
@@ -116,7 +116,7 @@ export class AdminSettingsComponent implements OnInit {
     }
 
     this.api.getData(data).then((res:any)=>{
-       console.log("shift  data ======",res);
+       //console.log("shift  data ======",res);
       if(res.status){
         this.shifts=res.success
         this.multishift=res.success
@@ -133,9 +133,9 @@ export class AdminSettingsComponent implements OnInit {
       userId:this.dataGet.userId,
       tblName:'deviceSetting'
     }
-    console.log("data get==",data)
+   // console.log("data get==",data)
     this.api.getData(data).then((res:any)=>{
-      console.log("setting data page ======",res);
+     // console.log("setting data page ======",res);
       if(res.status){
         this.setting = res.success[0]
         this.distanceForm.patchValue({
@@ -293,7 +293,7 @@ export class AdminSettingsComponent implements OnInit {
   }
 
   onSubmitDistanceForm(data) {
-    console.log("data=",data)
+   //// console.log("data=",data)
 
      if (this.distanceForm.valid) {
        try {
@@ -317,9 +317,9 @@ export class AdminSettingsComponent implements OnInit {
 
             }
         }
-         console.log("distance ===",value,data)
+        // console.log("distance ===",value,data)
          this.api.setDeviceRssi(value).then((res:any)=>{
-           console.log("distance insrted or updated",res)
+          // console.log("distance insrted or updated",res)
            if(res.status){
             var msg = 'Minimum distance and wearable type updated Successfully'
             this.general.openSnackBar(msg,'')
@@ -346,14 +346,14 @@ export class AdminSettingsComponent implements OnInit {
       try {
         data.userId=this.dataGet.userId
         this.api.setGatewayDataRate(data).then((res:any)=>{
-          console.log("setGatewayDataRate ===",res)
+          //console.log("setGatewayDataRate ===",res)
           if(res.status){
             this.refreshSetting()
             var msg='  Gateway data rate updated successfully'
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
-          console.log("err===",err);
+         // console.log("err===",err);
         })
       } catch (err) {
       }
@@ -365,7 +365,7 @@ export class AdminSettingsComponent implements OnInit {
         // console.log("threshold ===",data)
         data.userId = this.dataGet.userId
         this.api.addTxPower(data).then((res:any)=>{
-          console.log("tx power updated",res)
+          //console.log("tx power updated",res)
           if(res.status){
             this.refreshSetting()
             var msg = 'Transmission power updated Successfully'
@@ -380,12 +380,12 @@ export class AdminSettingsComponent implements OnInit {
   //scan count == meeting count
 
   onSubmitScanCountForm(data){
-    console.log("data==",data)
+    //console.log("data==",data)
     if (this.scanCountForm.valid) {
       try {
         data.userId=this.dataGet.userId
         this.api.updateMeetingCount(data).then((res:any)=>{
-          console.log("Scanning Interval===",res)
+         //console.log("Scanning Interval===",res)
           if(res.status){
             this.refreshSetting()
             this.scanCountForm.reset()
@@ -393,14 +393,14 @@ export class AdminSettingsComponent implements OnInit {
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
-          console.log("err===",err);
+          //console.log("err===",err);
         })
       } catch (err) {
       }
     }
   }
   customise(event){
-    console.log("event===",event)
+    //console.log("event===",event)
     this.statusCustomise = this.statusCustomise == true ? false : true
     this.distanceForm.patchValue({
       customize:event.checked==true?1:0
@@ -455,7 +455,7 @@ export class AdminSettingsComponent implements OnInit {
       try {
         data.userId=this.dataGet.userId
         this.api.updateScanningInterval(data).then((res:any)=>{
-           console.log("Scanning Interval===",res)
+           //console.log("Scanning Interval===",res)
           if(res.status){
             this.refreshSetting()
             this.meetingcount()
@@ -463,7 +463,7 @@ export class AdminSettingsComponent implements OnInit {
             this.general.openSnackBar(msg,'')
           }
         }).catch(err=>{
-          console.log("err===",err);
+         // console.log("err===",err);
         })
       } catch (err) {
       }
@@ -495,10 +495,10 @@ export class AdminSettingsComponent implements OnInit {
        userId:this.dataGet.userId,
        seconds:second
      }
-     console.log("data1==",data1)
+    // console.log("data1==",data1)
 
      this.api.getDurationThreshold(data1).then((res:any)=>{
-       console.log("duration==",res)
+      // console.log("duration==",res)
       if(res.status){
 
         this.refreshSetting()
@@ -514,23 +514,23 @@ export class AdminSettingsComponent implements OnInit {
 		var cdt2= moment(data.toTime, 'HH:mm:ss')
 		var times1=moment(cdt1).format("YYYY/MM/DD HH:mm:ss")
 		var times2=moment(cdt2).format("YYYY/MM/DD HH:mm:ss")
-		console.log("times22==",times1>times2)
+		//console.log("times22==",times1>times2)
 
 		if(times1>times2 || (data.fromTime == "00:00" &&  data.toTime == "00:00")){
-			console.log("yes")
+		//	console.log("yes")
 				times2=moment(cdt2).add(1,'days').format("YYYY/MM/DD HH:mm:ss")
 
 		}
-		console.log("false")
+		//console.log("false")
 		var times=moment(times2,"YYYY/MM/DD HH:mm:ss").diff(moment(times1,"YYYY/MM/DD HH:mm:ss"))
 
-		console.log("times==",times1,times2,times)
+	//	console.log("times==",times1,times2,times)
 
 		var d = moment.duration(times)
-		console.log("dd==",d)
+		//console.log("dd==",d)
 
 		var minhour=(d.hours()+ ":" + d.minutes()).split(":")
-    console.log("minhour==",minhour[0],minhour[1])
+    //console.log("minhour==",minhour[0],minhour[1])
 
 		if((parseInt(minhour[0]) >= 9 && (parseInt(minhour[1]) >= 0 && parseInt(minhour[1]) <=59)) ){
       this.timeExceed=false
@@ -590,7 +590,7 @@ export class AdminSettingsComponent implements OnInit {
    }
 
    onSubmitlanguageForm(data){
-    console.log("language===",data)
+    //console.log("language===",data)
     data.userId=this.dataGet.userId
     this.api.setLanguage(data).then((res:any)=>{
       this.general.updateItem('sensegizlogin','language',data.language)
@@ -642,10 +642,10 @@ export class AdminSettingsComponent implements OnInit {
         status: values.status,
         type :values.type,
         }
-          console.log(data)
+          //console.log(data)
           this.api.setDeviceMultiShift(data).then((res:any)=>{
-            console.log("multishift data sent===",data)
-            console.log("multishift data sent===",res)
+            //console.log("multishift data sent===",data)
+            //console.log("multishift data sent===",res)
             if(res.status){
               this.refreshShift()
               this.multishiftingselect.reset()
@@ -653,7 +653,7 @@ export class AdminSettingsComponent implements OnInit {
               this.general.openSnackBar(msg,'')
             }
           }).catch(err=>{
-            console.log("err===",err);
+            //console.log("err===",err);
           })
     }catch (err) {
 
@@ -674,9 +674,9 @@ username:any=[]
       subUserId: (this.dataGet.hasOwnProperty('id') && this.dataGet.type==4 && this.dataGet.id!=0) ? this.dataGet.id : 0,
       tblName:'deviceData'
     }
-    console.log("data==",data)
+   // console.log("data==",data)
     this.api.getAssignedDevices(data).then((res:any)=>{
-     console.log("res==",res)
+     //console.log("res==",res)
       if(res.status){
         this.username=[]
        for(let i=0;i<res.success.length;i++){
@@ -689,13 +689,13 @@ username:any=[]
 
 selectfinds(event){
   this.selectfind=event.value='1' || '2'?false:true;
-  console.log(this.selectfind)
+  //console.log(this.selectfind)
 
 }
 
 
    bufferval(event){
-     console.log(event.target.value)
+     //console.log(event.target.value)
       this.bufferValue=event.target.value>5?true:false
    }
 

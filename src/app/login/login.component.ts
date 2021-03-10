@@ -49,10 +49,10 @@ export class LoginComponent implements OnInit {
         data.system='portal'
 
         this.api.send(data).then((res:any)=>{
-          console.log("logged in=======",res)
+         // console.log("logged in=======",res)
           localStorage.setItem("token",JSON.stringify(res.token))
            var passwordExpiry=res.hasOwnProperty('alreadyExisted')
-           console.log(passwordExpiry)
+           //console.log(passwordExpiry)
           if(res.status){
               // this.newPassword=false
               res.success.role='user'
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
               }
              // else if( this.login.login(JSON.stringify(res.success)) && passwordExpiry==true ){
               else if( this.login.login(res.success) && passwordExpiry==true ){
-                console.log("expired")
+              //  console.log("expired")
                 this.newPassword=true
               }
               else{
@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
             this.loginInvalid = true;
           }
         }).catch(err=>{
-          console.log("err======",err)
+         // console.log("err======",err)
           })
       } catch (err) {
         this.loginInvalid = true;

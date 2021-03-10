@@ -49,7 +49,7 @@ totTime:any=[]
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
-    console.log("language==",this.language)
+    //console.log("language==",this.language)
     this.selectMin=this.fb.group({
       minute:['null']
     })
@@ -63,7 +63,7 @@ totTime:any=[]
   }
 
   refresh(){
-    console.log("pagination==",this.pageSet,this.pageIndex)
+    //console.log("pagination==",this.pageSet,this.pageIndex)
     this.refreshData(this.count,this.pageSet,this.pageIndex)
     this.getTotalCount(this.count)
   }
@@ -111,7 +111,7 @@ getTotalCount(val){
   this.api.getLiveDataTotalCount(data).then((res:any)=>{
     // console.log("live data ======",res);
     if(res.status){
-      console.log('\nTotal response: ',res.success[0].count);
+     // console.log('\nTotal response: ',res.success[0].count);
       this.currentPageSize= parseInt(res.success[0].count);
 
 
@@ -136,7 +136,7 @@ getTotalCount(val){
 
     this.api.getLiveData(data).then((res:any)=>{
 
-      console.log("live data ======",res);
+      //console.log("live data ======",res);
       if(res.status){
         this.liveData=[]
         this.totTime=[]
@@ -225,7 +225,7 @@ getTotalCount(val){
 // }
 
 getUpdate(event) {
-  console.log("paginator event",event);
+  //console.log("paginator event",event);
   // console.log("paginator event length", this.currentPageLength);
  this.limit = event.pageSize
   this.offset = event.pageIndex*event.pageSize
@@ -237,12 +237,12 @@ getUpdate(event) {
 }
 
   filterTotTime(event){
-      console.log("event value===",event,"  tot===", this.totTime)
+     // console.log("event value===",event,"  tot===", this.totTime)
       var arr=[]
 
     if(event.value !="0" && this.selectMin.get('minute').value!=''){
 
-        console.log("tot===", this.totTime)
+        //console.log("tot===", this.totTime)
         this.totTime.filter((obj,index)=>{
 
           if((parseInt(obj.totalTime.split(':')[1])>=parseInt(event.value) )|| (parseInt(obj.totalTime.split(':')[1])>=parseInt(this.selectMin.get('minute').value))){
@@ -255,7 +255,7 @@ getUpdate(event) {
               totalTime:obj.totalTime
 
             })
-            console.log("arrr==",arr)
+            //console.log("arrr==",arr)
             return arr
           }
       })
