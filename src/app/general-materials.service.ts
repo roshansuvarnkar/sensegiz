@@ -13,6 +13,7 @@ import { map } from 'rxjs/operators';
 import * as XLSX from 'xlsx';
 import * as moment from 'moment';
 import * as CryptoJS from 'crypto-js';
+import {utc} from 'moment'
 
 @Injectable({
   providedIn: 'root'
@@ -172,14 +173,15 @@ var momemts=Math.floor(pigArt.asMinutes())
     let m = timezone % 60;
    // console.log("m==",m)
     timezone = (timezone - m) / 60;
+   // console.log(timezone)
     let h = timezone
-  //  console.log("h==",m)
+   // console.log("h==",m)
 
     let mm = m <= 9 && m >= 0 ? "0"+m : m;
     let hh = h <= 9 && h >= 0 ? "0"+h : h;
 
     var timezones=-(timezone)
-  //  console.log("time zone==",timezone)
+   //console.log("time zone==",timezone)
 
     if(timezones<0 ){
       var timeZone= '-'+((hh)+':'+(mm)).toString()
@@ -192,7 +194,9 @@ var momemts=Math.floor(pigArt.asMinutes())
   }
 
 
-decrt:string;
+
+
+
   decrypt(data) {
 
     if(data){

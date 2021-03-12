@@ -424,7 +424,12 @@ numOfcontactPerDay(){
                       dataPoints:this.dataPoints
                     }]
                   });
+                  chart.render();
+                  chart.destroy();
+               chart=null;
+
 }
+
 else if(this.language=='japanese'){
  var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
@@ -445,10 +450,11 @@ else if(this.language=='japanese'){
                       dataPoints:this.dataPoints
                     }]
                   });
-}
-    // chart.render();
-      //chart.destroy()
-      chart=null;
+                  chart.render();
+                  chart.destroy();
+               chart=null;
+   }
+
       if(this.language=='english'){
       chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
@@ -492,7 +498,8 @@ else if(this.language=='japanese'){
       });
       }
 
-      chart.render();
+     chart.render();
+
     }
 
   })

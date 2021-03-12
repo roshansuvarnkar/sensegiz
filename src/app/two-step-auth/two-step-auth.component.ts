@@ -145,7 +145,6 @@ submit(data){
     var phoneNum = /^\+?[0-9]{10,14}$/;
     if(event.target.value==event.target.value.match(phoneNum)){
       this.type=true
-
     }
     else{
       this.type=false

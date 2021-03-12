@@ -116,7 +116,6 @@ export class AdminSettingsComponent implements OnInit {
     }
 
     this.api.getData(data).then((res:any)=>{
-       //console.log("shift  data ======",res);
       if(res.status){
         this.shifts=res.success
         this.multishift=res.success
