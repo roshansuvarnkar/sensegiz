@@ -297,9 +297,6 @@ refreshCount(){
 }
 
 
-
-
-
 refreshSetting(){
   var data={
     userId:this.loginData.userId,
@@ -314,8 +311,6 @@ refreshSetting(){
     }
   })
 }
-
-
 
 maximumContactTime(){
   var date = new Date()
@@ -347,18 +342,12 @@ maximumContactTime(){
 
 }
 
-
-
-
-
 repeatedContacts(){
   var date = new Date()
   var data={
     userId:this.loginData.userId,
     zone:this.general.getZone(date),
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
-
-
   }
   this.api.getMaxContactDevice(data).then((res:any)=>{
     // console.log("max contact devices data ======",res);
@@ -368,9 +357,6 @@ repeatedContacts(){
   })
 
 }
-
-
-
 
 numOfcontactPerDay(){
   var date = new Date()
@@ -402,8 +388,6 @@ numOfcontactPerDay(){
 
       }
 
-
-
      if(this.language=='english'){
       var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
@@ -424,37 +408,31 @@ numOfcontactPerDay(){
                       dataPoints:this.dataPoints
                     }]
                   });
-                  chart.render();
-                  chart.destroy();
-               chart=null;
+      }
+      else if(this.language=='japanese'){
+      var chart = new CanvasJS.Chart("chartContainer", {
+                          animationEnabled: true,
+                          exportEnabled: true,
+                          title: {
+                            text: "一日当たりのトータル接触回数",
+                            fontColor: "#ef6c00",
+                          },
+                          axisY:{
 
-}
+                            gridThickness: 0
+                          },
+                          dataPointWidth: 30,
 
-else if(this.language=='japanese'){
- var chart = new CanvasJS.Chart("chartContainer", {
-                    animationEnabled: true,
-                    exportEnabled: true,
-                    title: {
-                      text: "一日当たりのトータル接触回数",
-                      fontColor: "#ef6c00",
-                    },
-                    axisY:{
+                          data: [{
+                            type: "column",
 
-                      gridThickness: 0
-                    },
-                    dataPointWidth: 30,
-
-                    data: [{
-                      type: "column",
-
-                      dataPoints:this.dataPoints
-                    }]
-                  });
-                  chart.render();
-                  chart.destroy();
-               chart=null;
-   }
-
+                            dataPoints:this.dataPoints
+                          }]
+                        });
+      }
+      chart.render();
+      chart.destroy()
+      chart=null;
       if(this.language=='english'){
       chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
@@ -477,31 +455,29 @@ else if(this.language=='japanese'){
       });
       }
       else if(this.language=='japanese'){
-      chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        exportEnabled: true,
-        title: {
-          text: "一日当たりのトータル接触回数",
-          fontColor: "#ef6c00",
-        },
-        axisY:{
+        chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "一日当たりのトータル接触回数",
+            fontColor: "#ef6c00",
+          },
+          axisY:{
 
-          gridThickness: 0
-        },
-        dataPointWidth: 30,
+            gridThickness: 0
+          },
+          dataPointWidth: 30,
+          data: [{
+            type: "column",
 
-        data: [{
-          type: "column",
-
-          dataPoints:this.dataPoints
-        }]
-      });
+            dataPoints:this.dataPoints
+          }]
+        });
       }
 
      chart.render();
 
     }
-
   })
  }
 }
