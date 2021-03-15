@@ -385,9 +385,7 @@ numOfcontactPerDay(){
               label:this.dates[i]
              }
            )
-
       }
-
      if(this.language=='english'){
       var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
@@ -469,14 +467,11 @@ numOfcontactPerDay(){
           dataPointWidth: 30,
           data: [{
             type: "column",
-
             dataPoints:this.dataPoints
           }]
         });
       }
-
      chart.render();
-
     }
   })
  }

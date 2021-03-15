@@ -161,6 +161,8 @@ export class HistoryReportComponent implements OnInit {
         // console.log('\nTotal response: ',res.count);
          // this.currentPageLength = parseInt(res.success[0].count);
           // this.tempLen=this.currentPageLength
+        }else{
+          this.currentPageLength=parseInt(res.count)
         }
       })
 
