@@ -1015,9 +1015,7 @@ if(this.type=='deptcummulative'){
   }
 
   temapraturecolors(val){
-    var cof=this.loginData.temperature
-    console.log(cof)
-      if(cof == "C"){
+
         if(val < 38){
           var a = {
               'color':'green',
@@ -1030,22 +1028,6 @@ if(this.type=='deptcummulative'){
           }
           return a
         }
-      }else{
-        if(val < 100.4){
-          var a = {
-              'color':'green',
-          }
-          return a
-        }
-        else if(val >=100.4){
-          var a = {
-            'color':'red',
-          }
-          return a
-        }
       }
-    }
-
-
-
+  
 }

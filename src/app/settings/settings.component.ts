@@ -896,6 +896,9 @@ export class SettingsComponent implements OnInit {
       }
       this.api.updateTemperatureFormat(data).then((res)=>{
         this.general.updateItem('sensegizlogin','temperature',data.temperatureFormat)
+        this.refreshSetting()
+        var msg='TemperatureFormat updated Successfully'
+        this.general.openSnackBar(msg,'')
         //console.log(res)
       })
      } catch(err){
