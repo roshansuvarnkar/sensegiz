@@ -27,6 +27,7 @@ export class SettingsComponent implements OnInit {
   buzzerConfigForm:FormGroup
   twoStepAuthForm:FormGroup
   languageForm:FormGroup
+  Temperaturescale:FormGroup
   loginData:any
   setting:any
   duration:any
@@ -123,6 +124,9 @@ export class SettingsComponent implements OnInit {
     this.scanningForm=this.fb.group({
       seconds:['',[Validators.required,Validators.max(60), Validators.min(1)]],
 
+    })
+    this.Temperaturescale=this.fb.group({
+      temperatureFormat:['',Validators.required]
     })
 
 
@@ -883,5 +887,20 @@ export class SettingsComponent implements OnInit {
    }
 
   }
+  onSubmitTemperature(value){
+    if(this.Temperaturescale.valid){
+     try{
+      var data={
+        userId:this.loginData.userId,
+        temperatureFormat:value.temperatureFormat
+      }
+      this.api.updateTemperatureFormat(data).then((res)=>{
+        this.general.updateItem('sensegizlogin','temperature',data.temperatureFormat)
+        //console.log(res)
+      })
+     } catch(err){
 
+     }
+    }
+  }
 }

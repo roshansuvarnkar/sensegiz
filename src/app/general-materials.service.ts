@@ -25,6 +25,8 @@ export class GeneralMaterialsService {
   SERVER_URL: string = environment.apiHost;
 
   ENCRYPT_KEY: string = environment.ENCRYPTKEY;
+  cof:any;
+  
   public loadingFreez : BehaviorSubject<any> = new BehaviorSubject<any>([])
 
   constructor(private _snackBar: MatSnackBar, private http:HttpClient) {
@@ -193,6 +195,26 @@ var momemts=Math.floor(pigArt.asMinutes())
     return timeZone
   }
 
+  temperatureconver(val,formate){
+    // console.log(val,formate)
+     if(formate == "C"){
+       if(val == 'NA'){
+         return val
+       }else{
+         return val+'°C'
+       }
+     }else{
+       if(val=="NA"){
+         return val
+       }else{
+         let temp = Number(val) * 1.8 + 32;
+         this.cof = Math.round(temp * 10) / 10;
+         return this.cof+"°F"
+       }
+
+     }
+
+      }
 
 
 

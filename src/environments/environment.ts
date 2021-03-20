@@ -8,11 +8,12 @@ export const environment = {
 //apiHost:'https://testdba.sensegiz.com:3000',
 // apiHost:'http://65.0.56.151:3000',
   //apiHost:'http://3.6.176.216:3000',
-  // apiHost:'http://3.6.7.251:3000',
- apiHost:'http://15.207.93.193:3000',
- //apiHost:'http://35.154.8.192:3000',
+  // apiHost:'http://15.207.93.193:3000',
+
+
+  apiHost:'http://15.207.93.193:3000',
   socketHost:'http://15.207.93.193:3010',
-  
+
   ENCRYPTKEY:"KeYiSGDQdtgUbfu7LpHpGY8G4VzCczMG",
 
   production: false

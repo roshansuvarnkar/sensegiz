@@ -26,7 +26,7 @@ loginData:any
 findData:any=[]
 findDataTemp:any
 dataSource: any = [];
-displayedColumns = ['i','deviceId','deviceName','empId','shift','department','infected','isolated','batteryStatus','emailId','mobileNum',	'edit',	'deallocate','delete'];
+displayedColumns = ['i','deviceId','deviceName','empId','shift','department','infected','temperature','isolated','batteryStatus','emailId','mobileNum',	'edit',	'deallocate','delete'];
 shift = new FormControl('');
 shifts:any=[]
 elementsTemp:any=[]
@@ -103,7 +103,7 @@ refreshFinds(){
   }
 
   this.api.getData(data).then((res:any)=>{
-   // console.log("find device data ======",res);
+   console.log("find device data ======",res);
     if(res.status){
      this.findData=[]
       for (let i = 0; i <res.success.length; i++) {
@@ -115,6 +115,9 @@ refreshFinds(){
               deviceName: res.success[i].deviceName,
               shift: res.success[i].shiftName ,
               infected: res.success[i].infected,
+              temperature:this.general.temperatureconver(res.success[i].temperature,this.loginData.temperature),
+              temperatureTimestamp:res.success[i].temperatureTimestamp,
+              temp:res.success[i].temperature,
               isolated: res.success[i].isolated,
               department: res.success[i].department,
               batteryUpdatedOn:res.success[i].batteryUpdatedOn,
@@ -616,5 +619,40 @@ departmentSelect(a,b){
     }
   })
 }
+temperatureValue(value){
+  // console.log(value)
+   return value
+ }
+ temapraturecolors(val){
+   var cof=this.loginData.temperature
+   if(cof=="C"){
+     if(val < 38){
+       var a = {
+           'color':'green',
+       }
+       return a
+     }
+     else if(val >=38){
+       var a = {
+         'color':'red',
+       }
+       return a
+     }
+   }else{
+     if(val < 100.4){
+       var a = {
+           'color':'green',
+       }
+       return a
+     }
+     else if(val >=100.4){
+       var a = {
+         'color':'red',
+       }
+       return a
+     }
+   }
+
+ }
 
 }

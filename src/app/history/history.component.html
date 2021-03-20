@@ -631,8 +631,61 @@
     </mat-card-content>
   </mat-card>
 
+<!-- -------------------------------- -->
 
+<mat-card class="temparature">
+  <span class="card-head">
+    <mat-card-title color="primary">
+      Report Based On Temperature
+    </mat-card-title>
+    <mat-card-subtitle>
+      Enter username and date range
+    </mat-card-subtitle>
+  </span>
+  <mat-card-content>
+    <div class="radio">
+    <mat-radio-group  color="primary">
+      <mat-radio-button [value]="1" name="small" (change)="onclickTemperature(7)">Last week</mat-radio-button>
+      <mat-radio-button [value]="2" name="small" (change)="onclickTemperature(14)">Last two weeks</mat-radio-button>
+    </mat-radio-group>
+    </div>
+    <form [formGroup]="temparature" (ngSubmit)="onSubmitTemperature(temparature.value)">
+      <mat-form-field class="example-full-width">
+        <input type='text' matInput placeholder="User Name" formControlName="deviceName"  [matAutocomplete]="auto"  (keyup)="temperatureSuggestion($event)" required>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let user of username" [value]="user">
+            {{user}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error>
+          Please provide a valid user name
+        </mat-error>
+      </mat-form-field>
 
+      <mat-form-field>
+        <mat-label>From date</mat-label>
+        <input matInput [matDatepicker]="myDatepicker15" formControlName="fromDate" required>
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker15"></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker15></mat-datepicker>
+        <mat-error>
+          Please provide a valid from date
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>To date</mat-label>
+        <input matInput [matDatepicker]="myDatepicker16" formControlName="toDate" required>
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker16"></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker16></mat-datepicker>
+        <mat-error>
+          Please provide a valid to date
+        </mat-error>
+      </mat-form-field>
+<br><br><br>
+      <button class="btn-set" mat-raised-button [disabled]="!temparature.valid" color="primary">Submit</button>
+    </form>
+  </mat-card-content>
+</mat-card>
 
 
 </div>

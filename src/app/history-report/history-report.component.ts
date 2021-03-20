@@ -52,6 +52,7 @@ export class HistoryReportComponent implements OnInit {
   displayedColumns5: string[] = ['i','username','department','count','totTime'];
   displayedColumns6: string[] = ['i','deviceId','deviceName','department','dataReceivedTime'];
   displayedColumns7: string[] = ['i','username','department','count','totTime'];
+  displayedColumns8: string[] = ['i','deviceName','temperature','temperatureTimestamp']
   date:any
   fileName:any
   showSpinner:boolean=false
@@ -144,6 +145,29 @@ export class HistoryReportComponent implements OnInit {
     })
 
   }
+  if(this.type=='temperature'){
+    var data5={
+      userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+      deviceName:this.deviceName,
+      fromDate: this.from,
+      toDate:this.to,
+      zone:this.general.getZone(this.date)
+    }
+
+      this.api.temperatureDataCount(data5).then((res:any)=>{
+      //console.log("length of geo fence report on device name ======",res);
+        if(res.status){
+          // console.log('\nTotal response: ',res.success[0].count);
+          this.currentPageLength = parseInt(res.success[0].count);
+         // console.log( this.currentPageLength)
+          // this.tempLen=this.currentPageLength
+        }else{
+          this.currentPageLength = parseInt(res.success[0].count);
+        }
+      })
+
+    }
   if(this.type=='deptcummulative'){
     var date=new Date()
     var data6={
@@ -168,6 +192,7 @@ export class HistoryReportComponent implements OnInit {
 
     }
   }
+
   loadData(limit=10,offset=0){
 
     if(this.type == 'basedOnDate'){
@@ -189,6 +214,9 @@ export class HistoryReportComponent implements OnInit {
     }
     if(this.type == 'deptcummulative'){
       this.departmentReport(limit=limit,offset=offset)
+    }
+    if(this.type == 'temperature'){
+      this.temperatureData(limit=limit,offset=offset)
     }
 
 }
@@ -251,6 +279,45 @@ basedOnDate(limit,offset){
   })
 
 }
+
+temperatureData(limit,offset){
+  var data={
+    userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+    deviceName:this.deviceName,
+    fromDate: this.from,
+    toDate:this.to,
+    offset:offset,
+    limit:limit,
+    zone:this.general.getZone(this.date)
+  }
+
+ // console.log(data)
+  this.api.temperatureData(data).then((res:any)=>{
+  console.log(res)
+    this.liveData=[]
+    this.totTime=[]
+    for(let i=0;i<res.success.length;i++){
+    if(res.status){
+      this.liveData.push({
+        i:i+1,
+        deviceName:res.success[i].deviceName,
+        temperature:this.general.temperatureconver(res.success[i].temperature,this.loginData.temperature),
+        temp:res.success[i].temperature,
+        temperatureTimestamp:res.success[i].timestamp,
+      });
+    }
+    this.dataSource = new MatTableDataSource(this.liveData);
+    setTimeout(() => {
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator
+       })
+  }
+  })
+
+}
+
+
 basedOnFindName(limit,offset){
   var data={
     userId:this.loginData.userId,
@@ -625,6 +692,7 @@ if(this.type=='summaryReport'){
 
 }
 
+
  if(this.type=='cummulative'){
   var fileName=''
 
@@ -645,6 +713,25 @@ if(this.type=='summaryReport'){
 
      // console.log("report data recieved ======",res);
 
+    })
+  }
+
+  if(this.type=='temperature'){
+    var date=new Date()
+    data={
+      userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+      deviceName:this.deviceName,
+      fromDate: this.from,
+      toDate:this.to,
+      zone:this.general.getZone(date),
+      type:this.type
+    }
+   // console.log(data)
+
+    fileName="Temperature- "+this.deviceName
+    this.api.downloadTemperatureData(data,fileName).then((res:any)=>{
+      console.log(res)
     })
   }
 /* ------------------------------- */
@@ -926,6 +1013,38 @@ if(this.type=='deptcummulative'){
     })
 
   }
+
+  temapraturecolors(val){
+    var cof=this.loginData.temperature
+    console.log(cof)
+      if(cof == "C"){
+        if(val < 38){
+          var a = {
+              'color':'green',
+          }
+          return a
+        }
+        else if(val >=38){
+          var a = {
+            'color':'red',
+          }
+          return a
+        }
+      }else{
+        if(val < 100.4){
+          var a = {
+              'color':'green',
+          }
+          return a
+        }
+        else if(val >=100.4){
+          var a = {
+            'color':'red',
+          }
+          return a
+        }
+      }
+    }
 
 
 
