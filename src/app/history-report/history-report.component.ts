@@ -294,7 +294,7 @@ temperatureData(limit,offset){
 
  // console.log(data)
   this.api.temperatureData(data).then((res:any)=>{
-  console.log(res)
+  //console.log(res)
     this.liveData=[]
     this.totTime=[]
     for(let i=0;i<res.success.length;i++){
@@ -1029,5 +1029,5 @@ if(this.type=='deptcummulative'){
           return a
         }
       }
-  
+
 }

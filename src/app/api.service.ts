@@ -2545,7 +2545,6 @@ downloadReport(data,fileName){
     }
     return new Promise((resolve,reject)=>{
       this.http.post(url,body,httpOptions).subscribe((res:any)=>{
-        console.log("getdata",res.data)
         resolve(res.data)
       })
     })
@@ -2561,7 +2560,6 @@ updateTemperatureFormat(data){
   }
   return new Promise((resolve,reject)=>{
     this.http.post(url,body,httpOptions).subscribe((res:any)=>{
-      console.log(res.data)
       resolve(res.data)
     })
   })
@@ -2602,7 +2600,6 @@ temperatureDataCount(data) {
   let url = this.host + '/temperatureDataCount';
   return new Promise((resolve, reject) => {
     this.http.post(url, body, httpOptions).subscribe((res: any) => {
-      console.log(res.data)
       resolve(res.data);
     });
   });

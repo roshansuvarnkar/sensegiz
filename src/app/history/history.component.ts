@@ -621,9 +621,9 @@ onclickSummaryReport(data){
        tblName:'temperatureData'
 
      }
-    console.log("data==",data)
+    //console.log("data==",data)
      this.api.getUsernameSuggestion(data).then((res:any)=>{
-      console.log("res==",res)
+     // console.log("res==",res)
        if(res.status){
          this.username=[]
         for(let i=0;i<res.success.length;i++){

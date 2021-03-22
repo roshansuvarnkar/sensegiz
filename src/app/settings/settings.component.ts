@@ -8,6 +8,7 @@ import { EditSettingShiftComponent } from '../edit-setting-shift/edit-setting-sh
 import { saveAs  } from 'file-saver';
 
 
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -51,6 +52,7 @@ export class SettingsComponent implements OnInit {
   min:any=[]
   sec:any=[]
   language:any
+  temper:any
   tempImagePath:any
   // buzzerValue:any=[1,2,3,4,5]
 
@@ -66,7 +68,11 @@ export class SettingsComponent implements OnInit {
     this.loginData = this.login.Getlogin()
     this.loginData = JSON.parse(this.loginData)
     this.language=this.loginData.language
+    this.temper=  this.loginData.temperature
+    //console.log("language==",this.loginData)
     //console.log("language==",this.language)
+    //console.log("language==",this.temper)
+
     this.refreshSetting()
     this.maxThresholdMinsec()
 
@@ -138,7 +144,9 @@ export class SettingsComponent implements OnInit {
     //   language: ['', Validators.required],
     // });
 
-
+    this.Temperaturescale.patchValue({
+      temperatureFormat:this.temper
+    })
 
   }
 
@@ -148,13 +156,15 @@ export class SettingsComponent implements OnInit {
   }
 
   refreshSetting(){
+
+
     var data={
       userId:this.loginData.userId,
       subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
       tblName:'deviceSetting'
     }
     this.api.getData(data).then((res:any)=>{
-    //  console.log("setting data page ======",res);
+     // console.log("setting data page ======",res);
       if(res.status){
         this.setting = res.success[0]
         this.duration=res.success[0].durationThreshold
@@ -894,11 +904,15 @@ export class SettingsComponent implements OnInit {
         userId:this.loginData.userId,
         temperatureFormat:value.temperatureFormat
       }
-      this.api.updateTemperatureFormat(data).then((res)=>{
-        this.general.updateItem('sensegizlogin','temperature',data.temperatureFormat)
-        this.refreshSetting()
-        var msg='TemperatureFormat updated Successfully'
-        this.general.openSnackBar(msg,'')
+      this.api.updateTemperatureFormat(data).then((res:any)=>{
+        if(res.status){
+          this.general.updateItem('sensegizlogin','temperature',data.temperatureFormat)
+          this.refreshSetting()
+          var msg='TemperatureFormat updated Successfully'
+          this.general.openSnackBar(msg,'')
+
+        }
+
         //console.log(res)
       })
      } catch(err){

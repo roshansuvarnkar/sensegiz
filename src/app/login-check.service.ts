@@ -46,7 +46,7 @@ export class LoginCheckService {
 
   loginData(){
     var status = this.general.decrypt(localStorage.getItem('sensegizlogin'))
-   //var status = localStorage.getItem('sensegizlogin')
+  //console.log(status)
    if(status  && status!='undefined'){
       return status
     }
@@ -108,7 +108,7 @@ export class LoginCheckService {
   }
   loginStatusMenu(){
     var status = this.general.decrypt(localStorage.getItem('sensegizlogin'))
-  // var status = localStorage.getItem('sensegizlogin')
+
    var route = window.location.pathname
     // console.log("route==",route)
     if(route !='/login' && route!='/admin-login' ){
