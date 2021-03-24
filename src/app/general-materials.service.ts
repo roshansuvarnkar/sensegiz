@@ -210,8 +210,9 @@ var momemts=Math.floor(pigArt.asMinutes())
         /*  let temp = Number(val) * 1.8 + 32;
          this.cof = Math.round(temp * 10) / 10;
          return this.cof+"°F" */
-         let temp = Number(val) * 9/5 + 32;
-         return temp+"°F"
+         let temp = (Number(val) * 9/5) + 32;
+         this.cof = Math.floor(temp * 100) / 100;
+         return this.cof+"°F"
        }
 
      }
