@@ -26,7 +26,7 @@ export class GeneralMaterialsService {
 
   ENCRYPT_KEY: string = environment.ENCRYPTKEY;
   cof:any;
-  
+
   public loadingFreez : BehaviorSubject<any> = new BehaviorSubject<any>([])
 
   constructor(private _snackBar: MatSnackBar, private http:HttpClient) {
@@ -207,9 +207,11 @@ var momemts=Math.floor(pigArt.asMinutes())
        if(val=="NA"){
          return val
        }else{
-         let temp = Number(val) * 1.8 + 32;
+        /*  let temp = Number(val) * 1.8 + 32;
          this.cof = Math.round(temp * 10) / 10;
-         return this.cof+"°F"
+         return this.cof+"°F" */
+         let temp = Number(val) * 9/5 + 32;
+         return temp+"°F"
        }
 
      }
