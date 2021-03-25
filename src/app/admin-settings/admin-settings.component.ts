@@ -796,7 +796,7 @@ selectfinds(event){
         if(res.status){
           this.temperaturehrsmin.reset()
           this.refreshSetting()
-          var msg='updateTemperaturePeriod'
+          var msg='Update Temperature Period Successfully'
           this.general.openSnackBar(msg,'')
         }
 
