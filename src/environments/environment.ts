@@ -11,8 +11,8 @@ export const environment = {
   // apiHost:'http://15.207.93.193:3000',
 
 
-  apiHost:'http://15.207.93.193:3000',
-  socketHost:'http://15.207.93.193:3010',
+  apiHost:'http://65.1.226.0:3000',
+  socketHost:'http://65.1.226.0:3010',
 
   ENCRYPTKEY:"KeYiSGDQdtgUbfu7LpHpGY8G4VzCczMG",
 

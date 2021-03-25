@@ -24,6 +24,7 @@ export class AdminSettingsComponent implements OnInit {
   sendDataForm:FormGroup
   scanCountForm:FormGroup
   multishiftingselect:FormGroup
+  temperaturehrsmin:FormGroup
   setting:any=[]
   min:any=[]
   sec:any=[]
@@ -102,6 +103,10 @@ export class AdminSettingsComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.dataGet = JSON.parse(params.record) ;
       // console.log("data==",this.dataGet.userId)
+  })
+  this.temperaturehrsmin=this.fb.group({
+    tempPeriodhours:[''],
+    tempPeriodminutes:['']
   })
   this. refreshSetting()
   this.minThresholdMinsec()
@@ -780,4 +785,20 @@ selectfinds(event){
       this.standered=false
     }
   }
+  onSubmittemperaturehoursmints(values){
+    var data={
+      userId:this.dataGet.userId,
+      tempPeriodhours:values.tempPeriodhours,
+      tempPeriodminutes:values.tempPeriodminutes,
+    }
+    console.log(data)
+      this.api.updateTemperaturePeriod(data).then((res:any)=>{
+        this.temperaturehrsmin.reset()
+        this.refreshSetting()
+        var msg='updateTemperaturePeriod'
+        this.general.openSnackBar(msg,'')
+        console.log(res)
+      })
+
+    }
 }
