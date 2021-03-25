@@ -791,13 +791,15 @@ selectfinds(event){
       tempPeriodhours:values.tempPeriodhours,
       tempPeriodminutes:values.tempPeriodminutes,
     }
-    console.log(data)
+
       this.api.updateTemperaturePeriod(data).then((res:any)=>{
-        this.temperaturehrsmin.reset()
-        this.refreshSetting()
-        var msg='updateTemperaturePeriod'
-        this.general.openSnackBar(msg,'')
-        console.log(res)
+        if(res.status){
+          this.temperaturehrsmin.reset()
+          this.refreshSetting()
+          var msg='updateTemperaturePeriod'
+          this.general.openSnackBar(msg,'')
+        }
+
       })
 
     }
