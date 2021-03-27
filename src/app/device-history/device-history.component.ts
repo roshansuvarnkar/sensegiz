@@ -36,11 +36,16 @@ export class DeviceHistoryComponent implements OnInit {
     this.language=this.loginData.language
   //  console.log("language==",this.language)
 
-    this.route.queryParams.subscribe(params => {
+  /*   this.route.queryParams.subscribe(params => {
         this.deviceData = JSON.parse(params.record) ;
       //   console.log("records=",this.deviceData )
         this.getTotalCount()
         this.refreshFinds()
+    }) */
+    this.general.deviceHistory.subscribe((res:any)=>{
+      this.deviceData =res
+      this.refreshFinds()
+      this.getTotalCount()
     })
     //setInterval(()=>{this.refreshFinds()},60*1000)
   }

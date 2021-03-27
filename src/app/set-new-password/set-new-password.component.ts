@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl,FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { LoginComponent } from '../login/login.component';
-
+import {GeneralMaterialsService} from '../general-materials.service'
 import { LoginCheckService } from '../login-check.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -20,14 +20,18 @@ export class SetNewPasswordComponent implements OnInit {
   passwordIcon: string = 'visibility_off';
   passwordType1: string = 'password';
   passwordIcon1: string = 'visibility_off';
-  constructor(private fb:FormBuilder,private login:LoginCheckService,private api:ApiService, private router: Router,private route: ActivatedRoute) { }
+  constructor(private fb:FormBuilder,private login:LoginCheckService,private api:ApiService,
+     private router: Router,private route: ActivatedRoute,private general:GeneralMaterialsService) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(res =>{
+   /*  this.route.queryParams.subscribe(res =>{
       this.userData=JSON.parse(res.user)
       //console.log("user info==",this.userData)
+    }) */
+    this.general.setpassword.subscribe((res:any)=>{
+      this.userData=res;
     })
-
+    
     this.setPasswordForm=this.fb.group({
       password:['',[Validators.required,Validators.minLength(8),Validators.maxLength(20),Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) ]],
       confirmPassword:['',[Validators.required,Validators.minLength(8),Validators.maxLength(20),Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).*$/) ]],

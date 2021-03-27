@@ -7,43 +7,53 @@
                     <input matInput type="text"  formControlName="username" placeholder="Enter Email Id / Mobile Number" (keyup)="validate($event)" required>
                 </mat-form-field> <br>
                 <mat-error *ngIf="invalidUser" class="otp-exp">
-                    Invalid user
+                    Invalid User, Please Contact Admin
                 </mat-error>
-                <span class="dail" *ngIf="type">Note* : Please provide registered mobile number with valid country dail code 
+
+                <span class="dail" *ngIf="type">Note* : Please provide registered mobile number with valid country dail code
                     if you are authenticating through mobile number to get OTP.
                 </span>
-            
+
                <div class="flex1" *ngIf="otpField">
                 <mat-form-field class="otp">
-                    <input matInput id="codeBox1" class="codebox" type="text" maxlength="1" formControlName="otp1" (keyup)="onKeyUpEvent(1, $event)" autocomplete="off"> 
+                    <input matInput id="codeBox1" class="codebox" type="text" maxlength="1" formControlName="otp1" (keyup)="onKeyUpEvent(1, $event)" autocomplete="off">
                 </mat-form-field> &nbsp;&nbsp;
                 <mat-form-field class="otp">
-                    <input matInput id="codeBox2" class="codebox" type="text" maxlength="1" formControlName="otp2" (keyup)="onKeyUpEvent(2, $event)" autocomplete="off"> 
+                    <input matInput id="codeBox2" class="codebox" type="text" maxlength="1" formControlName="otp2" (keyup)="onKeyUpEvent(2, $event)" autocomplete="off">
                 </mat-form-field >&nbsp;&nbsp;
                 <mat-form-field class="otp">
-                    <input matInput id="codeBox3" class="codebox" type="text" maxlength="1" formControlName="otp3" (keyup)="onKeyUpEvent(3, $event)" autocomplete="off"> 
+                    <input matInput id="codeBox3" class="codebox" type="text" maxlength="1" formControlName="otp3" (keyup)="onKeyUpEvent(3, $event)" autocomplete="off">
                 </mat-form-field>&nbsp;&nbsp;
                 <mat-form-field class="otp">
                     <input matInput id="codeBox4" class="codebox" type="text" maxlength="1" formControlName="otp4" (keyup)="onKeyUpEvent(4, $event)" autocomplete="off" >
                 </mat-form-field>&nbsp;&nbsp;
-               
+
                </div>
                <mat-error *ngIf="otpExpired" class="otp-exp">
                 OTP expired
             </mat-error>
-            <mat-error *ngIf="invalidOTP"  class="otp-exp"> 
+            <mat-error *ngIf="invalidOTP"  class="otp-exp">
                 Invalid OTP
             </mat-error>
+            <ngx-recaptcha2 #captchaElem
+                [siteKey]="siteKey"
+                 [theme]="theme"
+                 [useGlobalDomain]="false"
+                 [size]='size'
+                 (success)="handleSuccess($event)"
+
+               formControlName="recaptcha">
+              </ngx-recaptcha2><br>
             <div class="btn-otp">
-                <button *ngIf="sendOTP" class="sendotp" mat-raised-button color="primary" (click)="sendOtp(twoStepAuthForm.value.username)">Send OTP</button>&nbsp;&nbsp;
+                <button *ngIf="sendOTP" class="sendotp" mat-raised-button color="primary" [disabled]="!twoStepAuthForm.valid" (click)="sendOtp(twoStepAuthForm.value)">Send OTP</button>&nbsp;&nbsp;
                 <button class="btn-sub" mat-raised-button color="primary" [disabled]="!twoStepAuthForm.valid" *ngIf="otpField" (click)="submit(twoStepAuthForm.value)">Submit</button>&nbsp;&nbsp;
- 
-            </div> 
-            
-            <span><p (click)="sendOtp(twoStepAuthForm.value.username)" class="resend">Resend OTP</p></span>
+
+            </div>
+
+            <span><p (click)="sendOtp(twoStepAuthForm.value)" class="resend">Resend OTP</p></span>
             </form>
         </mat-card-content>
-    
+
     </mat-card>
     <!-- <mat-card class="auth-card" *ngIf="language=='japanese'">
         <mat-card-subtitle>二段階認証</mat-card-subtitle>
@@ -55,40 +65,40 @@
                 <mat-error *ngIf="invalidUser" class="otp-exp">
                     Invalid user
                 </mat-error>
-                <span class="dail" *ngIf="type">注：登録済みの携帯電話番号に有効な国のダイヤルコードを入力してください 
+                <span class="dail" *ngIf="type">注：登録済みの携帯電話番号に有効な国のダイヤルコードを入力してください
                     OTPを取得するために携帯電話番号を介して認証している場合……
                 </span>
-            
+
                <div class="flex1" *ngIf="otpField">
                 <mat-form-field class="otp">
-                    <input matInput id="codeBox1" class="codebox" type="text" maxlength="1" formControlName="otp1" (keyup)="onKeyUpEvent(1, $event)" autocomplete="off"> 
+                    <input matInput id="codeBox1" class="codebox" type="text" maxlength="1" formControlName="otp1" (keyup)="onKeyUpEvent(1, $event)" autocomplete="off">
                 </mat-form-field> &nbsp;&nbsp;
                 <mat-form-field class="otp">
-                    <input matInput id="codeBox2" class="codebox" type="text" maxlength="1" formControlName="otp2" (keyup)="onKeyUpEvent(2, $event)" autocomplete="off"> 
+                    <input matInput id="codeBox2" class="codebox" type="text" maxlength="1" formControlName="otp2" (keyup)="onKeyUpEvent(2, $event)" autocomplete="off">
                 </mat-form-field >&nbsp;&nbsp;
                 <mat-form-field class="otp">
-                    <input matInput id="codeBox3" class="codebox" type="text" maxlength="1" formControlName="otp3" (keyup)="onKeyUpEvent(3, $event)" autocomplete="off"> 
+                    <input matInput id="codeBox3" class="codebox" type="text" maxlength="1" formControlName="otp3" (keyup)="onKeyUpEvent(3, $event)" autocomplete="off">
                 </mat-form-field>&nbsp;&nbsp;
                 <mat-form-field class="otp">
                     <input matInput id="codeBox4" class="codebox" type="text" maxlength="1" formControlName="otp4" (keyup)="onKeyUpEvent(4, $event)" autocomplete="off" >
                 </mat-form-field>&nbsp;&nbsp;
-               
+
                </div>
                <mat-error *ngIf="otpExpired" class="otp-exp">
                 OTPの有効期限が切れました
             </mat-error>
-            <mat-error *ngIf="invalidOTP"  class="otp-exp"> 
+            <mat-error *ngIf="invalidOTP"  class="otp-exp">
                 OTP（ワンタイムパスワード）を無効にする
             </mat-error>
             <div class="btn-otp">
                 <button *ngIf="sendOTP" class="sendotp" mat-raised-button color="primary" (click)="sendOtp(twoStepAuthForm.value.username)"> OTPを送信する</button>&nbsp;&nbsp;
                 <button class="btn-sub" mat-raised-button color="primary" [disabled]="!twoStepAuthForm.valid" *ngIf="otpField" (click)="submit(twoStepAuthForm.value)">レポート作成</button>&nbsp;&nbsp;
- 
-            </div> 
-            
+
+            </div>
+
             <span><p (click)="sendOtp(twoStepAuthForm.value.username)" class="resend">OTPを再送する  </p></span>
             </form>
         </mat-card-content>
-    
+
     </mat-card> -->
 </div>

@@ -28,7 +28,9 @@ export class GeneralMaterialsService {
   cof:any;
 
   public loadingFreez : BehaviorSubject<any> = new BehaviorSubject<any>([])
-
+  public deviceHistory: BehaviorSubject<any>= new BehaviorSubject<any>([]);
+  public setpassword:BehaviorSubject<any>= new BehaviorSubject<any>([]);
+  
   constructor(private _snackBar: MatSnackBar, private http:HttpClient) {
     // this.logout()
  /*     var deData = CryptoJS.AES.decrypt("U2FsdGVkX1+ud8O+9XUjw6zd5NWIKVhxOjmvO1t9zk4QbvIdSN…zRIAxp2YxPkwjw+6YxKlcVOsYeTh141FnAffiQhRv8iufooN2", this.ENCRYPT_KEY);

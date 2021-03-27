@@ -39,6 +39,7 @@
     "moment-timezone-picker": "^2.1.0",
     "ng-circle-progress": "^1.5.1",
     "ngx-bootstrap": "^5.6.1",
+    "ngx-captcha": "^9.0.1",
     "ngx-device-detector": "^1.4.4",
     "ngx-international-phone-number2": "^1.2.4",
     "ngx-intl-tel-input": "^3.0.5",

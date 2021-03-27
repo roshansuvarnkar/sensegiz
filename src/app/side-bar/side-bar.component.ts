@@ -5,7 +5,7 @@ import { LoginCheckService } from '../login-check.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatMenuTrigger} from '@angular/material/menu';
-
+import {GeneralMaterialsService } from '../general-materials.service'
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
@@ -29,7 +29,8 @@ export class SideBarComponent implements OnInit {
   date1:any
   index:any
   language:any
-  constructor(private api: ApiService,private login:LoginCheckService,private router:Router) { }
+  constructor(private api: ApiService,private login:LoginCheckService,
+    private router:Router, private general:GeneralMaterialsService,) { }
 
   ngOnInit(): void {
     this.loginData = this.login.Getlogin()
@@ -73,7 +74,8 @@ export class SideBarComponent implements OnInit {
 
   clickDevice(data){
    // console.log("data====",data)
-    this.router.navigate(['/device-history'], { queryParams: { record: JSON.stringify(data) } });
+    this.router.navigate(['/device-history']);
+    this.general.deviceHistory.next(data)
   }
 
 
