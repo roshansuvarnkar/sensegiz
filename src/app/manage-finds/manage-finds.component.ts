@@ -44,6 +44,10 @@ isDesktopDevice:boolean
 deviceInfo=null
 userType:any
 departments:any
+currentPageLength:any=10
+currentPageSize:any=10
+limit:any
+offset:any
 @ViewChild('fileInput') fileInput:ElementRef
 constructor(public dialog: MatDialog,
   private api: ApiService,
@@ -88,22 +92,25 @@ ngOnInit(): void {
   this.refreshFinds()
   this.refreshShift()
   this.departmentList()
-
-
-
+  this.getDataCount()
 }
 
+refreshFinds(limit=10,offset=0){
+  this.loadData(limit=limit,offset=offset)
 
+  }
 
-refreshFinds(){
+loadData(limit,offset){
   var data={
     userId:this.loginData.userId,
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+    limit:limit,
+    offset:offset,
     tblName:'deviceRegistration'
   }
 
   this.api.getData(data).then((res:any)=>{
-  // console.log("find device data ======",res);
+   console.log("find device data ======",res);
     if(res.status){
      this.findData=[]
       for (let i = 0; i <res.success.length; i++) {
@@ -135,11 +142,10 @@ refreshFinds(){
       this.dataSource = new MatTableDataSource(this.findData);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+       // this.dataSource.paginator = this.paginator;
         // this.paginator.length = this.currentPageSize
       })
       this.elementsTemp = this.findData
-
     }
   })
 }
@@ -638,4 +644,27 @@ temperatureValue(value){
      }
    }
 
+getUpdate(event) {
+  // console.log("paginator event",event);
+  // console.log("paginator event length", this.currentPageLength);
+  this.limit = event.pageSize
+ this.offset = event.pageIndex*event.pageSize
+  // console.log("limit==",limit,"offset==",offset)
+ this.refreshFinds(this.limit,this.offset)
+}
+getDataCount(){
+  var data={
+    userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+    tblName:'deviceRegistration'
+  }
+  this.api.getDataCount(data).then((res:any)=>{
+      console.log("length of location report on device name ======",res);
+       if(res.status){
+         console.log('\nTotal response: ',res.success[0].count);
+         this.currentPageLength = parseInt(res.success[0].count);
+
+       }
+     })
+}
 }

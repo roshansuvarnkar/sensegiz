@@ -23,6 +23,10 @@ export class ManageUsersComponent implements OnInit {
   userData:any=[]
   userType:any
   dataSource: any = [];
+  currentPageLength:any=10
+  currentPageSize:any=10
+  limit:any
+  offset:any
   displayedColumns = ['i','mobileNum','emailId','edit',	'delete'];
 
   constructor(public dialog: MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,) {}
@@ -51,14 +55,19 @@ export class ManageUsersComponent implements OnInit {
     this.language=this.loginData.language
    // console.log("language==",this.language)
     this.refreshUsers()
+    this.getDataCount()
   }
 
+  refreshUsers(limit=10,offset=0){
+    this.loadData(limit=limit,offset=offset)
+  }
 
-
-  refreshUsers(){
+  loadData(limit,offset){
     var data={
         userId:this.loginData.userId,
         subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 &&  this.loginData.id!=0) ? this.loginData.id : 0,
+        limit:limit,
+        offset:offset,
         tblName:'userDetails'
       }
 
@@ -146,6 +155,28 @@ export class ManageUsersComponent implements OnInit {
 
   }
 
+  getUpdate(event) {
+    // console.log("paginator event",event);
+    // console.log("paginator event length", this.currentPageLength);
+    this.limit = event.pageSize
+   this.offset = event.pageIndex*event.pageSize
+    // console.log("limit==",limit,"offset==",offset)
+  this.refreshUsers(this.limit,this.offset)
+  }
+  getDataCount(){
+    var data={
+      userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+      tblName:'userDetails'
+    }
+    this.api.getDataCount(data).then((res:any)=>{
+        console.log("length of location report on device name ======",res);
+         if(res.status){
+           console.log('\nTotal response: ',res.success[0].count);
+           this.currentPageLength = parseInt(res.success[0].count);
 
+         }
+       })
+  }
 
 }

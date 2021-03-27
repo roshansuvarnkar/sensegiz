@@ -150,8 +150,15 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
       </table>
-      <mat-paginator   pageSize="10" [pageSizeOptions] = "[5, 10, 25, 100]" showFirstLastButtons ></mat-paginator>
-  </div>
+     <!--  <mat-paginator   pageSize="10" [pageSizeOptions] = "[5, 10, 25, 100]" showFirstLastButtons ></mat-paginator> -->
+     <mat-paginator
+     (page)="getUpdate($event)"
+     [length] = "currentPageLength"
+     [pageSize]="currentPageSize"
+     [pageSizeOptions] = "[5, 10, 25, 100]"
+     showFirstLastButtons
+ ></mat-paginator>
+    </div>
 </div>
 
  <!--  <div class="mat-elevation-z8" *ngIf="language=='japanese'">

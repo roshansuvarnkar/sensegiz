@@ -25,6 +25,10 @@ export class ManageCoinsComponent implements OnInit {
   coindDataTemp:any=[]
   dataSource: any = [];
   inserted:any=[]
+  currentPageLength:any=10
+currentPageSize:any=10
+limit:any
+offset:any
   displayedColumns = ['i','coinId','coinName','gatewayId','batteryStatus',	'edit',	'delete'];
 
 
@@ -40,6 +44,7 @@ constructor(public dialog: MatDialog,
     this.userType=this.loginData.type
 
     this.refreshCoins()
+    this.getDataCount()
   }
 
   openDialog(): void {
@@ -60,10 +65,17 @@ constructor(public dialog: MatDialog,
 
   }
 
-  refreshCoins(){
+  refreshCoins(limit=10,offset=0){
+  this.loadData(limit=limit,offset=offset)
+
+  }
+
+  loadData(limit,offset){
     var data={
       userId:this.loginData.userId,
       subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+      limit:limit,
+      offset:offset,
       tblName:'coinRegistration'
     }
 
@@ -95,7 +107,7 @@ constructor(public dialog: MatDialog,
       this.dataSource = new MatTableDataSource(this.coinData);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+       // this.dataSource.paginator = this.paginator;
         // this.paginator.length = this.currentPageSize
       })
       this.coindDataTemp=this.coinData
@@ -189,6 +201,30 @@ search(a){
     this.dataSource.filter =a.trim().toLowerCase()
 
   })
+}
+
+getUpdate(event) {
+  // console.log("paginator event",event);
+  // console.log("paginator event length", this.currentPageLength);
+  this.limit = event.pageSize
+ this.offset = event.pageIndex*event.pageSize
+  // console.log("limit==",limit,"offset==",offset)
+ this.refreshCoins(this.limit,this.offset)
+}
+getDataCount(){
+  var data={
+    userId:this.loginData.userId,
+    subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+    tblName:'coinRegistration'
+  }
+  this.api.getDataCount(data).then((res:any)=>{
+      console.log("length of location report on device name ======",res);
+       if(res.status){
+         console.log('\nTotal response: ',res.success[0].count);
+         this.currentPageLength = parseInt(res.success[0].count);
+
+       }
+     })
 }
 
 }
