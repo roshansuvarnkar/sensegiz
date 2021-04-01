@@ -10,6 +10,9 @@
         <mat-error *ngIf="loginInvalid">
           Invalid User Name or Password
         </mat-error>
+        <mat-error *ngIf="block">
+          You are not allowed to login. Please Contact Admin
+        </mat-error>
         <mat-form-field class="full-width-input">
           <input matInput placeholder="Email" formControlName="userName" autocomplete="off" required>
           <mat-error>
