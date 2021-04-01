@@ -1005,10 +1005,10 @@ if(this.type=='deptcummulative'){
       if(res.status){
         this.customData=res.success
         this.dataSource = new MatTableDataSource(this.customData);
-        setTimeout(() => {
+      //  setTimeout(() => {
           this.dataSource.sort = this.sort;
-          //this.dataSource.paginator = this.paginator
-        })
+          this.dataSource.paginator = this.paginator
+       // })
       }
     })
 
