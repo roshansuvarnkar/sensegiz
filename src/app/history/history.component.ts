@@ -405,6 +405,7 @@ onclickSummaryReport(data){
 
 
   onSubmitcummulativeForm(data){
+    console.log("cummulat",data)
     var date1=new Date(data.fromDate)
     var date2=new Date(data.toDate)
     var year = date1.getFullYear();
@@ -413,11 +414,12 @@ onclickSummaryReport(data){
     var from = year + '-' + month + '-'  + day
     var from1 = day + '-' + month + '-'  + year
 
+
     var year1 = date2.getFullYear();
     var month1 = ("0" + (date2.getMonth() + 1)).slice(-2);
     var day1 = ("0" + date2.getDate()).slice(-2);
     var to = year1 + '-' + month1 + '-'  + day1
-    var to1 = day1 + '-' + month + '-'  + year1
+    var to1 = day1 + '-' + month1 + '-'  + year1
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
