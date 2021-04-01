@@ -32,6 +32,8 @@ export class AdminSettingsComponent implements OnInit {
   multishift:any=[]
   inactivityStatusValue:any=[]
   dataGet:any
+  hrsvalues:any;
+  minvalues:any;
   languageForm:FormGroup
   inactivityForm:FormGroup
   statusCustomise:boolean=false
@@ -170,6 +172,21 @@ export class AdminSettingsComponent implements OnInit {
       /*   this.scanCountForm.patchValue({
           count:res.success[0].scanCount.toString()
         }) */
+        if(res.success[0].temperaturePeriod<6){
+          this.temperaturehrsmin.patchValue({
+            tempPeriodminutes:res.success[0].temperaturePeriod+"0"
+          })
+        }else{
+          this.hrsvalues=Math.floor(res.success[0].temperaturePeriod/6).toString()
+          this.minvalues=(((res.success[0].temperaturePeriod)-this.hrsvalues*6)).toString()
+          this.temperaturehrsmin.patchValue({
+            tempPeriodhours:this.hrsvalues,
+            tempPeriodminutes:this.minvalues+"0"
+          })
+        }
+        this.scanCountForm.patchValue({
+          count:res.success[0].scanCount.toString()
+        })
         this.txPowerForm.patchValue({
           txPower: res.success[0].txPower,
         })
@@ -454,12 +471,13 @@ export class AdminSettingsComponent implements OnInit {
     }
   }
   onSubmitScanningForm(data){
-    // console.log("data==",data)
+     console.log("data==",data)
     if (this.scanningForm.valid) {
       try {
         data.userId=this.dataGet.userId
         this.api.updateScanningInterval(data).then((res:any)=>{
-           //console.log("Scanning Interval===",res)
+          console.log("Scanning Interval===",data)
+           console.log("Scanning Interval===",res)
           if(res.status){
             this.refreshSetting()
             this.meetingcount()
@@ -481,6 +499,7 @@ export class AdminSettingsComponent implements OnInit {
     }
     this.api.getData(data).then((res:any)=>{
       if(res.status){
+        console.log(res)
         this.scanCountForm.patchValue({
           count:res.success[0].scanCount.toString()
         })
