@@ -121,6 +121,8 @@ export class HistoryReportComponent implements OnInit {
           // console.log('\nTotal response: ',res.success[0].count);
           this.currentPageLength = parseInt(res.success[0].count);
 
+        }else{
+          this.currentPageLength = parseInt(res.success[0].count);
         }
       })
 
@@ -141,6 +143,23 @@ export class HistoryReportComponent implements OnInit {
         // console.log('\nTotal response: ',res.success[0].count);
         this.currentPageLength = parseInt(res.success[0].count);
         // this.tempLen=this.currentPageLength
+      }else{
+        this.currentPageLength = parseInt(res.success[0].count);
+      }
+    })
+
+  }
+  if(this.type=='custom'){
+    var data9={
+      userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+      type:this.liveData.type
+    }
+    this.api.OnlineOfflineReportCount(data9).then((res:any)=>{
+      if(res.status){
+        this.currentPageLength = parseInt(res.success[0].count);
+      }else{
+        this.currentPageLength = parseInt(res.success[0].count);
       }
     })
 
@@ -209,7 +228,7 @@ export class HistoryReportComponent implements OnInit {
 
     }
     if(this.type == 'custom'){
-      this.customReport()
+      this.customReport(limit=limit,offset=offset)
 
     }
     if(this.type == 'deptcummulative'){
@@ -622,7 +641,6 @@ getUpdate(event) {
   this.offset = event.pageIndex*event.pageSize
   // console.log("limit==",limit,"offset==",offset)
   this.loadData(this.limit,this.offset)
-
 }
 
 
@@ -992,23 +1010,25 @@ if(this.type=='deptcummulative'){
 
 
 
-  customReport(){
+  customReport(limit,offset){
     var data={
       userId:this.loginData.userId,
       subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
-      type:this.liveData.type
+      type:this.liveData.type,
+      limit:limit,
+      offset:offset
     }
    // console.log(" custom data======",data)
     this.api.getCustomReport(data).then((res:any)=>{
-     // console.log("Custom Report res==",res)
+     console.log("Custom Report res==",res)
       this.customData=[]
       if(res.status){
         this.customData=res.success
         this.dataSource = new MatTableDataSource(this.customData);
-      //  setTimeout(() => {
+        setTimeout(() => {
           this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator
-       // })
+          //this.dataSource.paginator = this.paginator
+        })
       }
     })
 

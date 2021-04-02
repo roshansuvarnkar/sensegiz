@@ -110,7 +110,7 @@ loadData(limit,offset){
   }
 
   this.api.getData(data).then((res:any)=>{
-   console.log("find device data ======",res);
+  //console.log("find device data ======",res);
     if(res.status){
      this.findData=[]
       for (let i = 0; i <res.success.length; i++) {
