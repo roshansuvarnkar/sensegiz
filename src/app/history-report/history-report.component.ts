@@ -129,7 +129,7 @@ export class HistoryReportComponent implements OnInit {
     }
     if(this.type == 'cummulative'){
       var date=new Date()
-      var data5={
+      var data11={
         userId:this.loginData.userId,
         subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
         fromDate: this.from,
@@ -137,7 +137,7 @@ export class HistoryReportComponent implements OnInit {
         zone:this.general.getZone(date)
 
       }
-      this.api.viewCTReportCount(data5).then((res:any)=>{
+      this.api.viewCTReportCount(data11).then((res:any)=>{
         // console.log("length of report on device name ======",res);
         if(res.status){
           // console.log('\nTotal response: ',res.success[0].count);
