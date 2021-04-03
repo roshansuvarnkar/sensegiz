@@ -127,6 +127,27 @@ export class HistoryReportComponent implements OnInit {
       })
 
     }
+    if(this.type == 'cummulative'){
+      var date=new Date()
+      var data5={
+        userId:this.loginData.userId,
+        subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
+        fromDate: this.from,
+        toDate:this.to,
+        zone:this.general.getZone(date)
+
+      }
+      this.api.viewCTReportCount(data5).then((res:any)=>{
+        // console.log("length of report on device name ======",res);
+        if(res.status){
+          // console.log('\nTotal response: ',res.success[0].count);
+          this.currentPageLength = parseInt(res.success[0].count);
+          // this.tempLen=this.currentPageLength
+        }else{
+          this.currentPageLength = parseInt(res.success[0].count);
+        }
+      })
+    }
   if(this.type=='basedOnFindName'){
     var data1={
       userId:this.loginData.userId,
@@ -558,7 +579,7 @@ cummulativeReport(limit,offset){
         this.dataSource = new MatTableDataSource(this.liveData);
         setTimeout(() => {
           this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator
+         // this.dataSource.paginator = this.paginator
            })
 
       // }

@@ -80,8 +80,10 @@ export class AdminSettingsComponent implements OnInit {
     })
 
     this.timeForm=this.fb.group({
-      minutes:[{value:'',disabled: false},Validators.required],
-      seconds:[{value:'',disabled: false},Validators.required]
+    /*   minutes:[{value:'',disabled: false},Validators.required],
+      seconds:[{value:'',disabled: false},Validators.required] */
+      minutes:['',Validators.required],
+      seconds:['',Validators.required]
     })
 
     this.workingForm = this.fb.group({
@@ -223,15 +225,13 @@ export class AdminSettingsComponent implements OnInit {
   }
 
   minThresholdMinsec(){
-    var seconds=''
+
     for(let i =0;i<=5;i++){
       var minutes=i==0?'none':i
       this.min.push(minutes)
      }
+     var seconds=''
     for(let i =-1;i<=11;i++){
-      if(i==1|| i==2 || i==3){
-      }
-      else{
         if(i==-1){
           seconds='none'
         }
@@ -240,7 +240,7 @@ export class AdminSettingsComponent implements OnInit {
         }
         this.sec.push(seconds)
       }
-    }
+
   }
 
   customizeoff(){
