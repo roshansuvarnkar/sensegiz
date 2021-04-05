@@ -80,10 +80,10 @@ export class AdminSettingsComponent implements OnInit {
     })
 
     this.timeForm=this.fb.group({
-    /*   minutes:[{value:'',disabled: false},Validators.required],
-      seconds:[{value:'',disabled: false},Validators.required] */
-      minutes:['',Validators.required],
-      seconds:['',Validators.required]
+       minutes:[{value:'',disabled: false},Validators.required],
+      seconds:[{value:'',disabled: false},Validators.required] 
+     /*  minutes:['',Validators.required],
+      seconds:['',Validators.required] */
     })
 
     this.workingForm = this.fb.group({
