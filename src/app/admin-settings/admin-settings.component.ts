@@ -660,7 +660,7 @@ export class AdminSettingsComponent implements OnInit {
     if(this.multishiftingselect.valid){
     try{
       if(values.eraseShift==0){
-        this.shiftName=values.shiftName
+        this.shiftName=values.shiftName.shiftName
     }else{
       this.shiftName="zeroShift"
     }
@@ -673,10 +673,10 @@ export class AdminSettingsComponent implements OnInit {
         type :values.type,
         eraseShift:values.eraseShift
         }
-         // console.log(data)
+          //console.log(data)
           this.api.setDeviceMultiShift(data).then((res:any)=>{
-            //console.log("multishift data sent===",data)
-            //console.log("multishift data sent===",res)
+           // console.log("multishift data sent===",data)
+           // console.log("multishift data sent===",res)
             if(res.status){
               this.refreshShift()
               this.multishiftingselect.reset()
