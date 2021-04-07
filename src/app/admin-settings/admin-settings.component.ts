@@ -52,6 +52,7 @@ export class AdminSettingsComponent implements OnInit {
   custom:boolean=false
   standered:boolean=true
   shiftName:any;
+  eraseShift:any;
   constructor(private fb:FormBuilder,public dialog: MatDialog,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -103,7 +104,7 @@ export class AdminSettingsComponent implements OnInit {
       deviceId:[''],
       status:['',Validators.required],
       type:[,Validators.required],
-      eraseShift:['',Validators.required]
+      eraseShift:['']
     })
 
     this.route.queryParams.subscribe(params => {
@@ -659,11 +660,18 @@ export class AdminSettingsComponent implements OnInit {
    onMultiShiftselect(values){
     if(this.multishiftingselect.valid){
     try{
-      if(values.eraseShift==0){
+      if(values.status == 1){
+        if(values.eraseShift == 0){
+          this.shiftName=values.shiftName.shiftName
+          this.eraseShift=values.eraseShift
+        }else{
+          this.shiftName='zeroShift'
+          this.eraseShift=values.eraseShift
+        }
+      }else{
         this.shiftName=values.shiftName.shiftName
-    }else{
-      this.shiftName="zeroShift"
-    }
+        this.eraseShift="0"
+      }
       var data={
         userId : this.dataGet.userId,
         shiftId : values.shiftName.id,
@@ -671,9 +679,9 @@ export class AdminSettingsComponent implements OnInit {
         deviceId : values.deviceId,
         status: values.status,
         type :values.type,
-        eraseShift:values.eraseShift
+        eraseShift:this.eraseShift
         }
-          //console.log(data)
+          console.log(data)
           this.api.setDeviceMultiShift(data).then((res:any)=>{
            // console.log("multishift data sent===",data)
            // console.log("multishift data sent===",res)

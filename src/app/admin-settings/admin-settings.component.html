@@ -474,7 +474,7 @@
               <mat-radio-button value="1" name="small"  (change)="selectfinds($event)">All</mat-radio-button>
               <mat-radio-button value="2" name="small" (change)="selectfinds($event)">Specific Finds</mat-radio-button>
             </mat-radio-group><br>
-            <mat-radio-group  color="primary" formControlName="eraseShift"  class="wearable">
+            <mat-radio-group  color="primary" formControlName="eraseShift"  class="wearable" *ngIf="(multishiftingselect.get('status').value == 1)">
               <mat-radio-button value="0" name="small">Select Shift</mat-radio-button>
               <mat-radio-button value="1" name="small" [hidden]="(multishiftingselect.get('type').value == 2)">Erase</mat-radio-button>
               <mat-radio-button value="2" name="small" *ngIf="(multishiftingselect.get('type').value == 2)">Erase</mat-radio-button>
