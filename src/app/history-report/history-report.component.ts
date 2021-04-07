@@ -138,7 +138,7 @@ export class HistoryReportComponent implements OnInit {
 
       }
       this.api.viewCTReportCount(data11).then((res:any)=>{
-        console.log("length of report on device name ======",res);
+      //  console.log("length of report on device name ======",res);
         if(res.status){
           // console.log('\nTotal response: ',res.success[0].count);
           this.currentPageLength = parseInt(res.success[0].count);
@@ -558,11 +558,11 @@ cummulativeReport(limit,offset){
     zone:this.general.getZone(date)
 
   }
-  console.log("hvhs==",data)
+  //console.log("hvhs==",data)
   this.api.viewCTReport(data).then((res:any)=>{
     this.liveData=[]
     this.totTime=[]
-   console.log("cummulative report==",res)
+  // console.log("cummulative report==",res)
     if(res.status){
       this.totTime=res.success
       // if(this.selectMin.get('minute').value=='null' || this.selectMin.get('minute').value==0){
@@ -770,7 +770,7 @@ if(this.type=='summaryReport'){
 
     fileName="Temperature- "+this.deviceName
     this.api.downloadTemperatureData(data,fileName).then((res:any)=>{
-      console.log(res)
+      //console.log(res)
     })
   }
 /* ------------------------------- */
@@ -1041,7 +1041,7 @@ if(this.type=='deptcummulative'){
     }
    // console.log(" custom data======",data)
     this.api.getCustomReport(data).then((res:any)=>{
-     console.log("Custom Report res==",res)
+    // console.log("Custom Report res==",res)
       this.customData=[]
       if(res.status){
         this.customData=res.success

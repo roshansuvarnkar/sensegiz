@@ -51,6 +51,7 @@ export class AdminSettingsComponent implements OnInit {
   selectfind:boolean=false
   custom:boolean=false
   standered:boolean=true
+  shiftName:any;
   constructor(private fb:FormBuilder,public dialog: MatDialog,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -81,7 +82,7 @@ export class AdminSettingsComponent implements OnInit {
 
     this.timeForm=this.fb.group({
        minutes:[{value:'',disabled: false},Validators.required],
-      seconds:[{value:'',disabled: false},Validators.required] 
+      seconds:[{value:'',disabled: false},Validators.required]
      /*  minutes:['',Validators.required],
       seconds:['',Validators.required] */
     })
@@ -101,7 +102,8 @@ export class AdminSettingsComponent implements OnInit {
       shiftName:[''],
       deviceId:[''],
       status:['',Validators.required],
-      type:[,Validators.required]
+      type:[,Validators.required],
+      eraseShift:['',Validators.required]
     })
 
     this.route.queryParams.subscribe(params => {
@@ -471,13 +473,13 @@ export class AdminSettingsComponent implements OnInit {
     }
   }
   onSubmitScanningForm(data){
-     console.log("data==",data)
+     //console.log("data==",data)
     if (this.scanningForm.valid) {
       try {
         data.userId=this.dataGet.userId
         this.api.updateScanningInterval(data).then((res:any)=>{
-          console.log("Scanning Interval===",data)
-           console.log("Scanning Interval===",res)
+         // console.log("Scanning Interval===",data)
+         //  console.log("Scanning Interval===",res)
           if(res.status){
             this.refreshSetting()
             this.meetingcount()
@@ -499,7 +501,7 @@ export class AdminSettingsComponent implements OnInit {
     }
     this.api.getData(data).then((res:any)=>{
       if(res.status){
-        console.log(res)
+       // console.log(res)
         this.scanCountForm.patchValue({
           count:res.success[0].scanCount.toString()
         })
@@ -657,15 +659,21 @@ export class AdminSettingsComponent implements OnInit {
    onMultiShiftselect(values){
     if(this.multishiftingselect.valid){
     try{
+      if(values.eraseShift==0){
+        this.shiftName=values.shiftName
+    }else{
+      this.shiftName="zeroShift"
+    }
       var data={
         userId : this.dataGet.userId,
         shiftId : values.shiftName.id,
-        shiftName : values.shiftName.shiftName,
+        shiftName :this.shiftName,
         deviceId : values.deviceId,
         status: values.status,
         type :values.type,
+        eraseShift:values.eraseShift
         }
-          //console.log(data)
+         // console.log(data)
           this.api.setDeviceMultiShift(data).then((res:any)=>{
             //console.log("multishift data sent===",data)
             //console.log("multishift data sent===",res)

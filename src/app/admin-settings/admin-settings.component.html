@@ -474,7 +474,12 @@
               <mat-radio-button value="1" name="small"  (change)="selectfinds($event)">All</mat-radio-button>
               <mat-radio-button value="2" name="small" (change)="selectfinds($event)">Specific Finds</mat-radio-button>
             </mat-radio-group><br>
-            <mat-form-field *ngIf="(multishiftingselect.get('status').value == 1)">
+            <mat-radio-group  color="primary" formControlName="eraseShift"  class="wearable">
+              <mat-radio-button value="0" name="small">Select Shift</mat-radio-button>
+              <mat-radio-button value="1" name="small" [hidden]="(multishiftingselect.get('type').value == 2)">Erase</mat-radio-button>
+              <mat-radio-button value="2" name="small" *ngIf="(multishiftingselect.get('type').value == 2)">Erase</mat-radio-button>
+            </mat-radio-group><br>
+            <mat-form-field *ngIf="(multishiftingselect.get('status').value == 1 && multishiftingselect.get('eraseShift').value == 0)">
               <mat-label>Shift Name</mat-label>
               <mat-select  formControlName="shiftName" name="shiftName">
                 <mat-option *ngFor=" let b of multishift" [value]="b">
@@ -487,7 +492,7 @@
               </mat-select>
 
           </mat-form-field>
-          <mat-form-field class="full-width-input" *ngIf="(multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 1 || multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 0)">
+          <mat-form-field class="full-width-input" *ngIf="(multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 1 && multishiftingselect.get('eraseShift').value == 0)">
             <input type='text' matInput placeholder="Device Id" formControlName="deviceId" [matAutocomplete]="auto"  (keyup)="userSuggestion($event)" >
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let user of username" [value]="user.deviceId">

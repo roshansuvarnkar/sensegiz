@@ -405,7 +405,7 @@ onclickSummaryReport(data){
 
 
   onSubmitcummulativeForm(data){
-    console.log("cummulat",data)
+    //console.log("cummulat",data)
     var date1=new Date(data.fromDate)
     var date2=new Date(data.toDate)
     var year = date1.getFullYear();
