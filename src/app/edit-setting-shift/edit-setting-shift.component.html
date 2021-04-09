@@ -136,6 +136,76 @@
 
 </div>
 
+<div class="head"  *ngIf="type=='eraseshift'">
+	<div class="content">
+    	<p class="center">Erase Shifts</p>
+		<span>
+			<button mat-button mat-dialog-close><mat-icon >clear</mat-icon></button>
+		</span>
+    </div>
+    <br>
+
+	<mat-card class="shifts">
+		<mat-card-content *ngIf="shifts">
+			<form [formGroup]="shiftForm"  >
+
+		      <div class="diagWrapper"  formArrayName="items" *ngIf="shiftForm.get('items')['controls']?.length>0">
+		        <div class='item' *ngFor="let item of shiftForm.get('items')['controls']; let i=index;">
+		          <ng-container [formGroupName]="i">
+		          	{{i+1}}.
+			<!-- 		<mat-form-field class="full-width-input">
+						<input matInput  type="text" placeholder="Shift Name" formControlName="shiftName" matInput required >
+						<mat-error>
+							Please provide a valid shift name
+						</mat-error>
+					</mat-form-field> -->
+
+          <mat-form-field>
+            <mat-label>Shift Name</mat-label>
+            <mat-select formControlName="shiftName" required>
+              <mat-option value="general">General</mat-option>
+              <mat-option value="morning">Morning</mat-option>
+              <mat-option value="evening">Evening</mat-option>
+              <mat-option value="night">Night</mat-option>
+              <mat-option value="zeroShift">zeroShift</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+					<mat-form-field class="full-width-input">
+						<input matInput  type="time" placeholder="From time" formControlName="fromTime" matInput required >
+						<mat-error>
+							Please provide a valid from time
+						</mat-error>
+					</mat-form-field>
+
+
+					<mat-form-field class="full-width-input">
+						<input matInput  type="time" placeholder="To time" formControlName="toTime" matInput required >
+						<mat-error>
+							Please provide a valid to time
+						</mat-error>
+					</mat-form-field>
+
+					<button type="button" mat-raised-button color="primary" (click)="submit(item.value)">Submit</button>
+
+
+
+		          </ng-container>
+		        </div>
+
+		        <br>
+
+		      </div>
+		    </form>
+		</mat-card-content>
+	</mat-card>
+
+
+
+</div>
+
+
 
 
 

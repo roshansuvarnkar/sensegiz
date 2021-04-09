@@ -141,6 +141,9 @@ export class AdminSettingsComponent implements OnInit {
         this.multishiftingselect.patchValue({
           shiftName:this.multishift[0]
         })
+        this.eraseshiftselsect.patchValue({
+          shiftName:this.multishift[0]
+        })
       }
     })
   }
@@ -817,6 +820,21 @@ selectfinds(event){
     });
   }
 
+  openDialog2(): void {
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '60vh';
+    dialogConfig.width = '70vw';
+    dialogConfig.data = {
+      type:"eraseshift"
+    }
+    const dialogRef = this.dialog.open(EditSettingShiftComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 
   scannIntravaleLimit(valees){
     if(valees==1){

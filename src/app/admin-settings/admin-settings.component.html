@@ -535,7 +535,7 @@
         <mat-radio-button   value="1" name="small">All</mat-radio-button>
         <mat-radio-button   value="2" name="small">Specific Finds</mat-radio-button>
       </mat-radio-group><br>
-      <!--  <div [hidden]="(eraseshiftselsect.get('type').value ==1 || eraseshiftselsect.get('type').value ==2)">
+     <div hidden>
         <mat-form-field>
           <mat-label>Shift Name</mat-label>
           <mat-select formControlName="shiftName" name="shiftName">
@@ -561,7 +561,7 @@
         <br><br><br><br><br><br>
         <span  class="spanbtton">
           <button mat-raised-button [disabled]="!eraseshiftselsect.valid"  color="primary">Submit</button>&nbsp;&nbsp;&nbsp;
-          <button type="button" mat-raised-button (click)="openDialog1()"  color="primary">Info</button>
+          <button type="button" mat-raised-button (click)="openDialog2()"  color="primary">Info</button>
         </span>
     <!--   <div  class="btn-set">
         <button mat-raised-button [disabled]="!eraseshiftselsect.valid"  color="primary">Submit</button>&nbsp;&nbsp;&nbsp;
