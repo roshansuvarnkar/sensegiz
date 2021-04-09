@@ -33,6 +33,11 @@ mat-card {
     bottom: 1rem;
     right: 7.5rem;
   }
+  .spanbtton{
+    position: absolute;
+    bottom: 1rem;
+    right: 5rem;
+    }
   @media only screen and (max-width: 768px){
     .setting {
       display: block;
