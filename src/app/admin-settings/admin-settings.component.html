@@ -471,8 +471,8 @@
 
     <form [formGroup]="multishiftingselect" (ngSubmit)="onMultiShiftselect(multishiftingselect.value)" >
       <mat-radio-group  color="primary" formControlName="status"  class="wearable">
-        <mat-radio-button  value="1" name="small" >Enable</mat-radio-button>
-        <mat-radio-button value="0" name="small" >Disable</mat-radio-button>
+        <mat-radio-button  style="margin-left: -40px !important;"  value="1" name="small" >Enable</mat-radio-button>
+        <mat-radio-button  style="margin-left: -65px !important;"  value="0" name="small" >Disable</mat-radio-button>
       </mat-radio-group><br>
       <mat-radio-group  color="primary" formControlName="type"  class="wearable" >
         <mat-radio-button  value="1" name="small"  (change)="selectfinds($event)">All</mat-radio-button>
@@ -531,15 +531,9 @@
         <mat-radio-button style="margin-left: -10px !important;" value="1" name="small" >Enable</mat-radio-button>
         <mat-radio-button  style="margin-left:-20px !important;"value="0" name="small" >Disable</mat-radio-button>
       </mat-radio-group><br> -->
-
-     <mat-radio-group  color="primary" formControlName="eraseShift"  class="wearable">
-       <!--  <mat-radio-button style="margin-left: -20px !important;" value="0" name="small" (change)="selectfinds($event)">Select Shift</mat-radio-button> -->
-        <mat-radio-button style="margin-left: -30px !important;" value="0" name="small">Erase</mat-radio-button>
-       <!--  <mat-radio-button value="2" name="small">Erase</mat-radio-button> -->
-      </mat-radio-group><br>
       <mat-radio-group  color="primary" formControlName="type"  class="wearable" >
-        <mat-radio-button value="1" name="small">All</mat-radio-button>
-        <mat-radio-button value="2" name="small">Specific Finds</mat-radio-button>
+        <mat-radio-button   value="1" name="small">All</mat-radio-button>
+        <mat-radio-button   value="2" name="small">Specific Finds</mat-radio-button>
       </mat-radio-group><br>
       <!--  <div [hidden]="(eraseshiftselsect.get('type').value ==1 || eraseshiftselsect.get('type').value ==2)">
         <mat-form-field>

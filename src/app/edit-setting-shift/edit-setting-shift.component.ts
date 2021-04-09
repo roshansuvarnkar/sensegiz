@@ -67,11 +67,17 @@ export class EditSettingShiftComponent implements OnInit {
 			  var day = dateobj.getDate()
 			  var date = month + '/' + day + '/'  + year
 
-			  var time1=date+" "+this.shifts[i].fromTime+':00 UTC'
-			  var time2=date+" "+this.shifts[i].toTime+':00 UTC'
-			  time1=new Date(time1).toString()
-			  time2=new Date(time2).toString()
-
+        if(this.shifts[i].fromTime=="00:00"){
+          var time1="00:00"
+          var time2="00:00"
+          time1=new Date(time1).toString()
+          time2=new Date(time2).toString()
+        }else{
+          var time1=date+" "+this.shifts[i].fromTime+':00 UTC'
+          var time2=date+" "+this.shifts[i].toTime+':00 UTC'
+          time1=new Date(time1).toString()
+          time2=new Date(time2).toString()
+        }
 
 			  var h=new Date(time1).getHours()
 			  var m=new Date(time1).getMinutes()
@@ -86,7 +92,6 @@ export class EditSettingShiftComponent implements OnInit {
 			this.shifts[i].fromTime=(hh+':'+mm)
 			this.shifts[i].toTime=(hh1+':'+mm1)
 		}
-
 
 				const control = <FormArray>this.shiftForm.controls.items;
 			  control.controls = [];
