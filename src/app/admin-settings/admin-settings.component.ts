@@ -688,7 +688,7 @@ export class AdminSettingsComponent implements OnInit {
         type :values.type,
         eraseShift:"0"
         }
-          console.log(data)
+         // console.log(data)
           this.api.setDeviceMultiShift(data).then((res:any)=>{
            // console.log("multishift data sent===",data)
            // console.log("multishift data sent===",res)
@@ -846,7 +846,7 @@ selectfinds(event){
 
     }
      oneraseshiftselect(values){
-    console.log(values)
+ //   console.log(values)
     if(this.eraseshiftselsect.valid){
       try{
         if(values.type==1){
@@ -878,9 +878,9 @@ selectfinds(event){
           type :values.type,
           eraseShift: this.eraseShift,
           }
-          console.log(data)
+        //  console.log(data)
           this.api.setDeviceMultiShift(data).then((res:any)=>{
-             console.log("multishift data sent===",res)
+           //  console.log("multishift data sent===",res)
               if(res.status){
                 this.eraseshiftselsect.reset()
                 this.refreshShift()
