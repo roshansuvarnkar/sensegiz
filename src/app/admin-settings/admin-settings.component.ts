@@ -902,7 +902,7 @@ selectfinds(event){
               if(res.status){
                 this.eraseshiftselsect.reset()
                 this.refreshShift()
-                var msg='Multishift Select updated Successfully'
+                var msg='Erase Shift Select updated Successfully'
                 this.general.openSnackBar(msg,'')
               }
             }).catch(err=>{
