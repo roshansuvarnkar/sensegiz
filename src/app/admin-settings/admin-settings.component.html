@@ -484,9 +484,7 @@
           <mat-option *ngFor="let b of multishift" [value]="b">
             {{b.shiftName}}
           </mat-option>
-
         </mat-select>
-
     </mat-form-field>
     <mat-form-field class="full-width-input" *ngIf="(multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 1 || multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 0)">
       <input type='text' matInput placeholder="Device Id" formControlName="deviceId" [matAutocomplete]="auto"  (keyup)="userSuggestion($event)" >
@@ -514,22 +512,17 @@
         <button mat-raised-button [disabled]="!multishiftingselect.valid"  color="primary">Submit</button>&nbsp;&nbsp;&nbsp;
         <button type="button" mat-raised-button (click)="openDialog1()"  color="primary">Info</button>
       </div> -->
-
       </form>
   </mat-card-content>
-
 </mat-card>
 <!-- -------------------------------------- -->
 <mat-card>
   <mat-card-title>
     Erase Shift
   </mat-card-title>
-
    <br><br>
-
   <mat-card-content>
     <br>
-
     <form [formGroup]="eraseshiftselsect" (ngSubmit)="oneraseshiftselect(eraseshiftselsect.value)" >
     <!--   <mat-radio-group  color="primary" formControlName="status"  class="wearable">
         <mat-radio-button style="margin-left: -10px !important;" value="1" name="small" >Enable</mat-radio-button>
@@ -564,14 +557,10 @@
       </div>
         <br><br><br><br><br><br>
         <span  class="spanbtton">
-          <button mat-raised-button [disabled]="!eraseshiftselsect.valid || (eraseshiftselsect.get('deviceId').value=='') "  color="primary">Submit</button>&nbsp;&nbsp;&nbsp;
+          <button mat-raised-button [disabled]="!eraseshiftselsect.valid || (eraseshiftselsect.get('type').value==2 &&eraseshiftselsect.get('deviceId').value=='') "  color="primary">Submit</button>&nbsp;&nbsp;&nbsp;
           <button type="button" mat-raised-button (click)="openDialog2()"  color="primary">Info</button>
         </span>
-    <!--   <div  class="btn-set">
-        <button mat-raised-button [disabled]="!eraseshiftselsect.valid"  color="primary">Submit</button>&nbsp;&nbsp;&nbsp;
-        <button type="button" mat-raised-button (click)="openDialog1()"  color="primary">Info</button>
-      </div>
- -->
+
       </form>
   </mat-card-content>
 

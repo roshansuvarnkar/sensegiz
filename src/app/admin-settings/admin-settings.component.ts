@@ -54,6 +54,8 @@ export class AdminSettingsComponent implements OnInit {
   standered:boolean=true
   shiftName:any;
   eraseShift:any;
+  shifterr:any;
+  shifterrr:boolean=false;
   constructor(private fb:FormBuilder,public dialog: MatDialog,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -135,6 +137,7 @@ export class AdminSettingsComponent implements OnInit {
     }
 
     this.api.getData(data).then((res:any)=>{
+      console.log(res)
       if(res.status){
         this.shifts=res.success
         this.multishift=res.success
@@ -285,7 +288,7 @@ export class AdminSettingsComponent implements OnInit {
 
     if (this.inactivityForm.valid) {
       try {
-         console.log("inactivity data==",value)
+        // console.log("inactivity data==",value)
         value.inactivity= value.type == '2'? 0 : value.inactivity
         var data={
           userId : this.dataGet.userId,
@@ -294,7 +297,7 @@ export class AdminSettingsComponent implements OnInit {
         }
 
         this.api.getInactivityDeviceSetting(data).then((res:any)=>{
-           console.log("Inactivity response===",res)
+           //console.log("Inactivity response===",res)
           if(res.status){
             this.refreshSetting()
             var msg = 'Inactivity updated Successfully'
