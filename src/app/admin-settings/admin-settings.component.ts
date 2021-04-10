@@ -285,7 +285,7 @@ export class AdminSettingsComponent implements OnInit {
 
     if (this.inactivityForm.valid) {
       try {
-        // console.log("inactivity data==",value)
+         console.log("inactivity data==",value)
         value.inactivity= value.type == '2'? 0 : value.inactivity
         var data={
           userId : this.dataGet.userId,
@@ -294,7 +294,7 @@ export class AdminSettingsComponent implements OnInit {
         }
 
         this.api.getInactivityDeviceSetting(data).then((res:any)=>{
-          // console.log("Inactivity response===",res)
+           console.log("Inactivity response===",res)
           if(res.status){
             this.refreshSetting()
             var msg = 'Inactivity updated Successfully'
