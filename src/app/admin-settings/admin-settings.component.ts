@@ -221,7 +221,8 @@ export class AdminSettingsComponent implements OnInit {
             status:'Disable'
           }
           this.inactivityForm.patchValue({
-           inactivity: res.success[0].inactivity
+            inactivity: res.success[0].inactivity,
+            type : res.success[0].inactivityStatus
         })
         }
         if( res.success[0].inactivityStatus == 2){
