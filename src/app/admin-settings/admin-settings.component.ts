@@ -112,7 +112,7 @@ export class AdminSettingsComponent implements OnInit {
       deviceId:[''],
       status:[''],
       type:['',Validators.required],
-      eraseShift:['',Validators.required]
+      eraseShift:['']
     })
     this.route.queryParams.subscribe(params => {
       this.dataGet = JSON.parse(params.record) ;
