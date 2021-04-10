@@ -487,6 +487,7 @@
 
         </mat-select>
 
+        
     </mat-form-field>
     <mat-form-field class="full-width-input" *ngIf="(multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 1 || multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 0)">
       <input type='text' matInput placeholder="Device Id" formControlName="deviceId" [matAutocomplete]="auto"  (keyup)="userSuggestion($event)" >
