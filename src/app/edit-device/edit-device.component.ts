@@ -124,7 +124,7 @@ export class EditDeviceComponent implements OnInit {
       //  console.log("find edit===",data)
 
         this.api.editDeviceRegister(data).then((res:any)=>{
-        //  console.log("find submit====",res);
+         console.log("find submit====",res);
           if(res.status){
             if(this.language=='english'){ var msg = 'Device Updated Successfully'}
             else if(this.language=='japanese'){ var msg = 'デバイスが正常に更新されました'}

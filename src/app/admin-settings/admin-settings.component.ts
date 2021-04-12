@@ -56,6 +56,7 @@ export class AdminSettingsComponent implements OnInit {
   eraseShift:any;
   shifterr:any;
   shifterrr:boolean=false;
+  shiftname:boolean=false;
   constructor(private fb:FormBuilder,public dialog: MatDialog,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -137,7 +138,7 @@ export class AdminSettingsComponent implements OnInit {
     }
 
     this.api.getData(data).then((res:any)=>{
-      console.log(res)
+     // console.log(res)
       if(res.status){
         this.shifts=res.success
         this.multishift=res.success
@@ -147,6 +148,8 @@ export class AdminSettingsComponent implements OnInit {
         this.eraseshiftselsect.patchValue({
           shiftName:this.multishift[0]
         })
+      }else{
+        this.shiftName="Please Create Shift"
       }
     })
   }
