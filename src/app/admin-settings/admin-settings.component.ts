@@ -934,6 +934,7 @@ shiftnameselsect(){
         })
       }else{
         this.shiftName="Please Create Shift"
+        this.shifterrr=true
       }
     })
   }
