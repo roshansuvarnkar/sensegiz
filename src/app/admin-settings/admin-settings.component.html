@@ -486,7 +486,7 @@
           </mat-option>
         </mat-select>
     </mat-form-field>
-    <p style="font-size: 12px;color:red;margin-top: -17px;margin-left: -80px;">{{shiftName}}</p>
+    <p *ngIf="multishiftingselect.get('status').value == 1" style="font-size: 12px;color:red;margin-top: -17px;margin-left: -80px;">{{shiftName}}</p>
 
     <mat-form-field class="full-width-input" *ngIf="(multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 1 || multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 0)">
       <mat-label style="color:red">Device Id</mat-label>
@@ -537,7 +537,7 @@
       </mat-radio-group><br>
      <div hidden>
         <mat-form-field>
-          <mat-label>Shift Name</mat-label>
+          <mat-label>Shift Name*</mat-label>
           <mat-select formControlName="shiftName" name="shiftName">
             <mat-option *ngFor="let b of multishift" [value]="b">
               {{b.shiftName}}
