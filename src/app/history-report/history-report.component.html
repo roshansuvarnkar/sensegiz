@@ -531,7 +531,7 @@
         <button mat-button mat-dialog-close><mat-icon >clear</mat-icon></button>
       </span>
     </div> <br>
-    <p class="center-head" mat-dialog-title *ngIf="language=='english'">Summary Report - {{deviceName | titlecase}}</p>
+    <p class="center-head" mat-dialog-title *ngIf="language=='english'"> Infected User - {{deviceName | titlecase}}</p>
     <p class="center-head" mat-dialog-title *ngIf="language=='japanese'">感染したユーザー数 - {{deviceName | titlecase}}</p>
     <div class="btn">
       <button mat-raised-button  class="btn-color" (click)="sendWarning()" *ngIf="language=='english'">Send warning</button>
