@@ -480,13 +480,14 @@
       </mat-radio-group><br>
       <mat-form-field *ngIf="(multishiftingselect.get('status').value == 1 && (multishiftingselect.get('type').value == 1 || multishiftingselect.get('type').value == 2))">
         <mat-label style="color:red">Shift Name*</mat-label>
-        <mat-select formControlName="shiftName" name="shiftName">
-        <mat-option *ngIf="(multishiftingselect.get('shiftName').value == '')">{{shiftName}}</mat-option> 
-          <mat-option *ngFor="let b of multishift" [value]="b">
+        <mat-select formControlName="shiftName" name="shiftName" (click)="shiftnameselsect()" >
+          <mat-option *ngFor="let b of multishift" [value]="b" >
             {{b.shiftName}}
           </mat-option>
         </mat-select>
     </mat-form-field>
+    <p style="font-size: 12px;color:red;margin-top: -17px;margin-left: -80px;">{{shiftName}}</p>
+
     <mat-form-field class="full-width-input" *ngIf="(multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 1 || multishiftingselect.get('type').value == 2 && multishiftingselect.get('status').value == 0)">
       <mat-label style="color:red">Device Id</mat-label>
       <input type='text' matInput formControlName="deviceId" [matAutocomplete]="auto"  (keyup)="userSuggestion($event)" >

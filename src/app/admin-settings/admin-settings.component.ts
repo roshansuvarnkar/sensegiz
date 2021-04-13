@@ -148,8 +148,6 @@ export class AdminSettingsComponent implements OnInit {
         this.eraseshiftselsect.patchValue({
           shiftName:this.multishift[0]
         })
-      }else{
-        this.shiftName="Please Create Shift"
       }
     })
   }
@@ -763,8 +761,6 @@ selectfinds(event){
       this.requiredStatus1=false
       this.requiredStatus2=true
       this.timeFormStatus=true
-
-
     }
     else{
       this.minStatus=false
@@ -772,8 +768,6 @@ selectfinds(event){
       this.requiredStatus1=true
       this.requiredStatus2=false
       this.timeFormStatus=false
-
-
     }
 
   }
@@ -919,5 +913,28 @@ selectfinds(event){
 
         }
       }
+  }
+shiftnameselsect(){
+    var data={
+      userId:this.dataGet.userId,
+      subUserId: (this.dataGet.hasOwnProperty('id') && this.dataGet.type==4 && this.dataGet.id!=0) ? this.dataGet.id : 0,
+      tblName:'deviceShift'
+    }
+
+    this.api.getData(data).then((res:any)=>{
+     // console.log(res)
+      if(res.status){
+        this.shifts=res.success
+        this.multishift=res.success
+        this.multishiftingselect.patchValue({
+          shiftName:this.multishift[0]
+        })
+        this.eraseshiftselsect.patchValue({
+          shiftName:this.multishift[0]
+        })
+      }else{
+        this.shiftName="Please Create Shift"
+      }
+    })
   }
 }
