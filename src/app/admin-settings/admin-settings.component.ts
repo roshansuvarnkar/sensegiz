@@ -248,22 +248,22 @@ export class AdminSettingsComponent implements OnInit {
           this.onoffselsect = {
             value:true,
             status:'Disable',
-            onOff:2
+            onOff:1
           }
            this.onffbutton.patchValue({
-            onOff:2
+            onOff:1
           })
         }
         if(res.success[0].lastDateCommand == 'OFF'){
           this.onoffselsect = {
             value:false,
             status:'Enable',
-            onOff:1
+            onOff:2
           }
          /*  this.onffbutton.patchValue({
             onOff:1
           }) */
-        
+
 
 
           /* ---------------------------------------------------------- */
