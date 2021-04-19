@@ -467,7 +467,7 @@ summaryReport(){
   }
   //console.log("Sumaary data==",data)
   this.api.getSummaryReport(data).then((res:any)=>{
-   // console.log("summary report======",res);
+    console.log("summary report======",res);
 
     this.liveData=[]
 
@@ -723,7 +723,7 @@ if(this.type=='basedOnDate' || this.type=='basedOnFindName'){
 }
 if(this.type=='summaryReport'){
   this.general.loadingFreez.next({status:true})
-  //console.log("hi")
+    console.log("hi")
   setTimeout(()=>{
     this.openExcel()
     this.general.loadingFreez.next({status:false})

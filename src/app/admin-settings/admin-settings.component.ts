@@ -26,12 +26,14 @@ export class AdminSettingsComponent implements OnInit {
   multishiftingselect:FormGroup
   eraseshiftselsect:FormGroup
   temperaturehrsmin:FormGroup
+  onffbutton:FormGroup
   setting:any=[]
   min:any=[]
   sec:any=[]
   shifts:any=[]
   multishift:any=[]
   inactivityStatusValue:any=[]
+  onoffselsect:any=[]
   dataGet:any
   hrsvalues:any;
   minvalues:any;
@@ -104,7 +106,7 @@ export class AdminSettingsComponent implements OnInit {
       rate:['',[Validators.required,Validators.max(255), Validators.min(1)]],
     });
     this.multishiftingselect=this.fb.group({
-      shiftName:[''],
+      shiftName:['',Validators.required],
       deviceId:[''],
       status:['',Validators.required],
       type:[,Validators.required],
@@ -124,6 +126,9 @@ export class AdminSettingsComponent implements OnInit {
   this.temperaturehrsmin=this.fb.group({
     tempPeriodhours:[''],
     tempPeriodminutes:['']
+  })
+  this.onffbutton=this.fb.group({
+    onOff:['',Validators.required]
   })
   this. refreshSetting()
   this.minThresholdMinsec()
@@ -238,8 +243,34 @@ export class AdminSettingsComponent implements OnInit {
             inactivity: res.success[0].inactivity
          }) */
         }
+         /* ------------------------------------------------ */
+         if(res.success[0].lastDateCommand == 'ON'){
+          this.onoffselsect = {
+            value:true,
+            status:'Disable',
+            onOff:2
+          }
+           this.onffbutton.patchValue({
+            onOff:2
+          })
+        }
+        if(res.success[0].lastDateCommand == 'OFF'){
+          this.onoffselsect = {
+            value:false,
+            status:'Enable',
+            onOff:1
+          }
+         /*  this.onffbutton.patchValue({
+            onOff:1
+          }) */
+        
+
+
+          /* ---------------------------------------------------------- */
       }
+    }
     })
+
   }
 
   minThresholdMinsec(){
@@ -914,7 +945,8 @@ selectfinds(event){
         }
       }
   }
-shiftnameselsect(){
+
+  shiftnameselsect(){
     var data={
       userId:this.dataGet.userId,
       subUserId: (this.dataGet.hasOwnProperty('id') && this.dataGet.type==4 && this.dataGet.id!=0) ? this.dataGet.id : 0,
@@ -934,8 +966,57 @@ shiftnameselsect(){
         })
       }else{
         this.shiftName="Please Create Shift"
-        this.shifterrr=true
       }
     })
   }
+
+onoffeven(event){
+  if(event.checked == true){
+    this.onoffselsect = {
+      value:true,
+      status:'Disable',
+      onOff:1
+    }
+     this.onffbutton.patchValue({
+      onOff:1
+    })
+
+  }
+  else if(event.checked == false){
+    this.onoffselsect = {
+      value:false,
+      status:'Enable',
+      onOff:2
+    }
+    this.onffbutton.patchValue({
+      onOff:2
+    })
+
+  }
+
+}
+
+onSubmitonoff(values){
+  if(this.onffbutton.valid){
+    try{
+      var data={
+        userId:this.dataGet.userId,
+        subUserId: (this.dataGet.hasOwnProperty('id') && this.dataGet.type==4 && this.dataGet.id!=0) ? this.dataGet.id : 0,
+        onOff: values.onOff
+      }
+      console.log(data)
+      this.api.onofftoggele(data).then((res:any)=>{
+        if(res.status){
+          this.onffbutton.reset()
+          this.refreshSetting()
+          var msg='On or Off updated Successfully'
+          this.general.openSnackBar(msg,'')
+        }
+      })
+    }catch(err){
+
+    }
+  }
+
+}
 }

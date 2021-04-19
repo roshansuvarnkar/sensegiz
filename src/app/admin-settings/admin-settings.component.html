@@ -480,11 +480,12 @@
       </mat-radio-group><br>
       <mat-form-field *ngIf="(multishiftingselect.get('status').value == 1 && (multishiftingselect.get('type').value == 1 || multishiftingselect.get('type').value == 2))">
         <mat-label >Shift Name*</mat-label>
-        <mat-select formControlName="shiftName" name="shiftName" (click)="shiftnameselsect()" >
+        <mat-select formControlName="shiftName" name="shiftName" (click)="shiftnameselsect()"  >
           <mat-option *ngFor="let b of multishift" [value]="b" >
             {{b.shiftName}}
           </mat-option>
         </mat-select>
+        <!-- <mat-error>Please Create Shift</mat-error> -->
     </mat-form-field>
     <p *ngIf="multishiftingselect.get('status').value == 1" style="font-size: 12px;color:red;margin-top: -17px;margin-left: -80px;">{{shiftName}}</p>
 
@@ -506,7 +507,6 @@
         <span  class="spanbtton">
           <button mat-raised-button
           [disabled]="!multishiftingselect.valid ||
-          (multishiftingselect.get('shiftName').value == '') ||
            (multishiftingselect.get('status').value && multishiftingselect.get('type').value ==2 && multishiftingselect.get('deviceId').value =='') "
            color="primary">Submit</button>&nbsp;&nbsp;&nbsp;
           <button type="button" mat-raised-button (click)="openDialog1()"  color="primary">Info</button>
@@ -677,6 +677,22 @@
 
       <br><br><br>
       <button class="btn-set" mat-raised-button  color="primary">Submit</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<!-- ------------------------- -->
+<mat-card>
+  <mat-card-title>
+    On/Off
+  </mat-card-title>
+
+  <mat-card-content>
+    <form [formGroup]="onffbutton" (ngSubmit)="onSubmitonoff(onffbutton.value)">
+    <!--   <mat-slide-toggle color="primary" [checked]="false" formControlName="onoff" (change)="onoffeven($event)" ></mat-slide-toggle> -->
+
+      <br><br>
+      <mat-slide-toggle color="primary" [checked]="onoffselsect.value" formControlName="onOff" (change)="onoffeven($event)" >{{onoffselsect.status}}</mat-slide-toggle>
+      <button class="btn-set" mat-raised-button [disabled]="!onffbutton.valid" color="primary">Submit</button>
     </form>
   </mat-card-content>
 </mat-card>
