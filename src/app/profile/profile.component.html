@@ -152,7 +152,7 @@
 
 		<mat-card class="tab">
 			<mat-card-content>
-				<table class="table table-hover">
+			<!-- 	<table class="table table-hover">
 					<thead *ngIf="language=='english'">
 						<tr>
 							<th scope="col">Sl no.</th>
@@ -188,7 +188,55 @@
 						<td *ngIf="a.isDeleted=='N'"><mat-icon matListIcon (click)="delete(a)">done</mat-icon></td>
 						<td *ngIf="a.isDeleted=='Y'"><mat-icon matListIcon (click)="delete(a)">clear</mat-icon></td>
 					</tr>
-				</table>
+				</table> -->
+        <div class="center">
+
+          <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort >
+          <div>
+             <ng-container matColumnDef="i"  >
+                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Sl No.</th>
+                 <td mat-cell *matCellDef="let i=index" > {{i+1}} </td>
+               </ng-container>
+               <ng-container matColumnDef="userName"  >
+                 <th mat-header-cell *matHeaderCellDef mat-sort-header> User Name </th>
+                 <td mat-cell *matCellDef="let live" > {{live.userName}} </td>
+               </ng-container>
+               <ng-container matColumnDef="type"  >
+                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                 <td mat-cell *matCellDef="let live">
+                   <span *ngIf="live.type==2">Co. Admin</span>
+                   <span *ngIf="live.type==3">Normal User</span>
+                   <span *ngIf="live.type==4">Sub Admin</span>
+                   </td>
+               </ng-container>
+               <ng-container matColumnDef="department"  >
+                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+                 <td mat-cell *matCellDef="let live" > {{live.department}} </td>
+               </ng-container>
+               <ng-container matColumnDef="createdDate"  >
+                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Added on</th>
+                 <td mat-cell *matCellDef="let live" > {{live.createdDate | date : 'medium' : 'IST'}} </td>
+               </ng-container>
+               <ng-container matColumnDef="mobileNum">
+                 <th mat-header-cell *matHeaderCellDef mat-sort-header>  Mobile Number</th>
+                 <td mat-cell *matCellDef="let live"> {{live.mobileNum}} </td>
+               </ng-container>
+               <ng-container matColumnDef="isDeleted">
+                 <th mat-header-cell *matHeaderCellDef mat-sort-header>isDeleted</th>
+                 <td mat-cell *matCellDef="let live ">
+                   <span *ngIf="live.isDeleted=='N'"><mat-icon matListIcon (click)="delete(live)">done</mat-icon></span>
+                   <span *ngIf="live.isDeleted=='Y'"><mat-icon matListIcon (click)="delete(live)">clear</mat-icon></span>
+                  </td>
+               </ng-container>
+          </div>
+
+             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+             <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+           </table>
+           <mat-paginator   pageSize="10" [pageSizeOptions] = "[5, 10, 25, 100]" showFirstLastButtons ></mat-paginator>
+</div>
+</div>
 			</mat-card-content>
 		</mat-card>
 	</div>

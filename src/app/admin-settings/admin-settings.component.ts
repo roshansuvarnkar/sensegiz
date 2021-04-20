@@ -128,7 +128,7 @@ export class AdminSettingsComponent implements OnInit {
     tempPeriodminutes:['']
   })
   this.onffbutton=this.fb.group({
-    onOff:['',Validators.required]
+    onOff:['']
   })
   this. refreshSetting()
   this.minThresholdMinsec()
@@ -253,15 +253,14 @@ export class AdminSettingsComponent implements OnInit {
            this.onffbutton.patchValue({
             onOff:1
           })
-        }
-        if(res.success[0].lastDateCommand == 'OFF'){
+        }else if(res.success[0].lastDateCommand == 'OFF'){
           this.onoffselsect = {
             value:false,
             status:'Enable',
             onOff:2
           }
-         /*  this.onffbutton.patchValue({
-            onOff:1
+          /*  this.onffbutton.patchValue({
+            onOff:2
           }) */
 
 

@@ -22,6 +22,22 @@ mat-card.mat-card.mat-focus-indicator.main {
 mat-card-title.mat-card-title.main  {
     font-size: 2rem;
 }
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+  font-weight: 500;
+  font-size: 0.9rem;
+color: #ef6c00;
+}
+.center {
+  text-align: center;
+  font-size: 1.6rem;
+  margin: 1.2rem 0 2rem 0;
+  font-weight: 500;
+}
+.mat-cell{
+  padding: 5px;
+}
 hr.main {
     width: 19rem;
     border: 1px solid #f082602b;
@@ -38,7 +54,7 @@ mat-icon {
 }
 ::ng-deep input#primaryPhoneInput{
     border: none;
-    
+
 }
 ::ng-deep button.dropbtn.btn {
     margin-left: 2.5rem;
