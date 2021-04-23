@@ -431,6 +431,25 @@
             Please provide a valid user name
           </mat-error>
         </mat-form-field>
+        <br>
+        <mat-form-field *ngIf="summaryReportForm.get('status').value==2">
+          <mat-label>From date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker19" formControlName="fromDate">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker19"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker19></mat-datepicker>
+          <mat-error>
+            Please provide a valid from date
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field *ngIf="summaryReportForm.get('status').value==2">
+          <mat-label>To date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker20" formControlName="toDate">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker20"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker20></mat-datepicker>
+          <mat-error>
+            Please provide a valid to date
+          </mat-error>
+        </mat-form-field>
 
         <br> <br><br>
         <button class="btn-set" mat-raised-button [disabled]="!summaryReportForm.valid" color="primary">Submit</button>
@@ -466,6 +485,25 @@
           </mat-autocomplete>
           <mat-error>
            正式なユーザー名を入力してください
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field *ngIf="summaryReportForm.get('status').value==2">
+          <mat-label>From date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker19" formControlName="fromDate">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker19"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker19></mat-datepicker>
+          <mat-error>
+            Please provide a valid from date
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field *ngIf="summaryReportForm.get('status').value==2">
+          <mat-label>To date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker20" formControlName="toDate">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker20"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker20></mat-datepicker>
+          <mat-error>
+            Please provide a valid to date
           </mat-error>
         </mat-form-field>
 
@@ -537,22 +575,41 @@
   <mat-card *ngIf="language== 'english'">
     <span class="card-head">
       <mat-card-title color="primary">
-        Custom Report
+        Sync Details
       </mat-card-title>
       <mat-card-subtitle>
-        Select Report Type
+        Select Sync details
       </mat-card-subtitle>
     </span>
     <mat-card-content>
-      <form [formGroup]="customReport" (ngSubmit)="onSubmitCustomReport(customReport.value)">
+      <form [formGroup]="customReport" (ngSubmit)="onSubmitCustomReport(customReport.value);customReport.reset()">
         <mat-form-field>
-          <mat-label>Select type</mat-label>
-          <mat-select formControlName="type">
-            <mat-option value="1"> Within 24 Hours</mat-option>
-            <mat-option value="2"> Between 24 Hours and 48 Hours</mat-option>
-            <mat-option value="3"> More than 48 Hours</mat-option>
+          <mat-label>Select Sync</mat-label>
+          <mat-select formControlName="sync">
+            <mat-option value="1"> Sync</mat-option>
+            <mat-option value="2">Not Sync</mat-option>
+           <!--  <mat-option value="3"> More than 48 Hours</mat-option> -->
           </mat-select>
-        </mat-form-field> <br> <br> <br>
+        </mat-form-field> <br>
+         <mat-form-field *ngIf="customReport.get('sync').value==1">
+          <mat-label>From date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker17" formControlName="fromDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker17"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker17></mat-datepicker>
+          <mat-error>
+            Please provide a valid from date
+          </mat-error>
+        </mat-form-field>
+       <!--  <mat-form-field>
+          <mat-label>To date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker18" formControlName="toDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker18"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker18></mat-datepicker>
+          <mat-error>
+            Please provide a valid to date
+          </mat-error>
+        </mat-form-field> -->
+        <br> <br>
         <button class="btn-set" color="primary" mat-raised-button [disabled]="!customReport.valid">Submit</button>
       </form>
     </mat-card-content>
@@ -562,23 +619,42 @@
   <mat-card *ngIf="language== 'japanese'">
     <span class="card-head">
       <mat-card-title color="primary">
-        カスタムレポート
+        Sync Details
       </mat-card-title>
       <mat-card-subtitle>
-        レポートタイプを選択します
+        Select Sync details
       </mat-card-subtitle>
     </span>
     <mat-card-content>
       <form [formGroup]="customReport" (ngSubmit)="onSubmitCustomReport(customReport.value)">
         <mat-form-field>
-          <mat-label>タイプを選択</mat-label>
-          <mat-select formControlName="type">
-            <mat-option value="1"> 24時間以内に</mat-option>
-            <mat-option value="2"> 24時間から48時間の間</mat-option>
-            <mat-option value="3"> 48時間以上</mat-option>
+          <mat-label>Select Sync</mat-label>
+          <mat-select formControlName="sync">
+            <mat-option value="1"> Sync</mat-option>
+            <mat-option value="2">Not Sync</mat-option>
+           <!--  <mat-option value="3"> More than 48 Hours</mat-option> -->
           </mat-select>
-        </mat-form-field> <br> <br> <br>
-        <button class="btn-set-jp" mat-raised-button [disabled]="!findNameForm.valid" color="primary">レポート作成</button>
+        </mat-form-field> <br>
+         <mat-form-field *ngIf="customReport.get('sync').value==1">
+          <mat-label>From date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker17" formControlName="fromDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker17"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker17></mat-datepicker>
+          <mat-error>
+            Please provide a valid from date
+          </mat-error>
+        </mat-form-field>
+       <!--  <mat-form-field>
+          <mat-label>To date</mat-label>
+          <input matInput [matDatepicker]="myDatepicker18" formControlName="toDate" required>
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker18"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker18></mat-datepicker>
+          <mat-error>
+            Please provide a valid to date
+          </mat-error>
+        </mat-form-field> -->
+        <br> <br>
+        <button class="btn-set" color="primary" mat-raised-button [disabled]="!customReport.valid">Submit</button>
       </form>
     </mat-card-content>
   </mat-card>

@@ -85,11 +85,14 @@ daysExceed:boolean=false
     this.summaryReportForm = this.fb.group({
       deviceName: ['', Validators.required],
       status: ['0'],
-
+      fromDate: [''],
+      toDate: [''],
     });
 
     this.customReport= this.fb.group({
-      type:['',Validators.required]
+      sync:['',Validators.required],
+      fromDate: [''],
+
     })
     this.departmentcummulativeForm = this.fb.group({
       department:['',Validators.required],
@@ -524,6 +527,17 @@ onclickSummaryReport(data){
       //   var month1 = ("0" + (this.date2.getMonth() + 1)).slice(-2);
       //   var day1 = ("0" + this.date2.getDate()).slice(-2);
       //   var to = year1 + '-' + month1 + '-'  + day1
+      var date1=new Date(data.fromDate)
+      var date2=new Date(data.toDate)
+      var year = date1.getFullYear();
+      var month = ("0" + (date1.getMonth() + 1)).slice(-2);
+      var day = ("0" + date1.getDate()).slice(-2);
+      var from = year + '-' + month + '-'  + day
+
+      var year1 = date2.getFullYear();
+      var month1 = ("0" + (date2.getMonth() + 1)).slice(-2);
+      var day1 = ("0" + date2.getDate()).slice(-2);
+      var to = year1 + '-' + month1 + '-'  + day1
 
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
@@ -533,9 +547,9 @@ onclickSummaryReport(data){
         dialogConfig.data = {
           type:"summaryReport",
           deviceName:data.deviceName,
-          status:data.status
-          // fromDate:from,
-          // toDate:to,
+          status:data.status,
+           fromDate:from,
+           toDate:to,
 
         }
         const dialogRef = this.dialog.open(HistoryReportComponent, dialogConfig);
@@ -661,6 +675,18 @@ onclickSummaryReport(data){
 
   }
   onSubmitCustomReport(data){
+    var date1=new Date(data.fromDate)
+    var date2=new Date(data.toDate)
+    var year = date1.getFullYear();
+    var month = ("0" + (date1.getMonth() + 1)).slice(-2);
+    var day = ("0" + date1.getDate()).slice(-2);
+    var from = year + '-' + month + '-'  + day
+
+    var year1 = date2.getFullYear();
+    var month1 = ("0" + (date2.getMonth() + 1)).slice(-2);
+    var day1 = ("0" + date2.getDate()).slice(-2);
+    var to = year1 + '-' + month1 + '-'  + day1
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -668,7 +694,8 @@ onclickSummaryReport(data){
     dialogConfig.width = '75vw';
     dialogConfig.data = {
       type:"custom",
-      data:data,
+      fromDate:from,
+      sync:data.sync,
     }
     const dialogRef = this.dialog.open(HistoryReportComponent, dialogConfig);
 
