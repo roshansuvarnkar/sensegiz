@@ -175,7 +175,7 @@ export class HistoryReportComponent implements OnInit {
   if(this.type=='custom'){
     var date=new Date()
     if(this.sync =="2"){
-      this.from="0000-00-00 00:00:00"
+      this.from="0000-00-00"
     }
     var data9={
       userId:this.loginData.userId,
@@ -185,7 +185,7 @@ export class HistoryReportComponent implements OnInit {
       zone:this.general.getZone(date),
     }
     this.api.OnlineOfflineReportCount(data9).then((res:any)=>{
-      console.log(res)
+     // console.log(res)
       if(res.status){
         this.currentPageLength = parseInt(res.success[0].count);
       }else{
@@ -474,9 +474,9 @@ summaryReport(){
     zone:this.general.getZone(date)
 
   }
-  console.log("Sumaary data==",data)
+ // console.log("Sumaary data==",data)
   this.api.getSummaryReport(data).then((res:any)=>{
-    console.log("summary report======",res);
+    //console.log("summary report======",res);
 
     this.liveData=[]
 
@@ -732,7 +732,7 @@ if(this.type=='basedOnDate' || this.type=='basedOnFindName'){
 }
 if(this.type=='summaryReport'){
   this.general.loadingFreez.next({status:true})
-    console.log("hi")
+   // console.log("hi")
   setTimeout(()=>{
     this.openExcel()
     this.general.loadingFreez.next({status:false})
@@ -811,7 +811,7 @@ if(this.type=='deptcummulative'){
 /* -------------------- */
   if(this.type=='custom'){
     if(this.sync =="2"){
-      this.from="0000-00-00 00:00:00"
+      this.from="0000-00-00"
     }
     data={
       userId:this.loginData.userId,
@@ -1047,7 +1047,7 @@ if(this.type=='deptcummulative'){
   customReport(limit,offset){
     var date=new Date()
     if(this.sync =="2"){
-      this.from="0000-00-00 00:00:00"
+      this.from="0000-00-00"
     }
     var data={
       userId:this.loginData.userId,
@@ -1058,9 +1058,9 @@ if(this.type=='deptcummulative'){
       offset:offset,
       zone:this.general.getZone(date),
     }
-    console.log(" custom data======",data)
+    //console.log(" custom data======",data)
     this.api.getCustomReport(data).then((res:any)=>{
-     console.log("Custom Report res==",res)
+    // console.log("Custom Report res==",res)
       this.customData=[]
       if(res.status){
         this.customData=res.success
