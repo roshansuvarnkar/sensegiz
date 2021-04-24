@@ -8,7 +8,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as XLSX from 'xlsx';
 import * as moment from 'moment';
@@ -30,6 +30,8 @@ export class GeneralMaterialsService {
   public loadingFreez : BehaviorSubject<any> = new BehaviorSubject<any>([])
   public deviceHistory: BehaviorSubject<any>= new BehaviorSubject<any>([]);
   public setpassword:BehaviorSubject<any>= new BehaviorSubject<any>([]);
+  public managefind=new Subject<any>()
+
   
   constructor(private _snackBar: MatSnackBar, private http:HttpClient) {
     // this.logout()

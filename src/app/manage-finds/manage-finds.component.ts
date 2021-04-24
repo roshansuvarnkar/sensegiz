@@ -48,6 +48,7 @@ currentPageLength:any=10
 currentPageSize:any=10
 limit:any
 offset:any
+devicename:any
 @ViewChild('fileInput') fileInput:ElementRef
 constructor(public dialog: MatDialog,
   private api: ApiService,
@@ -69,7 +70,8 @@ openDialog(): void {
   const dialogRef = this.dialog.open(AddFindComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(result => {
-    this.refreshFinds()
+    this.refreshManageFinds()
+    //this.refreshFinds()
   });
 }
 
@@ -89,29 +91,36 @@ ngOnInit(): void {
     type:'devices',
     header:['']
   })
-  this.refreshFinds()
+ // this.refreshFinds()
   this.refreshShift()
   this.departmentList()
   this.getDataCount()
+  this.refreshManageFinds()
+}
+refreshManageFinds(){
+  this.refreshFinds(this.limit,this.offset,this.devicename)
+
 }
 
-refreshFinds(limit=10,offset=0){
-  this.loadData(limit=limit,offset=offset)
-
+refreshFinds(limit=10,offset=0,deviceName){
+  this.loadData(limit=limit,offset=offset,deviceName=deviceName)
+  this.getDataCount()
   }
 
-loadData(limit,offset){
+loadData(limit,offset,deviceName){
   var data={
     userId:this.loginData.userId,
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
     limit:limit,
     offset:offset,
+    deviceName:deviceName,
     tblName:'deviceRegistration'
   }
-
+  console.log("find device data ======",data);
   this.api.getData(data).then((res:any)=>{
-  //console.log("find device data ======",res);
+  console.log("find device data ======",res);
     if(res.status){
+      this.getDataCount()
      this.findData=[]
       for (let i = 0; i <res.success.length; i++) {
         this.findData.push(
@@ -139,6 +148,16 @@ loadData(limit,offset){
           });
           //console.log("data find",this.findData)
       }
+      this.dataSource = new MatTableDataSource(this.findData);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+       // this.dataSource.paginator = this.paginator;
+        // this.paginator.length = this.currentPageSize
+      })
+      this.elementsTemp = this.findData
+    }else{
+      this.findData=[]
+      this.getDataCount()
       this.dataSource = new MatTableDataSource(this.findData);
       setTimeout(() => {
         this.dataSource.sort = this.sort;
@@ -182,7 +201,7 @@ edit(data){
   const dialogRef = this.dialog.open(EditDeviceComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(result => {
-    this.refreshFinds()
+    this.refreshManageFinds()
   });
 }
 
@@ -199,7 +218,7 @@ delete(a){
     this.api.deletedeviceandUser(data).then((res:any)=>{
       // console.log("find data ======",res);
       if(res.status){
-        this.refreshFinds()
+        this.refreshManageFinds()
          var msg = 'Device Deleted Successfully'
 
         this.general.openSnackBar(msg,'')
@@ -218,7 +237,7 @@ delete(a){
     this.api.deletedeviceandUser(data).then((res:any)=>{
       // console.log("find data ======",res);
       if(res.status){
-          this.refreshFinds()
+          this.refreshManageFinds()
           var msg = 'デバイスが正常に削除されました'
           this.general.openSnackBar(msg,'')
         }
@@ -241,7 +260,7 @@ infected(a){
         this.api.editInfectedPerson(data).then((res:any)=>{
          // console.log("infected data ======",res);
           if(res.status){
-            this.refreshFinds()
+            this.refreshManageFinds()
             var msg = 'Employee updated Successfully'
             this.general.openSnackBar(msg,'')
           }
@@ -249,7 +268,7 @@ infected(a){
 
     }
     else{
-      this.refreshFinds()
+      this.refreshManageFinds()
     }
   }
   else{
@@ -271,7 +290,7 @@ infected(a){
       })
     }
     else{
-      this.refreshFinds()
+      this.refreshManageFinds()
     }
   }
 }
@@ -298,7 +317,7 @@ isolated(a){
         this.api.editIsolation(data).then((res:any)=>{
          // console.log("isolated data ======",res);
           if(res.status){
-            this.refreshFinds()
+            this.refreshManageFinds()
             var msg = 'Employee updated Successfully'
             this.general.openSnackBar(msg,'')
           }
@@ -306,11 +325,11 @@ isolated(a){
       }
       else{
         alert("Infected person cannnot be marked as isolated.")
-        this.refreshFinds()
+        this.refreshManageFinds()
       }
     }
     else{
-      this.refreshFinds()
+      this.refreshManageFinds()
     }
 
   }
@@ -331,7 +350,7 @@ isolated(a){
         this.api.editIsolation(data).then((res:any)=>{
          // console.log("isolated data ======",res);
           if(res.status){
-            this.refreshFinds()
+            this.refreshManageFinds()
             var msg = '従業員は正常に更新されました'
             this.general.openSnackBar(msg,'')
           }
@@ -339,11 +358,11 @@ isolated(a){
       }
       else{
         alert("感染者を隔離としてマークすることはできません.")
-        this.refreshFinds()
+        this.refreshManageFinds()
       }
     }
     else{
-      this.refreshFinds()
+      this.refreshManageFinds()
     }
   }
 }
@@ -363,7 +382,7 @@ deallocate(event,a){
        // console.log("deallocate resp=======",res)
         if(res.status){
           a.check=res.status
-          this.refreshFinds()
+          this.refreshManageFinds()
         }
         else{
           a.check=false
@@ -372,12 +391,12 @@ deallocate(event,a){
       })
 
     }
-    this.refreshFinds()
+    this.refreshManageFinds()
 
   }
   else{
     alert("You cannot allocate device")
-    this.refreshFinds()
+    this.refreshManageFinds()
   }
 
 }
@@ -394,7 +413,7 @@ onShiftSelection(a){
   this.api.editShift(data).then((res:any)=>{
     // console.log("shift update data ======",res);
     if(res.status){
-      this.refreshFinds()
+      this.refreshManageFinds()
        if(this.language=='english'){
          var msg = 'Employee Shift updated Successfully'
         }
@@ -409,6 +428,11 @@ onShiftSelection(a){
 
 
 search(a){
+  var limit=10;
+  var offset=0
+  this.refreshFinds(limit=10,offset=0,a)
+  this.general.managefind.next(a)
+  this.getDataCount()
   // console.log("a==",a)
   // if(a.length>0){
   //   this.findData = this.elementsTemp.filter(obj=>{
@@ -614,7 +638,7 @@ departmentSelect(a,b){
   this.api.setDeviceDepartment(data).then((res:any)=>{
     //console.log("department list======",res);
     if(res.status){
-      this.refreshFinds()
+      this.refreshManageFinds()
       if(this.language=='english'){
         var msg = 'Employee department updated Successfully'
        }
@@ -649,17 +673,25 @@ getUpdate(event) {
   // console.log("paginator event length", this.currentPageLength);
   this.limit = event.pageSize
  this.offset = event.pageIndex*event.pageSize
+ this.general.managefind.subscribe((res)=>{
+   this.devicename=res;
+ })
   // console.log("limit==",limit,"offset==",offset)
- this.refreshFinds(this.limit,this.offset)
+ this.refreshFinds(this.limit,this.offset,this.devicename)
 }
 getDataCount(){
+  this.general.managefind.subscribe((data)=>{
+    this.devicename=data
+  })
   var data={
     userId:this.loginData.userId,
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
-    tblName:'deviceRegistration'
+    tblName:'deviceRegistration',
+    deviceName:this.devicename
   }
+  console.log("length of location report on device name ======",data);
   this.api.getDataCount(data).then((res:any)=>{
-    //  console.log("length of location report on device name ======",res);
+    console.log("length of location report on device name ======",res);
        if(res.status){
         // console.log('\nTotal response: ',res.success[0].count);
          this.currentPageLength = parseInt(res.success[0].count);
