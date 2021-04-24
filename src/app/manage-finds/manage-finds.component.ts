@@ -283,7 +283,7 @@ infected(a){
       this.api.editInfectedPerson(data).then((res:any)=>{
         // console.log("infected data ======",res);
         if(res.status){
-          this.refreshFinds()
+          this.refreshManageFinds()
           var msg = '従業員は正常に更新されました'
           this.general.openSnackBar(msg,'')
         }
