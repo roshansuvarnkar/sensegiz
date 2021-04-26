@@ -464,6 +464,12 @@ basedOnFindName(limit,offset){
 // }
 summaryReport(){
   var date=new Date()
+  
+  if(this.status !="2"){
+    this.from="0000-00-00",
+    this.to ="0000-00-00"
+  }
+
   var data={
     userId:this.loginData.userId,
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
@@ -474,9 +480,9 @@ summaryReport(){
     zone:this.general.getZone(date)
 
   }
- // console.log("Sumaary data==",data)
+  console.log("Sumaary data==",data)
   this.api.getSummaryReport(data).then((res:any)=>{
-    //console.log("summary report======",res);
+    console.log("summary report======",res);
 
     this.liveData=[]
 

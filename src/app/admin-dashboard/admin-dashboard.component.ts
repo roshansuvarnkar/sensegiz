@@ -139,7 +139,8 @@ refreshAdminData(){
 	  dialogRef.afterClosed().subscribe(result => {
 	  });
  }
- /* openDialog1(data): void {
+ /*
+ openDialog1(data): void {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
