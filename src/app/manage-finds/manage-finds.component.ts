@@ -98,16 +98,16 @@ ngOnInit(): void {
   this.refreshManageFinds()
 }
 refreshManageFinds(){
-  this.refreshFinds(this.limit,this.offset,this.devicename)
+  this.loadData(this.limit,this.offset,this.devicename)
 
 }
 
-refreshFinds(limit=10,offset=0,deviceName){
-  this.loadData(limit=limit,offset=offset,deviceName=deviceName)
+loadData(limit=10,offset=0,deviceName){
+  this.refreshFinds(limit=limit,offset=offset,deviceName=deviceName)
   this.getDataCount()
   }
 
-loadData(limit,offset,deviceName){
+  refreshFinds(limit,offset,deviceName){
   var data={
     userId:this.loginData.userId,
     subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
@@ -118,9 +118,9 @@ loadData(limit,offset,deviceName){
   }
   //console.log("find device data ======",data);
   this.api.getData(data).then((res:any)=>{
+    this.getDataCount()
   //console.log("find device data ======",res);
     if(res.status){
-      this.getDataCount()
      this.findData=[]
       for (let i = 0; i <res.success.length; i++) {
         this.findData.push(
@@ -430,9 +430,10 @@ onShiftSelection(a){
 search(a){
   var limit=10;
   var offset=0
-  this.refreshFinds(limit=10,offset=0,a)
+ // this.refreshFinds(limit=10,offset=0,a)
   this.general.managefind.next(a)
-  this.getDataCount()
+  this.refreshManageFinds()
+ // this.getDataCount()
   // console.log("a==",a)
   // if(a.length>0){
   //   this.findData = this.elementsTemp.filter(obj=>{
@@ -677,7 +678,7 @@ getUpdate(event) {
    this.devicename=res;
  })
   // console.log("limit==",limit,"offset==",offset)
- this.refreshFinds(this.limit,this.offset,this.devicename)
+  this.loadData(this.limit,this.offset,this.devicename)
 }
 getDataCount(){
   this.general.managefind.subscribe((data)=>{

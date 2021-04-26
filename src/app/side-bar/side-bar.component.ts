@@ -55,7 +55,6 @@ export class SideBarComponent implements OnInit {
      // console.log("find data side bar ======",res);
       if(res.status){
         this.findData=[]
-
         this.findData=res.success
         this.findDataTemp=res.success
         this.dataSource = new MatTableDataSource(this.findData)
