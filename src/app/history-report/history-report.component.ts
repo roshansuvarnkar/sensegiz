@@ -174,9 +174,9 @@ export class HistoryReportComponent implements OnInit {
   }
   if(this.type=='custom'){
     var date=new Date()
-    if(this.sync =="2"){
+   /*  if(this.sync =="2"){
       this.from="0000-00-00"
-    }
+    } */
     var data9={
       userId:this.loginData.userId,
       subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
@@ -810,9 +810,9 @@ if(this.type=='deptcummulative'){
 
 /* -------------------- */
   if(this.type=='custom'){
-    if(this.sync =="2"){
+   /*  if(this.sync =="2"){
       this.from="0000-00-00"
-    }
+    } */
     data={
       userId:this.loginData.userId,
       subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
@@ -1046,9 +1046,9 @@ if(this.type=='deptcummulative'){
 
   customReport(limit,offset){
     var date=new Date()
-    if(this.sync =="2"){
+   /*  if(this.sync =="2"){
       this.from="0000-00-00"
-    }
+    } */
     var data={
       userId:this.loginData.userId,
       subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0,
