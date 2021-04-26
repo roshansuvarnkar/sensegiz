@@ -17,3 +17,84 @@ p.center{
 button.mat-focus-indicator.mat-raised-button.mat-button-base.mat-primary.ng-star-inserted {
     height: 2.1rem;
 }
+
+
+.contents {
+  width: 20rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+.history {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.card-head {
+ /* background-color: red !important; */
+  padding: 5px !important;
+  text-align: center !important;
+}
+mat-card.mat-card.mat-focus-indicator {
+  box-shadow: 0 2px 8px 0 #ef6c00;
+}
+mat-card-title{
+color: #ef6c00;
+/* font-family: serif; */
+font-size: 1.3rem;
+line-height: 2rem;
+font-weight: 400;
+}
+.dailog {
+  display: flex;
+  justify-content: center;
+}
+
+mat-radio-button {
+  display: inline !important;
+  margin-left: 2.6rem;
+}
+.text{
+  margin-right: 4rem;
+}
+mat-radio-group.mat-radio-group.ng-untouched.ng-pristine.ng-valid {
+  display: flex;
+}
+
+mat-radio-group.mat-radio-group {
+  display: flex;
+  justify-content: space-between;
+}
+.infect{
+  display: contents !important;
+}
+button.mat-focus-indicator.btn-set.mat-raised-button.mat-button-base.mat-primary {
+position: absolute;
+bottom: 1rem;
+right: 7.5rem;
+}
+mat-card.mat-card.mat-focus-indicator.geoReport {
+  width: 21rem !important;
+}
+.radio{
+  margin-left: -2rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+/* .radio.radio1 {
+  margin-top: 0.7rem;
+} */
+.radio.radio2 {
+  /* margin-top: 3rem; */
+  margin-left: 1rem;
+}
+.mat-form-filed{
+margin-top: -50px !important;
+}
+@media only screen and (max-width: 768px) {
+  /* .history{
+      margin-left: 2rem;
+  } */
+  ::ng-deep .mat-autocomplete-panel{
+  width:0 !important;
+}
+}

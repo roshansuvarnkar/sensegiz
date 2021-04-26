@@ -50,7 +50,7 @@ export class HistoryReportComponent implements OnInit {
   // displayedColumns2: string[] = ['contactDeviceName','updatedOn'];
   // displayedColumns3: string[] = ['i','deviceName','inTime', 'outTime','totTime'];
   displayedColumns5: string[] = ['i','username','department','count','totTime'];
-  displayedColumns6: string[] = ['i','deviceId','deviceName','department','dataReceivedTime','updatedOnLoc'];
+  displayedColumns6: string[] = ['i','deviceId','deviceName','department','dataReceivedTime'];
   displayedColumns7: string[] = ['i','username','department','count','totTime'];
   displayedColumns8: string[] = ['i','deviceName','temperature','temperatureTimestamp']
   date:any

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators ,FormArray} from '@angular/forms';
 import { ApiService } from '../api.service';
 import { LoginCheckService } from '../login-check.service';
 import { GeneralMaterialsService } from '../general-materials.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-add-ble-id',
@@ -12,10 +13,11 @@ import { GeneralMaterialsService } from '../general-materials.service';
 })
 export class AdminAddBleIdComponent implements OnInit {
 
-	type:any 
-	dataGet:any 
-	loginData:any 
+	type:any
+	dataGet:any
+	loginData:any
 	bleIdForm:FormGroup;
+  dateForm:FormGroup;
 	language:any
     constructor(
 	    private fb: FormBuilder,
@@ -23,6 +25,8 @@ export class AdminAddBleIdComponent implements OnInit {
 	    @Inject(MAT_DIALOG_DATA)  data,
 	    private api: ApiService,
 	    private login:LoginCheckService,
+       private router: Router,
+      private route: ActivatedRoute,
 	    private general:GeneralMaterialsService
   ) {
       this.type = data.type
@@ -35,6 +39,10 @@ export class AdminAddBleIdComponent implements OnInit {
   		this.bleIdForm = this.fb.group({
 		  items:this.fb.array([])
 		});
+    this.dateForm = this.fb.group({
+      fromDate: ['', Validators.required],
+      toDate: ['', Validators.required]
+    });
 
 		this.refreshDevice()
   }
@@ -48,7 +56,7 @@ export class AdminAddBleIdComponent implements OnInit {
 	}
 
   	this.api.getData(data).then((res:any)=>{
-    	// console.log("data===",res)
+    	 //console.log("data===",res)
 		if(res.status){
 			const control = <FormArray>this.bleIdForm.controls.items;
 			control.controls = [];
@@ -79,4 +87,36 @@ export class AdminAddBleIdComponent implements OnInit {
 	})
   }
 
+  onclickDate(data){
+    // console.log("data==",data)
+    var date = new Date();
+    var toDate = new Date();
+    var prevDate = date.setDate(date.getDate() - data);
+
+    var date = new Date(prevDate);
+    var year = date.getFullYear();
+    var month = ("0" + (date.getMonth() + 1)).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    var tot = year + '-' + month + '-'  + day
+
+    var todayDate = toDate.getFullYear() + '-' +  ("0" + (toDate.getMonth() + 1)).slice(-2) + '-'  + ("0" + toDate.getDate()).slice(-2)
+
+    this.dateForm.patchValue({
+      fromDate:tot,
+      toDate:todayDate
+    })
+  }
+  onSubmitDateForm(vales){
+    var data={
+      userId:this.dataGet.userId,
+	    tblName:'deviceRegistration',
+      fromDate:vales.fromDate,
+      toDate:vales.toDate
+    }
+    this.dialogRef.close()
+    this.router.navigate(['/admin-Analystics'], {
+      queryParams: { user: JSON.stringify(data)},
+    });
+  }
 }

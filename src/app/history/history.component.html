@@ -591,7 +591,7 @@
            <!--  <mat-option value="3"> More than 48 Hours</mat-option> -->
           </mat-select>
         </mat-form-field> <br>
-         <mat-form-field *ngIf="customReport.get('sync').value==1">
+         <mat-form-field>
           <mat-label>From date</mat-label>
           <input matInput [matDatepicker]="myDatepicker17" formControlName="fromDate" required>
           <mat-datepicker-toggle matSuffix [for]="myDatepicker17"></mat-datepicker-toggle>

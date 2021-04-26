@@ -44,7 +44,8 @@ import { AuthenticationInterceptor } from './authentication.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { ManageCoinsComponent } from './manage-coins/manage-coins.component';
-import {NgxCaptchaModule} from 'ngx-captcha'
+import {NgxCaptchaModule} from 'ngx-captcha';
+import { AdminAnalysticsComponent } from './adminAnalystics/admin-analystics/admin-analystics.component'
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import {NgxCaptchaModule} from 'ngx-captcha'
     SetNewPasswordComponent,
     ProfileComponent,
     ManageCoinsComponent,
+    AdminAnalysticsComponent,
   ],
   imports: [
     BrowserModule,

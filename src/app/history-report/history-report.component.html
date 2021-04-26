@@ -628,15 +628,6 @@
                 <span  *ngIf="data.dataReceivedTime=='-' || data.dataReceivedTime=='0000-00-00 00:00:00'">-</span>
               </td>
             </ng-container>
-            <ng-container matColumnDef="updatedOnLoc">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Seen Time</th>
-              <td mat-cell *matCellDef="let data" >
-                <span  *ngIf="data.updatedOnLoc!='-' && data.updatedOnLoc!='0000-00-00 00:00:00'">{{data.updatedOnLoc | date : 'medium' }}</span>
-                <span  *ngIf="data.updatedOnLoc=='-' || data.updatedOnLoc=='0000-00-00 00:00:00'">-</span>
-              </td>
-            </ng-container>
-
-
           <tr mat-header-row *matHeaderRowDef="displayedColumns6"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns6;"></tr>
         </table>

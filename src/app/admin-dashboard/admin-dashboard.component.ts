@@ -139,7 +139,22 @@ refreshAdminData(){
 	  dialogRef.afterClosed().subscribe(result => {
 	  });
  }
+ /* openDialog1(data): void {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.height = '70vh';
+  dialogConfig.width = '35vw';
+  dialogConfig.data = {
+    type: 'Analytics',
+    data: data,
+  };
+  const dialogRef = this.dialog.open(AdminAddBleIdComponent, dialogConfig);
 
+  dialogRef.afterClosed().subscribe((result) => {
+
+  });
+} */
  openSetting(data){
   this.router.navigate(['/admin-settings'], { queryParams: { record: JSON.stringify(data) } });
  }
