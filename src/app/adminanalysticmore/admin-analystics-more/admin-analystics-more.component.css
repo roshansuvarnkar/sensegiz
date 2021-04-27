@@ -11,6 +11,7 @@ justify-content:center;
 font-weight: 500;
 font-size: 0.9rem;
 color: #ef6c00;
+
 }
 .center {
 text-align: center;
@@ -31,5 +32,5 @@ width: 29rem;
 }
 mat-icon{
 color: #ef6c00;
-cursor: pointer;
 }
+

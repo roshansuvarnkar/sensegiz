@@ -45,7 +45,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { ManageCoinsComponent } from './manage-coins/manage-coins.component';
 import {NgxCaptchaModule} from 'ngx-captcha';
-import { AdminAnalysticsComponent } from './adminAnalystics/admin-analystics/admin-analystics.component'
+import { AdminAnalysticsComponent } from './adminAnalystics/admin-analystics/admin-analystics.component';
+import { AdminAnalysticsMoreComponent } from './adminanalysticmore/admin-analystics-more/admin-analystics-more.component'
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { AdminAnalysticsComponent } from './adminAnalystics/admin-analystics/adm
     ProfileComponent,
     ManageCoinsComponent,
     AdminAnalysticsComponent,
+    AdminAnalysticsMoreComponent,
   ],
   imports: [
     BrowserModule,

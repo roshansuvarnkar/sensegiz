@@ -1,0 +1,46 @@
+
+
+<div class="center">
+  <p>Data Analytics </p>
+  <hr>
+</div>
+<div class="totalfind">
+  <p>Find Name:{{totalFinds}}</p>
+</div>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort >
+   <div>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Type Name</th>
+          <td mat-cell *matCellDef="let coin"> {{coin.type}} </td>
+        </ng-container>
+        <ng-container matColumnDef="count">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Sync Data </th>
+          <td mat-cell *matCellDef="let coin "> {{coin.count}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="syncTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><span>syncedDates</span> </th>
+          <td mat-cell *matCellDef="let coin">{{coin.syncTime}}
+            <!--  <span *ngIf="coin.updatedOn!='0000-00-00 00:00:00'"></span>
+             <span *ngIf="coin.updatedOn=='0000-00-00 00:00:00'">-</span> -->
+
+          </td>
+        </ng-container>
+
+
+   </div>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+    </table>
+    <mat-paginator
+    (page)="getUpdate($event)"
+    [length] = "currentPageLength"
+    [pageSize]="currentPageSize"
+    [pageSizeOptions] = "[5, 10, 25, 100]"
+    showFirstLastButtons
+></mat-paginator>
+</div>
+
+

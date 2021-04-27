@@ -32,7 +32,7 @@ export class GeneralMaterialsService {
   public setpassword:BehaviorSubject<any>= new BehaviorSubject<any>([]);
   public managefind=new Subject<any>()
 
-  
+
   constructor(private _snackBar: MatSnackBar, private http:HttpClient) {
     // this.logout()
  /*     var deData = CryptoJS.AES.decrypt("U2FsdGVkX1+ud8O+9XUjw6zd5NWIKVhxOjmvO1t9zk4QbvIdSN…zRIAxp2YxPkwjw+6YxKlcVOsYeTh141FnAffiQhRv8iufooN2", this.ENCRYPT_KEY);
@@ -222,7 +222,7 @@ var momemts=Math.floor(pigArt.asMinutes())
      }
 
       }
-
+    
 
 
 

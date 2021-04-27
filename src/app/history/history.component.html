@@ -575,20 +575,20 @@
   <mat-card *ngIf="language== 'english'">
     <span class="card-head">
       <mat-card-title color="primary">
-        Sync Details
+        Device Synced Details
       </mat-card-title>
       <mat-card-subtitle>
-        Select Sync details
+        Select Synced Details
       </mat-card-subtitle>
     </span>
     <mat-card-content>
       <form [formGroup]="customReport" (ngSubmit)="onSubmitCustomReport(customReport.value);customReport.reset()">
         <mat-form-field>
-          <mat-label>Select Sync</mat-label>
+          <mat-label>Select Synced</mat-label>
           <mat-select formControlName="sync">
-            <mat-option value="1"> Sync</mat-option>
-            <mat-option value="2">Not Sync</mat-option>
-           <!--  <mat-option value="3"> More than 48 Hours</mat-option> -->
+            <mat-option value="1"> Synced </mat-option>
+            <mat-option value="2">Not Synced </mat-option>
+           <!-- <mat-option value="3"> More than 48 Hours</mat-option> -->
           </mat-select>
         </mat-form-field> <br>
          <mat-form-field>
