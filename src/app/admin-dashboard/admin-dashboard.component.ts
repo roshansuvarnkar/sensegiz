@@ -135,10 +135,10 @@ refreshAdminData(){
 	    data:data
 	  }
 	  const dialogRef = this.dialog.open(AdminAddBleIdComponent, dialogConfig);
+
 	  dialogRef.afterClosed().subscribe(result => {
 	  });
  }
- 
 /*  openDialog1(data): void {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
