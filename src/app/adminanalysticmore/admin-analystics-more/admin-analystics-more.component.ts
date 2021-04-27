@@ -36,6 +36,7 @@ export class AdminAnalysticsMoreComponent implements OnInit {
        this.userData = JSON.parse(res.more);
     });
     this.refreshAnalysticsMore()
+    this.getAnlysticsCount()
   }
   refreshAnalysticsMore(limit=10,offset=0){
 
@@ -81,5 +82,26 @@ export class AdminAnalysticsMoreComponent implements OnInit {
     var offset = event.pageIndex*event.pageSize
    // console.log("limit==",limit,"offset==",offset)
     this.refreshAnalysticsMore(limit,offset)
+  }
+  getAnlysticsCount(){
+    var date=new Date()
+    var data={
+     userId:this.userData.userId ,
+     deviceId:this.userData.deviceId,
+     fromDate:this.userData.fromDate,
+     toDate:this.userData.toDate,
+     zone:this.general.getZone(date)
+   }
+   this.api.getSyncedDeviceDataTypesCount(data).then((res:any)=>{
+    console.log(res)
+     if(res.success){
+      this.currentPageLength = parseInt(res.success.length);
+      console.log(this.currentPageLength)
+     }else{
+      this.currentPageLength = parseInt(res.success.length);
+     }
+
+   })
+
   }
 }

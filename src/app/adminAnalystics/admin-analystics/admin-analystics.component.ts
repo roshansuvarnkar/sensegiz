@@ -36,6 +36,7 @@ export class AdminAnalysticsComponent implements OnInit {
       this.userData = JSON.parse(res.user);
     });
     this.refreshAnalystics()
+    this.getCountAnalystics()
   }
   refreshAnalystics(limit=10,offset=0){
     var date=new Date()
@@ -94,5 +95,23 @@ export class AdminAnalysticsComponent implements OnInit {
 this.router.navigate(['/admin-more'], {
   queryParams: { more: JSON.stringify(data)},
 });
+  }
+  getCountAnalystics(){
+    var date=new Date()
+    var data={
+     userId:this.userData.userId ,
+     fromDate:this.userData.fromDate,
+     toDate:this.userData.toDate,
+     zone:this.general.getZone(date)
+   }
+   this.api.getSyncedDeviceDetailsCount(data).then((res:any)=>{
+    console.log(res)
+    if(res.success){
+     this.currentPageLength = parseInt(res.success.length);
+     console.log(this.currentPageLength)
+    }else{
+     this.currentPageLength = parseInt(res.success.length);
+    }
+   })
   }
 }
