@@ -133,7 +133,6 @@ getTotalCount(val){
       limit:limit
     }
 
-
     this.api.getLiveData(data).then((res:any)=>{
 
       //console.log("live data ======",res);
