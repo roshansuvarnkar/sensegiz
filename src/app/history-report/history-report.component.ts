@@ -464,7 +464,7 @@ basedOnFindName(limit,offset){
 // }
 summaryReport(){
   var date=new Date()
-  
+
   if(this.status !="2"){
     this.from="0000-00-00",
     this.to ="0000-00-00"

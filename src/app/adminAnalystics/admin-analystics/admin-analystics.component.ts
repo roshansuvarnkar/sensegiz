@@ -18,8 +18,8 @@ export class AdminAnalysticsComponent implements OnInit {
   currentPageLength:any=10
   currentPageSize:any=10
   userData: any;
-  fromDate:any
-  toDate:any;
+  from:any
+  to:any;
   dataSource:any=[]
   findData:any=[]
   totalFinds:any;
@@ -37,8 +37,9 @@ export class AdminAnalysticsComponent implements OnInit {
   ngOnInit(): void {
        this.route.queryParams.subscribe((res) => {
       this.userData = JSON.parse(res.user);
-        this.fromDate=this.userData.fromDate,
-        this.toDate=this.userData.toDate
+      console.log(this.userData)
+        this.from=this.userData.fromDate,
+        this.to=this.userData.toDate
     });
     this.refreshAnalystics()
     this.getCountAnalystics()

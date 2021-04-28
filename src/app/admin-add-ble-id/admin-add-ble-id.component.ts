@@ -107,16 +107,28 @@ export class AdminAddBleIdComponent implements OnInit {
       toDate:todayDate
     })
   }
-  onSubmitDateForm(vales){
-    var data={
+  onSubmitDateForm(data){
+    var date1=new Date(data.fromDate)
+    var date2=new Date(data.toDate)
+    var year = date1.getFullYear();
+    var month = ("0" + (date1.getMonth() + 1)).slice(-2);
+    var day = ("0" + date1.getDate()).slice(-2);
+    var from = year + '-' + month + '-'  + day
+
+    var year1 = date2.getFullYear();
+    var month1 = ("0" + (date2.getMonth() + 1)).slice(-2);
+    var day1 = ("0" + date2.getDate()).slice(-2);
+    var to = year1 + '-' + month1 + '-'  + day1
+    
+    var vales={
       userId:this.dataGet.userId,
 	    tblName:'deviceRegistration',
-      fromDate:vales.fromDate,
-      toDate:vales.toDate
+      fromDate:from,
+      toDate:to
     }
     this.dialogRef.close()
     this.router.navigate(['/admin-Analystics'], {
-      queryParams: { user: JSON.stringify(data)},
+      queryParams: { user: JSON.stringify(vales)},
     });
   }
 }
