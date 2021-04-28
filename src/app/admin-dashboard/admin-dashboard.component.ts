@@ -20,7 +20,7 @@ export class AdminDashboardComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   dataSource: any = [];
-   displayedColumns = ['i','userName','createdDate','apiKey','add','settings','isDeleted'];
+   displayedColumns = ['i','userName','createdDate','apiKey','add','settings','Analytics','isDeleted'];
    findData:any=[]
   SearchCountryField = SearchCountryField;
   TooltipLabel = TooltipLabel;
@@ -139,7 +139,6 @@ refreshAdminData(){
 	  dialogRef.afterClosed().subscribe(result => {
 	  });
  }
- /*
  openDialog1(data): void {
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
@@ -155,7 +154,7 @@ refreshAdminData(){
   dialogRef.afterClosed().subscribe((result) => {
 
   });
-} */
+}
  openSetting(data){
   this.router.navigate(['/admin-settings'], { queryParams: { record: JSON.stringify(data) } });
  }

@@ -10,9 +10,9 @@
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort >
    <div>
-        <ng-container matColumnDef="type">
+        <ng-container matColumnDef="typeName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Type Name</th>
-          <td mat-cell *matCellDef="let coin"> {{coin.type}} </td>
+          <td mat-cell *matCellDef="let coin"> {{coin.typeName}} </td>
         </ng-container>
         <ng-container matColumnDef="count">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Synced Data </th>

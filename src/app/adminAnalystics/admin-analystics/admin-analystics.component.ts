@@ -107,10 +107,10 @@ this.router.navigate(['/admin-more'], {
    this.api.getSyncedDeviceDetailsCount(data).then((res:any)=>{
     console.log(res)
     if(res.success){
-     this.currentPageLength = parseInt(res.success.length);
+     this.currentPageLength = parseInt(res.success[0].count);
      console.log(this.currentPageLength)
     }else{
-     this.currentPageLength = parseInt(res.success.length);
+      this.currentPageLength = parseInt(res.success[0].count);
     }
    })
   }

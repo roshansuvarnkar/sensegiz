@@ -33,3 +33,8 @@ mat-icon{
 color: #ef6c00;
 cursor: pointer;
 }
+.download1{
+  margin-right: 5rem !important;
+  position: absolute;
+  margin-top: -3rem;
+}

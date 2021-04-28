@@ -21,7 +21,7 @@ export class AdminAnalysticsMoreComponent implements OnInit {
   dataSource:any=[]
   findData:any=[]
   totalFinds:any;
-  displayedColumns: string[] = ['type','count','syncTime'];
+  displayedColumns: string[] = ['typeName','count','syncTime'];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -60,7 +60,7 @@ export class AdminAnalysticsMoreComponent implements OnInit {
           this.findData.push(
             {
               i: i+1,
-              type:res.success[i].type,
+              typeName:res.success[i].typeName,
               count:res.success[i].count,
               syncTime:res.success[i].syncTime
           });
@@ -95,10 +95,10 @@ export class AdminAnalysticsMoreComponent implements OnInit {
    this.api.getSyncedDeviceDataTypesCount(data).then((res:any)=>{
     console.log(res)
      if(res.success){
-      this.currentPageLength = parseInt(res.success.length);
+      this.currentPageLength = parseInt(res.success[0].count);
       console.log(this.currentPageLength)
      }else{
-      this.currentPageLength = parseInt(res.success.length);
+      this.currentPageLength = parseInt(res.success[0].count);
      }
 
    })
