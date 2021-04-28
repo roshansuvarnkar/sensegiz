@@ -18,9 +18,12 @@ export class AdminAnalysticsComponent implements OnInit {
   currentPageLength:any=10
   currentPageSize:any=10
   userData: any;
+  fromDate:any
+  toDate:any;
   dataSource:any=[]
   findData:any=[]
   totalFinds:any;
+
   displayedColumns: string[] = ['i','deviceName', 'latestSyncTime', 'count','syncTime','more'];
   constructor(
     private router: Router,
@@ -34,6 +37,8 @@ export class AdminAnalysticsComponent implements OnInit {
   ngOnInit(): void {
        this.route.queryParams.subscribe((res) => {
       this.userData = JSON.parse(res.user);
+        this.fromDate=this.userData.fromDate,
+        this.toDate=this.userData.toDate
     });
     this.refreshAnalystics()
     this.getCountAnalystics()

@@ -143,7 +143,7 @@ refreshAdminData(){
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
-  dialogConfig.height = '70vh';
+  dialogConfig.height = '80vh';
   dialogConfig.width = '35vw';
   dialogConfig.data = {
     type: 'Analytics',
