@@ -39,9 +39,10 @@ export class AdminAnalysticsMoreComponent implements OnInit {
        this.userData = JSON.parse(res.more);
        this.from=this.userData.fromDate,
        this.to=this.userData.toDate
+       this.refreshAnalysticsMore()
+       this.getAnlysticsCount()
     });
-    this.refreshAnalysticsMore()
-    this.getAnlysticsCount()
+
   }
   refreshAnalysticsMore(limit=10,offset=0){
 

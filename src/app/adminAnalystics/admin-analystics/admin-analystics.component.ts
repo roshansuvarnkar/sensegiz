@@ -40,9 +40,10 @@ export class AdminAnalysticsComponent implements OnInit {
       //console.log(this.userData)
         this.from=this.userData.fromDate,
         this.to=this.userData.toDate
+        this.refreshAnalystics()
+        this.getCountAnalystics()
     });
-    this.refreshAnalystics()
-    this.getCountAnalystics()
+
   }
   refreshAnalystics(limit=10,offset=0){
     var date=new Date()
@@ -123,5 +124,5 @@ this.router.navigate(['/admin-more'], {
   backwordarrow(){
     this.router.navigate(['/admin-dashboard'])
   }
-  
+
 }
