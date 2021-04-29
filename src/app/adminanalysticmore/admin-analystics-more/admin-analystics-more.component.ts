@@ -24,7 +24,7 @@ export class AdminAnalysticsMoreComponent implements OnInit {
   dataSource:any=[]
   findData:any=[]
   totalFinds:any;
-  displayedColumns: string[] = ['typeName','count','syncTime'];
+  displayedColumns: string[] = ['i','typeName','count','syncTime'];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
