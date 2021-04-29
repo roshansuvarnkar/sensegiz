@@ -5,8 +5,22 @@
   <hr>
 </div>
 <div class="totalfind">
-  <p>{{currentPageLength}}-Finds Got Synced ({{from}} to {{to }}) </p>
+  <p>{{currentPageLength}}-Finds Got Synced ({{from}} to {{to}}) </p>
 </div>
+<mat-card class="backforward">
+  <span class="material-icons" (click)="backwordarrow()" style="font-size: 1rem;">
+    arrow_back
+    </span>
+  </mat-card>
+
+
+    <!-- <span class="material-icons" (click)="backwordarrow()">
+      arrow_forward
+      </span>
+ -->
+  <!-- <span class="material-icons" (click)="forwordarrow()">
+    arrow_forward
+    </span> -->
 <!-- <div class="download1">
   <button mat-raised-button  color="primary"><mat-icon> cloud_download &nbsp;&nbsp;&nbsp;&nbsp;</mat-icon> Download</button>
 </div> -->

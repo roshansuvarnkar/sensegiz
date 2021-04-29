@@ -7,6 +7,12 @@
 <div class="totalfind">
   <p>Find Name:{{totalFinds}} ({{from }} to {{to}})</p>
 </div>
+<mat-card class="backforward">
+  <span class="material-icons" (click)="backwordarrow()">
+    arrow_back
+    </span>
+  </mat-card>
+
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort >
    <div>

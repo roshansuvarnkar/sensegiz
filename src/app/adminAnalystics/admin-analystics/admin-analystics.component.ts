@@ -37,7 +37,7 @@ export class AdminAnalysticsComponent implements OnInit {
   ngOnInit(): void {
        this.route.queryParams.subscribe((res) => {
       this.userData = JSON.parse(res.user);
-      console.log(this.userData)
+      //console.log(this.userData)
         this.from=this.userData.fromDate,
         this.to=this.userData.toDate
     });
@@ -111,13 +111,17 @@ this.router.navigate(['/admin-more'], {
      zone:this.general.getZone(date)
    }
    this.api.getSyncedDeviceDetailsCount(data).then((res:any)=>{
-    console.log(res)
+   // console.log(res)
     if(res.success){
      this.currentPageLength = parseInt(res.success[0].count);
-     console.log(this.currentPageLength)
+     //console.log(this.currentPageLength)
     }else{
       this.currentPageLength = parseInt(res.success[0].count);
     }
    })
   }
+  backwordarrow(){
+    this.router.navigate(['/admin-dashboard'])
+  }
+  
 }

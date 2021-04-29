@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralMaterialsService } from 'src/app/general-materials.service';
 import {ApiService}  from 'src/app/api.service'
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-admin-analystics-more',
@@ -54,9 +55,9 @@ export class AdminAnalysticsMoreComponent implements OnInit {
       toDate:this.userData.toDate,
       zone:this.general.getZone(date)
     }
-    console.log("res",data)
+    //console.log("res",data)
     this.api.MoregetSyncedDeviceDataTypes(data).then((res:any)=>{
-      console.log("res",res)
+     // console.log("res",res)
       this.findData=[]
       if(res.status){
         //this.adminData=res.success
@@ -97,15 +98,21 @@ export class AdminAnalysticsMoreComponent implements OnInit {
      zone:this.general.getZone(date)
    }
    this.api.getSyncedDeviceDataTypesCount(data).then((res:any)=>{
-    console.log(res)
+    //console.log(res)
      if(res.success){
       this.currentPageLength = parseInt(res.success[0].count);
-      console.log(this.currentPageLength)
+     // console.log(this.currentPageLength)
      }else{
       this.currentPageLength = parseInt(res.success[0].count);
      }
 
    })
+
+  }
+  backwordarrow(){
+    this.router.navigate(['/admin-Analystics'], {
+      queryParams: { user: JSON.stringify( this.userData)},
+    });
 
   }
 }

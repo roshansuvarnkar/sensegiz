@@ -119,13 +119,14 @@ export class AdminAddBleIdComponent implements OnInit {
     var month1 = ("0" + (date2.getMonth() + 1)).slice(-2);
     var day1 = ("0" + date2.getDate()).slice(-2);
     var to = year1 + '-' + month1 + '-'  + day1
-    
+
     var vales={
       userId:this.dataGet.userId,
 	    tblName:'deviceRegistration',
       fromDate:from,
       toDate:to
     }
+    //console.log(vales)
     this.dialogRef.close()
     this.router.navigate(['/admin-Analystics'], {
       queryParams: { user: JSON.stringify(vales)},

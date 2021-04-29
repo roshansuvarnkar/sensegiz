@@ -38,3 +38,15 @@ cursor: pointer;
   position: absolute;
   margin-top: -3rem;
 }
+.backforward{
+  width: 4rem;
+  height: 10vh;
+  margin-left: 1rem;
+  position: absolute;
+  margin-top: -4rem;
+  justify-content:center;
+}
+.material-icons{
+color: #ef6c00;
+cursor: pointer;
+}
