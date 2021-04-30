@@ -124,9 +124,8 @@ export class AdminSettingsComponent implements OnInit {
       eraseShift:['']
     })
     this.meshForm=this.fb.group({
+      gatewayId:['',Validators.required],
       meshId:['',Validators.required],
-      numaric:['',Validators.required],
-
     })
     this.route.queryParams.subscribe(params => {
       this.dataGet = JSON.parse(params.record) ;
@@ -1042,16 +1041,38 @@ refreshgateways(){
     subUserId: (this.dataGet.hasOwnProperty('id') && this.dataGet.type==4 && this.dataGet.id!=0) ? this.dataGet.id : 0,
     tblName:'gatewayRegistration'
   }
-  console.log("data",data)
+ // console.log("data",data)
   this.api.getDataGateways(data).then((res:any)=>{
     if(res.status){
       this.gatWaysData=res.success
       this.grouped=false
     }
-    console.log("res1",res)
+   // console.log("res1",res)
   })
 }
-onSubmitmeshForm(data){
-console.log("formdata",data)
-}
+/* onSubmitmeshForm(vales){
+  if(this.meshForm.valid){
+    try{
+      var data={
+        userId:this.dataGet.userId,
+        gatewayId:vales.gatewayId,
+        meshId:vales.meshId
+      }
+      this.api.createMeshId(data).then((res:any)=>{
+        if(res.status){
+          this.meshForm.reset()
+          this.refreshSetting()
+          var msg='Mesh ID updated Successfully'
+          this.general.openSnackBar(msg,'')
+        }
+
+      })
+    }catch(err){
+
+    }
+  }
+
+//console.log("formdata",data)
+
+} */
 }

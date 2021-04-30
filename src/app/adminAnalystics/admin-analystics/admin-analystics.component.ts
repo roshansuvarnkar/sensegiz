@@ -135,7 +135,8 @@ this.router.navigate(['/admin-more'], {
      zone:this.general.getZone(date)
    }
    fileName="Analystic Data"
-   this.api.analysticDownloadReport(data , fileName).then((res:any)=>{
+   this.api.analysticDownloadReport(data,fileName).then((res:any)=>{
+    // console.log(res)
    })
 
   }

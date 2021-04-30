@@ -2755,6 +2755,7 @@ temperatureDataCount(data) {
     let url = this.host+'/downloadSyncedDeviceDetails';
     return new Promise((resolve,reject)=>{
       this.http.post(url,body,{ observe: 'response', responseType: 'blob' as 'json' }).subscribe((res:any)=>{
+        //console.log(res)
         if(res.status==200)
         this.downloadFile(res,fileName)
 
@@ -2784,6 +2785,20 @@ temperatureDataCount(data) {
       })
     });
 
+  }
+  createMeshId(data) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    let body = {
+      data: data,
+    };
+    let url = this.host + '/createMesh';
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body, httpOptions).subscribe((res: any) => {
+        resolve(res.data);
+      });
+    });
   }
 }
 
