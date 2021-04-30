@@ -696,4 +696,42 @@
     </form>
   </mat-card-content>
 </mat-card>
+<!-- --------------------------------------------------- -->
+
+<mat-card>
+  <mat-card-title>
+    Mesh ID
+  </mat-card-title>
+  <mat-card-subtitle>
+    Enter gateways and mesh id
+  </mat-card-subtitle> <br>
+  <mat-card-content>
+
+    <form [formGroup]="meshForm" (ngSubmit)="onSubmitmeshForm(meshForm.value)" >
+      <mat-form-field  >
+          <mat-label>Gateways</mat-label>
+          <mat-select  formControlName="meshId" multiple required>
+            <mat-option *ngFor="let gateways of gatWaysData" [value]="gateways.gatewayName">{{gateways.gatewayName}}</mat-option>
+          </mat-select>
+          <mat-error>
+            Please provide a gateways
+          </mat-error>
+      </mat-form-field>
+    <div class="maxlimit" >
+      <mat-form-field>
+        <input type='number' min="0" max='256'  matInput placeholder="Mesh ID" formControlName="numaric"  required>
+        <mat-error>
+          Please provide a mesh id
+        </mat-error>
+      </mat-form-field>
+    </div>
+      <br>
+    <div class="btn-set-grp">
+      <button mat-raised-button [disabled]="!meshForm.valid"  color="primary">Submit</button>&nbsp;&nbsp;&nbsp;
+    </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
+
 </div>

@@ -116,4 +116,21 @@ export class AdminAnalysticsMoreComponent implements OnInit {
     });
 
   }
+  download(){
+    var fileName=''
+    var date=new Date()
+    var data={
+     userId:this.userData.userId ,
+     deviceId:this.userData.deviceId,
+     fromDate:this.userData.fromDate,
+     toDate:this.userData.toDate,
+     zone:this.general.getZone(date)
+   }
+   fileName="Analystic Data"
+   //console.log(data ,fileName)
+   this.api.analysticMoreDownloadReport(data , fileName).then((res:any)=>{
+    //console.log("res",res)
+   })
+
+  }
 }

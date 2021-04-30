@@ -2733,5 +2733,57 @@ temperatureDataCount(data) {
       });
     });
   }
+  getDataGateways(data){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    let body = {
+      data: data,
+    };
+    let url = this.host + '/getData';
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body, httpOptions).subscribe((res: any) => {
+        resolve(res.data);
+      });
+    });
+  }
+  analysticDownloadReport(data,fileName){
+    this.general.loadingFreez.next({status:true})
+    let body={
+      data:data
+    }
+    let url = this.host+'/downloadSyncedDeviceDetails';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,body,{ observe: 'response', responseType: 'blob' as 'json' }).subscribe((res:any)=>{
+        if(res.status==200)
+        this.downloadFile(res,fileName)
+
+        resolve(true);
+      },
+      err=>{
+       // console.log("err==",err)
+      })
+    });
+
+  }
+  analysticMoreDownloadReport(data,fileName){
+    this.general.loadingFreez.next({status:true})
+    let body={
+      data:data
+    }
+    let url = this.host+'/downloadSyncedDeviceDataTypes';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,body,{ observe: 'response', responseType: 'blob' as 'json' }).subscribe((res:any)=>{
+        if(res.status==200)
+        this.downloadFile(res,fileName)
+
+        resolve(true);
+      },
+      err=>{
+       // console.log("err==",err)
+      })
+    });
+
+  }
 }
 

@@ -12,6 +12,10 @@
     arrow_back
     </span>
   </mat-card>
+  <span style="float: right;margin-top: -3rem;">
+    <button mat-flat-button color="primary" (click)="download()">Download <mat-icon>download</mat-icon>
+    </button>
+</span>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort >

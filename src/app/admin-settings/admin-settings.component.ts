@@ -34,11 +34,13 @@ export class AdminSettingsComponent implements OnInit {
   multishift:any=[]
   inactivityStatusValue:any=[]
   onoffselsect:any=[]
+  gatWaysData:any=[]
   dataGet:any
   hrsvalues:any;
   minvalues:any;
   languageForm:FormGroup
   inactivityForm:FormGroup
+  meshForm:FormGroup
   statusCustomise:boolean=false
   selectedValue:boolean=false
   selectStatus1:boolean=false
@@ -59,6 +61,7 @@ export class AdminSettingsComponent implements OnInit {
   shifterr:any;
   shifterrr:boolean=false;
   shiftname:boolean=false;
+  grouped:boolean=false;
   onoffnull:any;
   constructor(private fb:FormBuilder,public dialog: MatDialog,private api:ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,private route: ActivatedRoute) { }
 
@@ -120,6 +123,11 @@ export class AdminSettingsComponent implements OnInit {
       type:['',Validators.required],
       eraseShift:['']
     })
+    this.meshForm=this.fb.group({
+      meshId:['',Validators.required],
+      numaric:['',Validators.required],
+
+    })
     this.route.queryParams.subscribe(params => {
       this.dataGet = JSON.parse(params.record) ;
       // console.log("data==",this.dataGet.userId)
@@ -134,7 +142,7 @@ export class AdminSettingsComponent implements OnInit {
   this. refreshSetting()
   this.minThresholdMinsec()
   this.refreshShift()
-
+  this.refreshgateways()
   }
   refreshShift(){
     var data={
@@ -1027,5 +1035,23 @@ onSubmitonoff(values){
     }
   }
 
+}
+refreshgateways(){
+  var data={
+    userId:this.dataGet.userId,
+    subUserId: (this.dataGet.hasOwnProperty('id') && this.dataGet.type==4 && this.dataGet.id!=0) ? this.dataGet.id : 0,
+    tblName:'gatewayRegistration'
+  }
+  console.log("data",data)
+  this.api.getDataGateways(data).then((res:any)=>{
+    if(res.status){
+      this.gatWaysData=res.success
+      this.grouped=false
+    }
+    console.log("res1",res)
+  })
+}
+onSubmitmeshForm(data){
+console.log("formdata",data)
 }
 }

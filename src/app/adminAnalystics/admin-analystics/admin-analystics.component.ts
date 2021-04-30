@@ -18,6 +18,7 @@ export class AdminAnalysticsComponent implements OnInit {
   currentPageLength:any=10
   currentPageSize:any=10
   userData: any;
+  fileName:any
   from:any
   to:any;
   dataSource:any=[]
@@ -123,6 +124,22 @@ this.router.navigate(['/admin-more'], {
   }
   backwordarrow(){
     this.router.navigate(['/admin-dashboard'])
+  }
+  download(){
+    var fileName=''
+    var date=new Date()
+    var data={
+     userId:this.userData.userId ,
+     fromDate:this.userData.fromDate,
+     toDate:this.userData.toDate,
+     zone:this.general.getZone(date)
+   }
+   fileName="Analystic Data"
+  // console.log(data ,fileName)
+   this.api.analysticDownloadReport(data , fileName).then((res:any)=>{
+   // console.log("res",res)
+   })
+
   }
 
 }
