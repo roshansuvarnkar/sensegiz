@@ -1050,7 +1050,7 @@ refreshgateways(){
    // console.log("res1",res)
   })
 }
-/* onSubmitmeshForm(vales){
+onSubmitmeshForm(vales){
   if(this.meshForm.valid){
     try{
       var data={
@@ -1074,5 +1074,5 @@ refreshgateways(){
 
 //console.log("formdata",data)
 
-} */
+}
 }
