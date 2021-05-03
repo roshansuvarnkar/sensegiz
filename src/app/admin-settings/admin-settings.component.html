@@ -711,7 +711,7 @@
       <mat-form-field  >
           <mat-label>Gateways</mat-label>
           <mat-select  formControlName="gatewayId" multiple required>
-            <mat-option *ngFor="let gateways of gatWaysData" [value]="gateways.gatewayId">{{gateways.gatewayName}}</mat-option>
+            <mat-option *ngFor="let gateways of gatWaysData" [value]="gateways.gatewayId">{{gateways.gatewayId}}</mat-option>
           </mat-select>
           <mat-error>
             Please provide a gateways
