@@ -125,7 +125,7 @@ export class AdminSettingsComponent implements OnInit {
     })
     this.meshForm=this.fb.group({
       gatewayId:['',Validators.required],
-      meshId:['',[Validators.required,Validators.max(255), Validators.min(1)]],
+      meshId:['',[Validators.required,Validators.max(255), Validators.min(0)]],
     })
     this.route.queryParams.subscribe(params => {
       this.dataGet = JSON.parse(params.record) ;
