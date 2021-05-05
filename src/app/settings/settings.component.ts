@@ -939,7 +939,7 @@ export class SettingsComponent implements OnInit {
       }
 
     this.api.getData(data).then((res:any)=>{
-     console.log("user data ======",res);
+     //console.log("user data ======",res);
       if(res.status){
         this.userData=res.success;
       }
@@ -952,7 +952,7 @@ export class SettingsComponent implements OnInit {
     }
     this.api.getFeaturesAlert(data).then((res:any)=>{
       this.featuresData=res.success
-      console.log("features",res)
+      //console.log("features",res)
     })
   }
    onSubmitemailConfig(vales){
@@ -964,7 +964,7 @@ export class SettingsComponent implements OnInit {
           type:vales.type,
           enable :vales.enable,
         }
-        console.log(data)
+      //  console.log(data)
         this.api.emailConfigurationAlert(data).then((res:any)=>{
           if(res.status){
             this.emailConfig.reset()
@@ -986,7 +986,7 @@ export class SettingsComponent implements OnInit {
       emailId:vales.emailId
     }
     this.api.useremailAlert(data).then((res:any)=>{
-      console.log(res.success[0])
+     // console.log(res.success[0])
       /* for(let i=0;i<=res.success[0].length){
       } */
       this.userAlert=[]
