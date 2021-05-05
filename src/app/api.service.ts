@@ -2800,5 +2800,47 @@ temperatureDataCount(data) {
       });
     });
   }
+  getFeaturesAlert(data){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    let body = {
+      data: data,
+    };
+    let url = this.host + '/getEmailAlertTypes';
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body, httpOptions).subscribe((res: any) => {
+        resolve(res.data);
+      });
+    });
+  }
+  emailConfigurationAlert(data){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    let body = {
+      data: data,
+    };
+    let url = this.host + '/configureEmailAlert';
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body, httpOptions).subscribe((res: any) => {
+        resolve(res.data);
+      });
+    });
+  }
+  useremailAlert(data){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    let body = {
+      data: data,
+    };
+    let url = this.host + '/getEmailAlertSettings';
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body, httpOptions).subscribe((res: any) => {
+        resolve(res.data);
+      });
+    });
+  }
 }
 

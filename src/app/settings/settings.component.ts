@@ -6,6 +6,7 @@ import { GeneralMaterialsService } from '../general-materials.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { EditSettingShiftComponent } from '../edit-setting-shift/edit-setting-shift.component';
 import { saveAs  } from 'file-saver';
+import { resetFakeAsyncZone } from '@angular/core/testing';
 
 
 
@@ -29,6 +30,7 @@ export class SettingsComponent implements OnInit {
   twoStepAuthForm:FormGroup
   languageForm:FormGroup
   Temperaturescale:FormGroup
+  emailConfig:FormGroup
   loginData:any
   setting:any
   duration:any
@@ -48,6 +50,9 @@ export class SettingsComponent implements OnInit {
   inactivityStatusValue:any=[]
   twoStepAuthStatus:any=[]
   coinData:any=[]
+  userData:any=[]
+  featuresData:any=[]
+  userAlert:any=[]
   coin:any=[]
   min:any=[]
   sec:any=[]
@@ -75,7 +80,8 @@ export class SettingsComponent implements OnInit {
 
     this.refreshSetting()
     this.maxThresholdMinsec()
-
+    this.emailConfigUser()
+    this.featuresAlert()
 
     this.workingForm = this.fb.group({
       shift: [{value:'',disabled: true}, Validators.required],
@@ -140,6 +146,11 @@ export class SettingsComponent implements OnInit {
       fileData:null,
       type:'logo',
     });
+    this.emailConfig=this.fb.group({
+      emailid:['',Validators.required],
+      type:['',Validators.required],
+      enable:['',Validators.required]
+  })
     // this.languageForm = this.fb.group({
     //   language: ['', Validators.required],
     // });
@@ -920,4 +931,137 @@ export class SettingsComponent implements OnInit {
      }
     }
   }
+  emailConfigUser(){
+    var data={
+        userId:this.loginData.userId,
+        subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 &&  this.loginData.id!=0) ? this.loginData.id : 0,
+        tblName:'userDetails'
+      }
+
+    this.api.getData(data).then((res:any)=>{
+     console.log("user data ======",res);
+      if(res.status){
+        this.userData=res.success;
+      }
+    })
+  }
+  featuresAlert(){
+    var data={
+      userId:this.loginData.userId,
+      subUserId: (this.loginData.hasOwnProperty('id') && this.loginData.type==4 &&  this.loginData.id!=0) ? this.loginData.id : 0,
+    }
+    this.api.getFeaturesAlert(data).then((res:any)=>{
+      this.featuresData=res.success
+      console.log("features",res)
+    })
+  }
+   onSubmitemailConfig(vales){
+     if(this.emailConfig.valid){
+      try{
+        var data={
+          userId:this.loginData.userId,
+          emailId:vales.emailid,
+          type:vales.type,
+          enable :vales.enable,
+        }
+        console.log(data)
+        this.api.emailConfigurationAlert(data).then((res:any)=>{
+          if(res.status){
+            this.emailConfig.reset()
+            var msg = 'Email Configuration Alert updated Successfully'
+            this.general.openSnackBar(msg,'')
+            this.featuresAlert()
+            this.emailConfigUser()
+            this.refreshSetting()
+          }
+        })
+      }catch(err){
+
+      }
+     }
+  }
+  userEmailAlert(vales){
+    var data={
+      userId:this.loginData.userId,
+      emailId:vales.emailId
+    }
+    this.api.useremailAlert(data).then((res:any)=>{
+      console.log(res.success[0])
+      /* for(let i=0;i<=res.success[0].length){
+      } */
+      this.userAlert=[]
+      if(res.success[0].ACB==1){
+        this.userAlert.push('ACB')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].CBS==1){
+        this.userAlert.push('CBS')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].CCS==1){
+        this.userAlert.push('CCS')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].COS==1){
+        this.userAlert.push('COS')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].DIS==1){
+        this.userAlert.push('DIS')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].FVA==1){
+        this.userAlert.push('FVA')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].FVI==1){
+        this.userAlert.push('FVI')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].GSS==1){
+        this.userAlert.push('GSS')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].ICS==1){
+        this.userAlert.push('ICS')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].IPDQ==1){
+        this.userAlert.push('IPDQ')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].IPPQ==1){
+        this.userAlert.push('IPPQ')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].MIN==1){
+        this.userAlert.push('MIN')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].MIS==1){
+        this.userAlert.push('MIS')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }else if(res.success[0].UTS==1){
+        this.userAlert.push('UTS')
+        this.emailConfig.patchValue({
+          type:this.userAlert
+        })
+      }
+    })
+  }
 }
+
