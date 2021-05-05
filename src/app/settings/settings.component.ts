@@ -964,15 +964,13 @@ export class SettingsComponent implements OnInit {
           type:vales.type,
           enable :vales.enable,
         }
-      //  console.log(data)
+       // console.log(data)
         this.api.emailConfigurationAlert(data).then((res:any)=>{
           if(res.status){
             this.emailConfig.reset()
             var msg = 'Email Configuration Alert updated Successfully'
             this.general.openSnackBar(msg,'')
             this.featuresAlert()
-            this.emailConfigUser()
-            this.refreshSetting()
           }
         })
       }catch(err){
@@ -986,76 +984,89 @@ export class SettingsComponent implements OnInit {
       emailId:vales.emailId
     }
     this.api.useremailAlert(data).then((res:any)=>{
-     // console.log(res.success[0])
-      /* for(let i=0;i<=res.success[0].length){
-      } */
       this.userAlert=[]
+      //console.log(res.success[0])
+      /* for(let i=0;i<=res.success[0].length){
+
+      } */
       if(res.success[0].ACB==1){
         this.userAlert.push('ACB')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].CBS==1){
+      }if(res.success[0].CBS==1){
         this.userAlert.push('CBS')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].CCS==1){
+      }
+      if(res.success[0].CCS==1){
         this.userAlert.push('CCS')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].COS==1){
+      }
+      if(res.success[0].COS==1){
         this.userAlert.push('COS')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].DIS==1){
+      }
+      if(res.success[0].DIS==1){
         this.userAlert.push('DIS')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].FVA==1){
+      }
+      if(res.success[0].FVA==1){
         this.userAlert.push('FVA')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].FVI==1){
+      }
+      if(res.success[0].FVI==1){
         this.userAlert.push('FVI')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].GSS==1){
+      }
+      if(res.success[0].GSS==1){
         this.userAlert.push('GSS')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].ICS==1){
+      }
+      if(res.success[0].ICS==1){
         this.userAlert.push('ICS')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].IPDQ==1){
+      }
+      if(res.success[0].IPDQ==1){
         this.userAlert.push('IPDQ')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].IPPQ==1){
+      }
+      if(res.success[0].IPPQ==1){
         this.userAlert.push('IPPQ')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].MIN==1){
+      }
+      if(res.success[0].MIN==1){
         this.userAlert.push('MIN')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].MIS==1){
+      }
+      if(res.success[0].MIS==1){
         this.userAlert.push('MIS')
         this.emailConfig.patchValue({
           type:this.userAlert
         })
-      }else if(res.success[0].UTS==1){
+      }
+      if(res.success[0].UTS==1){
         this.userAlert.push('UTS')
         this.emailConfig.patchValue({
           type:this.userAlert
