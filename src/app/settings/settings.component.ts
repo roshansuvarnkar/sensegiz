@@ -955,7 +955,7 @@ export class SettingsComponent implements OnInit {
       //console.log("features",res)
     })
   }
-  /*  onSubmitemailConfig(vales){
+   onSubmitemailConfig(vales){
      if(this.emailConfig.valid){
       try{
         var data={
@@ -986,6 +986,7 @@ export class SettingsComponent implements OnInit {
     this.api.useremailAlert(data).then((res:any)=>{
       this.userAlert=[]
       //console.log(res.success[0])
+     
       if(res.success[0].ACB==1){
         this.userAlert.push('ACB')
         this.emailConfig.patchValue({
@@ -1070,6 +1071,6 @@ export class SettingsComponent implements OnInit {
         })
       }
     })
-  } */
+  }
 }
 
