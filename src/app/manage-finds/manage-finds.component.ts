@@ -104,7 +104,7 @@ refreshManageFinds(){
 
 loadData(limit=10,offset=0,deviceName){
   this.refreshFinds(limit=limit,offset=offset,deviceName=deviceName)
-  this.getDataCount()
+  //this.getDataCount()
   }
 
   refreshFinds(limit,offset,deviceName){
@@ -676,6 +676,7 @@ getUpdate(event) {
  this.offset = event.pageIndex*event.pageSize
  this.general.managefind.subscribe((res)=>{
    this.devicename=res;
+   this.offset =0;
  })
   // console.log("limit==",limit,"offset==",offset)
   this.loadData(this.limit,this.offset,this.devicename)
