@@ -121,8 +121,10 @@ export class ManageUsersComponent implements OnInit {
   if(this.language=='english'){
     if(confirm('Are you sure you want to delete the user')){
       // console.log("yes",a)
-      var data = {
+       var data = {
         id:a.id,
+        userId:this.loginData.userId,
+        userName:a.emailId,
         tblName:'userDetails'
       }
       this.api.deletedeviceandUser(data).then((res:any)=>{
