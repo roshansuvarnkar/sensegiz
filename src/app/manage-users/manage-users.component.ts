@@ -127,13 +127,14 @@ export class ManageUsersComponent implements OnInit {
         userName:a.emailId,
         tblName:'userDetails'
       }
-      //console.log(data1)
+      console.log(data1)
       this.api.deletedeviceandUser(data1).then((res:any)=>{
         // console.log("find data ======",res);
+        this.refreshUsers()
         if(res.status){
-          this.refreshUsers()
          var msg = 'Contact Deleted Successfully'
           this.general.openSnackBar(msg,'')
+          this.refreshUsers()
         }
       })
     }
@@ -141,11 +142,13 @@ export class ManageUsersComponent implements OnInit {
     else if(this.language=='japanese'){
     if(confirm('ユーザー情報を削除してもよろしいですか')){
       // console.log("yes",a)
-      var data = {
+      var data1 = {
         id:a.id,
+        userId:this.loginData.userId,
+        userName:a.emailId,
         tblName:'userDetails'
       }
-      this.api.deletedeviceandUser(data).then((res:any)=>{
+      this.api.deletedeviceandUser(data1).then((res:any)=>{
         // console.log("find data ======",res);
         if(res.status){
           this.refreshUsers()
