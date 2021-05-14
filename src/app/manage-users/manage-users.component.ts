@@ -127,7 +127,6 @@ export class ManageUsersComponent implements OnInit {
         userName:a.emailId,
         tblName:'userDetails'
       }
-      console.log(data1)
       this.api.deletedeviceandUser(data1).then((res:any)=>{
         // console.log("find data ======",res);
         this.refreshUsers()

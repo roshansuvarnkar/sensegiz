@@ -694,7 +694,7 @@
       <mat-form-field  >
           <mat-label>Emails</mat-label>
           <mat-select  formControlName="emailid">
-         <mat-option *ngFor="let user of userData" [value]="user.emailId" (click)="userEmailAlert(user)">{{user.emailId}}</mat-option>
+         <mat-option *ngFor="let user of userData" [value]="user" (click)="userEmailAlert(user)">{{user.emailId}}</mat-option>
           </mat-select>
           <mat-error>
             Please provide a email

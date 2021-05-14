@@ -58,6 +58,7 @@ export class SettingsComponent implements OnInit {
   sec:any=[]
   language:any
   temper:any
+  email:any;
   tempImagePath:any
   // buzzerValue:any=[1,2,3,4,5]
 
@@ -939,7 +940,7 @@ export class SettingsComponent implements OnInit {
       }
 
     this.api.getData(data).then((res:any)=>{
-     //console.log("user data ======",res);
+     console.log("user data ======",res);
       if(res.status){
         this.userData=res.success;
       }
@@ -956,15 +957,17 @@ export class SettingsComponent implements OnInit {
     })
   }
    onSubmitemailConfig(vales){
+     this.email=vales
      if(this.emailConfig.valid){
       try{
         var data={
           userId:this.loginData.userId,
-          emailId:vales.emailid,
+         id:this.email.emailid.id,
+         emailId:this.email.emailid.emailId,
           type:vales.type,
           enable :vales.enable,
         }
-       // console.log(data)
+        console.log(data)
         this.api.emailConfigurationAlert(data).then((res:any)=>{
           if(res.status){
             this.emailConfig.reset()
@@ -983,10 +986,11 @@ export class SettingsComponent implements OnInit {
       userId:this.loginData.userId,
       emailId:vales.emailId
     }
+
     this.api.useremailAlert(data).then((res:any)=>{
       this.userAlert=[]
       //console.log(res.success[0])
-     
+
       if(res.success[0].ACB==1){
         this.userAlert.push('ACB')
         this.emailConfig.patchValue({
