@@ -967,7 +967,7 @@ export class SettingsComponent implements OnInit {
           type:vales.type,
           enable :vales.enable,
         }
-        console.log(data)
+       //console.log(data)
         this.api.emailConfigurationAlert(data).then((res:any)=>{
           if(res.status){
             this.emailConfig.reset()

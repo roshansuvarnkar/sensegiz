@@ -185,7 +185,7 @@ export class EditDeviceComponent implements OnInit {
         data.subUserId=(this.loginData.hasOwnProperty('id') && this.loginData.type==4 && this.loginData.id!=0) ? this.loginData.id : 0;
         data.mobileNum=data.mobileNum.e164Number
         data.userId=this.loginData.userId
-
+        //console.log("user submit==",data)
         this.api.EditUserRegister(data).then((res:any)=>{
           // console.log("user submit==",res)
           if(res.status){
