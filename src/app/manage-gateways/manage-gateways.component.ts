@@ -26,8 +26,8 @@ export class ManageGatewaysComponent implements OnInit {
   dataSource: any = [];
   currentPageLength:any=10
   currentPageSize:any=10
-  limit:any
-  offset:any
+  limit:any=10
+  offset:any=0
   displayedColumns = ['i','gatewayId','gatewayName','gatewayType','currentVersion','bleVersion','edit',	'delete'];
   // ,'currentVersion'
   constructor(private dialog:MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService) { }
@@ -47,7 +47,8 @@ export class ManageGatewaysComponent implements OnInit {
     const dialogRef = this.dialog.open(AddFindComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      this.refreshGateway()
+      this.refreshGateway(this.limit,this.offset)
+      this.getDataCount()
     });
   }
 
@@ -58,7 +59,7 @@ export class ManageGatewaysComponent implements OnInit {
     this.userType=this.loginData.type
     this.language=this.loginData.language
    // console.log("language==",this.language)
-    this.refreshGateway()
+   this.refreshGateway(this.limit,this.offset)
     this.getDataCount()
   }
 
@@ -123,7 +124,8 @@ edit(data){
   const dialogRef = this.dialog.open(EditDeviceComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(result => {
-    this.refreshGateway()
+    this.refreshGateway(this.limit,this.offset)
+    this.getDataCount()
   });
 }
 
@@ -140,7 +142,8 @@ if(this.language=='english'){
     this.api.deletedeviceandUser(data).then((res:any)=>{
       // console.log("gateway data ======",res);
       if(res.status){
-        this.refreshGateway()
+        this.refreshGateway(this.limit,this.offset)
+         this.getDataCount()
         var msg = 'Gateway Deleted Successfully'
         this.general.openSnackBar(msg,'')
       }
@@ -157,7 +160,8 @@ if(this.language=='english'){
     this.api.deletedeviceandUser(data).then((res:any)=>{
       // console.log("gateway data ======",res);
       if(res.status){
-        this.refreshGateway()
+        this.refreshGateway(this.limit,this.offset)
+        this.getDataCount()
         var msg = 'ゲートウェイが正常に削除されました'
         this.general.openSnackBar(msg,'')
       }

@@ -25,8 +25,8 @@ export class ManageUsersComponent implements OnInit {
   dataSource: any = [];
   currentPageLength:any=10
   currentPageSize:any=10
-  limit:any
-  offset:any
+  limit:any=10
+  offset:any=0
   displayedColumns = ['i','mobileNum','emailId','edit',	'delete'];
 
   constructor(public dialog: MatDialog,private api: ApiService,private login:LoginCheckService,private general:GeneralMaterialsService,) {}
@@ -43,7 +43,8 @@ export class ManageUsersComponent implements OnInit {
     const dialogRef = this.dialog.open(AddFindComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      this.refreshUsers()
+      this.refreshUsers(this.limit,this.offset)
+      this.getDataCount()
     });
   }
 
@@ -54,8 +55,8 @@ export class ManageUsersComponent implements OnInit {
     this.userType=this.loginData.type
     this.language=this.loginData.language
    // console.log("language==",this.language)
-    this.refreshUsers()
-    this.getDataCount()
+   this.refreshUsers(this.limit,this.offset)
+      this.getDataCount()
   }
 
   refreshUsers(limit=10,offset=0){
@@ -111,7 +112,8 @@ export class ManageUsersComponent implements OnInit {
     const dialogRef = this.dialog.open(EditDeviceComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      this.refreshUsers()
+      this.refreshUsers(this.limit,this.offset)
+      this.getDataCount()
     });
   }
 
@@ -129,11 +131,11 @@ export class ManageUsersComponent implements OnInit {
       }
       this.api.deletedeviceandUser(data1).then((res:any)=>{
         // console.log("find data ======",res);
-        this.refreshUsers()
         if(res.status){
          var msg = 'Contact Deleted Successfully'
           this.general.openSnackBar(msg,'')
-          this.refreshUsers()
+          this.refreshUsers(this.limit,this.offset)
+          this.getDataCount()
         }
       })
     }
@@ -150,7 +152,8 @@ export class ManageUsersComponent implements OnInit {
       this.api.deletedeviceandUser(data1).then((res:any)=>{
         // console.log("find data ======",res);
         if(res.status){
-          this.refreshUsers()
+          this.refreshUsers(this.limit,this.offset)
+          this.getDataCount()
          var msg = '連絡先が正常に削除されましたy'
           this.general.openSnackBar(msg,'')
         }
